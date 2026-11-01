@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska State Capacity · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — masthead, the read, indicators, timeliness bars, error-rate bars, ferry ledger, comparison, notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+.tbl{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+th.r,td.n{text-align:right} td.n{font-variant-numeric:tabular-nums}
+td.n.b{font-weight:600}
+tr:last-child td{border-bottom:0}
+.bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-left:8px;opacity:.85}
+.bar.neg{background:var(--series2)}
+.up{color:var(--bad)} .dn{color:var(--good)}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 09</span></nav>
+  <h1>State capacity</h1>
+  <span class="asof">Food aid: FY2025 · staffing: Nov 2025 · assets: FY2025 financial report and FY2027 budget · ferry: 2024 · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska's state government is delivering basic services with fewer hands than it is budgeted for. About one in six budgeted state jobs was vacant in late 2025. Food assistance shows the strain most clearly: the state processed only about two-thirds of new applications on time in federal fiscal 2025 and a quarter of renewals, and its payment error rate was the highest in the country for a fourth straight year. The state ferry system carries less than half the passengers it did in the early 1990s, with fewer ships in service. On buildings and roads, the state is holding its maintenance backlog steady rather than shrinking it: the FY2027 capital budget puts about $180 million toward deferred maintenance, roughly what the state estimated it needs each year just to keep a backlog of about $2.3 billion from growing.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Indicators</h2><p>Service measures that show how well state programs reach people. Periods differ by source.</p></div>
+  <div class="tiles"><div class="tile"><span class="lab">State job vacancies</span><span class="val">15.5%</span><span class="chip bad">1 in 6 budgeted jobs</span><span class="sub">14,357 positions filled.</span><span class="per">Nov 2025 · via ADN</span></div><div class="tile"><span class="lab">Food aid, new applications</span><span class="val">64.3%</span><span class="chip bad">2nd lowest state</span><span class="sub">Share processed on time.</span><span class="per">FY2025 · USDA</span></div><div class="tile"><span class="lab">Food aid, renewals</span><span class="val">25.2%</span><span class="chip bad">Lowest of 50 states</span><span class="sub">Recertifications processed on time.</span><span class="per">FY2025 · USDA</span></div><div class="tile"><span class="lab">Food aid payment errors</span><span class="val">23%</span><span class="chip bad">U.S. 11%</span><span class="sub">Highest in the nation, 4th year running.</span><span class="per">FY2025 · USDA via KMXT</span></div><div class="tile"><span class="lab">Ferry passengers</span><span class="val">~185k</span><span class="chip bad">400k+ in early 1990s</span><span class="sub">Alaska Marine Highway, calendar 2024.</span><span class="per">2024 · via Wrangell Sentinel</span></div><div class="tile"><span class="lab">Ferries in service</span><span class="val">6</span><span class="chip bad">10–11 in 2004–16</span><span class="sub">Vessels operating.</span><span class="per">FY2024 · via Wrangell Sentinel</span></div><div class="tile"><span class="lab">Maintenance backlog</span><span class="val">~$2.3B</span><span class="chip bad">$180M a year to hold steady</span><span class="sub">Deferred maintenance on state facilities.</span><span class="per">2026 · House Finance hearing</span></div><div class="tile"><span class="lab">Federal share of capital budget</span><span class="val">72%</span><span class="chip flat">$1.8B of $2.5B</span><span class="sub">FY2027 capital budget as passed.</span><span class="per">May 2026 · Alaska Beacon</span></div></div>
+</section>
+<section aria-labelledby="h-snap">
+  <div class="sec-head"><h2 id="h-snap">Food assistance processing</h2><p>Share of cases handled within federal time limits, federal fiscal year 2025.</p></div>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 98" style="min-width:520px" role="img" aria-label="Alaska SNAP timeliness FY2025: new applications 64.3 percent, renewals 25.2 percent"><line class="grid" x1="200.0" x2="200.0" y1="6" y2="74"/><text x="200.0" y="92" text-anchor="middle">0%</text><line class="grid" x1="292.5" x2="292.5" y1="6" y2="74"/><text x="292.5" y="92" text-anchor="middle">25%</text><line class="grid" x1="385.0" x2="385.0" y1="6" y2="74"/><text x="385.0" y="92" text-anchor="middle">50%</text><line class="grid" x1="477.5" x2="477.5" y1="6" y2="74"/><text x="477.5" y="92" text-anchor="middle">75%</text><line class="grid" x1="570.0" x2="570.0" y1="6" y2="74"/><text x="570.0" y="92" text-anchor="middle">100%</text><text x="192" y="25" text-anchor="end" style="fill:var(--ink)">New applications</text><rect x="200" y="12" width="237.8" height="18" fill="var(--accent)"/><text class="strong" x="443.8" y="25">64%</text><text x="192" y="59" text-anchor="end" style="fill:var(--ink)">Renewals</text><rect x="200" y="46" width="93.4" height="18" fill="var(--accent)"/><text class="strong" x="299.4" y="59">25%</text></svg></div>
+    <figcaption>Source: USDA Food and Nutrition Service, SNAP application and recertification processing timeliness, FY2025.</figcaption>
+  </figure>
+</section>
+<section aria-labelledby="h-err">
+  <div class="sec-head"><h2 id="h-err">Payment error rate</h2><p>Share of food assistance dollars paid in the wrong amount, mostly overpayments.</p></div>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 132" style="min-width:520px" role="img" aria-label="SNAP payment error rate: Alaska 25 percent in FY2024 and 23 percent in FY2025, U.S. 11 percent in FY2025"><line class="grid" x1="200.0" x2="200.0" y1="6" y2="108"/><text x="200.0" y="126" text-anchor="middle">0%</text><line class="grid" x1="292.5" x2="292.5" y1="6" y2="108"/><text x="292.5" y="126" text-anchor="middle">8%</text><line class="grid" x1="385.0" x2="385.0" y1="6" y2="108"/><text x="385.0" y="126" text-anchor="middle">15%</text><line class="grid" x1="477.5" x2="477.5" y1="6" y2="108"/><text x="477.5" y="126" text-anchor="middle">22%</text><line class="grid" x1="570.0" x2="570.0" y1="6" y2="108"/><text x="570.0" y="126" text-anchor="middle">30%</text><text x="192" y="25" text-anchor="end" style="fill:var(--ink)">Alaska, FY2024</text><rect x="200" y="12" width="308.3" height="18" fill="var(--accent)"/><text class="strong" x="514.3" y="25">25%</text><text x="192" y="59" text-anchor="end" style="fill:var(--ink)">Alaska, FY2025</text><rect x="200" y="46" width="283.7" height="18" fill="var(--accent)"/><text class="strong" x="489.7" y="59">23%</text><text x="192" y="93" text-anchor="end" style="fill:var(--ink)">U.S., FY2025</text><rect x="200" y="80" width="135.7" height="18" fill="var(--series2)"/><text class="strong" x="341.7" y="93">11%</text></svg></div>
+    <figcaption>Alaska topped 55% in FY2022 and FY2023. Source: USDA, as reported by KMXT, Jul 2026.</figcaption>
+  </figure>
+</section>
+<section aria-labelledby="h-ferry">
+  <div class="sec-head"><h2 id="h-ferry">The state ferry system</h2><p>Alaska Marine Highway passengers and fleet over time.</p></div>
+  <div class="ages"><div><span class="d num">400k+</span><span class="w">Passengers a year, 1990–92 peak, with 110,000 vehicles</span></div><div><span class="d num">52k</span><span class="w">Passengers in 2020, the pandemic low</span></div><div><span class="d num">~185k</span><span class="w">Passengers in 2024, with about 65,000 vehicles</span></div><div><span class="d num">11 → 6</span><span class="w">Vessels in service, 2004–16 vs. FY2024</span></div></div>
+  <span class="eyebrow">Source: Alaska Marine Highway figures reported by the Wrangell Sentinel, Feb 2025.</span>
+</section>
+<section aria-labelledby="h-capex">
+  <div class="sec-head"><h2 id="h-capex">Keeping up what the state owns</h2><p>Capital spending compared with depreciation and the maintenance backlog. Most of the capital budget is federal money, so the state's own reinvestment is the better test of whether it is keeping up.</p></div>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 96" style="min-width:520px" role="img" aria-label="FY2027 capital budget as passed, 2.5 billion dollars: federal funds 1.8 billion, about 72 percent; state funds about 0.7 billion, about 28 percent"><rect x="20.0" y="14" width="432.0" height="34" fill="var(--series2)"/><text class="strong" x="24.0" y="66" style="font-size:12px">Federal funds</text><text x="24.0" y="82">$1.8B · 72%</text><rect x="452.0" y="14" width="168.0" height="34" fill="var(--accent)"/><text class="strong" x="456.0" y="66" style="font-size:12px">State funds</text><text x="456.0" y="82">~$0.7B · 28%</text><line x1="20" x2="20" y1="8" y2="88" stroke="var(--rule)"/></svg></div>
+    <figcaption>FY2027 capital budget as passed by the Legislature, May 2026. State share is the remainder. After the governor's June vetoes, the enacted capital budget was $2.4B in all funds, including $354.6M in unrestricted general funds. Sources: Alaska Beacon, May 2026; Legislative Finance Division, FY27 enacted summary.</figcaption>
+  </figure>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 166" style="min-width:520px" role="img" aria-label="Reinvestment yardsticks in millions of dollars: depreciation in fiscal 2025, 638; state general funds in the FY2027 capital budget, 354.6; deferred maintenance in the FY2027 budget, about 180; needed each year to hold the backlog steady, 180"><line class="grid" x1="270.0" x2="270.0" y1="6" y2="142"/><text x="270.0" y="160" text-anchor="middle">$0M</text><line class="grid" x1="345.0" x2="345.0" y1="6" y2="142"/><text x="345.0" y="160" text-anchor="middle">$200M</text><line class="grid" x1="420.0" x2="420.0" y1="6" y2="142"/><text x="420.0" y="160" text-anchor="middle">$400M</text><line class="grid" x1="495.0" x2="495.0" y1="6" y2="142"/><text x="495.0" y="160" text-anchor="middle">$600M</text><line class="grid" x1="570.0" x2="570.0" y1="6" y2="142"/><text x="570.0" y="160" text-anchor="middle">$800M</text><text x="262" y="25" text-anchor="end" style="fill:var(--ink)">Depreciation, FY2025</text><rect x="270" y="12" width="239.2" height="18" fill="var(--ink)"/><text class="strong" x="515.2" y="25">$638M</text><text x="262" y="59" text-anchor="end" style="fill:var(--ink)">State general funds, FY2027 capital budget</text><rect x="270" y="46" width="133.0" height="18" fill="var(--series2)"/><text class="strong" x="409.0" y="59">$355M</text><text x="262" y="93" text-anchor="end" style="fill:var(--ink)">Deferred maintenance, FY2027 budget</text><rect x="270" y="80" width="67.5" height="18" fill="var(--accent)"/><text class="strong" x="343.5" y="93">$180M</text><text x="262" y="127" text-anchor="end" style="fill:var(--ink)">Needed each year to hold backlog steady</text><rect x="270" y="114" width="67.5" height="18" fill="var(--muted)"/><text class="strong" x="343.5" y="127">$180M</text></svg></div>
+    <figcaption>Millions of dollars. Depreciation is for the state's governmental activities. Deferred maintenance is "near" $180M as reported for the budget passed in May; reporting did not break it out by fund source. The $180M hold-steady estimate dates from about 2024. Sources: State of Alaska FY2025 Annual Comprehensive Financial Report; Alaska Beacon, May 2026; Legislative Finance Division.</figcaption>
+  </figure>
+  <div class="ages"><div><span class="d num">~$2.3B</span><span class="w">Statewide deferred maintenance backlog, 2026; about $2.4B two years earlier</span></div><div><span class="d num">~$1.5B</span><span class="w">The University of Alaska's own backlog estimate, 2026</span></div><div><span class="d num">≈1.6×</span><span class="w">All capital additions vs. depreciation, FY2025, including federally funded roads (Two Cents estimate)</span></div><div><span class="d num">≈0.28×</span><span class="w">FY2027 deferred maintenance funding vs. FY2025 depreciation</span></div></div>
+  <span class="eyebrow">Ratios are Two Cents calculations. Additions are estimated as the $355M rise in net capital assets plus $638M of depreciation, before disposals. Sources: FY2025 ACFR; House Finance Committee, 2026; Alaska Infrastructure Symposium, Apr 2026.</span>
+</section>
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>Alaska's vacancy rate in state jobs has stayed near one in six since at least 2022, when it was close to one in five. On food assistance, Alaska ranked 50th of 50 states for timely renewals and second-lowest for new applications in fiscal 2025, and its error rate was about double the national rate. Under the 2025 federal budget law, states with high error rates will eventually pay part of benefit costs; Alaska is temporarily exempt, but a similar rule applied today would shift nearly $40 million a year to the state.</p>
+  <p>Capital spending looks large, but about 72% of the FY2027 capital budget is federal money. Against the $638 million the state's buildings, roads and equipment depreciated in fiscal 2025, deferred maintenance funding of about $180 million replaces a little over a quarter, enough to keep the backlog from growing but not to reduce it.</p>
+</div>
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul><li>State capacity has no single official measure. This page tracks a few public services with regular, comparable data: staffing, food assistance processing, the ferry system and upkeep of state-owned buildings and roads.</li><li>Vacancy figures come from state budget data reported by the Anchorage Daily News. They count unfilled budgeted positions, not job postings.</li><li>USDA timeliness counts applicant-caused delays as untimely, so it is not a strict compliance measure.</li><li>Depreciation ($638M) and capital asset values ($9.72B net, up $355M) are for governmental activities in the FY2025 Annual Comprehensive Financial Report. They exclude the University of Alaska, which reports separately, so the backlog and depreciation figures cover somewhat different assets.</li><li>Alaska depreciates its roads and other infrastructure rather than using GASB's modified approach, which would replace depreciation with condition assessments (Alaska Administrative Manual 55).</li><li>Capital additions are estimated from the change in net assets because the financial report's capital-asset note, which lists additions and accumulated depreciation directly, was not available for this draft. That note would also give an asset-age measure: accumulated depreciation divided by original cost.</li><li>The governor's June 2026 line-item vetoes, about $89.5 million in total, left school maintenance and construction funding in place.</li><li>To add before launch: asset age and reinvestment from the ACFR capital-asset note, agency-by-agency backlog, permit processing times, DMV wait times, ferry on-time and cancellation records, and Division of Motor Vehicles and licensing backlogs.</li></ul>
+</section>
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul><li><a href="https://www.fna.usda.gov/snap/qc/timeliness/apt-fy25" target="_blank" rel="noopener">USDA, SNAP application timeliness FY2025</a></li><li><a href="https://www.fna.usda.gov/snap/qc/timeliness/rpt-fy25" target="_blank" rel="noopener">USDA, SNAP recertification timeliness FY2025</a></li><li><a href="https://www.kmxt.org/alaska-statewide-news/2026-07-02/alaskas-persistently-high-snap-payment-errors-top-nation-for-fourth-consecutive-year" target="_blank" rel="noopener">KMXT, SNAP payment errors, Jul 2026</a></li><li><a href="https://www.adn.com/politics/2025/12/16/state-workforce-size-remains-steady-despite-gov-dunleavys-hiring-freeze" target="_blank" rel="noopener">Anchorage Daily News, state workforce, Dec 2025</a></li><li><a href="https://wrangellsentinel.com/story/2025/02/19/news/ferry-ridership-up-slightly-but-still-down-more-than-half-from-1990s/14243.html" target="_blank" rel="noopener">Wrangell Sentinel, ferry ridership, Feb 2025</a></li><li><a href="https://doa.alaska.gov/dof/reports/resource/2025acfr.pdf" target="_blank" rel="noopener">State of Alaska, FY2025 Annual Comprehensive Financial Report</a></li><li><a href="https://doa.alaska.gov/dof/manuals/aam/resource/55.pdf" target="_blank" rel="noopener">Alaska Administrative Manual 55, capital assets</a></li><li><a href="https://alaskabeacon.com/2026/05/15/alaska-legislators-approve-2-5-billion-for-new-construction-and-renovation-projects/" target="_blank" rel="noopener">Alaska Beacon, FY2027 capital budget, May 2026</a></li><li><a href="https://www.legfin.akleg.gov/FisSum/FY27-Budget.pdf" target="_blank" rel="noopener">Legislative Finance Division, FY27 enacted fiscal summary</a></li><li><a href="https://alaskapublic.org/news/politics/alaska-legislature/2026-06-24/gov-dunleavy-vetoes-89-5m-from-alaska-budget-but-leaves-school-funding-intact" target="_blank" rel="noopener">Alaska Public Media, budget vetoes, Jun 2026</a></li><li><a href="https://citizenportal.ai/articles/7853690/alaska/2026-legislature-alaska/house-finance-hears-23-billion-deferred-maintenance-backlog-omb-pauses-major-fy26-allocations" target="_blank" rel="noopener">House Finance hears $2.3B deferred maintenance backlog, 2026</a></li><li><a href="https://www.akml.org/wp-content/uploads/2026/04/Alaska-Infra-Reality-Combined.pdf" target="_blank" rel="noopener">Alaska Infrastructure Symposium, Apr 2026</a></li></ul>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska Housing · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — breadcrumb masthead, the read, indicator strip, Anchorage price & vacancy charts, rent table by area, permits, affordability ledger, comparison, data notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+.tbl{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+th.r,td.n{text-align:right} td.n{font-variant-numeric:tabular-nums}
+td.n.b{font-weight:600}
+tr:last-child td{border-bottom:0}
+.bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-left:8px;opacity:.85}
+.bar.neg{background:var(--series2)}
+.up{color:var(--bad)} .dn{color:var(--good)}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 07</span></nav>
+  <h1>Housing</h1>
+  <span class="asof">Rents: March 2026 survey · prices: Q2 2026 · permits: Aug 2026 · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska home prices rose faster than in any other state over the past year, and mortgage rates are climbing again. Rents are rising more slowly, with the statewide increase the smallest in five years, but the Mat-Su and Kenai are the exceptions, with double-digit gains and tight vacancy. Builders finished more units in 2025 than in any year of the past decade.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Indicators</h2><p>Latest reading for each series and its source date.</p></div>
+  <div class="tiles">
+    <div class="tile"><span class="lab">Home prices</span><span class="val">+8.3%</span><span class="chip bad">Highest of any state</span><span class="sub">Year over year. U.S. +2.1%.</span><span class="per">Q2 2026 · FHFA HPI</span></div>
+    <div class="tile"><span class="lab">Median home value</span><span class="val">$415k</span><span class="chip bad">~$300k in 2019</span><span class="sub">Statewide.</span><span class="per">2025 · AK DOLWD</span></div>
+    <div class="tile"><span class="lab">Mortgage rate</span><span class="val">7.32%</span><span class="chip bad">6.19% a year ago</span><span class="sub">U.S. 30-year fixed average.</span><span class="per">Oct 22, 2026</span></div>
+    <div class="tile"><span class="lab">Rents, statewide</span><span class="val">+2.1%</span><span class="chip flat">Smallest rise in 5 yrs</span><span class="sub">Median 2-bedroom apartment.</span><span class="per">Mar 2026 · AK DOLWD survey</span></div>
+    <div class="tile"><span class="lab">Mat-Su 2-BR rent</span><span class="val">$1,567</span><span class="chip bad">+12.8% · vacancy 3.5%</span><span class="sub">Largest increase of 11 areas.</span><span class="per">Mar 2026</span></div>
+    <div class="tile"><span class="lab">Units built</span><span class="val">2,261</span><span class="chip good">10-year high</span><span class="sub">Single- and multifamily, 2025. 1,726 in 2021.</span><span class="per">2025 · AK DOLWD</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-anc">
+  <div class="sec-head"><h2 id="h-anc">Anchorage, 2018–2025</h2><p>The city tracks these yearly in its Housing Action Plan, which gives the longest consistent local series.</p></div>
+  <div class="two">
+    <figure class="chart">
+      <h3>Median December listing price</h3>
+      <svg id="c-price" viewBox="0 0 320 200" role="img" aria-label="Anchorage median December listing price, from 299,999 dollars in 2018 to 457,250 dollars in 2025"></svg>
+      <figcaption>Up 52% in seven years. Source: Municipality of Anchorage, 2026 progress report.</figcaption>
+    </figure>
+    <figure class="chart">
+      <h3>Rental vacancy rate</h3>
+      <svg id="c-vac" viewBox="0 0 320 200" role="img" aria-label="Anchorage rental vacancy rate 2018 to 2025: 6.2, 5.2, 5.7, 4.3, 3.2, 4.1, 4.6, 5.6 percent, with a 5 percent target line"></svg>
+      <figcaption>Dashed line is the city's 5% target. 2022 had the tightest market and a 14.2% rent jump.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="h-rent">
+  <div class="sec-head"><h2 id="h-rent">Rents by area</h2><p>Median adjusted rent for a two-bedroom apartment, March of each year. "Adjusted" means utilities are added in so areas compare fairly.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Area</th><th class="r">2026</th><th class="r">2025</th><th class="r">Change</th><th class="r">Vacancy 2026</th></tr></thead>
+    <tbody id="rents"></tbody>
+  </table></div>
+  <span class="eyebrow">Source: AK DOLWD rental market survey. North Slope and Bering Strait not surveyed.</span>
+</section>
+
+<section aria-labelledby="h-perm">
+  <div class="sec-head"><h2 id="h-perm">Permits, 2026</h2><p>New privately owned housing units authorized each month, statewide.</p></div>
+  <figure class="chart">
+    <svg id="c-perm" viewBox="0 0 640 200" role="img" aria-label="Alaska monthly housing units permitted April to August 2026: 55, 82, 73, 78, 57"></svg>
+    <figcaption>Not seasonally adjusted. Much of rural Alaska needs no building permit, so this undercounts construction. Source: Census Building Permits Survey via FRED (AKBPPRIV). September data due Oct 27.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="h-aff">
+  <div class="sec-head"><h2 id="h-aff">Affordability</h2><p>What it costs to buy the median home now compared with before the pandemic.</p></div>
+  <div class="ages">
+    <div><span class="d num">$2,050</span><span class="w">Monthly payment on a $415k home, 2025</span></div>
+    <div><span class="d num">+84%</span><span class="w">Vs. the 2019 median payment</span></div>
+    <div><span class="d num">&lt;3% → 6.5%</span><span class="w">Median mortgage rate, 2020 vs. 2023</span></div>
+    <div><span class="d num">1.37</span><span class="w">Affordability index, 2025 (below 1 in 2019–21)</span></div>
+  </div>
+  <span class="eyebrow">The index is the number of average paychecks needed to afford an average home. Source: AK DOLWD via Alaska Public Media, Sep 2026.</span>
+</section>
+
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>Alaska led the country in home price growth over the year to Q2 2026, at four times the national rate. Rents are a different picture: Anchorage's median two-bedroom apartment rent of $1,720 is above the U.S. median rent of $1,413, but rent growth across most of the state has slowed.</p>
+</div>
+
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul>
+    <li>The U.S. median rent covers all rental units, while Alaska's figures are two-bedroom apartments, so the comparison is approximate.</li>
+    <li>To add before launch: statewide sales volume and average sales price from AHFC's quarterly housing indicators, and a long permit history from Census.</li>
+    <li>The mortgage rate is a national average. Alaska rates track it closely but are not published separately each week.</li>
+  </ul>
+</section>
+
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul>
+    <li><a href="https://live.laborstats.alaska.gov/housing/rentnumbedrms.html" target="_blank" rel="noopener">AK DOLWD rental market survey</a></li>
+    <li><a href="https://alaskapublic.org/news/economy/2026-09-23/mixed-signals-for-housing-costs-across-alaska" target="_blank" rel="noopener">Alaska Public Media, Sep 2026</a></li>
+    <li><a href="https://eyeonhousing.org/2026/09/house-price-appreciation-by-state-and-metro-area-in-the-second-quarter-of-2026/" target="_blank" rel="noopener">NAHB on FHFA HPI, Q2 2026</a></li>
+    <li><a href="https://www.muni.org/Departments/Assembly/Documents/Assembly%20Housing%20Action%20Plan_2026%20Progress%20Report.pdf" target="_blank" rel="noopener">Anchorage Housing Action Plan, 2026</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/AKBPPRIV" target="_blank" rel="noopener">FRED, AKBPPRIV</a></li>
+    <li><a href="https://tradingeconomics.com/united-states/30-year-mortgage-rate/news/588887" target="_blank" rel="noopener">Trading Economics, 30-year mortgage rate</a></li>
+  </ul>
+</footer>
+</div>
+
+<script>
+(function(){
+  function line(id,cfg){
+    const svg=document.getElementById(id),W=320,H=200,L=50,R=18,T=18,B=24,n=cfg.v.length;
+    const X=i=>L+i/(n-1)*(W-L-R), Y=v=>T+(1-(v-cfg.min)/(cfg.max-cfg.min))*(H-T-B);
+    let s='';
+    cfg.ticks.forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${cfg.fmt(t)}</text>`});
+    cfg.x.forEach((l,i)=>{if(i%cfg.every===0||i===n-1) s+=`<text x="${X(i)}" y="${H-6}" text-anchor="middle">${l}</text>`});
+    if(cfg.ref!=null) s+=`<line x1="${L}" x2="${W-R}" y1="${Y(cfg.ref)}" y2="${Y(cfg.ref)}" stroke="var(--muted)" stroke-dasharray="3 3"/>`;
+    const pts=cfg.v.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+    s+=`<polygon points="${X(0)},${Y(cfg.min)} ${pts} ${X(n-1)},${Y(cfg.min)}" fill="var(--accent)" opacity=".10"/>`;
+    s+=`<polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>`;
+    cfg.v.forEach((v,i)=>{s+=`<circle cx="${X(i)}" cy="${Y(v)}" r="${i===n-1?3.6:2.2}" fill="var(--accent)"/>`});
+    (cfg.labels||[n-1]).forEach(i=>{s+=`<text class="strong" x="${X(i)}" y="${Y(cfg.v[i])-8}" text-anchor="${i===n-1?'end':'middle'}">${cfg.lfmt(cfg.v[i])}</text>`});
+    svg.innerHTML=s;
+  }
+  const yrs=['2018','2019','2020','2021','2022','2023','2024','2025'];
+  line('c-price',{x:yrs,every:1,v:[299999,311500,328450,374500,439000,425000,447625,457250],min:250000,max:500000,ticks:[250000,300000,350000,400000,450000,500000],
+    fmt:t=>'$'+t/1000+'k',lfmt:v=>'$'+Math.round(v/1000)+'k',labels:[0,4,7]});
+  line('c-vac',{x:yrs,every:1,v:[6.2,5.2,5.7,4.3,3.2,4.1,4.6,5.6],min:0,max:8,ticks:[0,2,4,6,8],ref:5,
+    fmt:t=>t+'%',lfmt:v=>v.toFixed(1)+'%',labels:[0,4,7]});
+
+  // Rents table
+  const rents=[["Bethel",2030,2075,8.0],["Kodiak Island",1728,1713,7.8],["Anchorage",1720,1680,4.9],["Fairbanks North Star",1710,1676,10.1],["Juneau",1708,1661,4.1],["Ketchikan Gateway",1671,1600,8.4],["Sitka",1579,1564,5.8],["Matanuska-Susitna",1567,1389,3.5],["Valdez-Cordova",1393,1375,4.2],["Kenai Peninsula",1336,1203,5.8],["Wrangell-Petersburg",1288,1235,1.1]];
+  const tb=document.getElementById('rents');
+  tb.innerHTML=rents.map(([a,r26,r25,v])=>{
+    const c=(r26/r25-1)*100, w=Math.round(Math.abs(c)*5);
+    return `<tr><td>${a}</td><td class="n b">$${r26.toLocaleString()}</td><td class="n">$${r25.toLocaleString()}</td><td class="n">${c>=0?'+':'−'}${Math.abs(c).toFixed(1)}%<span class="bar${c<0?' neg':''}" style="width:${w}px"></span></td><td class="n">${v.toFixed(1)}%</td></tr>`}).join('');
+
+  // Permits bars
+  (function(){
+    const svg=document.getElementById('c-perm'),W=640,H=200,L=40,R=12,T=20,B=26,m=['Apr','May','Jun','Jul','Aug'],v=[55,82,73,78,57];
+    const Y=x=>T+(1-x/100)*(H-T-B),slot=(W-L-R)/v.length,bw=Math.min(64,slot*.55);
+    let s='';[0,25,50,75,100].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`});
+    v.forEach((x,i)=>{const cx=L+slot*i+slot/2;s+=`<rect x="${cx-bw/2}" y="${Y(x)}" width="${bw}" height="${Y(0)-Y(x)}" fill="var(--accent)"/><text class="strong" x="${cx}" y="${Y(x)-6}" text-anchor="middle">${x}</text><text x="${cx}" y="${H-8}" text-anchor="middle">${m[i]}</text>`});
+    svg.innerHTML=s;
+  })();
+})();
+</script>
+</body>
+</html>

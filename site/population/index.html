@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska Population &amp; Migration · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — breadcrumb masthead, the read, indicator strip, long-run chart, components, borough ranking, births/deaths ledger, lens, data notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:10px;vertical-align:middle;margin-right:5px}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .ink{fill:var(--ink)} svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.scroll{overflow-x:auto}
+
+.ledger{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+tr:last-child td{border-bottom:0}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch;display:flex;flex-direction:column;gap:6px}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 06</span></nav>
+  <h1>Population &amp; migration</h1>
+  <span class="asof">Latest estimate: July 1, 2025 · next estimate Jan 2027 · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska is growing on births alone. More people have left than arrived for 13 straight years, and the gap is now closed only by a shrinking natural increase. The state is getting older fast, while the working-age population has stopped growing. Within the state, people are moving toward the Mat-Su and Kenai and away from rural regions and the older cities.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Indicators</h2><p>Alaska Department of Labor estimates for July 1, 2025, compared with a year earlier.</p></div>
+  <div class="tiles">
+    <div class="tile"><span class="lab">Population</span><span class="val">738,737</span><span class="chip flat">+1,649 · +0.22%</span><span class="sub">Ranked 40th among states for growth.</span><span class="per">Jul 2025 · AK DOLWD</span></div>
+    <div class="tile"><span class="lab">Net migration</span><span class="val">−1,740</span><span class="chip bad">13th year negative</span><span class="sub">Longest streak since 1945.</span><span class="per">Jul 2024–Jul 2025</span></div>
+    <div class="tile"><span class="lab">Natural increase</span><span class="val">+3,389</span><span class="chip bad">A decade ago: 7,000+</span><span class="sub">Births minus deaths.</span><span class="per">Jul 2024–Jul 2025</span></div>
+    <div class="tile"><span class="lab">Births</span><span class="val">&lt;9,000</span><span class="chip bad">First time since 1978</span><span class="sub">21% below the prior decade.</span><span class="per">2025</span></div>
+    <div class="tile"><span class="lab">Working age, 18–64</span><span class="val">−0.1%</span><span class="chip bad">Shrinking</span><span class="sub">Age 65+ grew 3.2%.</span><span class="per">Jul 2024–Jul 2025</span></div>
+    <div class="tile"><span class="lab">Mat-Su, since 2020</span><span class="val">+9.2%</span><span class="chip good">Fastest in state</span><span class="sub">Anchorage −0.7% over the same years.</span><span class="per">2020–2025</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-long">
+  <div class="sec-head"><h2 id="h-long">Fifty-five years of population</h2><p>Oil booms brought people; busts sent them home. The 2016 peak has not been passed in the Census series.</p></div>
+  <figure class="chart">
+    <h3>Resident population, thousands</h3>
+    <div class="scroll"><svg id="c-pop" viewBox="0 0 680 280" style="min-width:520px" role="img" aria-label="Alaska resident population 1970 to 2025, rising from 303 thousand to a peak of 742.6 thousand in 2016, then flat near 735 thousand"></svg></div>
+    <figcaption>U.S. Census Bureau annual estimates via FRED (AKPOP), one consistent series. The state's own 2025 estimate is 738,737; Census has 737,270.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="h-comp">
+  <div class="sec-head"><h2 id="h-comp">Where the growth comes from</h2><p>Population change splits into births minus deaths and people moving in minus people moving out.</p></div>
+  <div class="two">
+    <figure class="chart">
+      <h3>Components of change, 2024–25</h3>
+      <svg id="c-comp" viewBox="0 0 320 210" role="img" aria-label="Natural increase plus 3,389, net migration minus 1,740, total change plus 1,649"></svg>
+      <figcaption>Source: AK DOLWD population estimates.</figcaption>
+    </figure>
+    <figure class="chart">
+      <h3>The engine is slowing</h3>
+      <div class="ledger" style="border:0">
+      <table style="min-width:0">
+        <thead><tr><th>Measure</th><th style="text-align:right">Then</th><th style="text-align:right">Now</th></tr></thead>
+        <tbody>
+          <tr><td>Births per year</td><td class="n">11,000+ <span class="eyebrow">~2015</span></td><td class="n">&lt;9,000</td></tr>
+          <tr><td>Deaths per year</td><td class="n">~4,300 <span class="eyebrow">~2015</span></td><td class="n">~5,500</td></tr>
+          <tr><td>Natural increase</td><td class="n">7,000+ <span class="eyebrow">~2015</span></td><td class="n">3,389</td></tr>
+          <tr><td>Total fertility rate</td><td class="n">2.6 <span class="eyebrow">1990</span></td><td class="n">1.9</td></tr>
+          <tr><td>Births to mothers 30+</td><td class="n">32% <span class="eyebrow">1990</span></td><td class="n">~50%</td></tr>
+        </tbody>
+      </table></div>
+      <figcaption>About 60% of the drop in natural increase is fewer births, 40% more deaths. Source: Alaska Economic Trends, Mar 2026.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="h-boro">
+  <div class="sec-head"><h2 id="h-boro">Growth by borough, 2020–2025</h2><p>Thirteen of 30 areas lost at least 5% of their people. Only the Mat-Su, Kenai and the Fairbanks areas grew more than 1%.</p></div>
+  <figure class="chart">
+    <div class="legend"><span><i style="background:var(--accent)"></i>Grew</span><span><i style="background:var(--series2)"></i>Shrank</span><span>Label: 2025 population</span></div>
+    <div class="scroll"><svg id="c-boro" viewBox="0 0 680 660" style="min-width:560px" role="img" aria-label="Percent population change 2020 to 2025 for all 30 Alaska boroughs and census areas, from plus 9.2 percent in Mat-Su to minus 12.3 percent in Aleutians East"></svg></div>
+    <figcaption>Haines is 2021–2025. Source: AK DOLWD via Alaska Economic Trends, Apr 2026.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="h-age">
+  <div class="sec-head"><h2 id="h-age">An older Alaska</h2><p>Change since the 2020 Census.</p></div>
+  <div class="ages">
+    <div><span class="d num">+23,100</span><span class="w">Alaskans 65 and older</span></div>
+    <div><span class="d num">−5,000</span><span class="w">Children under 18</span></div>
+    <div><span class="d num">48.1k → 43.3k</span><span class="w">Children under 5</span></div>
+    <div><span class="d num">37.1</span><span class="w">Median age, up 1.5 years</span></div>
+  </div>
+</section>
+
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>From 2015 to 2025, births minus deaths added about 0.6% a year to Alaska's population, the second-highest rate among states after Utah. Net migration subtracted about the same, the lowest rate of any state.</p>
+  <p>Twenty states have had more deaths than births since 2020. Alaska is not one of them yet, but its natural increase has fallen by half in a decade.</p>
+</div>
+
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul>
+    <li>The long-run chart uses one Census series so vintages aren't stitched together. The state estimate differs slightly because it surveys military bases and group quarters directly.</li>
+    <li>To add before launch: the state's full 1945–2025 components table (births, deaths, net migration each year), and PFD-based migration by age. Both are published as spreadsheets that this draft couldn't load yet.</li>
+    <li>"Then" figures for births and deaths are rounded values from the state's own narrative, not table values.</li>
+  </ul>
+</section>
+
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul>
+    <li><a href="https://live.laborstats.alaska.gov/data-pages/alaska-population-estimates" target="_blank" rel="noopener">AK DOLWD, population estimates</a></li>
+    <li><a href="https://labor.alaska.gov/news/2026/news26-2.htm" target="_blank" rel="noopener">AK DOLWD release, Jan 2026</a></li>
+    <li><a href="https://live.laborstats.alaska.gov/sites/default/files/trends/apr26art2.pdf" target="_blank" rel="noopener">Trends, Apr 2026: population change in the 2020s</a></li>
+    <li><a href="https://live.laborstats.alaska.gov/sites/default/files/trends/mar26art1.pdf" target="_blank" rel="noopener">Trends, Mar 2026: population change, 1947–2025</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/AKPOP" target="_blank" rel="noopener">FRED, AKPOP (Census)</a></li>
+    <li><a href="https://laborstats.alaska.gov/trends/mar21art1.pdf" target="_blank" rel="noopener">Trends, Mar 2021: migration by age</a></li>
+  </ul>
+</footer>
+</div>
+
+<script>
+(function(){
+  // --- Long-run population (Census, thousands)
+  const pop=[302.583,315.510,324.464,330.543,341.063,376.170,400.969,403.436,404.766,402.753,405.315,418.491,449.606,488.417,513.702,532.495,544.268,539.309,541.983,547.159,553.120,569.273,587.073,596.993,600.624,601.345,604.918,608.846,615.205,619.500,627.963,633.714,642.337,648.414,659.286,666.946,675.302,680.300,687.455,698.895,713.982,722.349,730.810,737.626,737.075,738.430,742.575,740.983,736.624,733.603,732.906,734.590,733.659,734.654,736.537,737.270];
+  (function(){
+    const svg=document.getElementById('c-pop'),W=680,H=280,L=44,R=56,T=16,B=26,y0=250,y1=800,n=pop.length;
+    const X=i=>L+i/(n-1)*(W-L-R), Y=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B), yr=i=>1970+i;
+    let s='';
+    // era bands
+    [[1974,1977,'Pipeline'],[1986,1988,'Oil bust'],[2015,2018,'AK recession']].forEach(([a,b,l])=>{
+      s+=`<rect x="${X(a-1970)}" y="${T}" width="${X(b-1970)-X(a-1970)}" height="${H-T-B}" fill="var(--rule)" opacity=".55"/><text x="${(X(a-1970)+X(b-1970))/2}" y="${T+11}" text-anchor="middle">${l}</text>`});
+    [300,400,500,600,700,800].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`});
+    [1970,1980,1990,2000,2010,2020].forEach(y=>{s+=`<text x="${X(y-1970)}" y="${H-8}" text-anchor="middle">${y}</text>`});
+    const pts=pop.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+    s+=`<polygon points="${X(0)},${Y(y0)} ${pts} ${X(n-1)},${Y(y0)}" fill="var(--accent)" opacity=".10"/>`;
+    s+=`<polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>`;
+    const pk=46; s+=`<circle cx="${X(pk)}" cy="${Y(pop[pk])}" r="3" fill="var(--ink)"/><text class="strong" x="${X(pk)-6}" y="${Y(pop[pk])-8}" text-anchor="end">2016 peak 742.6</text>`;
+    s+=`<circle cx="${X(n-1)}" cy="${Y(pop[n-1])}" r="3.6" fill="var(--accent)"/><text class="strong" x="${X(n-1)+6}" y="${Y(pop[n-1])+14}">737.3</text>`;
+    svg.innerHTML=s;
+  })();
+
+  // --- Components waterfall
+  (function(){
+    const svg=document.getElementById('c-comp'),W=320,H=210,L=46,R=12,T=18,B=34;
+    const items=[['Natural\nincrease',0,3389,'var(--accent)'],['Net\nmigration',3389,1649,'var(--series2)'],['Total\nchange',0,1649,'var(--ink)']];
+    const y0=0,y1=4000,Y=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B),bw=56,gap=(W-L-R-3*bw)/3;
+    let s='';[0,1000,2000,3000,4000].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`});
+    const lab=['+3,389','−1,740','+1,649'];
+    items.forEach(([name,a,b,c],i)=>{
+      const x=L+gap/2+i*(bw+gap), top=Y(Math.max(a,b)), h=Math.abs(Y(a)-Y(b));
+      s+=`<rect x="${x}" y="${top}" width="${bw}" height="${h}" fill="${c}"/>`;
+      s+=`<text class="strong" x="${x+bw/2}" y="${top-5}" text-anchor="middle">${lab[i]}</text>`;
+      name.split('\n').forEach((w,k)=>{s+=`<text x="${x+bw/2}" y="${H-B+14+k*12}" text-anchor="middle">${w}</text>`});
+      if(i===0) s+=`<line x1="${x+bw}" x2="${x+bw+gap}" y1="${Y(3389)}" y2="${Y(3389)}" stroke="var(--muted)" stroke-dasharray="2 2"/>`;
+    });
+    svg.innerHTML=s;
+  })();
+
+  // --- Borough ranking
+  const boro=[["Matanuska-Susitna",9.20,117412],["Kenai Peninsula",4.21,61327],["Southeast Fairbanks",3.51,7051],["Fairbanks North Star",1.48,97083],["Denali",0.74,1631],["Copper River",0.42,2628],["Prince of Wales-Hyder",0.26,5768],["Petersburg",-0.09,3395],["Anchorage",-0.70,289221],["Bethel",-2.59,18188],["Juneau",-3.38,31182],["Ketchikan Gateway",-4.18,13377],["Wrangell",-4.32,2037],["North Slope",-4.41,10555],["Yakutat",-4.48,633],["Nome",-4.56,9598],["Kusilvak",-4.83,7973],["Sitka",-5.17,8032],["Kodiak Island",-5.26,12430],["Aleutians West",-5.28,4963],["Hoonah-Angoon",-5.97,2228],["Haines*",-6.87,2447],["Yukon-Koyukuk",-6.87,4988],["Bristol Bay",-6.99,787],["Chugach",-7.42,6594],["Northwest Arctic",-7.48,7231],["Dillingham",-8.32,4469],["Lake and Peninsula",-8.77,1352],["Skagway",-8.93,1134],["Aleutians East",-12.32,3023]];
+  (function(){
+    const svg=document.getElementById('c-boro'),W=680,T=22,row=20.5,LBL=160,RPAD=70,x0=-16,x1=11;
+    const X=v=>LBL+(v-x0)/(x1-x0)*(W-LBL-RPAD);
+    let s='';
+    [-12,-8,-4,0,4,8].forEach(t=>{s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T-6}" y2="${T+boro.length*row}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${X(t)}" y="${T-9}" text-anchor="middle">${t>0?'+':''}${t}%</text>`});
+    boro.forEach(([n,v,p],i)=>{
+      const y=T+i*row, c=v>=0?'var(--accent)':'var(--series2)', a=X(Math.min(0,v)), w=Math.abs(X(v)-X(0));
+      s+=`<text class="ink" x="${LBL-8}" y="${y+row/2+3.5}" text-anchor="end">${n}</text>`;
+      s+=`<rect x="${a}" y="${y+3}" width="${Math.max(w,1)}" height="${row-6}" fill="${c}"/>`;
+      const lx=v>=0?X(v)+5:X(v)-5, an=v>=0?'start':'end';
+      s+=`<text class="strong" x="${lx}" y="${y+row/2+3.5}" text-anchor="${an}">${v>0?'+':''}${v.toFixed(1)}%</text>`;
+      s+=`<text x="${W-4}" y="${y+row/2+3.5}" text-anchor="end">${p.toLocaleString()}</text>`;
+    });
+    svg.setAttribute('viewBox',`0 0 ${W} ${T+boro.length*row+8}`);
+    svg.innerHTML=s;
+  })();
+})();
+</script>
+</body>
+</html>

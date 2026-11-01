@@ -1,0 +1,35 @@
+name: Refresh data
+
+on:
+  schedule:
+    # 16:17 UTC (8:17 a.m. Alaska) on the 2nd and 16th of each month
+    - cron: "17 16 2,16 * *"
+  workflow_dispatch: {}   # adds a "Run workflow" button on the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch FRED series
+        run: python scripts/fetch_fred.py
+
+      - name: Commit any new data
+        run: |
+          git config user.name "data-bot"
+          git config user.email "data-bot@users.noreply.github.com"
+          git add site/data
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Data refresh $(date -u +%Y-%m-%d)"
+            git push
+          fi

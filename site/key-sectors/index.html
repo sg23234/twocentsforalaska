@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska Key Sectors · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — masthead, the read, indicators, charts, comparison table, notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+.tbl{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+th.r,td.n{text-align:right} td.n{font-variant-numeric:tabular-nums}
+td.n.b{font-weight:600}
+tr:last-child td{border-bottom:0}
+.bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-left:8px;opacity:.85}
+.bar.neg{background:var(--series2)}
+.up{color:var(--bad)} .dn{color:var(--good)}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 08</span></nav>
+  <h1>Key sectors</h1>
+  <span class="asof">Jobs through Sep 2026 · sector data latest available · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska added 300 jobs over the year to September 2026, with private gains in transportation, construction, oil and gas and mining offsetting 1,900 fewer government jobs. Oil prices and North Slope output are both up, mine output hit a record $6.5 billion in 2025, and Anchorage handled more all-cargo landed weight than any other U.S. airport. Summer visitor numbers were flat in 2025 after several years of growth, and Bristol Bay's 2026 salmon run was below average but worth more than usual.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Sector snapshot</h2><p>One headline figure per sector, from the latest release for each. Periods differ, so read the date on each tile.</p></div>
+  <div class="tiles">
+    <div class="tile"><span class="lab">Oil &amp; gas</span><span class="val">562.6k<span style="font-size:15px;color:var(--muted)"> bpd</span></span><span class="chip good">FY27 forecast 518.5k</span><span class="sub">North Slope output; ANS crude about $128.</span><span class="per">Oct 12, 2026 · DOR</span></div>
+    <div class="tile"><span class="lab">Mining</span><span class="val">$6.5B</span><span class="chip good">Record</span><span class="sub">Value of mine output; nearly 1 million oz of gold.</span><span class="per">2025 · USGS</span></div>
+    <div class="tile"><span class="lab">Seafood</span><span class="val">$264M</span><span class="chip good">+21% vs 20-yr avg</span><span class="sub">Bristol Bay ex-vessel value, all species.</span><span class="per">2026 season · ADF&amp;G prelim.</span></div>
+    <div class="tile"><span class="lab">Tourism</span><span class="val">2.71M</span><span class="chip flat">+0.1% y/y</span><span class="sub">Out-of-state summer visitors; 66% by cruise.</span><span class="per">Summer 2025 · ATIA</span></div>
+    <div class="tile"><span class="lab">Air cargo</span><span class="val">#1</span><span class="chip good">+3.2% y/y</span><span class="sub">U.S. airports by all-cargo landed weight.</span><span class="per">2025 · FAA prelim.</span></div>
+    <div class="tile"><span class="lab">Health care</span><span class="val">43.2k</span><span class="chip good">+300 y/y</span><span class="sub">Jobs; about 1 in 8 payroll jobs.</span><span class="per">Sep 2026 · DOLWD</span></div>
+    <div class="tile"><span class="lab">Construction</span><span class="val">20.9k</span><span class="chip good">+600 y/y</span><span class="sub">Jobs, up 3.0% from Sep 2025.</span><span class="per">Sep 2026 · DOLWD</span></div>
+    <div class="tile"><span class="lab">Federal civilian</span><span class="val">13.9k</span><span class="chip bad">−1,300 y/y</span><span class="sub">Jobs, down 8.6%. Uniformed military not included.</span><span class="per">Sep 2026 · DOLWD</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-jobs">
+  <div class="sec-head"><h2 id="h-jobs">Job change by industry</h2><p>September 2026 vs. September 2025. Private industries added jobs; federal and state government shed them.</p></div>
+  <figure class="chart">
+    <svg id="c-jobs" viewBox="0 0 640 380" role="img" aria-label="Over-the-year job change by industry, September 2026: transportation and utilities plus 800, construction plus 600, mining and logging plus 500, of which oil and gas plus 400, health care plus 300, manufacturing, information and leisure flat, financial minus 100, professional services minus 200, local government minus 200, state government minus 400, federal government minus 1,300"></svg>
+    <figcaption>Not seasonally adjusted, so compare with the same month a year earlier. Oil and gas is part of mining and logging. Source: Alaska DOLWD, Current Employment Statistics, Sep 2026 preliminary.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="h-size">
+  <div class="sec-head"><h2 id="h-size">How big each industry is</h2><p>Payroll jobs, September 2026, and share of the state's 347,000.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Industry</th><th class="r">Sep 2026</th><th class="r">Sep 2025</th><th class="r">Change</th><th class="r">Share</th></tr></thead>
+    <tbody id="t-size"></tbody>
+  </table></div>
+  <span class="eyebrow">Source: Alaska DOLWD, Current Employment Statistics. Seafood processing and air transportation detail not yet published for 2026.</span>
+</section>
+
+<section aria-labelledby="h-vis">
+  <div class="sec-head"><h2 id="h-vis">Visitors and cargo</h2><p>Two of Alaska's export industries that are counted in people and pounds.</p></div>
+  <div class="two">
+    <figure class="chart">
+      <h3>Summer visitors by how they arrived</h3>
+      <svg id="c-vis" viewBox="0 0 320 200" role="img" aria-label="Summer out-of-state visitors, 2019, 2024 and 2025, by cruise, air and highway or ferry. Total 2.21 million in 2019, 2.70 million in 2024, 2.71 million in 2025"></svg>
+      <figcaption>May–September, millions. Source: Alaska Visitor Volume, Summer 2025 (ATIA).</figcaption>
+    </figure>
+    <figure class="chart">
+      <h3>Top U.S. all-cargo airports, 2025</h3>
+      <svg id="c-air" viewBox="0 0 320 200" role="img" aria-label="All-cargo landed weight in 2025, billions of pounds: Anchorage 26.3, Louisville 19.7, Memphis 16.3, Miami 10.4, Cincinnati 8.6"></svg>
+      <figcaption>Landed weight, billions of pounds, preliminary. Source: FAA CY2025 all-cargo airports.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="h-more">
+  <div class="sec-head"><h2 id="h-more">Sector details</h2><p>The latest figures beyond the headline, with what each one measures.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Sector</th><th>Figure</th><th>Period</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Oil &amp; gas</td><td>9,400 jobs, +400 (+4.4%) y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Oil &amp; gas</td><td>ANS crude about $128/bbl vs. $75 in the spring forecast for FY27</td><td>Oct 21, 2026</td><td>Dept. of Revenue</td></tr>
+      <tr><td>Mining</td><td>Mining and logging jobs 14,000, +500 y/y; about 4,600 outside oil and gas</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Seafood</td><td>Bristol Bay sockeye run 45.7M, harvest 30.1M; first run under 50M since 2014</td><td>2026 season</td><td>ADF&amp;G prelim.</td></tr>
+      <tr><td>Seafood</td><td>Manufacturing (mostly seafood processing) 13,100 jobs, flat y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Tourism</td><td>Leisure and hospitality 40,300 jobs, flat y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Tourism</td><td>Juneau cruise passengers 1,733,016, +2.6%, first year of daily limits</td><td>2026 season</td><td>CBJ via Cruise Mapper</td></tr>
+      <tr><td>Air cargo</td><td>Anchorage 26.3B lb landed weight, 34% more than No. 2 Louisville</td><td>2025</td><td>FAA prelim.</td></tr>
+      <tr><td>Transportation</td><td>Trade, transportation and utilities 70,700 jobs, +800 y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Government</td><td>Federal 13,900 (−1,300), state 23,700 (−400), local 40,300 (−200)</td><td>Sep 2026</td><td>DOLWD</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>Alaska's largest employers by industry are trade and transportation, health care, local government and leisure and hospitality, much like most states. What sets it apart is a set of small-workforce, high-output industries: oil and gas employs under 3% of payroll workers but drives much of state revenue and GDP, and Anchorage moves more all-cargo weight than any other U.S. airport.</p>
+</div>
+
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul>
+    <li>Job figures are a survey of employers and exclude the self-employed, which matters for commercial fishing: most fishermen are not in payroll counts.</li>
+    <li>Uniformed military personnel are not in payroll jobs. A military panel with active-duty counts and defense spending is planned.</li>
+    <li>Mining and Bristol Bay values are preliminary and in current dollars. Statewide 2026 salmon totals come later in the year.</li>
+    <li>To add before launch: statewide ex-vessel value, 2026 visitor volume, uniformed military counts, construction spending forecast, and monthly ANS production and price charts.</li>
+  </ul>
+</section>
+
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul>
+    <li><a href="https://live.laborstats.alaska.gov/labforce/000000/01/ces.html" target="_blank" rel="noopener">Alaska DOLWD, monthly employment by industry</a></li>
+    <li><a href="https://www.akbizmag.com/industry/government/alaska-employment-positive-job-growth-while-september-unemployment-rate-holds-flat/" target="_blank" rel="noopener">Alaska Business, September 2026 jobs report</a></li>
+    <li><a href="https://tax.alaska.gov/" target="_blank" rel="noopener">Alaska Dept. of Revenue, oil price and production</a></li>
+    <li><a href="https://www.miningnewsnorth.com/story/2026/03/06/news/alaska-mine-value-hits-new-heights-in-2025/9564.html" target="_blank" rel="noopener">North of 60 Mining News, 2025 mine value (USGS)</a></li>
+    <li><a href="https://alaskapublic.org/news/economy/2026-10-02/alaskas-bristol-bay-salmon-return-about-average-this-year-with-higher-prices-paid-to-fishers" target="_blank" rel="noopener">Alaska Public Media, Bristol Bay 2026 (ADF&amp;G)</a></li>
+    <li><a href="https://www.alaskatia.org/sites/default/files/2026-02/Alaska%20Visitor%20Volume%20Summer%202025%202.11.26.pdf" target="_blank" rel="noopener">Alaska Visitor Volume, Summer 2025</a></li>
+    <li><a href="https://www.cruisemapper.com/news/16846-juneau-records-fourth-consecutive-year-cruise-passenger-growth" target="_blank" rel="noopener">Cruise Mapper, Juneau 2026 passengers</a></li>
+    <li><a href="https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/arp-CY2025-all-cargo-airports-preliminary.pdf" target="_blank" rel="noopener">FAA, CY2025 all-cargo landed weight</a></li>
+  </ul>
+</footer>
+</div>
+
+<script>
+(function(){
+  // Job change bars
+  (function(){
+    const rows=[['Trade & transport',800],['Construction',600],['Mining & logging',500],['  of which oil & gas',400],['Health care',300],['Manufacturing',0],['Information',0],['Leisure & hospitality',0],['Financial',-100],['Professional services',-200],['Local government',-200],['State government',-400],['Federal government',-1300]];
+    const svg=document.getElementById('c-jobs'),W=640,H=380,L=150,R=56,T=8,rh=27;
+    const min=-1900,max=1000,X=v=>L+(v-min)/(max-min)*(W-L-R),z=X(0);
+    let s='';[-1200,-600,0,600].forEach(t=>{s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${T+rh*rows.length}"/><text x="${X(t)}" y="${H-4}" text-anchor="middle">${t>0?'+':''}${t.toLocaleString()}</text>`});
+    rows.forEach(([n,v],i)=>{const y=T+i*rh+5,sub=n.startsWith('  ');
+      s+=`<text x="${L-8}" y="${y+12}" text-anchor="end"${sub?'':' class="strong"'}>${n.trim()}</text>`;
+      if(v!==0) s+=`<rect x="${Math.min(X(v),z)}" y="${y}" width="${Math.abs(X(v)-z)}" height="16" fill="${v>0?'var(--accent)':'var(--series2)'}" opacity="${sub?.55:1}"/>`;
+      s+=`<text class="strong" x="${v>=0?Math.max(X(v),z)+5:X(v)-5}" y="${y+12}" text-anchor="${v>=0?'start':'end'}">${v>0?'+':''}${v===0?'0':v.toLocaleString()}</text>`;});
+    s+=`<line x1="${z}" x2="${z}" y1="${T}" y2="${T+rh*rows.length}" stroke="var(--muted)"/>`;
+    svg.innerHTML=s;
+  })();
+  // Size table
+  (function(){
+    const d=[['Trade, transportation & utilities',70700,69900],['Health care',43200,42900],['Leisure & hospitality',40300,40300],['Local government',40300,40500],['Professional & business services',28900,29100],['State government',23700,24100],['Construction',20900,20300],['Mining & logging',14000,13500],['  Oil & gas',9400,9000],['Federal government',13900,15200],['Manufacturing',13100,13100],['Financial activities',10700,10800],['Information',4200,4200]];
+    const tb=document.getElementById('t-size');let h='';
+    d.forEach(([n,a,b])=>{const c=a-b,sub=n.startsWith('  ');
+      h+=`<tr><td${sub?' style="padding-left:28px;color:var(--muted)"':''}>${n.trim()}</td><td class="n b">${a.toLocaleString()}</td><td class="n">${b.toLocaleString()}</td><td class="n ${c>0?'dn':c<0?'up':''}">${c>0?'+':''}${c===0?'0':c.toLocaleString()}</td><td class="n">${(a/347000*100).toFixed(1)}%</td></tr>`;});
+    h+=`<tr><td class="b"><strong>Total nonfarm</strong></td><td class="n b">347,000</td><td class="n">346,700</td><td class="n dn">+300</td><td class="n">100%</td></tr>`;
+    tb.innerHTML=h;
+  })();
+  // Visitors stacked bars
+  (function(){
+    const svg=document.getElementById('c-vis'),W=320,H=200,L=34,R=8,T=16,B=36;
+    const yrs=['2019','2024','2025'],d=[[1.3316,.7909,.0905],[1.785,.8396,.0783],[1.777,.8459,.084]];
+    const cols=['var(--accent)','var(--series2)','var(--muted)'];
+    const Y=v=>T+(1-v/3)*(H-T-B),slot=(W-L-R)/3,bw=slot*.5;
+    let s='';[0,1,2,3].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-5}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`});
+    d.forEach((r,i)=>{const cx=L+slot*i+slot/2;let acc=0;
+      r.forEach((v,j)=>{s+=`<rect x="${cx-bw/2}" y="${Y(acc+v)}" width="${bw}" height="${Y(acc)-Y(acc+v)}" fill="${cols[j]}"/>`;acc+=v;});
+      s+=`<text class="strong" x="${cx}" y="${Y(acc)-5}" text-anchor="middle">${acc.toFixed(2)}</text><text x="${cx}" y="${H-B+14}" text-anchor="middle">${yrs[i]}</text>`;});
+    [['Cruise',0],['Air',1],['Highway/ferry',2]].forEach(([n,j],k)=>{const x=L+k*90;s+=`<rect x="${x}" y="${H-13}" width="9" height="8" fill="${cols[j]}"/><text x="${x+13}" y="${H-6}">${n}</text>`});
+    svg.innerHTML=s;
+  })();
+  // Air cargo bars
+  (function(){
+    const svg=document.getElementById('c-air'),W=320,H=200,L=82,R=40,T=8,rh=36;
+    const d=[['Anchorage',26.28],['Louisville',19.67],['Memphis',16.27],['Miami',10.38],['Cincinnati',8.55]];
+    const X=v=>L+v/30*(W-L-R);let s='';
+    d.forEach(([n,v],i)=>{const y=T+i*rh+6;
+      s+=`<text x="${L-8}" y="${y+13}" text-anchor="end"${i===0?' class="strong"':''}>${n}</text><rect x="${L}" y="${y}" width="${X(v)-L}" height="18" fill="${i===0?'var(--accent)':'var(--series2)'}"/><text class="strong" x="${X(v)+5}" y="${y+13}">${v.toFixed(1)}</text>`;});
+    svg.innerHTML=s;
+  })();
+})();
+</script>
+</body>
+</html>

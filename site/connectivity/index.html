@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska Connectivity · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — masthead, the read, eight indicators, comparison table, grant technology stack and cost-per-location bars, subsidy ledger, outage timeline, mail and air, notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+.tbl{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+th.r,td.n{text-align:right} td.n{font-variant-numeric:tabular-nums}
+td.n.b{font-weight:600}
+tr:last-child td{border-bottom:0}
+.bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-left:8px;opacity:.85}
+.bar.neg{background:var(--series2)}
+.up{color:var(--bad)} .dn{color:var(--good)}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 10</span></nav>
+  <h1>Connectivity</h1>
+  <span class="asof">Coverage: FCC data through Dec 2025 · prices: Mar 2026 · grants: Feb 2026 approval · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska is the hardest state in the country to connect, and the numbers show both the gap and the money aimed at it. At the end of 2025, a quarter of Alaska homes could not get wired or fixed-wireless internet at 100 megabits, and the average internet plan on offer cost $110 a month, the most of any state. Even so, 95% of households pay for some kind of internet, helped by fast-spreading satellite service: about one in ten Alaskans running speed tests is on Starlink. Federal programs have paid Alaska telecom companies $4.6 billion since 2016, and a new $629 million grant round will reach about 46,500 more homes and businesses, about half by fiber and a third by satellite. Beyond the internet, 86% of communities have no road connection, so subsidized flights and air-shipped bypass mail carry people and groceries.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Indicators</h2><p>Internet access, cost and the physical links that connect communities. Periods differ by source; read the date on each tile.</p></div>
+  <div class="tiles"><div class="tile"><span class="lab">Homes without 100/20 wired service</span><span class="val">25%</span><span class="chip bad">Top of the state list</span><span class="sub">Wired or licensed fixed wireless, end of 2025.</span><span class="per">Dec 2025 · FCC data via Cartesian</span></div><div class="tile"><span class="lab">Households with internet</span><span class="val">95.0%</span><span class="chip good">U.S. 94.6%</span><span class="sub">Any broadband subscription, incl. satellite and cellular.</span><span class="per">2024 · Census ACS</span></div><div class="tile"><span class="lab">Average plan price</span><span class="val">$109.88</span><span class="chip bad">U.S. $81.16 · highest state</span><span class="sub">Per month, internet-only plans on offer.</span><span class="per">Mar 2026 · BroadbandNow</span></div><div class="tile"><span class="lab">Speed testers on Starlink</span><span class="val">~1 in 10</span><span class="chip flat">California: 1 in 67</span><span class="sub">Share of Ookla speed tests run over Starlink.</span><span class="per">2026 · ProPublica</span></div><div class="tile"><span class="lab">Federal telecom subsidies</span><span class="val">$4.6B</span><span class="chip flat">$600+ per Alaskan a year</span><span class="sub">Since 2016; the most per resident of any state.</span><span class="per">May 2026 · ProPublica</span></div><div class="tile"><span class="lab">New broadband grants</span><span class="val">$629M</span><span class="chip good">46,500 locations</span><span class="sub">Federal BEAD awards, of $1B+ allocated.</span><span class="per">Feb 2026 · NTIA approval</span></div><div class="tile"><span class="lab">Communities off the road system</span><span class="val">86%</span><span class="chip flat">Air and water only</span><span class="sub">Share of Alaska communities.</span><span class="per">2023 · state Digital Equity Plan</span></div><div class="tile"><span class="lab">Subsidized air service</span><span class="val">71</span><span class="chip flat">$73.3M a year</span><span class="sub">Communities with Essential Air Service.</span><span class="per">U.S. DOT, Alaska EAS report</span></div></div>
+</section>
+<section aria-labelledby="h-gap">
+  <div class="sec-head"><h2 id="h-gap">The broadband gap</h2><p>How Alaska compares on access, price and use. Each row uses its own source and date.</p></div>
+  <div class="tbl"><table style="min-width:640px"><thead><tr><th>Measure</th><th class="r">Alaska</th><th>Comparison</th><th>Source</th></tr></thead><tbody><tr><td>Homes lacking 100/20 Mbps wired or licensed fixed wireless</td><td class="n"><strong>25%</strong></td><td>Listed first among states</td><td>FCC filings, Dec 2025, via Cartesian</td></tr><tr><td>Households with any broadband subscription</td><td class="n"><strong>95.0%</strong></td><td>U.S. 94.6%</td><td>Census ACS 2024</td></tr><tr><td>Average monthly price of internet-only plans</td><td class="n"><strong>$109.88</strong></td><td>U.S. $81.16</td><td>BroadbandNow, Mar 2026</td></tr><tr><td>Speed tests run over Starlink</td><td class="n"><strong>~1 in 10</strong></td><td>California ~1 in 67</td><td>Ookla data via ProPublica</td></tr></tbody></table></div>
+  <span class="eyebrow">High subscription alongside low wired coverage reflects satellite use: the Census counts satellite and cellular plans, the FCC coverage figure does not.</span>
+</section>
+<section aria-labelledby="h-bead">
+  <div class="sec-head"><h2 id="h-bead">What the new grants buy</h2><p>The federal BEAD program approved $629 million for Alaska in late February 2026, after a $777 million draft in September 2025.</p></div>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 96" style="min-width:520px" role="img" aria-label="Share of the 46,500 approved BEAD locations by technology: fiber more than 51 percent, satellite about 34 percent, fixed wireless the remainder of about 15 percent"><rect x="20.0" y="14" width="306.0" height="34" fill="var(--accent)"/><text class="strong" x="24.0" y="66" style="font-size:12px">Fiber</text><text x="24.0" y="82">51%+ · ~23,700 locations</text><rect x="326.0" y="14" width="204.0" height="34" fill="var(--series2)"/><text class="strong" x="330.0" y="66" style="font-size:12px">Low-earth-orbit satellite</text><text x="330.0" y="82">~34% · ~15,800 (SpaceX)</text><rect x="530.0" y="14" width="90.0" height="34" fill="var(--muted)"/><text class="strong" x="534.0" y="66" style="font-size:12px">Fixed wireless</text><text x="534.0" y="82">~15% · ~7,000</text><line x1="20" x2="20" y1="8" y2="88" stroke="var(--rule)"/></svg></div>
+    <figcaption>Share of approved locations. Fixed wireless is the remainder; location counts are Two Cents estimates from the shares. Source: Broadband Breakfast on the NTIA approval, Feb 2026.</figcaption>
+  </figure>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 268" style="min-width:520px" role="img" aria-label="Grant dollars per location: Alaska Connects 49,900, GCI 49,600, Quintillion about 46,700, Alaska Communications 42,700, statewide average 13,500, Atka 11,300, SpaceX about 1,500"><line class="grid" x1="230.0" x2="230.0" y1="6" y2="244"/><text x="230.0" y="262" text-anchor="middle">$0k</text><line class="grid" x1="315.0" x2="315.0" y1="6" y2="244"/><text x="315.0" y="262" text-anchor="middle">$15k</text><line class="grid" x1="400.0" x2="400.0" y1="6" y2="244"/><text x="400.0" y="262" text-anchor="middle">$30k</text><line class="grid" x1="485.0" x2="485.0" y1="6" y2="244"/><text x="485.0" y="262" text-anchor="middle">$45k</text><line class="grid" x1="570.0" x2="570.0" y1="6" y2="244"/><text x="570.0" y="262" text-anchor="middle">$60k</text><text x="222" y="25" text-anchor="end" style="fill:var(--ink)">Alaska Connects</text><rect x="230" y="12" width="282.6" height="18" fill="var(--accent)"/><text class="strong" x="518.6" y="25">$49.9k</text><text x="222" y="59" text-anchor="end" style="fill:var(--ink)">GCI, largest award</text><rect x="230" y="46" width="280.9" height="18" fill="var(--accent)"/><text class="strong" x="516.9" y="59">$49.6k</text><text x="222" y="93" text-anchor="end" style="fill:var(--ink)">Quintillion</text><rect x="230" y="80" width="264.6" height="18" fill="var(--accent)"/><text class="strong" x="500.6" y="93">$46.7k</text><text x="222" y="127" text-anchor="end" style="fill:var(--ink)">Alaska Communications, one award</text><rect x="230" y="114" width="242.0" height="18" fill="var(--accent)"/><text class="strong" x="478.0" y="127">$42.7k</text><text x="222" y="161" text-anchor="end" style="fill:var(--ink)">Statewide average</text><rect x="230" y="148" width="76.7" height="18" fill="var(--ink)"/><text class="strong" x="312.7" y="161">$13.5k</text><text x="222" y="195" text-anchor="end" style="fill:var(--ink)">Atka tribal government</text><rect x="230" y="182" width="64.3" height="18" fill="var(--accent)"/><text class="strong" x="300.3" y="195">$11.3k</text><text x="222" y="229" text-anchor="end" style="fill:var(--ink)">SpaceX (Starlink)</text><rect x="230" y="216" width="8.5" height="18" fill="var(--series2)"/><text class="strong" x="244.5" y="229">$1.5k</text></svg></div>
+    <figcaption>Grant dollars per location, a Two Cents calculation from each award's reported dollars and locations: Alaska Connects $18.9M / 379; GCI $115.4M / 2,328; Quintillion ~$48M / 1,028; Alaska Communications $69.6M / 1,630; Atka $4.9M / 432; SpaceX ~$1,500 each. Statewide: $629M / 46,500. Sources: Broadband Breakfast; Anchorage Daily News; Wireless Estimator.</figcaption>
+  </figure>
+  <div class="ages"><div><span class="d num">$777M → $629M</span><span class="w">Draft (Sep 2025) to approved plan; GCI cut from ~$140M to $120M, Quintillion from $127M+ to ~$48M</span></div><div><span class="d num">$360M+</span><span class="w">Of the allocation left as non-deployment funds; federal rules for spending it not yet set</span></div><div><span class="d num">6 months</span><span class="w">To sign contracts after final federal review</span></div><div><span class="d num">4 years</span><span class="w">For providers to finish building</span></div></div>
+  <span class="eyebrow">Sources: Broadband Breakfast, Feb 2026; Anchorage Daily News, Mar 2026.</span>
+</section>
+<section aria-labelledby="h-sub">
+  <div class="sec-head"><h2 id="h-sub">Where federal support already goes</h2><p>Before the new grants, Alaska already received more federal telecom support per person than any other state.</p></div>
+  <div class="ages"><div><span class="d num">$4.6B</span><span class="w">Federal Universal Service subsidies to Alaska telecom companies since 2016</span></div><div><span class="d num">$200M+</span><span class="w">E-Rate support to more than 100 Alaska schools and libraries in 2025, about a tenth of the national program</span></div><div><span class="d num">$25,000+</span><span class="w">E-Rate per student in the Lower Kuskokwim School District, 2025</span></div><div><span class="d num">$118k → $13k</span><span class="w">E-Rate support for the Cold Bay library, 2023 vs. 2025, after it switched to Starlink</span></div></div>
+  <span class="eyebrow">Sources: ProPublica, May 2026; Anchorage Daily News, Aug 2026. The FCC opened a rulemaking in June 2026 on scaling back E-Rate (docket 26-133). The national-share figure is a Two Cents estimate from the program's $2B+ national budget.</span>
+</section>
+<section aria-labelledby="h-cut">
+  <div class="sec-head"><h2 id="h-cut">When the cable breaks</h2><p>Much of western and northern Alaska depends on a few subsea fiber lines. Sea ice can delay repairs for months.</p></div>
+  <div class="tbl"><table style="min-width:640px"><thead><tr><th>When</th><th>Where</th><th>What happened</th></tr></thead><tbody><tr><td>Jun 2023</td><td>Quintillion, off Oliktok Point (Arctic)</td><td>Cable cut; repairs finished in September, about three months later</td></tr><tr><td>2024 and 2025</td><td>GCI, line feeding Sitka</td><td>Cut both years; Starlink shipments eased the disruption</td></tr><tr><td>Jan 2025</td><td>Quintillion, Beaufort Sea</td><td>Ice scour broke the cable; crews could not reach it for about nine months. About 20,000 Alaskans use providers that rely on the network</td></tr><tr><td>Dec 2025</td><td>GCI, Dutch Harbor (Aleutians)</td><td>Subsea fiber incident; two weeks to repair</td></tr><tr><td>Feb 2026</td><td>GCI, near Deering (Kotzebue Sound)</td><td>Subsea tear; repair after ice-out, cost in the low single-digit millions</td></tr></tbody></table></div>
+  <span class="eyebrow">Sources: Nome Nugget, Jan 2025; Broadband Breakfast, Feb 2026.</span>
+</section>
+<section aria-labelledby="h-move">
+  <div class="sec-head"><h2 id="h-move">Moving people and goods</h2><p>With most communities off the road system, federal programs pay for scheduled flights and for shipping groceries by air.</p></div>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg viewBox="0 0 640 98" style="min-width:520px" role="img" aria-label="Alaska bypass mail in the last fiscal year: revenue from shippers 38.2 million dollars; USPS subsidy beyond that revenue 118.9 million dollars"><line class="grid" x1="200.0" x2="200.0" y1="6" y2="74"/><text x="200.0" y="92" text-anchor="middle">$0M</text><line class="grid" x1="292.5" x2="292.5" y1="6" y2="74"/><text x="292.5" y="92" text-anchor="middle">$40M</text><line class="grid" x1="385.0" x2="385.0" y1="6" y2="74"/><text x="385.0" y="92" text-anchor="middle">$80M</text><line class="grid" x1="477.5" x2="477.5" y1="6" y2="74"/><text x="477.5" y="92" text-anchor="middle">$120M</text><line class="grid" x1="570.0" x2="570.0" y1="6" y2="74"/><text x="570.0" y="92" text-anchor="middle">$160M</text><text x="192" y="25" text-anchor="end" style="fill:var(--ink)">Revenue from shippers</text><rect x="200" y="12" width="88.3" height="18" fill="var(--series2)"/><text class="strong" x="294.3" y="25">$38.2M</text><text x="192" y="59" text-anchor="end" style="fill:var(--ink)">USPS subsidy beyond revenue</text><rect x="200" y="46" width="275.0" height="18" fill="var(--accent)"/><text class="strong" x="481.0" y="59">$118.9M</text></svg></div>
+    <figcaption>Last fiscal year before June 2025, as reported. USPS covered the $118.9M itself; federal appropriations did not. Bypass mail ships palletized groceries and bulk goods by air at ground rates to about 20 regional hubs and 120 to 130 bush destinations; rates rose 9.4% in July 2025. Sources: USPS via Anchorage Daily News, Jun 2025; Alaska Association of State Planners, Oct 2025.</figcaption>
+  </figure>
+  <div class="ages"><div><span class="d num">86%</span><span class="w">Alaska communities not connected to any road system</span></div><div><span class="d num">71</span><span class="w">Communities with federally subsidized scheduled flights; Grant Aviation serves 22 of them</span></div><div><span class="d num">$73.3M</span><span class="w">Annual Essential Air Service subsidy in Alaska</span></div><div><span class="d num">~50%</span><span class="w">Share of inbound freight handled by the Port of Alaska in Anchorage</span></div></div>
+  <span class="eyebrow">Sources: state Digital Equity Plan via Benton Institute, 2023; U.S. DOT Alaska EAS report; DOT&PF long-range plan via Kittelson.</span>
+</section>
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>Alaska combines the country's hardest geography with its largest per-person telecom subsidy. A quarter of homes still lacked 100/20 wired or fixed-wireless service at the end of 2025, and advertised plans averaged about $29 a month more than the national average. Satellite has changed the picture quickly: about one in ten Alaskans running speed tests used Starlink, compared with one in 67 Californians, and the new federal grants put a third of locations on satellite at a small fraction of the per-location cost of fiber.</p>
+</div>
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul><li>The 25% figure counts fiber, cable, copper and licensed fixed wireless at 100/20 Mbps, from FCC Broadband Data Collection filings as of December 2025, analyzed by Cartesian. It leaves out satellite. Cartesian's state chart lists Alaska first but its text does not state a national comparison on the same basis.</li><li>The household subscription rate is from the Census Bureau's 2024 American Community Survey, via America's Health Rankings, and counts any broadband subscription, including satellite and cellular data plans.</li><li>Prices are averages of advertised internet-only plans, not what households pay. The Starlink share comes from Ookla speed tests, which people choose to run, so it is a rough guide to use.</li><li>Cost per location divides each award's reported dollars by its reported locations; several are rounded or minimum figures. Fiber grants pay for new lines in the ground; satellite awards pay for service on a network that already exists.</li><li>The $4.6 billion is ProPublica's total of federal Universal Service subsidies to Alaska telecom companies since 2016.</li><li>To add before launch: FCC coverage by borough, cellular coverage, barge and air freight rates, and Essential Air Service fares and on-time records.</li></ul>
+</section>
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul><li><a href="https://www.cartesian.com/wp-content/uploads/2026/05/State-of-US-Broadband-Report-Cartesian-June-2026.pdf" target="_blank" rel="noopener">Cartesian, State of US Broadband, Jun 2026</a></li><li><a href="https://www.americashealthrankings.org/explore/measures/internet/Internet_other_race/AK" target="_blank" rel="noopener">America's Health Rankings, high-speed internet (ACS 2024)</a></li><li><a href="https://broadbandnow.com/research/home-internet-costs-by-state" target="_blank" rel="noopener">BroadbandNow, internet costs by state, 2026</a></li><li><a href="https://www.propublica.org/article/alaska-telecom-subsidies-roger-shoffstall" target="_blank" rel="noopener">ProPublica, FCC subsidies to Alaska telecoms, May 2026</a></li><li><a href="https://broadbandbreakfast.com/bead-plans-approved-736-million-for-washington-and-629-million-for-alaska/" target="_blank" rel="noopener">Broadband Breakfast, BEAD approval for Alaska, Feb 2026</a></li><li><a href="https://broadbandbreakfast.com/alaska-broadband-office-approves-629-million-in-bead-awards/" target="_blank" rel="noopener">Broadband Breakfast, Alaska BEAD awards</a></li><li><a href="https://www.adn.com/business-economy/2026/03/17/federal-program-poised-to-provide-629m-to-boost-internet-access-across-alaska/" target="_blank" rel="noopener">Anchorage Daily News, BEAD awards, Mar 2026</a></li><li><a href="https://wirelessestimator.com/articles/2025/alaskas-bead-sticker-shock-113578-per-location-is181-higher-than-new-mexicos-high-40433-benchmark/" target="_blank" rel="noopener">Wireless Estimator, Alaska draft BEAD plan, Sep 2025</a></li><li><a href="https://www.adn.com/alaska-news/rural-alaska/2026/08/01/the-fcc-spends-hundreds-of-millions-subsidizing-internet-for-alaska-schools-and-libraries-now-it-might-cut-the-program/" target="_blank" rel="noopener">Anchorage Daily News, E-Rate in Alaska, Aug 2026</a></li><li><a href="https://www.nomenugget.com/news/nome-suffers-through-another-quintillion-fiber-optic-cable-break-causing-prolonged-internet" target="_blank" rel="noopener">Nome Nugget, Quintillion cable break, Jan 2025</a></li><li><a href="https://broadbandbreakfast.com/gcis-alaska-subsea-fiber-breaks-start-to-pile-up-and-cost-money/" target="_blank" rel="noopener">Broadband Breakfast, GCI subsea breaks, Feb 2026</a></li><li><a href="https://www.adn.com/alaska-news/rural-alaska/2025/06/11/alaska-bypass-mail-rates-set-to-rise-by-over-9-in-july/" target="_blank" rel="noopener">Anchorage Daily News, bypass mail rates, Jun 2025</a></li><li><a href="https://www.alaskaasp.com/wp-content/uploads/2026/05/2025-10-21_aasp-11f_bypassmail_whitepaper_final.pdf" target="_blank" rel="noopener">Alaska Association of State Planners, bypass mail, Oct 2025</a></li><li><a href="https://www.transportation.gov/sites/dot.gov/files/2026-06/May%202026%20Subsidized%20Report%20Alaska.pdf" target="_blank" rel="noopener">U.S. DOT, subsidized air service in Alaska</a></li><li><a href="https://www.benton.org/blog/alaskas-plan-address-broadband-adversity" target="_blank" rel="noopener">Benton Institute, Alaska's digital equity plan, 2023</a></li><li><a href="https://kittelson.com/ideas/alaskas-transportation-future" target="_blank" rel="noopener">Kittelson, Alaska long-range transportation plan</a></li></ul>
+</footer>
+</div>
+</body>
+</html>

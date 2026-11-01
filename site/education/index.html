@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska Education · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — masthead, the read, indicators, NAEP table, graduation ledger, comparison, notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+.tbl{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+th.r,td.n{text-align:right} td.n{font-variant-numeric:tabular-nums}
+td.n.b{font-weight:600}
+tr:last-child td{border-bottom:0}
+.bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-left:8px;opacity:.85}
+.bar.neg{background:var(--series2)}
+.up{color:var(--bad)} .dn{color:var(--good)}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 12</span></nav>
+  <h1>Education</h1>
+  <span class="asof">NAEP: 2024 · state report card: 2024–25 · UA: fall 2025 · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska students score near the bottom of the country on the national test, and scores have fallen over the past decade. In 2024, Alaska ranked 51st of 53 jurisdictions in three of four national test categories. About 28% of students met the state's own proficiency standard in reading and math. Fewer than four in five high schoolers graduate in four years, and more than two in five students were chronically absent. The state spends about $21,800 per student.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Indicators</h2><p>National test results (NAEP) and the state report card for 2024–25.</p></div>
+  <div class="tiles"><div class="tile"><span class="lab">4th-grade reading</span><span class="val">202</span><span class="chip bad">U.S. 214</span><span class="sub">NAEP average score, 51st of 53.</span><span class="per">2024 · NAEP</span></div><div class="tile"><span class="lab">8th-grade math</span><span class="val">264</span><span class="chip bad">U.S. 272</span><span class="sub">NAEP average score, 47th of 53.</span><span class="per">2024 · NAEP</span></div><div class="tile"><span class="lab">State test proficiency</span><span class="val">28%</span><span class="chip bad">Reading and math</span><span class="sub">AK STAR: 28.3% ELA, 27.9% math.</span><span class="per">2024–25 · DEED</span></div><div class="tile"><span class="lab">Four-year graduation</span><span class="val">78.3%</span><span class="chip bad">Five-year: 82.9%</span><span class="sub">Among the lowest of any state.</span><span class="per">2024–25 · DEED</span></div><div class="tile"><span class="lab">Chronic absence</span><span class="val">42.8%</span><span class="chip bad">Of students</span><span class="sub">Missed 10% or more of school days.</span><span class="per">2024–25 · DEED</span></div><div class="tile"><span class="lab">Spending per student</span><span class="val">$21,827</span><span class="chip flat">Incl. $1,998 federal</span><span class="sub">Preliminary; districts still reporting.</span><span class="per">2024–25 · DEED</span></div></div>
+</section>
+<section aria-labelledby="h-naep">
+  <div class="sec-head"><h2 id="h-naep">A decade of decline</h2><p>NAEP average scale scores, Alaska, around 2011 vs. 2024.</p></div>
+  <div class="tbl"><table><thead><tr><th>Test</th><th class="r">About 2011</th><th class="r">2024</th><th class="r">Change</th><th class="r">Rank, 2024</th></tr></thead><tbody><tr><td>4th-grade reading</td><td class="n">208</td><td class="n"><strong>202</strong></td><td class="n">−6</td><td class="n">51st of 53</td></tr><tr><td>8th-grade reading</td><td class="n">261</td><td class="n"><strong>246</strong></td><td class="n">−15</td><td class="n">51st of 53</td></tr><tr><td>8th-grade math</td><td class="n">283</td><td class="n"><strong>264</strong></td><td class="n">−19</td><td class="n">47th of 53</td></tr><tr><td>4th-grade math</td><td class="n">236–237*</td><td class="n"><strong>226</strong></td><td class="n">about −10</td><td class="n">51st of 53</td></tr></tbody></table></div>
+  <span class="eyebrow">*4th-grade math was 236–237 from 2005 to 2015. Sources: NAEP via Juneau Empire, Jan 2025; DEED NAEP snapshots.</span>
+</section>
+<section aria-labelledby="h-grad">
+  <div class="sec-head"><h2 id="h-grad">Graduation and higher education</h2><p>How many students finish high school, and what comes after.</p></div>
+  <div class="ages"><div><span class="d num">78.3%</span><span class="w">Four-year high school graduation rate, 2024–25</span></div><div><span class="d num">3.5%</span><span class="w">Dropout rate, 2024–25</span></div><div><span class="d num">20,526</span><span class="w">University of Alaska students, fall 2025</span></div><div><span class="d num">3,421</span><span class="w">Degrees and certificates awarded by UA in a year</span></div></div>
+  <span class="eyebrow">Sources: DEED report card 2024–25; University of Alaska Fast Facts 2026.</span>
+</section>
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>Alaska's 4th-grade reading score was 12 points below the national public average in 2024, and its 8th-grade math score 8 points below. In a U.S. News compilation of 2024–25 state graduation rates, Alaska and the District of Columbia were the only places below 80%. Alaska spends about $21,800 per student, and the cost of running schools in remote communities is far higher than in cities.</p>
+</div>
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul><li>NAEP is a national sample test given every two years; it is the only measure that compares states directly. The next results, from 2026, are expected in early 2027.</li><li>The state report card shows two slightly different four-year graduation rates (78.3% and 79.9%) in different tables; this page uses the lagging cohort rate.</li><li>Spending per student is preliminary and includes all funding sources.</li><li>To add before launch: results by district, teacher vacancies and turnover, pre-K enrollment, and where Alaska graduates go after high school.</li></ul>
+</section>
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul><li><a href="https://education.alaska.gov/compass/Report/2024-2025" target="_blank" rel="noopener">DEED, State Report Card 2024–25</a></li><li><a href="https://education.alaska.gov/Media/Default/Assessments/snapshot_RED2024AK_4.pdf" target="_blank" rel="noopener">DEED, NAEP 2024 grade 4 reading snapshot</a></li><li><a href="https://archives.state.ak.us/Media/Default/Assessments/snapshot_MAT2024AK_8.pdf" target="_blank" rel="noopener">DEED, NAEP 2024 grade 8 math snapshot</a></li><li><a href="https://www.juneauempire.com/2025/01/28/alaska-test-results-near-the-bottom-among-states-in-latest-nations-report-card/" target="_blank" rel="noopener">Juneau Empire, NAEP rankings, Jan 2025</a></li><li><a href="https://wtop.com/news/2026/08/see-high-school-graduation-rates-by-state" target="_blank" rel="noopener">WTOP / U.S. News, graduation rates by state</a></li><li><a href="https://www.alaska.edu/govrelations/advocacy/Fast%20Facts%202026.pdf" target="_blank" rel="noopener">University of Alaska, Fast Facts 2026</a></li></ul>
+</footer>
+</div>
+</body>
+</html>

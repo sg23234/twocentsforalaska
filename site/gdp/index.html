@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alaska GDP · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: Two Cents for Alaska topic page — masthead, the read, indicators, annual line, quarterly bars, industry table, comparison, notes */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#14213D; --muted:#4A5672; --rule:#C9D2DE;
+  --accent:#B42318; --accent-soft:#F8E7E4; --series2:#4A6FA5;
+  --good:#17603F; --good-bg:#DDEFE5; --bad:#B54708; --bad-bg:#FBE8DC; --flat:#55581F; --flat-bg:#E8E8D2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#162036; --ink:#E6EBF3; --muted:#9AA6BD; --rule:#2A3550;
+  --accent:#F0675A; --accent-soft:#3A1F22; --series2:#8DB0E0;
+  --good:#6FD39C; --good-bg:#16352A; --bad:#F59E5B; --bad-bg:#3B2516; --flat:#D3D18A; --flat-bg:#33331E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.mast{display:flex;flex-direction:column;gap:6px;padding-block:22px 16px;border-bottom:3px solid var(--ink)}
+.crumb{font-family:var(--mono);font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.crumb a span{color:var(--accent)}
+header.mast h1{font-size:clamp(32px,5.6vw,48px);font-weight:700;line-height:1.02;text-transform:uppercase}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.read{display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.read p{margin:0;font-size:16.5px;line-height:1.6}
+.read .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.sec-head h2{font-size:24px;font-weight:600;text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid var(--rule);background:var(--surface)}
+.tile{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.tile .lab{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tile .val{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--muted)}
+.tile .per{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip{display:inline-flex;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;font-weight:500;width:fit-content}
+.chip.good{color:var(--good);background:var(--good-bg)} .chip.bad{color:var(--bad);background:var(--bad-bg)} .chip.flat{color:var(--flat);background:var(--flat-bg)}
+
+figure.chart{margin:0;background:var(--surface);border:1px solid var(--rule);padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.chart h3{font-size:18px;font-weight:600}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+svg text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .strong{font-weight:500;fill:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+.tbl{background:var(--surface);border:1px solid var(--rule);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+th.r,td.n{text-align:right} td.n{font-variant-numeric:tabular-nums}
+td.n.b{font-weight:600}
+tr:last-child td{border-bottom:0}
+.bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-left:8px;opacity:.85}
+.bar.neg{background:var(--series2)}
+.up{color:var(--bad)} .dn{color:var(--good)}
+
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--rule)}
+.ages div{padding:12px 12px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ages .d{font-family:var(--display);font-size:26px;font-weight:600}
+.ages .w{font-size:13.5px;color:var(--muted)}
+
+.lens{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;font-size:14.5px;max-width:80ch;display:flex;flex-direction:column;gap:8px}
+.lens strong{font-family:var(--display);font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.lens p{margin:0}
+.notes{font-size:13.5px;color:var(--muted);max-width:80ch}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+footer{border-top:3px solid var(--ink);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+footer ul{margin:0;padding-left:18px;columns:2 260px;column-gap:28px}
+footer li{break-inside:avoid;margin-bottom:3px}
+
+/* Monthly-issue style */
+header.mast{border-bottom:4px double var(--ink)}
+header.mast h1{text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,5.6vw,52px)}
+.crumb a{text-transform:none;letter-spacing:0;font-family:var(--display);font-size:16px;font-weight:700;border-bottom:0}
+.eyebrow{font-weight:600;letter-spacing:.1em}
+.sec-head{border-bottom:2px solid var(--ink)}
+.sec-head h2{text-transform:none;font-size:28px;font-weight:700}
+.tile .val,.ages .d{font-weight:700}
+.chip{border-radius:0;font-weight:600}
+.read p{font-size:17.5px}
+.lens strong{text-transform:none;font-size:20px;letter-spacing:0}
+footer{border-top:4px double var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 01</span></nav>
+  <h1>Alaska GDP</h1>
+  <span class="asof">Latest: Q2 2026, released Sep 30 · next release Dec 23 · draft</span>
+</header>
+
+<div class="read">
+  <span class="eyebrow">The read</span>
+  <p>Alaska's economy shrank in the first half of 2026 after a strong 2025. Real output grew 4.7% in 2025, then fell at a 3.9% annual rate in the first quarter and 1.3% in the second, while the U.S. grew. Even after 2025's gain, inflation-adjusted output is still slightly below its 2012 peak. Oil and gas swing the total, and the state's quarterly figures are often revised by several points.</p>
+  <span class="tag">Summary written from the figures on this page. Will regenerate with each release.</span>
+</div>
+
+<section aria-labelledby="h-ind">
+  <div class="sec-head"><h2 id="h-ind">Indicators</h2><p>BEA GDP by state. Quarterly growth is at an annual rate, adjusted for inflation and season.</p></div>
+  <div class="tiles">
+    <div class="tile"><span class="lab">Real GDP, Q2 2026</span><span class="val">−1.3%</span><span class="chip bad">U.S. +2.2%</span><span class="sub">One of six states to shrink.</span><span class="per">Annual rate · BEA</span></div>
+    <div class="tile"><span class="lab">Real GDP, Q1 2026</span><span class="val">−3.9%</span><span class="chip bad">First est. +2.8%</span><span class="sub">The largest revision of any state.</span><span class="per">Annual rate · revised Sep 30</span></div>
+    <div class="tile"><span class="lab">Real GDP, 2025</span><span class="val">+4.7%</span><span class="chip good">2023: +5.0%</span><span class="sub">$56.3B in 2017 dollars.</span><span class="per">Annual · BEA</span></div>
+    <div class="tile"><span class="lab">vs. a year earlier</span><span class="val">−0.3%</span><span class="chip flat">Q2 2026 vs. Q2 2025</span><span class="sub">Not annualized.</span><span class="per">BEA via FRED</span></div>
+    <div class="tile"><span class="lab">Nominal GDP, 2025</span><span class="val">$73.6B</span><span class="chip flat">3rd smallest state</span><span class="sub">About $99,700 per resident.</span><span class="per">Current dollars · BEA</span></div>
+    <div class="tile"><span class="lab">vs. 2012 peak</span><span class="val">−1.3%</span><span class="chip bad">Real output, 2025</span><span class="sub">2012: $57.1B in 2017 dollars.</span><span class="per">Annual · BEA</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-long">
+  <div class="sec-head"><h2 id="h-long">Real GDP since 1997</h2><p>Billions of chained 2017 dollars. Three decades of mostly sideways movement, with oil prices and production setting the swings.</p></div>
+  <figure class="chart">
+    <div style="overflow-x:auto"><svg id="c-ann" viewBox="0 0 680 260" style="min-width:520px" role="img" aria-label="Alaska annual real GDP 1997 to 2025, from 41.1 billion to a 2012 peak of 57.1 billion, a low of 50.4 billion in 2022, and 56.3 billion in 2025"></svg></div>
+    <figcaption>Source: BEA, real GDP by state, via FRED (AKRGSP). Updated Sep 30, 2026.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="h-q">
+  <div class="sec-head"><h2 id="h-q">Quarterly growth, 2023–2026</h2><p>Percent change at an annual rate. Alaska's quarterly numbers swing far more than the nation's.</p></div>
+  <figure class="chart">
+    <svg id="c-q" viewBox="0 0 640 230" role="img" aria-label="Alaska quarterly real GDP growth at annual rates from Q1 2023 to Q2 2026"></svg>
+    <figcaption>Computed from BEA quarterly real GDP (AKRQGSP). Seasonally adjusted.</figcaption>
+  </figure>
+</section>
+
+<section aria-labelledby="h-ind2">
+  <div class="sec-head"><h2 id="h-ind2">Two big industries</h2><p>Real output, billions of 2017 dollars at an annual rate. Mining is mostly oil and gas.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Industry</th><th class="r">Q2 2025</th><th class="r">Q3 2025</th><th class="r">Q4 2025</th><th class="r">Q1 2026</th><th class="r">Q2 2026</th><th class="r">Year change</th></tr></thead>
+    <tbody>
+      <tr><td>All industries</td><td class="n">56.34</td><td class="n">56.79</td><td class="n">56.90</td><td class="n">56.34</td><td class="n b">56.16</td><td class="n">−0.3%</td></tr>
+      <tr><td>Mining, oil &amp; gas</td><td class="n">9.95</td><td class="n">10.47</td><td class="n">10.74</td><td class="n">10.20</td><td class="n b">10.12</td><td class="n">+1.6%</td></tr>
+      <tr><td>Government</td><td class="n">10.28</td><td class="n">10.32</td><td class="n">9.95</td><td class="n">10.13</td><td class="n b">10.09</td><td class="n">−1.8%</td></tr>
+      <tr><td>Everything else (approx.)</td><td class="n">36.11</td><td class="n">36.00</td><td class="n">36.21</td><td class="n">36.01</td><td class="n b">35.95</td><td class="n">−0.4%</td></tr>
+    </tbody>
+  </table></div>
+  <span class="eyebrow">Source: BEA via FRED (AKMINRQGSP, AKGOVRQGSP). "Everything else" subtracts chained-dollar series, which is only approximate.</span>
+</section>
+
+<div class="lens">
+  <strong>How Alaska compares</strong>
+  <p>Alaska's economy is the third smallest by output, ahead of only Vermont and Wyoming. Its real GDP has grown far more slowly than the nation's since the late 1990s. Oil prices and production make its quarterly figures swing widely, and in the latest release its first-quarter estimate had the largest revision of any state.</p>
+</div>
+
+<section class="notes" aria-labelledby="h-notes">
+  <div class="sec-head"><h2 id="h-notes">Data notes</h2></div>
+  <ul>
+    <li>State GDP comes out about three months after each quarter, together with the third U.S. estimate. Every September, BEA revises several years at once.</li>
+    <li>Real GDP uses chained 2017 dollars. Industry pieces don't add exactly to the total, so the "everything else" row is a rough guide.</li>
+    <li>GDP counts output produced in Alaska. Permanent Fund earnings and dividends are income to Alaskans but are not part of state GDP.</li>
+    <li>To add before launch: all industries by quarter, and personal income by source.</li>
+  </ul>
+</section>
+
+<footer>
+  <span class="eyebrow">Sources</span>
+  <ul>
+    <li><a href="https://www.bea.gov/data/gdp/gdp-state" target="_blank" rel="noopener">BEA, GDP by State</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/AKRGSP" target="_blank" rel="noopener">FRED, AKRGSP (annual)</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/AKRQGSP" target="_blank" rel="noopener">FRED, AKRQGSP (quarterly)</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/AKMINRQGSP" target="_blank" rel="noopener">FRED, AKMINRQGSP (mining)</a></li>
+    <li><a href="https://fred.stlouisfed.org/series/AKGOVRQGSP" target="_blank" rel="noopener">FRED, AKGOVRQGSP (government)</a></li>
+    <li><a href="https://fred.stlouisfed.org/blog/2026/10/real-gdp-by-state-second-quarter-2026" target="_blank" rel="noopener">FRED Blog, Q2 2026 state GDP</a></li>
+  </ul>
+</footer>
+</div>
+
+<script>
+(function(){
+  // Charts read site/data/gdp.json, refreshed by .github/workflows/refresh-data.yml.
+  // If the file can't load (e.g. opening the page straight from disk), the built-in numbers below are used.
+  const FALLBACK={
+    annual:{start:1997,values:[41071.0,40263.7,39783.1,38428.1,40014.4,41904.7,41235.0,42880.1,44406.8,47546.2,50126.7,49926.6,54951.9,53652.0,54045.5,57087.4,54627.6,53303.3,53681.1,53463.9,53550.9,52479.4,52377.1,50941.2,51591.3,50384.5,52892.7,53780.7,56335.0]},
+    quarterly:{dates:['2022-10-01','2023-01-01','2023-04-01','2023-07-01','2023-10-01','2024-01-01','2024-04-01','2024-07-01','2024-10-01','2025-01-01','2025-04-01','2025-07-01','2025-10-01','2026-01-01','2026-04-01'],
+      values:[51311.2,51875.4,52880.7,53464.0,53350.9,52739.4,53471.0,54149.6,54762.9,55302.7,56342.4,56794.4,56900.4,56340.3,56159.6]}
+  };
+
+  function drawAnnual(start,raw){
+    const v=raw.map(x=>x/1000),n=v.length,last=start+n-1;
+    const svg=document.getElementById('c-ann'),W=680,H=260,L=40,R=46,T=16,B=26;
+    const y0=Math.floor(Math.min(...v)/5)*5,y1=Math.ceil((Math.max(...v)+1.5)/5)*5;
+    const X=i=>L+i/(n-1)*(W-L-R),Y=x=>T+(1-(x-y0)/(y1-y0))*(H-T-B);
+    let s='';for(let t=y0;t<=y1;t+=5){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`}
+    for(let y=start;y<last-2;y+=5){s+=`<text x="${X(y-start)}" y="${H-8}" text-anchor="middle">${y}</text>`}
+    s+=`<text x="${X(n-1)}" y="${H-8}" text-anchor="middle">${last}</text>`;
+    const pts=v.map((x,i)=>X(i)+','+Y(x)).join(' ');
+    s+=`<polygon points="${X(0)},${Y(y0)} ${pts} ${X(n-1)},${Y(y0)}" fill="var(--accent)" opacity=".10"/><polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>`;
+    const pk=v.indexOf(Math.max(...v));
+    if(pk<n-1){
+      s+=`<line x1="${X(pk)}" x2="${X(n-1)}" y1="${Y(v[pk])}" y2="${Y(v[pk])}" stroke="var(--muted)" stroke-dasharray="3 3"/>`;
+      s+=`<circle cx="${X(pk)}" cy="${Y(v[pk])}" r="3" fill="var(--ink)"/><text class="strong" x="${X(pk)}" y="${Y(v[pk])-8}" text-anchor="middle">${start+pk} peak ${v[pk].toFixed(1)}</text>`;
+      const after=v.slice(pk+1,n-1);if(after.length){const lo=pk+1+after.indexOf(Math.min(...after));
+        s+=`<circle cx="${X(lo)}" cy="${Y(v[lo])}" r="2.6" fill="var(--ink)"/><text x="${X(lo)}" y="${Y(v[lo])+16}" text-anchor="middle">${v[lo].toFixed(1)}</text>`;}
+    }
+    s+=`<circle cx="${X(n-1)}" cy="${Y(v[n-1])}" r="3.6" fill="var(--accent)"/><text class="strong" x="${X(n-1)+6}" y="${Y(v[n-1])+12}">${v[n-1].toFixed(1)}</text>`;
+    svg.innerHTML=s;
+  }
+
+  function drawQuarterly(dates,raw){
+    const lv=raw.slice(-15),dt=dates.slice(-15);
+    const g=[],lab=[];for(let i=1;i<lv.length;i++){g.push((Math.pow(lv[i]/lv[i-1],4)-1)*100);
+      const [yr,mo]=dt[i].split('-');const q='Q'+(Math.floor((+mo-1)/3)+1);lab.push(q==='Q1'?`Q1 ${yr.slice(2)}`:q);}
+    const svg=document.getElementById('c-q'),W=640,H=230,L=36,R=10,T=16,B=26;
+    const y0=Math.min(-6,Math.floor(Math.min(...g)/2)*2),y1=Math.max(10,Math.ceil(Math.max(...g)/2)*2);
+    const Y=x=>T+(1-(x-y0)/(y1-y0))*(H-T-B),slot=(W-L-R)/g.length,bw=slot*.6;
+    let s='';for(let t=Math.ceil(y0/5)*5;t<=y1;t+=5){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}%</text>`}
+    g.forEach((x,i)=>{const cx=L+slot*i+slot/2,c=x>=0?'var(--accent)':'var(--series2)';
+      s+=`<rect x="${cx-bw/2}" y="${Y(Math.max(0,x))}" width="${bw}" height="${Math.abs(Y(x)-Y(0))}" fill="${c}"/>`;
+      s+=`<text class="strong" x="${cx}" y="${x>=0?Y(x)-4:Y(x)+12}" text-anchor="middle" style="font-size:9.5px">${x.toFixed(1)}</text>`;
+      s+=`<text x="${cx}" y="${H-8}" text-anchor="middle" style="font-size:9.5px">${lab[i]}</text>`;});
+    svg.innerHTML=s;
+  }
+
+  function render(d){
+    drawAnnual(+d.annual.dates[0].slice(0,4),d.annual.values);
+    drawQuarterly(d.quarterly.dates,d.quarterly.values);
+  }
+  const fb={annual:{dates:[FALLBACK.annual.start+'-01-01'],values:FALLBACK.annual.values},quarterly:FALLBACK.quarterly};
+  fetch('/data/gdp.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()})
+    .then(d=>render({annual:d.series.AKRGSP,quarterly:d.series.AKRQGSP}))
+    .catch(()=>render(fb));
+})();
+</script>
+</body>
+</html>
