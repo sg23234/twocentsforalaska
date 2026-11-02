@@ -50,25 +50,21 @@
  "key-sectors": {
   "source": "fred",
   "latest": {
+   "AKNAN": "2026-09-01",
+   "AKTRADN": "2026-09-01",
+   "AKCONSN": "2026-09-01",
+   "AKNRMNN": "2026-09-01",
    "SMU02000001021300001": "2026-09-01",
    "SMU02000006562000001": "2026-09-01",
+   "AKMFGN": "2026-09-01",
+   "AKINFON": "2026-09-01",
+   "AKLEIHN": "2026-09-01",
+   "AKFIREN": "2026-09-01",
+   "AKPBSVN": "2026-09-01",
    "SMU02000009093000001": "2026-09-01",
    "SMU02000009092000001": "2026-09-01",
    "SMU02000009091000001": "2026-09-01"
-  },
-  "problems": [
-   "SMU02000000000000001: HTTP Error 404: Not Found",
-   "SMU02000004000000001: HTTP Error 404: Not Found",
-   "SMU02000002000000001: HTTP Error 404: Not Found",
-   "SMU02000001000000001: HTTP Error 404: Not Found",
-   "SMU02000001021100001: HTTP Error 404: Not Found (optional)",
-   "SMU02000006562000101: HTTP Error 404: Not Found (optional)",
-   "SMU02000003000000001: HTTP Error 404: Not Found",
-   "SMU02000005000000001: HTTP Error 404: Not Found",
-   "SMU02000007000000001: HTTP Error 404: Not Found",
-   "SMU02000005500000001: HTTP Error 404: Not Found",
-   "SMU02000006000000001: HTTP Error 404: Not Found"
-  ]
+  }
  },
  "population": {
   "source": "fred",
@@ -82,21 +78,16 @@
    "IPUZNL000020000": "2025-01-01",
    "IPUZNT010020000": "2025-01-01",
    "IPUZNL010020000": "2025-01-01"
-  },
-  "problems": [
-   "IPUZNL000000000: HTTP Error 404: Not Found (optional)"
-  ]
+  }
  },
  "spending": {
   "source": "fred",
   "latest": {
+   "AKNAN": "2026-09-01",
+   "AKGOVTN": "2026-09-01",
    "SMU02000009093000001": "2026-09-01",
    "SMU02000009092000001": "2026-09-01",
    "SMU02000009091000001": "2026-09-01"
-  },
-  "problems": [
-   "SMU02000000000000001: HTTP Error 404: Not Found",
-   "SMU02000009000000001: HTTP Error 404: Not Found"
-  ]
+  }
  }
 }
