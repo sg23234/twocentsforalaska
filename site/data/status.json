@@ -49,11 +49,22 @@
  },
  "key-sectors": {
   "source": "dolwd",
-  "latest": {},
-  "problems": [
-   "*: DOLWD CSV had none of the expected rows; it began: '\"Alaska Monthly Employment Statistics \" areaname,areatype,areacode,adjusted,year,seriescode,industry,emp_january,emp_february,emp_march,emp_april,emp_may,emp_june,emp_july,emp_august,emp_september,emp_october,emp_november,emp_december,emp_annual_average Alaska,01,000000,0,2026,0000000000,\"Total No'",
-   "kept existing data (0 days old)"
-  ]
+  "latest": {
+   "Total Nonfarm": "2026-09-01",
+   "Trade, Transportation, Utilities": "2026-09-01",
+   "Construction": "2026-09-01",
+   "Mining and Logging": "2026-09-01",
+   "Oil & Gas": "2026-09-01",
+   "Health Care": "2026-09-01",
+   "Manufacturing": "2026-09-01",
+   "Information": "2026-09-01",
+   "Leisure & Hospitality": "2026-09-01",
+   "Financial Activities": "2026-09-01",
+   "Professional & Business Svcs": "2026-09-01",
+   "Local Government": "2026-09-01",
+   "State Government": "2026-09-01",
+   "Federal Government": "2026-09-01"
+  }
  },
  "population": {
   "source": "fred",
@@ -71,10 +82,12 @@
  },
  "spending": {
   "source": "dolwd",
-  "latest": {},
-  "problems": [
-   "*: DOLWD CSV had none of the expected rows; it began: '\"Alaska Monthly Employment Statistics \" areaname,areatype,areacode,adjusted,year,seriescode,industry,emp_january,emp_february,emp_march,emp_april,emp_may,emp_june,emp_july,emp_august,emp_september,emp_october,emp_november,emp_december,emp_annual_average Alaska,01,000000,0,2026,0000000000,\"Total No'",
-   "kept existing data (0 days old)"
-  ]
+  "latest": {
+   "Total Nonfarm": "2026-09-01",
+   "Government": "2026-09-01",
+   "Local Government": "2026-09-01",
+   "State Government": "2026-09-01",
+   "Federal Government": "2026-09-01"
+  }
  }
 }
