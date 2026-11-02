@@ -51,7 +51,7 @@
   "source": "dolwd",
   "latest": {},
   "problems": [
-   "*: 'list' object has no attribute 'strip'",
+   "*: DOLWD CSV had none of the expected rows; it began: '\"Alaska Monthly Employment Statistics \" areaname,areatype,areacode,adjusted,year,seriescode,industry,emp_january,emp_february,emp_march,emp_april,emp_may,emp_june,emp_july,emp_august,emp_september,emp_october,emp_november,emp_december,emp_annual_average Alaska,01,000000,0,2026,0000000000,\"Total No'",
    "kept existing data (0 days old)"
   ]
  },
@@ -73,7 +73,7 @@
   "source": "dolwd",
   "latest": {},
   "problems": [
-   "*: 'list' object has no attribute 'strip'",
+   "*: DOLWD CSV had none of the expected rows; it began: '\"Alaska Monthly Employment Statistics \" areaname,areatype,areacode,adjusted,year,seriescode,industry,emp_january,emp_february,emp_march,emp_april,emp_may,emp_june,emp_july,emp_august,emp_september,emp_october,emp_november,emp_december,emp_annual_average Alaska,01,000000,0,2026,0000000000,\"Total No'",
    "kept existing data (0 days old)"
   ]
  }
