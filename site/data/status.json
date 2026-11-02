@@ -48,23 +48,25 @@
   }
  },
  "key-sectors": {
-  "source": "fred",
-  "latest": {
-   "AKNAN": "2026-09-01",
-   "AKTRADN": "2026-09-01",
-   "AKCONSN": "2026-09-01",
-   "AKNRMNN": "2026-09-01",
-   "SMU02000001021300001": "2026-09-01",
-   "SMU02000006562000001": "2026-09-01",
-   "AKMFGN": "2026-09-01",
-   "AKINFON": "2026-09-01",
-   "AKLEIHN": "2026-09-01",
-   "AKFIREN": "2026-09-01",
-   "AKPBSVN": "2026-09-01",
-   "SMU02000009093000001": "2026-09-01",
-   "SMU02000009092000001": "2026-09-01",
-   "SMU02000009091000001": "2026-09-01"
-  }
+  "source": "dolwd",
+  "latest": {},
+  "problems": [
+   "Total Nonfarm: not returned by the source",
+   "Trade, Transportation, Utilities: not returned by the source",
+   "Construction: not returned by the source",
+   "Mining and Logging: not returned by the source",
+   "Oil & Gas: not returned by the source",
+   "Health Care: not returned by the source",
+   "Manufacturing: not returned by the source",
+   "Information: not returned by the source",
+   "Leisure & Hospitality: not returned by the source",
+   "Financial Activities: not returned by the source",
+   "Professional & Business Svcs: not returned by the source",
+   "Local Government: not returned by the source",
+   "State Government: not returned by the source",
+   "Federal Government: not returned by the source",
+   "kept existing data (0 days old)"
+  ]
  },
  "population": {
   "source": "fred",
@@ -81,13 +83,15 @@
   }
  },
  "spending": {
-  "source": "fred",
-  "latest": {
-   "AKNAN": "2026-09-01",
-   "AKGOVTN": "2026-09-01",
-   "SMU02000009093000001": "2026-09-01",
-   "SMU02000009092000001": "2026-09-01",
-   "SMU02000009091000001": "2026-09-01"
-  }
+  "source": "dolwd",
+  "latest": {},
+  "problems": [
+   "Total Nonfarm: not returned by the source",
+   "Government: not returned by the source",
+   "Local Government: not returned by the source",
+   "State Government: not returned by the source",
+   "Federal Government: not returned by the source",
+   "kept existing data (0 days old)"
+  ]
  }
 }
