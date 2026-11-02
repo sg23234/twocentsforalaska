@@ -1,0 +1,57 @@
+{
+ "_about": "Hand-maintained numbers for the Energy page. Edit a value and commit; the charts redraw from this file and the AI summary is redrafted on the next refresh run.",
+ "charts": {
+  "electricity_price": {
+   "type": "hbar",
+   "title": "Residential electricity, cents per kWh",
+   "as_of": "Jul 2026 (EIA); FY2026 (PCE)",
+   "source": "EIA, Jul 2026; Alaska Energy Authority",
+   "max": 80,
+   "ticks": 4,
+   "format": {
+    "suffix": "¢",
+    "decimals": 1
+   },
+   "rows": [
+    {
+     "label": "U.S. average",
+     "value": 18.3,
+     "color": "series2"
+    },
+    {
+     "label": "PCE base rate",
+     "value": 20.38,
+     "color": "muted"
+    },
+    {
+     "label": "Alaska average",
+     "value": 28.8,
+     "color": "accent"
+    }
+   ]
+  },
+  "gas_price": {
+   "type": "hbar",
+   "title": "Natural gas price, dollars per thousand cubic feet",
+   "as_of": "Sep 2026",
+   "source": "KDLL/KBBI, Sep 11, 2026",
+   "max": 32,
+   "ticks": 4,
+   "format": {
+    "prefix": "$"
+   },
+   "rows": [
+    {
+     "label": "Enstar current cost",
+     "value": 11,
+     "color": "accent"
+    },
+    {
+     "label": "Asian LNG spot",
+     "value": 24,
+     "color": "series2"
+    }
+   ]
+  }
+ }
+}

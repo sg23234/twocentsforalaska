@@ -1,0 +1,109 @@
+{
+ "_about": "Hand-maintained numbers for the Connectivity page. Edit a value and commit; the charts redraw from this file and the AI summary is redrafted on the next refresh run.",
+ "charts": {
+  "bead_technology": {
+   "type": "split",
+   "title": "Share of the 46,500 approved BEAD locations by technology",
+   "as_of": "Feb 2026",
+   "source": "Broadband Breakfast on the NTIA approval, Feb 2026",
+   "parts": [
+    {
+     "label": "Fiber",
+     "value": 51,
+     "text": "51%+ · ~23,700 locations",
+     "color": "accent"
+    },
+    {
+     "label": "Low-earth-orbit satellite",
+     "value": 34,
+     "text": "~34% · ~15,800 (SpaceX)",
+     "color": "series2"
+    },
+    {
+     "label": "Fixed wireless",
+     "value": 15,
+     "text": "~15% · ~7,000",
+     "color": "muted"
+    }
+   ]
+  },
+  "grant_per_location": {
+   "type": "hbar",
+   "title": "Grant dollars per location, thousands",
+   "as_of": "Feb-Mar 2026",
+   "source": "Broadband Breakfast; Anchorage Daily News; Wireless Estimator. Two Cents calculation.",
+   "label_width": 230,
+   "max": 60,
+   "ticks": 4,
+   "format": {
+    "prefix": "$",
+    "suffix": "k",
+    "decimals": 1
+   },
+   "tick_decimals": 0,
+   "rows": [
+    {
+     "label": "Alaska Connects",
+     "value": 49.9,
+     "color": "accent"
+    },
+    {
+     "label": "GCI, largest award",
+     "value": 49.6,
+     "color": "accent"
+    },
+    {
+     "label": "Quintillion",
+     "value": 46.7,
+     "color": "accent"
+    },
+    {
+     "label": "Alaska Communications, one award",
+     "value": 42.7,
+     "color": "accent"
+    },
+    {
+     "label": "Statewide average",
+     "value": 13.5,
+     "color": "ink"
+    },
+    {
+     "label": "Atka tribal government",
+     "value": 11.3,
+     "color": "accent"
+    },
+    {
+     "label": "SpaceX (Starlink)",
+     "value": 1.5,
+     "color": "series2"
+    }
+   ]
+  },
+  "bypass_mail": {
+   "type": "hbar",
+   "title": "Alaska bypass mail, last fiscal year, millions of dollars",
+   "as_of": "FY ending Jun 2025",
+   "source": "USPS via Anchorage Daily News, Jun 2025",
+   "max": 160,
+   "ticks": 4,
+   "format": {
+    "prefix": "$",
+    "suffix": "M",
+    "decimals": 1
+   },
+   "tick_decimals": 0,
+   "rows": [
+    {
+     "label": "Revenue from shippers",
+     "value": 38.2,
+     "color": "series2"
+    },
+    {
+     "label": "USPS subsidy beyond revenue",
+     "value": 118.9,
+     "color": "accent"
+    }
+   ]
+  }
+ }
+}

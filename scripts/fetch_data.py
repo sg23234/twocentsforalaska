@@ -32,7 +32,8 @@ BLS_V1 = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 BLS_V2 = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
 
-# CES payroll series for Alaska, not seasonally adjusted, thousands of jobs.
+# CES payroll detail for Alaska, not seasonally adjusted, thousands of jobs.
+# (FRED files the big industry groups under short IDs like AKCONSN instead.)
 CES = "SMU0200000{}01"
 
 
@@ -88,29 +89,26 @@ DASHBOARDS = {
         "IPUZNL000020000": s("Labor productivity, private nonfarm, Alaska", "index 2017=100", "annual", "index"),
         "IPUZNT010020000": s("Real value-added output, private nonfarm, Alaska", "index 2017=100", "annual", "index"),
         "IPUZNL010020000": s("Hours worked, private nonfarm, Alaska", "index 2017=100", "annual", "index"),
-        "IPUZNL000000000": s("Labor productivity, private nonfarm, United States (state-productivity basis)", "index 2017=100", "annual", "index", optional=True),
     }},
     "key-sectors": {"source": "fred", "series": {
-        CES.format("00000000"): s("Payroll jobs, total nonfarm", "thousands of jobs", "monthly", "level"),
-        CES.format("40000000"): s("Payroll jobs, trade, transportation and utilities", "thousands of jobs", "monthly", "level"),
-        CES.format("20000000"): s("Payroll jobs, construction", "thousands of jobs", "monthly", "level"),
-        CES.format("10000000"): s("Payroll jobs, mining and logging", "thousands of jobs", "monthly", "level"),
-        CES.format("10211000"): s("Payroll jobs, oil and gas extraction", "thousands of jobs", "monthly", "level", optional=True),
-        CES.format("10213000"): s("Payroll jobs, support activities for mining (mostly oil field services)", "thousands of jobs", "monthly", "level", optional=True),
-        CES.format("65620001"): s("Payroll jobs, health care", "thousands of jobs", "monthly", "level", optional=True),
-        CES.format("65620000"): s("Payroll jobs, health care and social assistance", "thousands of jobs", "monthly", "level", optional=True),
-        CES.format("30000000"): s("Payroll jobs, manufacturing", "thousands of jobs", "monthly", "level"),
-        CES.format("50000000"): s("Payroll jobs, information", "thousands of jobs", "monthly", "level"),
-        CES.format("70000000"): s("Payroll jobs, leisure and hospitality", "thousands of jobs", "monthly", "level"),
-        CES.format("55000000"): s("Payroll jobs, financial activities", "thousands of jobs", "monthly", "level"),
-        CES.format("60000000"): s("Payroll jobs, professional and business services", "thousands of jobs", "monthly", "level"),
+        "AKNAN": s("Payroll jobs, total nonfarm", "thousands of jobs", "monthly", "level"),
+        "AKTRADN": s("Payroll jobs, trade, transportation and utilities", "thousands of jobs", "monthly", "level"),
+        "AKCONSN": s("Payroll jobs, construction", "thousands of jobs", "monthly", "level"),
+        "AKNRMNN": s("Payroll jobs, mining and logging (includes oil and gas)", "thousands of jobs", "monthly", "level"),
+        CES.format("10213000"): s("Payroll jobs, support activities for mining (mostly oil field services)", "thousands of jobs", "monthly", "level"),
+        CES.format("65620000"): s("Payroll jobs, health care and social assistance", "thousands of jobs", "monthly", "level"),
+        "AKMFGN": s("Payroll jobs, manufacturing (mostly seafood processing)", "thousands of jobs", "monthly", "level"),
+        "AKINFON": s("Payroll jobs, information", "thousands of jobs", "monthly", "level"),
+        "AKLEIHN": s("Payroll jobs, leisure and hospitality", "thousands of jobs", "monthly", "level"),
+        "AKFIREN": s("Payroll jobs, financial activities", "thousands of jobs", "monthly", "level"),
+        "AKPBSVN": s("Payroll jobs, professional and business services", "thousands of jobs", "monthly", "level"),
         CES.format("90930000"): s("Payroll jobs, local government (incl. schools)", "thousands of jobs", "monthly", "level"),
         CES.format("90920000"): s("Payroll jobs, state government", "thousands of jobs", "monthly", "level"),
         CES.format("90910000"): s("Payroll jobs, federal government (civilian)", "thousands of jobs", "monthly", "level"),
     }},
     "spending": {"source": "fred", "series": {
-        CES.format("00000000"): s("Payroll jobs, total nonfarm", "thousands of jobs", "monthly", "level"),
-        CES.format("90000000"): s("Payroll jobs, government", "thousands of jobs", "monthly", "level"),
+        "AKNAN": s("Payroll jobs, total nonfarm", "thousands of jobs", "monthly", "level"),
+        "AKGOVTN": s("Payroll jobs, government", "thousands of jobs", "monthly", "level"),
         CES.format("90930000"): s("Payroll jobs, local government (incl. schools)", "thousands of jobs", "monthly", "level"),
         CES.format("90920000"): s("Payroll jobs, state government", "thousands of jobs", "monthly", "level"),
         CES.format("90910000"): s("Payroll jobs, federal government (civilian)", "thousands of jobs", "monthly", "level"),

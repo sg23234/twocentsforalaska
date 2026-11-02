@@ -1,0 +1,197 @@
+{
+ "_about": "Hand-maintained numbers for the State Capacity page (twocentsforalaska.org/state-capacity/). Edit a value and commit; the charts redraw from this file and the AI summary is redrafted on the next refresh run. Tiles and captions on the page are edited in the page itself.",
+ "charts": {
+  "snap_timeliness": {
+   "type": "hbar",
+   "title": "Alaska SNAP cases handled on time, FY2025",
+   "as_of": "FY2025",
+   "source": "USDA Food and Nutrition Service, SNAP timeliness, FY2025",
+   "max": 100,
+   "ticks": 4,
+   "format": {
+    "suffix": "%"
+   },
+   "rows": [
+    {
+     "label": "New applications",
+     "value": 64.3,
+     "color": "accent"
+    },
+    {
+     "label": "Renewals",
+     "value": 25.2,
+     "color": "accent"
+    }
+   ]
+  },
+  "snap_error_rate": {
+   "type": "hbar",
+   "title": "SNAP payment error rate",
+   "as_of": "FY2025",
+   "source": "USDA, as reported by KMXT, Jul 2026",
+   "max": 30,
+   "ticks": 3,
+   "format": {
+    "suffix": "%"
+   },
+   "rows": [
+    {
+     "label": "Alaska, FY2024",
+     "value": 25,
+     "color": "accent"
+    },
+    {
+     "label": "Alaska, FY2025",
+     "value": 23,
+     "color": "accent"
+    },
+    {
+     "label": "U.S., FY2025",
+     "value": 11,
+     "color": "series2"
+    }
+   ]
+  },
+  "capital_budget": {
+   "type": "split",
+   "title": "FY2027 capital budget as passed, $2.5 billion",
+   "as_of": "May 2026",
+   "source": "Alaska Beacon, May 2026; Legislative Finance Division",
+   "parts": [
+    {
+     "label": "Federal funds",
+     "value": 1.8,
+     "text": "$1.8B · 72%",
+     "color": "series2"
+    },
+    {
+     "label": "State funds",
+     "value": 0.7,
+     "text": "~$0.7B · 28%",
+     "color": "accent"
+    }
+   ]
+  },
+  "reinvestment": {
+   "type": "hbar",
+   "title": "Reinvestment yardsticks, millions of dollars",
+   "as_of": "FY2025 report and FY2027 budget",
+   "source": "State of Alaska FY2025 ACFR; Alaska Beacon, May 2026; Legislative Finance Division",
+   "label_width": 270,
+   "max": 800,
+   "ticks": 4,
+   "format": {
+    "prefix": "$",
+    "suffix": "M"
+   },
+   "rows": [
+    {
+     "label": "Depreciation, FY2025",
+     "value": 638,
+     "color": "ink"
+    },
+    {
+     "label": "State general funds, FY2027 capital budget",
+     "value": 354.6,
+     "color": "series2"
+    },
+    {
+     "label": "Deferred maintenance, FY2027 budget",
+     "value": 180,
+     "color": "accent"
+    },
+    {
+     "label": "Needed each year to hold backlog steady",
+     "value": 180,
+     "color": "muted"
+    }
+   ]
+  }
+ },
+ "series": {
+  "capital_assets": {
+   "label": "State governmental capital assets, $ millions, fiscal years ending June 30",
+   "source": "State of Alaska Annual Comprehensive Financial Reports, FY2016-FY2025",
+   "as_of": "FY2025",
+   "note": "additions are a Two Cents estimate (change in net capital assets plus depreciation, before disposals). Running totals are the cumulative change in net book value since June 30, 2015. Roads values were read from the published chart and are accurate to about $1M.",
+   "years": [
+    "FY2015",
+    "FY2016",
+    "FY2017",
+    "FY2018",
+    "FY2019",
+    "FY2020",
+    "FY2021",
+    "FY2022",
+    "FY2023",
+    "FY2024",
+    "FY2025"
+   ],
+   "additions": [
+    null,
+    692,
+    516,
+    661,
+    640,
+    629,
+    1020,
+    635,
+    784,
+    1027,
+    976
+   ],
+   "depreciation": [
+    null,
+    453,
+    485,
+    500,
+    607,
+    554,
+    621,
+    578,
+    600,
+    627,
+    638
+   ],
+   "running_all": [
+    0,
+    239,
+    270,
+    431,
+    464,
+    539,
+    938,
+    995,
+    1179,
+    1579,
+    1917
+   ],
+   "running_roads": [
+    0,
+    -54,
+    107,
+    351,
+    457,
+    411,
+    819,
+    848,
+    1025,
+    1038,
+    1288
+   ],
+   "running_buildings": [
+    0,
+    147,
+    217,
+    313,
+    255,
+    192,
+    144,
+    24,
+    -17,
+    9,
+    -14
+   ]
+  }
+ }
+}
