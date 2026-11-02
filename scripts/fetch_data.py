@@ -2,6 +2,9 @@
 
 Sources
   FRED  - public CSV download, no key needed. Most series live here.
+  DOLWD - the Alaska Department of Labor's payroll-jobs CSV. Its own monthly
+          estimates, which are what Alaska news reports and can differ from the
+          federal (BLS/FRED) numbers for the latest months.
   BLS   - the BLS public API. Used only for Urban Alaska CPI detail, which FRED
           carries just twice a year. Works without a key (25 requests a day,
           shared by everyone on GitHub's servers); add a free key as the
@@ -30,12 +33,8 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "site" / "data"
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}"
 BLS_V1 = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 BLS_V2 = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
+DOLWD_CES = "https://live.laborstats.alaska.gov/labforce/csv/000000/01/ces.csv"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
-
-# CES payroll detail for Alaska, not seasonally adjusted, thousands of jobs.
-# (FRED files the big industry groups under short IDs like AKCONSN instead.)
-CES = "SMU0200000{}01"
-
 
 def s(label, units, freq, kind, optional=False):
     """Series metadata. kind: level | flow (counts you can add up) | index | rate | pct."""
@@ -90,34 +89,37 @@ DASHBOARDS = {
         "IPUZNT010020000": s("Real value-added output, private nonfarm, Alaska", "index 2017=100", "annual", "index"),
         "IPUZNL010020000": s("Hours worked, private nonfarm, Alaska", "index 2017=100", "annual", "index"),
     }},
-    "key-sectors": {"source": "fred", "series": {
-        "AKNAN": s("Payroll jobs, total nonfarm", "thousands of jobs", "monthly", "level"),
-        "AKTRADN": s("Payroll jobs, trade, transportation and utilities", "thousands of jobs", "monthly", "level"),
-        "AKCONSN": s("Payroll jobs, construction", "thousands of jobs", "monthly", "level"),
-        "AKNRMNN": s("Payroll jobs, mining and logging (includes oil and gas)", "thousands of jobs", "monthly", "level"),
-        CES.format("10213000"): s("Payroll jobs, support activities for mining (mostly oil field services)", "thousands of jobs", "monthly", "level"),
-        CES.format("65620000"): s("Payroll jobs, health care and social assistance", "thousands of jobs", "monthly", "level"),
-        "AKMFGN": s("Payroll jobs, manufacturing (mostly seafood processing)", "thousands of jobs", "monthly", "level"),
-        "AKINFON": s("Payroll jobs, information", "thousands of jobs", "monthly", "level"),
-        "AKLEIHN": s("Payroll jobs, leisure and hospitality", "thousands of jobs", "monthly", "level"),
-        "AKFIREN": s("Payroll jobs, financial activities", "thousands of jobs", "monthly", "level"),
-        "AKPBSVN": s("Payroll jobs, professional and business services", "thousands of jobs", "monthly", "level"),
-        CES.format("90930000"): s("Payroll jobs, local government (incl. schools)", "thousands of jobs", "monthly", "level"),
-        CES.format("90920000"): s("Payroll jobs, state government", "thousands of jobs", "monthly", "level"),
-        CES.format("90910000"): s("Payroll jobs, federal government (civilian)", "thousands of jobs", "monthly", "level"),
+    # Payroll jobs straight from Alaska DOLWD (not seasonally adjusted). Keyed by
+    # the industry name exactly as it appears in DOLWD's CSV.
+    "key-sectors": {"source": "dolwd", "soft": True, "series": {
+        "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
+        "Trade, Transportation, Utilities": s("Payroll jobs, trade, transportation and utilities", "jobs", "monthly", "level"),
+        "Construction": s("Payroll jobs, construction", "jobs", "monthly", "level"),
+        "Mining and Logging": s("Payroll jobs, mining and logging (includes oil and gas)", "jobs", "monthly", "level"),
+        "Oil & Gas": s("Payroll jobs, oil and gas", "jobs", "monthly", "level"),
+        "Health Care": s("Payroll jobs, health care", "jobs", "monthly", "level"),
+        "Manufacturing": s("Payroll jobs, manufacturing (mostly seafood processing)", "jobs", "monthly", "level"),
+        "Information": s("Payroll jobs, information", "jobs", "monthly", "level"),
+        "Leisure & Hospitality": s("Payroll jobs, leisure and hospitality", "jobs", "monthly", "level"),
+        "Financial Activities": s("Payroll jobs, financial activities", "jobs", "monthly", "level"),
+        "Professional & Business Svcs": s("Payroll jobs, professional and business services", "jobs", "monthly", "level"),
+        "Local Government": s("Payroll jobs, local government (incl. schools)", "jobs", "monthly", "level"),
+        "State Government": s("Payroll jobs, state government", "jobs", "monthly", "level"),
+        "Federal Government": s("Payroll jobs, federal government (civilian)", "jobs", "monthly", "level"),
     }},
-    "spending": {"source": "fred", "series": {
-        "AKNAN": s("Payroll jobs, total nonfarm", "thousands of jobs", "monthly", "level"),
-        "AKGOVTN": s("Payroll jobs, government", "thousands of jobs", "monthly", "level"),
-        CES.format("90930000"): s("Payroll jobs, local government (incl. schools)", "thousands of jobs", "monthly", "level"),
-        CES.format("90920000"): s("Payroll jobs, state government", "thousands of jobs", "monthly", "level"),
-        CES.format("90910000"): s("Payroll jobs, federal government (civilian)", "thousands of jobs", "monthly", "level"),
+    "spending": {"source": "dolwd", "soft": True, "series": {
+        "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
+        "Government": s("Payroll jobs, government", "jobs", "monthly", "level"),
+        "Local Government": s("Payroll jobs, local government (incl. schools)", "jobs", "monthly", "level"),
+        "State Government": s("Payroll jobs, state government", "jobs", "monthly", "level"),
+        "Federal Government": s("Payroll jobs, federal government (civilian)", "jobs", "monthly", "level"),
     }},
 }
 
 SOURCE_NAMES = {
     "fred": "FRED, Federal Reserve Bank of St. Louis",
     "bls": "U.S. Bureau of Labor Statistics API",
+    "dolwd": "Alaska Department of Labor and Workforce Development, Current Employment Statistics",
 }
 
 # A soft dashboard (BLS without a key can be rate-limited) only fails the job
@@ -204,6 +206,41 @@ def fetch_bls(series_ids, tries=3):
     return out
 
 
+# ---------- Alaska DOLWD ----------
+
+MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august",
+          "september", "october", "november", "december"]
+
+
+def fetch_dolwd(names, tries=3):
+    """Return {industry name: {"dates", "values"}} from DOLWD's statewide payroll CSV."""
+    req = urllib.request.Request(DOLWD_CES, headers=UA)
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                text = r.read().decode("utf-8-sig", errors="replace")
+            break
+        except Exception as e:
+            if attempt == tries - 1:
+                raise RuntimeError(f"DOLWD CSV: {e}") from e
+            time.sleep(10 * (attempt + 1))
+    found = {}
+    for row in csv.DictReader(io.StringIO(text)):
+        name = (row.get("industry") or "").strip()
+        if name not in names or (row.get("adjusted") or "0").strip() != "0":
+            continue
+        year = row["year"].strip()
+        for i, m in enumerate(MONTHS):
+            v = (row.get(f"emp_{m}") or "").replace(",", "").strip()
+            if v:
+                found.setdefault(name, {})[f"{year}-{i + 1:02d}-01"] = float(v)
+    out = {}
+    for name, obs in found.items():
+        d = sorted(obs)
+        out[name] = {"dates": d, "values": [obs[x] for x in d]}
+    return out
+
+
 # ---------- build / write ----------
 
 def build(slug, cfg):
@@ -219,6 +256,8 @@ def build(slug, cfg):
     meta = cfg["series"]
     if cfg["source"] == "bls":
         got = fetch_bls(meta.keys())
+    elif cfg["source"] == "dolwd":
+        got = fetch_dolwd(set(meta))
     else:
         got = {}
         for sid, m in meta.items():
