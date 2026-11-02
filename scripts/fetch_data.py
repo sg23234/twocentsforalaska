@@ -224,8 +224,10 @@ def fetch_dolwd(names, tries=3):
             if attempt == tries - 1:
                 raise RuntimeError(f"DOLWD CSV: {e}") from e
             time.sleep(10 * (attempt + 1))
+    # The file opens with a title line ("Alaska Monthly Employment Statistics") before the header.
+    start = text.find("areaname,")
     found = {}
-    reader = csv.DictReader(io.StringIO(text))
+    reader = csv.DictReader(io.StringIO(text[start:] if start >= 0 else text))
     for raw in reader:
         # Rows can carry trailing commas; csv puts those extras under a None key as a list.
         row = {k.strip().lower(): (v or "").strip() for k, v in raw.items() if isinstance(k, str) and not isinstance(v, list)}
