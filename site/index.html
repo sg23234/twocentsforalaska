@@ -80,7 +80,21 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <a href="#dashboards">Dashboards</a><a href="#calendar">Calendar</a>
   </nav>
   <span class="name">Two Cents for Alaska</span>
-  <span class="issue">Issue No. 1 · November 2026 · The month in Alaska's economy</span>
+  <span class="issue" id="dateline">Issue No. 305 · Sunday, November 1, 2026 · Alaska's economy in brief</span>
+  <script>
+  (function(){
+    var el=document.getElementById('dateline');
+    if(!el)return;
+    var tz={timeZone:'America/Anchorage'};
+    var now=new Date();
+    var p=new Intl.DateTimeFormat('en-US',Object.assign({year:'numeric',month:'numeric',day:'numeric'},tz)).formatToParts(now);
+    var g=function(t){return +p.find(function(x){return x.type===t}).value};
+    var y=g('year'),m=g('month'),d=g('day');
+    var issueNo=Math.round((Date.UTC(y,m-1,d)-Date.UTC(y,0,0))/864e5);
+    var date=now.toLocaleDateString('en-US',Object.assign({weekday:'long',month:'long',day:'numeric',year:'numeric'},tz));
+    el.textContent='Issue No. '+issueNo+' \u00b7 '+date+' \u00b7 Alaska\u2019s economy in brief';
+  })();
+  </script>
 </header>
 
 <section class="front">
