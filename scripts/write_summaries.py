@@ -39,7 +39,7 @@ SITE = ROOT / "site"
 DATA = SITE / "data"
 OUT = DATA / "summaries.json"
 
-MODEL = os.environ.get("SUMMARY_MODEL", "claude-opus-5-5")
+MODEL = os.environ.get("SUMMARY_MODEL") or "claude-opus-5-5"
 API = "https://api.anthropic.com/v1/messages"
 PROMPT_VERSION = "1"  # bump to force every page to redraft after changing the prompt
 
@@ -84,7 +84,7 @@ class PageText(HTMLParser):
             if "read" in cls.split() and self.read_depth is None:
                 self.read_depth = self.depth
             if "tile" in cls.split():
-                self.out.append("\n- Tile: ")
+                self.out.append("\n- Tile:")
         if tag == "footer":
             self.skip += 1  # source list: names, not figures
         if tag in self.BLOCK:
@@ -94,7 +94,7 @@ class PageText(HTMLParser):
         if tag in ("td", "th"):
             self.out.append(" | ")
         if tag == "span":
-            self.out.append(" ")
+            self.out.append(" | " if self.out and self.out[-1].strip() else " ")
 
     def handle_endtag(self, tag):
         if tag in self.SKIP or tag == "footer":
@@ -166,6 +166,7 @@ def series_facts(sid, s):
     dates, vals, freq, kind, units = s["dates"], s["values"], s.get("freq", ""), s.get("kind", "level"), s.get("units", "")
     by = dict(zip(dates, vals))
     last_d, last_v = dates[-1], vals[-1]
+    ints = all(float(v).is_integer() for v in vals)
     lines = [f"* {s['label']} [{sid}; {units}; {freq}]"]
 
     def show(d, v):
@@ -191,7 +192,7 @@ def series_facts(sid, s):
         else:
             ch = last_v - a
             c = as_count(ch, units) if units.startswith("thousands of") else None
-            lines.append(f"  A year earlier: {show(ago_d, a)}; change {signed(ch, 1 if abs(ch) < 100 else 0)}"
+            lines.append(f"  A year earlier: {show(ago_d, a)}; change {signed(ch, 0 if ints or abs(ch) >= 100 else 1)}"
                          + (f" ({'+' if ch > 0 else ''}{c})" if c else "") + f", {signed(pct(last_v, a))}%")
 
     if kind == "index" and freq in ("monthly", "bimonthly"):

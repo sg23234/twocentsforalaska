@@ -227,7 +227,8 @@ def fetch_dolwd(names, tries=3):
     found = {}
     reader = csv.DictReader(io.StringIO(text))
     for raw in reader:
-        row = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items()}
+        # Rows can carry trailing commas; csv puts those extras under a None key as a list.
+        row = {k.strip().lower(): (v or "").strip() for k, v in raw.items() if isinstance(k, str) and not isinstance(v, list)}
         name = row.get("industry", "")
         if name not in names or row.get("adjusted", "0") not in ("0", ""):
             continue

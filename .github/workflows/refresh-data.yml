@@ -35,6 +35,14 @@ jobs:
           BLS_API_KEY: ${{ secrets.BLS_API_KEY }}   # optional
         run: python3 scripts/fetch_data.py
 
+      - name: Draft AI summaries
+        id: summaries
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # skipped if not set
+          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}              # optional; default claude-opus-5-5
+        run: python3 scripts/write_summaries.py
+
       - name: Commit any new data
         run: |
           git config user.name "data-bot"
@@ -49,7 +57,7 @@ jobs:
           fi
 
       - name: Report failures
-        if: steps.fetch.outcome == 'failure'
+        if: steps.fetch.outcome == 'failure' || steps.summaries.outcome == 'failure'
         run: |
-          echo "::error::Some data could not be fetched. See the Fetch live data step and site/data/status.json."
+          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
           exit 1
