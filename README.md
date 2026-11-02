@@ -10,7 +10,7 @@ site/                   ← everything the public sees (Cloudflare Pages serves 
   gdp/index.html        ← one folder per dashboard → twocentsforalaska.org/gdp/
   cost-of-living/ …     ← 12 dashboards total
   data/gdp.json         ← numbers the charts read; rewritten by the refresh job
-scripts/fetch_fred.py   ← pulls series from FRED and writes site/data/*.json
+scripts/fetch_data.py   ← pulls series from FRED and BLS and writes site/data/*.json
 .github/workflows/
   refresh-data.yml      ← runs the script on the 2nd and 16th, commits new data
 ```
@@ -53,8 +53,8 @@ GitHub repo → **Actions → Refresh data → Run workflow**. In a minute or tw
 
 ## Wiring the next dashboard
 
-1. Add its series to `DASHBOARDS` in `scripts/fetch_fred.py` (two are already stubbed: business formation and housing permits).
-2. Run `python3 scripts/fetch_fred.py business-formation` to create `site/data/business-formation.json`.
+1. Add its series to `DASHBOARDS` in `scripts/fetch_data.py` (two are already stubbed: business formation and housing permits).
+2. Run `python3 scripts/fetch_data.py business-formation` to create `site/data/business-formation.json`.
 3. In that page's `<script>`, replace the hard-coded arrays with a `fetch('/data/business-formation.json')`, keeping the arrays as the fallback — copy the pattern at the bottom of `site/gdp/index.html`.
 
 Sources that aren't on FRED (state DOLWD, DEED, DCRA fuel survey, EIA) get their own script in `scripts/` later; same idea, same `site/data/` output.

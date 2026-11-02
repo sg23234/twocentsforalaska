@@ -5,6 +5,19 @@ on:
     # 16:17 UTC (8:17 a.m. Alaska) on the 2nd and 16th of each month
     - cron: "17 16 2,16 * *"
   workflow_dispatch: {}   # adds a "Run workflow" button on the Actions tab
+  push:
+    # Also run when the scripts, hand-maintained numbers or pages change,
+    # so new series and summaries show up without waiting for the schedule.
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "site/data/manual/**"
+      - "site/*/index.html"
+      - ".github/workflows/refresh-data.yml"
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -13,14 +26,14 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Fetch FRED series
-        run: python scripts/fetch_fred.py
+      - name: Fetch live data
+        id: fetch
+        continue-on-error: true   # still commit whatever did update; the last step fails the run
+        env:
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}   # optional
+        run: python3 scripts/fetch_data.py
 
       - name: Commit any new data
         run: |
@@ -31,5 +44,12 @@ jobs:
             echo "No changes."
           else
             git commit -m "Data refresh $(date -u +%Y-%m-%d)"
+            git pull --rebase --quiet origin main
             git push
           fi
+
+      - name: Report failures
+        if: steps.fetch.outcome == 'failure'
+        run: |
+          echo "::error::Some data could not be fetched. See the Fetch live data step and site/data/status.json."
+          exit 1
