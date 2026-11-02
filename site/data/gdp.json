@@ -1,10 +1,13 @@
 {
  "dashboard": "gdp",
  "source": "FRED, Federal Reserve Bank of St. Louis",
- "fetched": "2026-11-01",
+ "fetched": "2026-11-02",
  "series": {
   "AKRGSP": {
    "label": "Real GDP, annual, millions of chained 2017 dollars",
+   "units": "millions of 2017 dollars",
+   "freq": "annual",
+   "kind": "level",
    "dates": [
     "1997-01-01",
     "1998-01-01",
@@ -70,6 +73,9 @@
   },
   "AKRQGSP": {
    "label": "Real GDP, quarterly SAAR, millions of chained 2017 dollars",
+   "units": "millions of 2017 dollars, annual rate",
+   "freq": "quarterly",
+   "kind": "level",
    "dates": [
     "2005-01-01",
     "2005-04-01",
@@ -249,6 +255,9 @@
   },
   "AKMINRQGSP": {
    "label": "Real GDP, mining (incl. oil & gas), quarterly SAAR",
+   "units": "millions of 2017 dollars, annual rate",
+   "freq": "quarterly",
+   "kind": "level",
    "dates": [
     "2005-01-01",
     "2005-04-01",
@@ -428,6 +437,9 @@
   },
   "AKGOVRQGSP": {
    "label": "Real GDP, government, quarterly SAAR",
+   "units": "millions of 2017 dollars, annual rate",
+   "freq": "quarterly",
+   "kind": "level",
    "dates": [
     "2005-01-01",
     "2005-04-01",
