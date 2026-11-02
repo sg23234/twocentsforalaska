@@ -115,7 +115,7 @@ footer{border-top:4px double var(--ink)}
 <header class="mast">
   <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 08</span></nav>
   <h1>Key sectors</h1>
-  <span class="asof">Jobs through Sep 2026 · sector data latest available · draft</span>
+  <span class="asof">Jobs through <span data-latest="Total Nonfarm">Sep 2026</span> · sector data latest available · draft</span>
 </header>
 
 <div class="read">
@@ -139,17 +139,17 @@ footer{border-top:4px double var(--ink)}
 </section>
 
 <section aria-labelledby="h-jobs">
-  <div class="sec-head"><h2 id="h-jobs">Job change by industry</h2><p>September 2026 vs. September 2025. Private industries added jobs; federal and state government shed them.</p></div>
+  <div class="sec-head"><h2 id="h-jobs">Job change by industry</h2><p id="jobs-intro">September 2026 vs. September 2025. Private industries added jobs; federal and state government shed them.</p></div>
   <figure class="chart">
     <svg id="c-jobs" viewBox="0 0 640 380" role="img" aria-label="Over-the-year job change by industry, September 2026: transportation and utilities plus 800, construction plus 600, mining and logging plus 500, of which oil and gas plus 400, health care plus 300, manufacturing, information and leisure flat, financial minus 100, professional services minus 200, local government minus 200, state government minus 400, federal government minus 1,300"></svg>
-    <figcaption>Not seasonally adjusted, so compare with the same month a year earlier. Oil and gas is part of mining and logging. Source: Alaska DOLWD, Current Employment Statistics, Sep 2026 preliminary.</figcaption>
+    <figcaption>Not seasonally adjusted, so compare with the same month a year earlier. Oil and gas is part of mining and logging. Source: Alaska DOLWD, Current Employment Statistics; <span data-latest="Total Nonfarm">Sep 2026</span> is preliminary.</figcaption>
   </figure>
 </section>
 
 <section aria-labelledby="h-size">
-  <div class="sec-head"><h2 id="h-size">How big each industry is</h2><p>Payroll jobs, September 2026, and share of the state's 347,000.</p></div>
+  <div class="sec-head"><h2 id="h-size">How big each industry is</h2><p id="size-intro">Payroll jobs, September 2026, and share of the state's 347,000.</p></div>
   <div class="tbl"><table>
-    <thead><tr><th>Industry</th><th class="r">Sep 2026</th><th class="r">Sep 2025</th><th class="r">Change</th><th class="r">Share</th></tr></thead>
+    <thead><tr><th>Industry</th><th class="r" id="th-now">Sep 2026</th><th class="r" id="th-ago">Sep 2025</th><th class="r">Change</th><th class="r">Share</th></tr></thead>
     <tbody id="t-size"></tbody>
   </table></div>
   <span class="eyebrow">Source: Alaska DOLWD, Current Employment Statistics. Seafood processing and air transportation detail not yet published for 2026.</span>
@@ -176,16 +176,16 @@ footer{border-top:4px double var(--ink)}
   <div class="tbl"><table>
     <thead><tr><th>Sector</th><th>Figure</th><th>Period</th><th>Source</th></tr></thead>
     <tbody>
-      <tr><td>Oil &amp; gas</td><td>9,400 jobs, +400 (+4.4%) y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Oil &amp; gas</td><td id="d-oil">Oil and gas 9,400 jobs, +400 y/y</td><td id="d-oil-p">Sep 2026</td><td>DOLWD</td></tr>
       <tr><td>Oil &amp; gas</td><td>ANS crude about $128/bbl vs. $75 in the spring forecast for FY27</td><td>Oct 21, 2026</td><td>Dept. of Revenue</td></tr>
-      <tr><td>Mining</td><td>Mining and logging jobs 14,000, +500 y/y; about 4,600 outside oil and gas</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Mining</td><td id="d-mining">Mining and logging 14,000 jobs, +500 y/y; about 4,600 outside oil and gas</td><td id="d-mining-p">Sep 2026</td><td>DOLWD</td></tr>
       <tr><td>Seafood</td><td>Bristol Bay sockeye run 45.7M, harvest 30.1M; first run under 50M since 2014</td><td>2026 season</td><td>ADF&amp;G prelim.</td></tr>
-      <tr><td>Seafood</td><td>Manufacturing (mostly seafood processing) 13,100 jobs, flat y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
-      <tr><td>Tourism</td><td>Leisure and hospitality 40,300 jobs, flat y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Seafood</td><td id="d-seafood">Manufacturing (mostly seafood processing) 13,100 jobs, flat y/y</td><td id="d-seafood-p">Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Tourism</td><td id="d-tourism">Leisure and hospitality 40,300 jobs, flat y/y</td><td id="d-tourism-p">Sep 2026</td><td>DOLWD</td></tr>
       <tr><td>Tourism</td><td>Juneau cruise passengers 1,733,016, +2.6%, first year of daily limits</td><td>2026 season</td><td>CBJ via Cruise Mapper</td></tr>
       <tr><td>Air cargo</td><td>Anchorage 26.3B lb landed weight, 34% more than No. 2 Louisville</td><td>2025</td><td>FAA prelim.</td></tr>
-      <tr><td>Transportation</td><td>Trade, transportation and utilities 70,700 jobs, +800 y/y</td><td>Sep 2026</td><td>DOLWD</td></tr>
-      <tr><td>Government</td><td>Federal 13,900 (−1,300), state 23,700 (−400), local 40,300 (−200)</td><td>Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Transportation</td><td id="d-trans">Trade, transportation and utilities 70,700 jobs, +800 y/y</td><td id="d-trans-p">Sep 2026</td><td>DOLWD</td></tr>
+      <tr><td>Government</td><td id="d-gov">Federal 13,900 (−1,300), state 23,700 (−400), local 40,300 (−200)</td><td id="d-gov-p">Sep 2026</td><td>DOLWD</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -220,52 +220,100 @@ footer{border-top:4px double var(--ink)}
 </footer>
 </div>
 
+<script src="/js/tc.js"></script>
 <script>
 (function(){
-  // Job change bars
-  (function(){
-    const rows=[['Trade & transport',800],['Construction',600],['Mining & logging',500],['  of which oil & gas',400],['Health care',300],['Manufacturing',0],['Information',0],['Leisure & hospitality',0],['Financial',-100],['Professional services',-200],['Local government',-200],['State government',-400],['Federal government',-1300]];
-    const svg=document.getElementById('c-jobs'),W=640,H=380,L=150,R=56,T=8,rh=27;
-    const min=-1900,max=1000,X=v=>L+(v-min)/(max-min)*(W-L-R),z=X(0);
-    let s='';[-1200,-600,0,600].forEach(t=>{s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${T+rh*rows.length}"/><text x="${X(t)}" y="${H-4}" text-anchor="middle">${t>0?'+':''}${t.toLocaleString()}</text>`});
-    rows.forEach(([n,v],i)=>{const y=T+i*rh+5,sub=n.startsWith('  ');
-      s+=`<text x="${L-8}" y="${y+12}" text-anchor="end"${sub?'':' class="strong"'}>${n.trim()}</text>`;
-      if(v!==0) s+=`<rect x="${Math.min(X(v),z)}" y="${y}" width="${Math.abs(X(v)-z)}" height="16" fill="${v>0?'var(--accent)':'var(--series2)'}" opacity="${sub?.55:1}"/>`;
-      s+=`<text class="strong" x="${v>=0?Math.max(X(v),z)+5:X(v)-5}" y="${y+12}" text-anchor="${v>=0?'start':'end'}">${v>0?'+':''}${v===0?'0':v.toLocaleString()}</text>`;});
-    s+=`<line x1="${z}" x2="${z}" y1="${T}" y2="${T+rh*rows.length}" stroke="var(--muted)"/>`;
-    svg.innerHTML=s;
-  })();
-  // Size table
-  (function(){
-    const d=[['Trade, transportation & utilities',70700,69900],['Health care',43200,42900],['Leisure & hospitality',40300,40300],['Local government',40300,40500],['Professional & business services',28900,29100],['State government',23700,24100],['Construction',20900,20300],['Mining & logging',14000,13500],['  Oil & gas',9400,9000],['Federal government',13900,15200],['Manufacturing',13100,13100],['Financial activities',10700,10800],['Information',4200,4200]];
-    const tb=document.getElementById('t-size');let h='';
-    d.forEach(([n,a,b])=>{const c=a-b,sub=n.startsWith('  ');
-      h+=`<tr><td${sub?' style="padding-left:28px;color:var(--muted)"':''}>${n.trim()}</td><td class="n b">${a.toLocaleString()}</td><td class="n">${b.toLocaleString()}</td><td class="n ${c>0?'dn':c<0?'up':''}">${c>0?'+':''}${c===0?'0':c.toLocaleString()}</td><td class="n">${(a/347000*100).toFixed(1)}%</td></tr>`;});
-    h+=`<tr><td class="b"><strong>Total nonfarm</strong></td><td class="n b">347,000</td><td class="n">346,700</td><td class="n dn">+300</td><td class="n">100%</td></tr>`;
-    tb.innerHTML=h;
-  })();
-  // Visitors stacked bars
-  (function(){
+  // Payroll jobs are live from Alaska DOLWD (not seasonally adjusted). Visitors and air
+  // cargo come from /data/manual/key-sectors.json. The numbers below are a snapshot of
+  // September 2026 used only if those files can't load.
+  const FALLBACK={month:'2026-09-01',now:{'Total Nonfarm':347000,'Trade, Transportation, Utilities':70700,'Construction':20900,'Mining and Logging':14000,'Oil & Gas':9400,'Health Care':43200,'Manufacturing':13100,'Information':4200,'Leisure & Hospitality':40300,'Financial Activities':10700,'Professional & Business Svcs':28900,'Local Government':40300,'State Government':23700,'Federal Government':13900},
+    ago:{'Total Nonfarm':346700,'Trade, Transportation, Utilities':69900,'Construction':20300,'Mining and Logging':13500,'Oil & Gas':9000,'Health Care':42900,'Manufacturing':13100,'Information':4200,'Leisure & Hospitality':40300,'Financial Activities':10800,'Professional & Business Svcs':29100,'Local Government':40500,'State Government':24100,'Federal Government':15200},
+    vis:{years:['2019','2024','2025'],cruise:[1.3316,1.785,1.777],air:[0.7909,0.8396,0.8459],highway_ferry:[0.0905,0.0783,0.084]},
+    air:[['Anchorage',26.28],['Louisville',19.67],['Memphis',16.27],['Miami',10.38],['Cincinnati',8.55]]};
+  // [DOLWD name, short label for the chart, long label for the table, parent]
+  const IND=[['Trade, Transportation, Utilities','Trade & transport','Trade, transportation & utilities'],['Construction','Construction','Construction'],
+    ['Mining and Logging','Mining & logging','Mining & logging'],['Oil & Gas','of which oil & gas','Oil & gas','Mining and Logging'],['Health Care','Health care','Health care'],
+    ['Manufacturing','Manufacturing','Manufacturing'],['Information','Information','Information'],['Leisure & Hospitality','Leisure & hospitality','Leisure & hospitality'],
+    ['Financial Activities','Financial','Financial activities'],['Professional & Business Svcs','Professional services','Professional & business services'],
+    ['Local Government','Local government','Local government'],['State Government','State government','State government'],['Federal Government','Federal government','Federal government']];
+  const FULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const ordered=(key)=>{const top=IND.filter(r=>!r[3]).sort((a,b)=>key(b)-key(a)),out=[];
+    top.forEach(r=>{out.push(r);IND.filter(c=>c[3]===r[0]).forEach(c=>out.push(c));});return out;};
+
+  function jobs(month,now,ago){
+    const ch=n=>now[n]-ago[n],round=v=>Math.round(v/100)*100;
+    // Change by industry
+    (function(){
+      const rows=ordered(r=>ch(r[0])).map(r=>[r[3]?'  '+r[1]:r[1],round(ch(r[0]))]);
+      const rh=27,T=8,svg=document.getElementById('c-jobs'),W=640,L=150,R=56,H=T+rh*rows.length+24;
+      const vals=rows.map(r=>r[1]),min=Math.min(-600,Math.floor((Math.min(...vals)-600)/600)*600),max=Math.max(600,Math.ceil((Math.max(...vals)+400)/600)*600);
+      const X=v=>L+(v-min)/(max-min)*(W-L-R),z=X(0);
+      let s='';for(let t=Math.ceil(min/600)*600;t<=max;t+=600){s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${T+rh*rows.length}"/><text x="${X(t)}" y="${H-4}" text-anchor="middle">${t>0?'+':''}${t.toLocaleString()}</text>`}
+      rows.forEach(([n,v],i)=>{const y=T+i*rh+5,sub=n.startsWith('  ');
+        s+=`<text x="${L-8}" y="${y+12}" text-anchor="end"${sub?'':' class="strong"'}>${n.trim()}</text>`;
+        if(v!==0) s+=`<rect x="${Math.min(X(v),z)}" y="${y}" width="${Math.abs(X(v)-z)}" height="16" fill="${v>0?'var(--accent)':'var(--series2)'}" opacity="${sub?.55:1}"/>`;
+        s+=`<text class="strong" x="${v>=0?Math.max(X(v),z)+5:X(v)-5}" y="${y+12}" text-anchor="${v>=0?'start':'end'}">${v>0?'+':''}${v===0?'0':v.toLocaleString()}</text>`;});
+      s+=`<line x1="${z}" x2="${z}" y1="${T}" y2="${T+rh*rows.length}" stroke="var(--muted)"/>`;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.innerHTML=s;
+      svg.setAttribute('aria-label',`Over-the-year job change by industry, ${TC.month(month)}: `+rows.map(([n,v])=>`${n.trim()} ${v>0?'+':''}${v.toLocaleString()}`).join('; '));
+    })();
+    // Size table
+    (function(){
+      const tot=now['Total Nonfarm'],tb=document.getElementById('t-size');let h='';
+      ordered(r=>now[r[0]]).forEach(r=>{const a=now[r[0]],b=ago[r[0]],c=a-b,sub=!!r[3];
+        h+=`<tr><td${sub?' style="padding-left:28px;color:var(--muted)"':''}>${r[2]}</td><td class="n b">${a.toLocaleString()}</td><td class="n">${b.toLocaleString()}</td><td class="n ${c>0?'dn':c<0?'up':''}">${c>0?'+':''}${c===0?'0':c.toLocaleString()}</td><td class="n">${(a/tot*100).toFixed(1)}%</td></tr>`;});
+      const c=tot-ago['Total Nonfarm'];
+      h+=`<tr><td class="b"><strong>Total nonfarm</strong></td><td class="n b">${tot.toLocaleString()}</td><td class="n">${ago['Total Nonfarm'].toLocaleString()}</td><td class="n ${c>0?'dn':c<0?'up':''}">${c>0?'+':''}${c.toLocaleString()}</td><td class="n">100%</td></tr>`;
+      tb.innerHTML=h;
+    })();
+    // Labels that name the month
+    const m=+month.slice(5,7)-1,y=+month.slice(0,4),M=`${TC.MON[m]} ${y}`,Mp=`${TC.MON[m]} ${y-1}`;
+    const gov=n=>n['Federal Government']+n['State Government']+n['Local Government'];
+    const pc=now['Total Nonfarm']-gov(now)-(ago['Total Nonfarm']-gov(ago)),gc=gov(now)-gov(ago);
+    const verb=v=>v>0?'added jobs':v<0?'shed jobs':'held steady';
+    const set=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
+    set('jobs-intro',`${FULL[m]} ${y} vs. ${FULL[m]} ${y-1}. Private industries ${verb(pc)}; government ${verb(gc)}.`);
+    set('size-intro',`Payroll jobs, ${FULL[m]} ${y}, and share of the state's ${now['Total Nonfarm'].toLocaleString()}.`);
+    set('th-now',M);set('th-ago',Mp);
+    // Job lines in the sector-details table
+    const line=(n,txt)=>{const c=now[n]-ago[n];return `${txt} ${now[n].toLocaleString()} jobs, ${c===0?'flat':(c>0?'+':'−')+Math.abs(c).toLocaleString()} y/y`;};
+    const cells={'d-oil':line('Oil & Gas','Oil and gas'),'d-mining':`${line('Mining and Logging','Mining and logging')}; about ${(now['Mining and Logging']-now['Oil & Gas']).toLocaleString()} outside oil and gas`,
+      'd-seafood':line('Manufacturing','Manufacturing (mostly seafood processing)'),'d-tourism':line('Leisure & Hospitality','Leisure and hospitality'),
+      'd-trans':line('Trade, Transportation, Utilities','Trade, transportation and utilities'),
+      'd-gov':['Federal','State','Local'].map(k=>{const n=k+' Government',c=now[n]-ago[n];return `${k} ${now[n].toLocaleString()} (${c>0?'+':c<0?'−':''}${c===0?'0':Math.abs(c).toLocaleString()})`;}).join(', ').replace('State','state').replace('Local','local')};
+    for(const id in cells){set(id,cells[id]);set(id+'-p',M);}
+  }
+
+  function visitors(v){
     const svg=document.getElementById('c-vis'),W=320,H=200,L=34,R=8,T=16,B=36;
-    const yrs=['2019','2024','2025'],d=[[1.3316,.7909,.0905],[1.785,.8396,.0783],[1.777,.8459,.084]];
-    const cols=['var(--accent)','var(--series2)','var(--muted)'];
-    const Y=v=>T+(1-v/3)*(H-T-B),slot=(W-L-R)/3,bw=slot*.5;
-    let s='';[0,1,2,3].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-5}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`});
+    const d=v.years.map((_,i)=>[v.cruise[i],v.air[i],v.highway_ferry[i]]),cols=['var(--accent)','var(--series2)','var(--muted)'];
+    const top=Math.max(3,Math.ceil(Math.max(...d.map(r=>r[0]+r[1]+r[2])))),Y=x=>T+(1-x/top)*(H-T-B),slot=(W-L-R)/d.length,bw=slot*.5;
+    let s='';for(let t=0;t<=top;t++){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-5}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`}
     d.forEach((r,i)=>{const cx=L+slot*i+slot/2;let acc=0;
-      r.forEach((v,j)=>{s+=`<rect x="${cx-bw/2}" y="${Y(acc+v)}" width="${bw}" height="${Y(acc)-Y(acc+v)}" fill="${cols[j]}"/>`;acc+=v;});
-      s+=`<text class="strong" x="${cx}" y="${Y(acc)-5}" text-anchor="middle">${acc.toFixed(2)}</text><text x="${cx}" y="${H-B+14}" text-anchor="middle">${yrs[i]}</text>`;});
+      r.forEach((x,j)=>{s+=`<rect x="${cx-bw/2}" y="${Y(acc+x)}" width="${bw}" height="${Y(acc)-Y(acc+x)}" fill="${cols[j]}"/>`;acc+=x;});
+      s+=`<text class="strong" x="${cx}" y="${Y(acc)-5}" text-anchor="middle">${acc.toFixed(2)}</text><text x="${cx}" y="${H-B+14}" text-anchor="middle">${v.years[i]}</text>`;});
     [['Cruise',0],['Air',1],['Highway/ferry',2]].forEach(([n,j],k)=>{const x=L+k*90;s+=`<rect x="${x}" y="${H-13}" width="9" height="8" fill="${cols[j]}"/><text x="${x+13}" y="${H-6}">${n}</text>`});
     svg.innerHTML=s;
-  })();
-  // Air cargo bars
-  (function(){
-    const svg=document.getElementById('c-air'),W=320,H=200,L=82,R=40,T=8,rh=36;
-    const d=[['Anchorage',26.28],['Louisville',19.67],['Memphis',16.27],['Miami',10.38],['Cincinnati',8.55]];
-    const X=v=>L+v/30*(W-L-R);let s='';
+  }
+
+  function cargo(d){
+    const svg=document.getElementById('c-air'),W=320,H=200,L=82,R=40,T=8,rh=36,top=Math.max(30,Math.ceil(Math.max(...d.map(r=>r[1]))/10)*10);
+    const X=v=>L+v/top*(W-L-R);let s='';
     d.forEach(([n,v],i)=>{const y=T+i*rh+6;
-      s+=`<text x="${L-8}" y="${y+13}" text-anchor="end"${i===0?' class="strong"':''}>${n}</text><rect x="${L}" y="${y}" width="${X(v)-L}" height="18" fill="${i===0?'var(--accent)':'var(--series2)'}"/><text class="strong" x="${X(v)+5}" y="${y+13}">${v.toFixed(1)}</text>`;});
+      s+=`<text x="${L-8}" y="${y+13}" text-anchor="end"${i===0?' class="strong"':''}>${TC.esc(n)}</text><rect x="${L}" y="${y}" width="${X(v)-L}" height="18" fill="${n==='Anchorage'?'var(--accent)':'var(--series2)'}"/><text class="strong" x="${X(v)+5}" y="${y+13}">${v.toFixed(1)}</text>`;});
     svg.innerHTML=s;
-  })();
+  }
+
+  TC.load().then(({auto,manual})=>{
+    if(auto&&auto.series['Total Nonfarm']){
+      const month=TC.last(auto.series['Total Nonfarm']).date,ago=TC.yearAgo(month),now={},then={};
+      for(const n in auto.series){const by=TC.byDate(auto.series[n]);now[n]=by.get(month);then[n]=by.get(ago);}
+      jobs(month,now,then);
+    } else jobs(FALLBACK.month,FALLBACK.now,FALLBACK.ago);
+    visitors(manual?manual.visitors:FALLBACK.vis);
+    cargo(manual?manual.air_cargo.rows:FALLBACK.air);
+    TC.fillLatest(auto);
+  });
 })();
 </script>
 </body>

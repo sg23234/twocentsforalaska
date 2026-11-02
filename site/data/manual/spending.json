@@ -1,0 +1,75 @@
+{
+ "_about": "Hand-maintained numbers for the Spending page. Edit and commit; the charts redraw and the AI summary is redrafted on the next refresh run. The budget-lines table is edited in the page itself. Payroll jobs are live from Alaska DOLWD's CSV and are not kept here.",
+ "ugf_budget": {
+  "label": "State unrestricted general fund revenue and spending, $ billions",
+  "source": "Alaska Legislative Finance Division, FY27 Enacted fiscal summary, Sep 9, 2026",
+  "as_of": "FY2027 enacted",
+  "next_update": "Governor's FY2028 budget, Dec 2026",
+  "bars": [
+   {
+    "year": "FY26",
+    "kind": "revenue",
+    "parts": {
+     "Permanent Fund draw": 3.7989,
+     "Other revenue": 3.169
+    }
+   },
+   {
+    "year": "FY26",
+    "kind": "spending",
+    "parts": {
+     "Operations": 4.9772,
+     "Dividend": 0.6853,
+     "Statewide items": 0.7199,
+     "Capital": 0.2292
+    }
+   },
+   {
+    "year": "FY27",
+    "kind": "revenue",
+    "parts": {
+     "Permanent Fund draw": 3.9969,
+     "Other revenue": 2.7138
+    }
+   },
+   {
+    "year": "FY27",
+    "kind": "spending",
+    "parts": {
+     "Operations": 4.9889,
+     "Dividend": 0.6741,
+     "Statewide items": 0.5816,
+     "Capital": 0.3546
+    }
+   }
+  ]
+ },
+ "scale": {
+  "label": "Spending measures as a share of Alaska's nominal GDP, percent",
+  "source": "Leg. Finance; USAspending via 24/7 Wall St.; BEA",
+  "as_of": "FY2027 budget; 2025 GDP",
+  "nominal_gdp_billions": 73.6,
+  "rows": [
+   {
+    "label": "Federal obligations",
+    "billions": 18.3,
+    "color": "series2"
+   },
+   {
+    "label": "State budget, all funds",
+    "billions": 14.4,
+    "color": "accent"
+   },
+   {
+    "label": "Government share of output",
+    "pct": 18.0,
+    "color": "muted"
+   },
+   {
+    "label": "State UGF budget",
+    "billions": 6.6,
+    "color": "accent"
+   }
+  ]
+ }
+}

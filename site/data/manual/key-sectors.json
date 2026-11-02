@@ -1,0 +1,57 @@
+{
+ "_about": "Hand-maintained numbers for the Key Sectors page. Edit and commit; the charts redraw and the AI summary is redrafted on the next refresh run. Payroll jobs are live from Alaska DOLWD's CSV and are not kept here.",
+ "visitors": {
+  "label": "Out-of-state summer visitors (May-September) by how they arrived, millions",
+  "source": "Alaska Visitor Volume, Summer 2025 (ATIA)",
+  "as_of": "Summer 2025",
+  "next_update": "early 2027",
+  "years": [
+   "2019",
+   "2024",
+   "2025"
+  ],
+  "cruise": [
+   1.3316,
+   1.785,
+   1.777
+  ],
+  "air": [
+   0.7909,
+   0.8396,
+   0.8459
+  ],
+  "highway_ferry": [
+   0.0905,
+   0.0783,
+   0.084
+  ]
+ },
+ "air_cargo": {
+  "label": "Top U.S. all-cargo airports by landed weight, billions of pounds, preliminary",
+  "source": "FAA CY2025 all-cargo airports",
+  "as_of": "2025",
+  "next_update": "FAA CY2026 preliminary, about Sep 2027",
+  "rows": [
+   [
+    "Anchorage",
+    26.28
+   ],
+   [
+    "Louisville",
+    19.67
+   ],
+   [
+    "Memphis",
+    16.27
+   ],
+   [
+    "Miami",
+    10.38
+   ],
+   [
+    "Cincinnati",
+    8.55
+   ]
+  ]
+ }
+}

@@ -115,7 +115,7 @@ footer{border-top:4px double var(--ink)}
 <header class="mast">
   <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 02</span></nav>
   <h1>Cost of living</h1>
-  <span class="asof">CPI: Aug 2026 · rural fuel: summer 2026 survey · next CPI Nov 10 · draft</span>
+  <span class="asof">CPI: <span data-latest="CUURS49GSA0">Aug 2026</span> · rural fuel: summer 2026 survey · draft</span>
 </header>
 
 <div class="read">
@@ -137,10 +137,10 @@ footer{border-top:4px double var(--ink)}
 </section>
 
 <section aria-labelledby="h-cat">
-  <div class="sec-head"><h2 id="h-cat">What's driving prices</h2><p>12-month change by category, Urban Alaska, August 2026.</p></div>
+  <div class="sec-head"><h2 id="h-cat">What's driving prices</h2><p>12-month change by category, Urban Alaska, <span class="cpi-month">August 2026</span>.</p></div>
   <figure class="chart">
     <div class="scroll" style="overflow-x:auto"><svg id="c-cat" viewBox="0 0 680 400" style="min-width:540px" role="img" aria-label="Urban Alaska 12-month price change by category, August 2026, from motor fuel up 28 percent to new and used vehicles down 2.7 percent"></svg></div>
-    <figcaption>Not seasonally adjusted. Source: BLS, Consumer Price Index, Anchorage area, Aug 2026.</figcaption>
+    <figcaption>Not seasonally adjusted. Urban Alaska covers Anchorage and the Mat-Su; most categories are published every other month. Source: BLS Consumer Price Index, via the BLS API.</figcaption>
   </figure>
 </section>
 
@@ -191,34 +191,62 @@ footer{border-top:4px double var(--ink)}
 </footer>
 </div>
 
+<script src="/js/tc.js"></script>
 <script>
 (function(){
-  // Category diverging bars
-  (function(){
-    const d=[["Motor fuel",28.0],["Recreation",8.5],["Transportation",6.2],["Other goods & services",5.1],["Shelter",4.0],["Owners' equivalent rent",3.8],["Housing",3.6],["Rent of primary residence",3.4],["All items",3.3],["Food at home",1.7],["Food away from home",1.4],["Apparel",-1.0],["Education & communication",-1.1],["Medical care",-1.3],["Household furnishings",-1.6],["New & used vehicles",-2.7]];
-    const svg=document.getElementById('c-cat'),W=680,T=24,row=22,LBL=190,RP=56,x0=-5,x1=30;
+  // Category changes are live from the BLS API (Urban Alaska CPI, not seasonally adjusted).
+  // Annual averages come from /data/manual/cost-of-living.json.
+  // The numbers here are a snapshot used only if those files can't load.
+  const FALLBACK={month:'2026-08-01',cats:[["Motor fuel",28.0],["Recreation",8.5],["Transportation",6.2],["Other goods & services",5.1],["Shelter",4.0],["Owners' equivalent rent",3.8],["Housing",3.6],["Rent of primary residence",3.4],["All items",3.3],["Food at home",1.7],["Food away from home",1.4],["Apparel",-1.0],["Education & communication",-1.1],["Medical care",-1.3],["Household furnishings",-1.6],["New & used vehicles",-2.7]],years:['2019','2020','2021','2022','2023','2024','2025'],ak:[1.4,-1.1,4.9,8.1,1.5,2.2,2.1],us:[1.8,1.2,4.7,8.0,4.1,2.9,2.6]};
+  const CATS=[['CUURS49GSETB','Motor fuel'],['CUURS49GSAR','Recreation'],['CUURS49GSAT','Transportation'],['CUURS49GSAG','Other goods & services'],['CUURS49GSAH1','Shelter'],
+    ['CUURS49GSEHC',"Owners' equivalent rent"],['CUURS49GSAH','Housing'],['CUURS49GSEHA','Rent of primary residence'],['CUURS49GSA0','All items'],['CUURS49GSAF11','Food at home'],
+    ['CUURS49GSEFV','Food away from home'],['CUURS49GSAA','Apparel'],['CUURS49GSAE','Education & communication'],['CUURS49GSAM','Medical care'],['CUURS49GSAH3','Household furnishings'],['CUURS49GSETA','New & used vehicles']];
+
+  function fromLive(auto){
+    // Use the latest month for which all items is published, so every bar covers the same 12 months.
+    const all=auto.series.CUURS49GSA0,month=TC.last(all).date,ago=TC.yearAgo(month),d=[];
+    CATS.forEach(([id,name])=>{const s=auto.series[id];if(!s)return;const by=TC.byDate(s);
+      if(by.has(month)&&by.has(ago))d.push([name,Math.round((by.get(month)/by.get(ago)-1)*1000)/10]);});
+    d.sort((a,b)=>b[1]-a[1]);
+    return{month,cats:d};
+  }
+
+  function drawCats(month,d){
+    const svg=document.getElementById('c-cat'),W=680,T=24,row=22,LBL=190,RP=56;
+    const x0=Math.min(-5,Math.floor(Math.min(...d.map(x=>x[1]))/5)*5),x1=Math.max(10,Math.ceil(Math.max(...d.map(x=>x[1]))/10)*10);
     const X=v=>LBL+(v-x0)/(x1-x0)*(W-LBL-RP);
     let s='';
-    [0,10,20,30].forEach(t=>{s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T-6}" y2="${T+d.length*row}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${X(t)}" y="${T-10}" text-anchor="middle">${t>0?'+':''}${t}%</text>`});
+    for(let t=0;t<=x1;t+=10){s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T-6}" y2="${T+d.length*row}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${X(t)}" y="${T-10}" text-anchor="middle">${t>0?'+':''}${t}%</text>`}
     d.forEach(([n,v],i)=>{const y=T+i*row,all=n==='All items',c=all?'var(--ink)':(v>=0?'var(--accent)':'var(--series2)');
-      s+=`<text x="${LBL-8}" y="${y+row/2+3.5}" text-anchor="end" style="fill:var(--ink);${all?'font-weight:500':''}">${n}</text>`;
+      s+=`<text x="${LBL-8}" y="${y+row/2+3.5}" text-anchor="end" style="fill:var(--ink);${all?'font-weight:500':''}">${TC.esc(n)}</text>`;
       s+=`<rect x="${X(Math.min(0,v))}" y="${y+4}" width="${Math.abs(X(v)-X(0))}" height="${row-8}" fill="${c}"/>`;
       s+=`<text class="strong" x="${v>=0?X(v)+5:X(0)+5}" y="${y+row/2+3.5}">${v>0?'+':''}${v.toFixed(1)}%</text>`;});
     svg.setAttribute('viewBox',`0 0 ${W} ${T+d.length*row+6}`);svg.innerHTML=s;
-  })();
-  // Annual paired bars
-  (function(){
+    svg.setAttribute('aria-label',`Urban Alaska 12-month price change by category, ${TC.month(month)}: `+d.map(([n,v])=>`${n} ${v>0?'+':''}${v.toFixed(1)}%`).join('; '));
+    const full=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.querySelectorAll('.cpi-month').forEach(e=>e.textContent=`${full[+month.slice(5,7)-1]} ${month.slice(0,4)}`);
+  }
+
+  function drawYears(y,a,u){
     const svg=document.getElementById('c-yr'),W=640,H=230,L=40,R=10,T=20,B=26;
-    const y=['2019','2020','2021','2022','2023','2024','2025'],a=[1.4,-1.1,4.9,8.1,1.5,2.2,2.1],u=[1.8,1.2,4.7,8.0,4.1,2.9,2.6];
-    const Y=v=>T+(1-(v+2)/(10+2))*(H-T-B),slot=(W-L-R)/y.length,bw=slot*.3;
-    let s='';[-2,0,2,4,6,8,10].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}%</text>`});
+    const lo=Math.min(-2,Math.floor(Math.min(...a,...u)/2)*2),hi=Math.max(10,Math.ceil(Math.max(...a,...u)/2)*2);
+    const Y=v=>T+(1-(v-lo)/(hi-lo))*(H-T-B),slot=(W-L-R)/y.length,bw=slot*.3;
+    let s='';for(let t=lo;t<=hi;t+=2){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}%</text>`}
     y.forEach((l,i)=>{const cx=L+slot*i+slot/2;
       [[a[i],cx-bw-2,'var(--accent)'],[u[i],cx+2,'var(--series2)']].forEach(([v,x,c])=>{
         s+=`<rect x="${x}" y="${Y(Math.max(0,v))}" width="${bw}" height="${Math.abs(Y(v)-Y(0))}" fill="${c}"/>`;
         s+=`<text class="strong" x="${x+bw/2}" y="${v>=0?Y(v)-4:Y(v)+11}" text-anchor="middle" style="font-size:9.5px">${v.toFixed(1)}</text>`;});
       s+=`<text x="${cx}" y="${H-8}" text-anchor="middle">${l}</text>`;});
     svg.innerHTML=s;
-  })();
+  }
+
+  TC.load().then(({auto,manual})=>{
+    const live=auto&&auto.series.CUURS49GSA0?fromLive(auto):FALLBACK;
+    drawCats(live.month,live.cats);
+    const ai=manual&&manual.annual_inflation;
+    drawYears(ai?ai.years:FALLBACK.years,ai?ai.urban_alaska:FALLBACK.ak,ai?ai.us_city_average:FALLBACK.us);
+    TC.fillLatest(auto);
+  });
 })();
 </script>
 </body>

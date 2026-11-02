@@ -115,7 +115,7 @@ footer{border-top:4px double var(--ink)}
 <header class="mast">
   <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 04</span></nav>
   <h1>New business formation</h1>
-  <span class="asof">Applications through Sep 2026 · next release mid-Nov · draft</span>
+  <span class="asof">Applications through <span data-latest="BABATOTALNSAAK">Sep 2026</span> · Census releases monthly, mid-month · draft</span>
 </header>
 
 <div class="read">
@@ -140,14 +140,14 @@ footer{border-top:4px double var(--ink)}
   <div class="sec-head"><h2 id="h-yr">Applications by year</h2><p>Flat at 8,000–9,300 a year from 2018 to 2024, then up sharply in 2025 and again in 2026.</p></div>
   <figure class="chart">
     <svg id="c-year" viewBox="0 0 640 230" role="img" aria-label="Alaska business applications by year: 2018 9,257; 2019 8,087; 2020 8,056; 2021 8,081; 2022 8,475; 2023 8,908; 2024 9,130; 2025 10,531; 2026 through September 11,351"></svg>
-    <figcaption>2026 bar covers January–September only. Sums of monthly not-seasonally-adjusted counts. Source: Census BFS via FRED (BABATOTALNSAAK).</figcaption>
+    <figcaption><span id="cap-year">2026 bar covers January–September only. </span>Sums of monthly not-seasonally-adjusted counts. Source: Census BFS via FRED (BABATOTALNSAAK).</figcaption>
   </figure>
 </section>
 
 <section aria-labelledby="h-mo">
-  <div class="sec-head"><h2 id="h-mo">Month by month, 2026 vs. 2025</h2><p>Every month of 2026 except March and April has run above the same month of 2025.</p></div>
+  <div class="sec-head"><h2 id="h-mo">Month by month, <span class="yr-now">2026</span> vs. <span class="yr-prev">2025</span></h2><p id="mo-intro">Every month of 2026 except March and April has run above the same month of 2025.</p></div>
   <figure class="chart">
-    <div class="legend" style="display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap"><span><i style="display:inline-block;width:14px;height:3px;background:var(--accent);vertical-align:middle;margin-right:5px"></i>2026</span><span><i style="display:inline-block;width:14px;height:3px;background:var(--series2);vertical-align:middle;margin-right:5px"></i>2025</span></div>
+    <div class="legend" style="display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap"><span><i style="display:inline-block;width:14px;height:3px;background:var(--accent);vertical-align:middle;margin-right:5px"></i><span class="yr-now">2026</span></span><span><i style="display:inline-block;width:14px;height:3px;background:var(--series2);vertical-align:middle;margin-right:5px"></i><span class="yr-prev">2025</span></span></div>
     <svg id="c-month" viewBox="0 0 640 230" role="img" aria-label="Monthly Alaska business applications, January to September, 2026 compared with 2025"></svg>
     <figcaption>Not seasonally adjusted, so compare the same month across years rather than month to month.</figcaption>
   </figure>
@@ -202,45 +202,75 @@ footer{border-top:4px double var(--ink)}
 </footer>
 </div>
 
+<script src="/js/tc.js"></script>
 <script>
 (function(){
-  // Annual bars
-  (function(){
+  // Applications are live from FRED (Census BFS, BABATOTALNSAAK, not seasonally adjusted).
+  // Openings/closings come from /data/manual/business-formation.json.
+  // The numbers here are a snapshot used only if those files can't load.
+  const FALLBACK=(()=>{const f={start:"2018-01",values:[776,794,1047,869,990,857,685,932,474,493,809,531,872,777,747,647,721,513,520,689,635,930,486,550,819,729,668,713,684,716,823,667,670,549,457,561,741,713,947,711,619,744,526,577,687,594,567,655,761,761,966,771,706,721,582,702,619,624,744,518,823,790,1017,740,915,694,667,807,568,644,730,513,991,740,836,780,936,687,798,640,666,874,609,573,876,769,1028,1343,806,690,728,734,690,906,1107,854,952,1180,899,1290,1437,1236,1418,1241,1698]},d=[];let [y,m]=f.start.split('-').map(Number);
+    f.values.forEach(()=>{d.push(`${y}-${String(m).padStart(2,'0')}-01`);if(++m>12){m=1;y++}});return{dates:d,values:f.values};})();
+  const FALLBACK_BED={quarters:['Q4 2023','Q1 2024','Q2 2024','Q3 2024','Q4 2024'],jobs_gained_openings:[4425,3807,3798,3420,4208],jobs_lost_closings:[3700,4008,4047,4055,3793]};
+
+  function drawYears(s){
+    const last=TC.last(s).date,ly=+last.slice(0,4),lm=+last.slice(5,7),tot={};
+    s.dates.forEach((d,i)=>{const y=+d.slice(0,4);if(y>=2018)tot[y]=(tot[y]||0)+s.values[i];});
+    const yrs=Object.keys(tot).map(Number).sort(),v=yrs.map(y=>tot[y]),partial=lm<12;
     const svg=document.getElementById('c-year'),W=640,H=230,L=48,R=12,T=22,B=26;
-    const yrs=['2018','2019','2020','2021','2022','2023','2024','2025','2026*'],v=[9257,8087,8056,8081,8475,8908,9130,10531,11351];
-    const Y=x=>T+(1-x/12000)*(H-T-B),slot=(W-L-R)/v.length,bw=slot*.6;
-    let s='';[0,3000,6000,9000,12000].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`});
-    v.forEach((x,i)=>{const cx=L+slot*i+slot/2,c=i===8?'var(--accent)':(i===7?'var(--accent)':'var(--series2)'),op=i===8?'.55':'1';
-      s+=`<rect x="${cx-bw/2}" y="${Y(x)}" width="${bw}" height="${Y(0)-Y(x)}" fill="${c}" opacity="${op}"/><text class="strong" x="${cx}" y="${Y(x)-6}" text-anchor="middle">${x.toLocaleString()}</text><text x="${cx}" y="${H-8}" text-anchor="middle">${yrs[i]}</text>`});
-    svg.innerHTML=s;
-  })();
-  // Monthly lines
-  (function(){
+    const top=Math.max(12000,Math.ceil(Math.max(...v)/3000)*3000),Y=x=>T+(1-x/top)*(H-T-B),slot=(W-L-R)/v.length,bw=slot*.6;
+    let s2='';for(let t=0;t<=top;t+=3000){s2+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`}
+    v.forEach((x,i)=>{const cx=L+slot*i+slot/2,last=i===v.length-1,c=i>=v.length-2?'var(--accent)':'var(--series2)',op=last&&partial?'.55':'1';
+      s2+=`<rect x="${cx-bw/2}" y="${Y(x)}" width="${bw}" height="${Y(0)-Y(x)}" fill="${c}" opacity="${op}"/><text class="strong" x="${cx}" y="${Y(x)-6}" text-anchor="middle">${x.toLocaleString()}</text><text x="${cx}" y="${H-8}" text-anchor="middle">${yrs[i]}${last&&partial?'*':''}</text>`});
+    svg.innerHTML=s2;
+    svg.setAttribute('aria-label','Alaska business applications by year: '+yrs.map((y,i)=>`${y}${i===yrs.length-1&&partial?' through '+TC.MON[lm-1]:''} ${v[i].toLocaleString()}`).join('; '));
+    const cap=document.getElementById('cap-year');
+    if(cap)cap.textContent=partial?`${ly} bar covers January–${['January','February','March','April','May','June','July','August','September','October','November','December'][lm-1]} only. `:'';
+  }
+
+  function drawMonths(s){
+    const by=TC.byDate(s),last=TC.last(s).date,ly=+last.slice(0,4),lm=+last.slice(5,7),py=ly-1;
+    const m=TC.MON.slice(0,lm),key=(y,i)=>`${y}-${String(i+1).padStart(2,'0')}-01`;
+    const a=m.map((_,i)=>by.get(key(ly,i))),b=m.map((_,i)=>by.get(key(py,i)));
     const svg=document.getElementById('c-month'),W=640,H=230,L=48,R=48,T=16,B=26;
-    const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
-    const a=[952,1180,899,1290,1437,1236,1418,1241,1698], b=[876,769,1028,1343,806,690,728,734,690];
-    const X=i=>L+i/(m.length-1)*(W-L-R),Y=x=>T+(1-x/1800)*(H-T-B);
-    let s='';[0,600,1200,1800].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`});
-    m.forEach((l,i)=>{s+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle">${l}</text>`});
+    const top=Math.max(1800,Math.ceil(Math.max(...a,...b)/600)*600);
+    const X=i=>L+(m.length>1?i/(m.length-1):.5)*(W-L-R),Y=x=>T+(1-x/top)*(H-T-B);
+    let s2='';for(let t=0;t<=top;t+=600){s2+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`}
+    m.forEach((l,i)=>{s2+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle">${l}</text>`});
     [[b,'var(--series2)'],[a,'var(--accent)']].forEach(([d,c])=>{
-      s+=`<polyline points="${d.map((x,i)=>X(i)+','+Y(x)).join(' ')}" fill="none" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/>`;
-      d.forEach((x,i)=>{s+=`<circle cx="${X(i)}" cy="${Y(x)}" r="${i===d.length-1?3.6:2.2}" fill="${c}"/>`});
-      s+=`<text class="strong" x="${X(d.length-1)+6}" y="${Y(d[d.length-1])+3.5}">${d[d.length-1].toLocaleString()}</text>`;
+      s2+=`<polyline points="${d.map((x,i)=>X(i)+','+Y(x)).join(' ')}" fill="none" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/>`;
+      d.forEach((x,i)=>{s2+=`<circle cx="${X(i)}" cy="${Y(x)}" r="${i===d.length-1?3.6:2.2}" fill="${c}"/>`});
+      s2+=`<text class="strong" x="${X(d.length-1)+6}" y="${Y(d[d.length-1])+3.5}">${d[d.length-1].toLocaleString()}</text>`;
     });
-    svg.innerHTML=s;
-  })();
-  // BED paired bars
-  (function(){
+    svg.innerHTML=s2;
+    svg.setAttribute('aria-label',`Monthly Alaska business applications, January to ${TC.MON[lm-1]}, ${ly} compared with ${py}`);
+    document.querySelectorAll('.yr-now').forEach(e=>e.textContent=ly);
+    document.querySelectorAll('.yr-prev').forEach(e=>e.textContent=py);
+    // Which months ran below last year
+    const below=m.filter((_,i)=>a[i]<b[i]),full=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const el=document.getElementById('mo-intro');
+    if(el)el.textContent=below.length===0?`Every month of ${ly} so far has run above the same month of ${py}.`:
+      below.length<=m.length/2?`Every month of ${ly} so far except ${below.map(x=>full[TC.MON.indexOf(x)]).join(' and ').replace(/ and (?=.* and )/g,', ')} has run above the same month of ${py}.`:
+      `${m.length-below.length} of ${m.length} months of ${ly} so far have run above the same month of ${py}.`;
+  }
+
+  function drawBed(b){
+    const q=b.quarters,o=b.jobs_gained_openings,c=b.jobs_lost_closings;
     const svg=document.getElementById('c-bed'),W=640,H=220,L=48,R=12,T=22,B=40;
-    const q=['Q4 2023','Q1 2024','Q2 2024','Q3 2024','Q4 2024'],o=[4425,3807,3798,3420,4208],c=[3700,4008,4047,4055,3793];
-    const Y=x=>T+(1-x/5000)*(H-T-B),slot=(W-L-R)/q.length,bw=slot*.3;
-    let s='';[0,1000,2000,3000,4000,5000].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`});
+    const top=Math.max(5000,Math.ceil(Math.max(...o,...c)/1000)*1000),Y=x=>T+(1-x/top)*(H-T-B),slot=(W-L-R)/q.length,bw=slot*.3;
+    let s='';for(let t=0;t<=top;t+=1000){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`}
     q.forEach((l,i)=>{const cx=L+slot*i+slot/2;
       s+=`<rect x="${cx-bw-2}" y="${Y(o[i])}" width="${bw}" height="${Y(0)-Y(o[i])}" fill="var(--accent)"/><rect x="${cx+2}" y="${Y(c[i])}" width="${bw}" height="${Y(0)-Y(c[i])}" fill="var(--series2)"/>`;
       s+=`<text x="${cx}" y="${H-B+14}" text-anchor="middle">${l}</text>`;});
     s+=`<rect x="${L}" y="${H-14}" width="10" height="8" fill="var(--accent)"/><text x="${L+14}" y="${H-7}">Jobs gained at openings</text><rect x="${L+180}" y="${H-14}" width="10" height="8" fill="var(--series2)"/><text x="${L+194}" y="${H-7}">Jobs lost at closings</text>`;
     svg.innerHTML=s;
-  })();
+  }
+
+  TC.load().then(({auto,manual})=>{
+    const s=(auto&&auto.series.BABATOTALNSAAK)||FALLBACK;
+    drawYears(s);drawMonths(s);
+    drawBed((manual&&manual.openings_closings)||FALLBACK_BED);
+    TC.fillLatest(auto);
+  });
 })();
 </script>
 </body>

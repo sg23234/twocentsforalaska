@@ -115,7 +115,7 @@ footer{border-top:4px double var(--ink)}
 <header class="mast">
   <nav class="crumb" aria-label="Breadcrumb"><a href="/">Two Cents <span>for Alaska</span></a><span>/</span><span>Dashboard 07</span></nav>
   <h1>Housing</h1>
-  <span class="asof">Rents: March 2026 survey · prices: Q2 2026 · permits: Aug 2026 · draft</span>
+  <span class="asof">Rents: March 2026 survey · prices: Q2 2026 · permits: <span data-latest="AKBPPRIV">Aug 2026</span> · draft</span>
 </header>
 
 <div class="read">
@@ -162,10 +162,10 @@ footer{border-top:4px double var(--ink)}
 </section>
 
 <section aria-labelledby="h-perm">
-  <div class="sec-head"><h2 id="h-perm">Permits, 2026</h2><p>New privately owned housing units authorized each month, statewide.</p></div>
+  <div class="sec-head"><h2 id="h-perm">Building permits</h2><p>New privately owned housing units authorized each month, statewide, over the past year.</p></div>
   <figure class="chart">
     <svg id="c-perm" viewBox="0 0 640 200" role="img" aria-label="Alaska monthly housing units permitted April to August 2026: 55, 82, 73, 78, 57"></svg>
-    <figcaption>Not seasonally adjusted. Much of rural Alaska needs no building permit, so this undercounts construction. Source: Census Building Permits Survey via FRED (AKBPPRIV). September data due Oct 27.</figcaption>
+    <figcaption>Not seasonally adjusted. Much of rural Alaska needs no building permit, so this undercounts construction. Latest: <span data-latest="AKBPPRIV">Aug 2026</span>. Source: Census Building Permits Survey via FRED (AKBPPRIV), updated monthly.</figcaption>
   </figure>
 </section>
 
@@ -207,8 +207,15 @@ footer{border-top:4px double var(--ink)}
 </footer>
 </div>
 
+<script src="/js/tc.js"></script>
 <script>
 (function(){
+  // Permits are live from FRED (AKBPPRIV). Anchorage series and rents come from
+  // /data/manual/housing.json. The numbers here are a snapshot used only if those files can't load.
+  const FALLBACK_PERMITS={dates:["2024-10-01","2024-11-01","2024-12-01","2025-01-01","2025-02-01","2025-03-01","2025-04-01","2025-05-01","2025-06-01","2025-07-01","2025-08-01","2025-09-01","2025-10-01","2025-11-01","2025-12-01","2026-01-01","2026-02-01","2026-03-01","2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01","2026-09-01"],values:[92,109,57,29,32,123,83,136,72,70,90,83,67,50,52,41,58,118,55,82,73,78,57,59]};
+  const FALLBACK_MAN={anchorage:{years:['2018','2019','2020','2021','2022','2023','2024','2025'],median_december_listing_price:[299999,311500,328450,374500,439000,425000,447625,457250],rental_vacancy_rate_pct:[6.2,5.2,5.7,4.3,3.2,4.1,4.6,5.6],vacancy_target_pct:5},
+    rents:{rows:[["Bethel",2030,2075,8.0],["Kodiak Island",1728,1713,7.8],["Anchorage",1720,1680,4.9],["Fairbanks North Star",1710,1676,10.1],["Juneau",1708,1661,4.1],["Ketchikan Gateway",1671,1600,8.4],["Sitka",1579,1564,5.8],["Matanuska-Susitna",1567,1389,3.5],["Valdez-Cordova",1393,1375,4.2],["Kenai Peninsula",1336,1203,5.8],["Wrangell-Petersburg",1288,1235,1.1]]}};
+
   function line(id,cfg){
     const svg=document.getElementById(id),W=320,H=200,L=50,R=18,T=18,B=24,n=cfg.v.length;
     const X=i=>L+i/(n-1)*(W-L-R), Y=v=>T+(1-(v-cfg.min)/(cfg.max-cfg.min))*(H-T-B);
@@ -223,27 +230,39 @@ footer{border-top:4px double var(--ink)}
     (cfg.labels||[n-1]).forEach(i=>{s+=`<text class="strong" x="${X(i)}" y="${Y(cfg.v[i])-8}" text-anchor="${i===n-1?'end':'middle'}">${cfg.lfmt(cfg.v[i])}</text>`});
     svg.innerHTML=s;
   }
-  const yrs=['2018','2019','2020','2021','2022','2023','2024','2025'];
-  line('c-price',{x:yrs,every:1,v:[299999,311500,328450,374500,439000,425000,447625,457250],min:250000,max:500000,ticks:[250000,300000,350000,400000,450000,500000],
-    fmt:t=>'$'+t/1000+'k',lfmt:v=>'$'+Math.round(v/1000)+'k',labels:[0,4,7]});
-  line('c-vac',{x:yrs,every:1,v:[6.2,5.2,5.7,4.3,3.2,4.1,4.6,5.6],min:0,max:8,ticks:[0,2,4,6,8],ref:5,
-    fmt:t=>t+'%',lfmt:v=>v.toFixed(1)+'%',labels:[0,4,7]});
 
-  // Rents table
-  const rents=[["Bethel",2030,2075,8.0],["Kodiak Island",1728,1713,7.8],["Anchorage",1720,1680,4.9],["Fairbanks North Star",1710,1676,10.1],["Juneau",1708,1661,4.1],["Ketchikan Gateway",1671,1600,8.4],["Sitka",1579,1564,5.8],["Matanuska-Susitna",1567,1389,3.5],["Valdez-Cordova",1393,1375,4.2],["Kenai Peninsula",1336,1203,5.8],["Wrangell-Petersburg",1288,1235,1.1]];
-  const tb=document.getElementById('rents');
-  tb.innerHTML=rents.map(([a,r26,r25,v])=>{
-    const c=(r26/r25-1)*100, w=Math.round(Math.abs(c)*5);
-    return `<tr><td>${a}</td><td class="n b">$${r26.toLocaleString()}</td><td class="n">$${r25.toLocaleString()}</td><td class="n">${c>=0?'+':'−'}${Math.abs(c).toFixed(1)}%<span class="bar${c<0?' neg':''}" style="width:${w}px"></span></td><td class="n">${v.toFixed(1)}%</td></tr>`}).join('');
+  function anchorage(a){
+    const n=a.years.length,mid=Math.floor(n/2);
+    const pmax=Math.ceil(Math.max(...a.median_december_listing_price)/50000)*50000,pmin=Math.min(250000,Math.floor(Math.min(...a.median_december_listing_price)/50000)*50000),pt=[];
+    for(let t=pmin;t<=pmax;t+=50000)pt.push(t);
+    line('c-price',{x:a.years,every:1,v:a.median_december_listing_price,min:pmin,max:pmax,ticks:pt,fmt:t=>'$'+t/1000+'k',lfmt:v=>'$'+Math.round(v/1000)+'k',labels:[...new Set([0,mid,n-1])]});
+    const vmax=Math.max(8,Math.ceil(Math.max(...a.rental_vacancy_rate_pct)/2)*2),vt=[];for(let t=0;t<=vmax;t+=2)vt.push(t);
+    line('c-vac',{x:a.years,every:1,v:a.rental_vacancy_rate_pct,min:0,max:vmax,ticks:vt,ref:a.vacancy_target_pct,fmt:t=>t+'%',lfmt:v=>v.toFixed(1)+'%',labels:[...new Set([0,mid,n-1])]});
+  }
 
-  // Permits bars
-  (function(){
-    const svg=document.getElementById('c-perm'),W=640,H=200,L=40,R=12,T=20,B=26,m=['Apr','May','Jun','Jul','Aug'],v=[55,82,73,78,57];
-    const Y=x=>T+(1-x/100)*(H-T-B),slot=(W-L-R)/v.length,bw=Math.min(64,slot*.55);
-    let s='';[0,25,50,75,100].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`});
-    v.forEach((x,i)=>{const cx=L+slot*i+slot/2;s+=`<rect x="${cx-bw/2}" y="${Y(x)}" width="${bw}" height="${Y(0)-Y(x)}" fill="var(--accent)"/><text class="strong" x="${cx}" y="${Y(x)-6}" text-anchor="middle">${x}</text><text x="${cx}" y="${H-8}" text-anchor="middle">${m[i]}</text>`});
-    svg.innerHTML=s;
-  })();
+  function rents(rows){
+    document.getElementById('rents').innerHTML=rows.map(([a,r26,r25,v])=>{
+      const c=(r26/r25-1)*100, w=Math.round(Math.abs(c)*5);
+      return `<tr><td>${TC.esc(a)}</td><td class="n b">$${r26.toLocaleString()}</td><td class="n">$${r25.toLocaleString()}</td><td class="n">${c>=0?'+':'−'}${Math.abs(c).toFixed(1)}%<span class="bar${c<0?' neg':''}" style="width:${w}px"></span></td><td class="n">${v.toFixed(1)}%</td></tr>`}).join('');
+  }
+
+  function permits(s){
+    const d=s.dates.slice(-12),v=s.values.slice(-12);
+    const svg=document.getElementById('c-perm'),W=640,H=200,L=40,R=12,T=20,B=26;
+    const top=Math.max(100,Math.ceil(Math.max(...v)/25)*25),Y=x=>T+(1-x/top)*(H-T-B),slot=(W-L-R)/v.length,bw=Math.min(40,slot*.6);
+    let s2='';for(let t=0;t<=top;t+=25){s2+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`}
+    v.forEach((x,i)=>{const cx=L+slot*i+slot/2,m=TC.mon(d[i]),lab=(i===0||m==='Jan')?`${m} ${d[i].slice(2,4)}`:m;
+      s2+=`<rect x="${cx-bw/2}" y="${Y(x)}" width="${bw}" height="${Y(0)-Y(x)}" fill="var(--accent)"/><text class="strong" x="${cx}" y="${Y(x)-6}" text-anchor="middle">${x}</text><text x="${cx}" y="${H-8}" text-anchor="middle">${lab}</text>`});
+    svg.innerHTML=s2;
+    svg.setAttribute('aria-label',`Alaska housing units permitted each month, ${TC.month(d[0])} to ${TC.month(d[d.length-1])}: `+v.join(', '));
+  }
+
+  TC.load().then(({auto,manual})=>{
+    const m=manual||FALLBACK_MAN;
+    anchorage(m.anchorage);rents(m.rents.rows);
+    permits((auto&&auto.series.AKBPPRIV)||FALLBACK_PERMITS);
+    TC.fillLatest(auto);
+  });
 })();
 </script>
 </body>

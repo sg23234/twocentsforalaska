@@ -217,54 +217,60 @@ footer{border-top:4px double var(--ink)}
 </footer>
 </div>
 
+<script src="/js/tc.js"></script>
 <script>
 (function(){
-  // --- Long-run population (Census, thousands)
-  const pop=[302.583,315.510,324.464,330.543,341.063,376.170,400.969,403.436,404.766,402.753,405.315,418.491,449.606,488.417,513.702,532.495,544.268,539.309,541.983,547.159,553.120,569.273,587.073,596.993,600.624,601.345,604.918,608.846,615.205,619.500,627.963,633.714,642.337,648.414,659.286,666.946,675.302,680.300,687.455,698.895,713.982,722.349,730.810,737.626,737.075,738.430,742.575,740.983,736.624,733.603,732.906,734.590,733.659,734.654,736.537,737.270];
-  (function(){
-    const svg=document.getElementById('c-pop'),W=680,H=280,L=44,R=56,T=16,B=26,y0=250,y1=800,n=pop.length;
-    const X=i=>L+i/(n-1)*(W-L-R), Y=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B), yr=i=>1970+i;
+  // Long-run population is live from FRED (AKPOP, Census estimates, thousands).
+  // Components and boroughs come from /data/manual/population.json.
+  // The arrays here are a snapshot used only if those files can't load.
+  const FALLBACK={start:1970,pop:[302.583,315.510,324.464,330.543,341.063,376.170,400.969,403.436,404.766,402.753,405.315,418.491,449.606,488.417,513.702,532.495,544.268,539.309,541.983,547.159,553.120,569.273,587.073,596.993,600.624,601.345,604.918,608.846,615.205,619.500,627.963,633.714,642.337,648.414,659.286,666.946,675.302,680.300,687.455,698.895,713.982,722.349,730.810,737.626,737.075,738.430,742.575,740.983,736.624,733.603,732.906,734.590,733.659,734.654,736.537,737.270],nat:3389,mig:-1740,boro:[["Matanuska-Susitna",9.20,117412],["Kenai Peninsula",4.21,61327],["Southeast Fairbanks",3.51,7051],["Fairbanks North Star",1.48,97083],["Denali",0.74,1631],["Copper River",0.42,2628],["Prince of Wales-Hyder",0.26,5768],["Petersburg",-0.09,3395],["Anchorage",-0.70,289221],["Bethel",-2.59,18188],["Juneau",-3.38,31182],["Ketchikan Gateway",-4.18,13377],["Wrangell",-4.32,2037],["North Slope",-4.41,10555],["Yakutat",-4.48,633],["Nome",-4.56,9598],["Kusilvak",-4.83,7973],["Sitka",-5.17,8032],["Kodiak Island",-5.26,12430],["Aleutians West",-5.28,4963],["Hoonah-Angoon",-5.97,2228],["Haines*",-6.87,2447],["Yukon-Koyukuk",-6.87,4988],["Bristol Bay",-6.99,787],["Chugach",-7.42,6594],["Northwest Arctic",-7.48,7231],["Dillingham",-8.32,4469],["Lake and Peninsula",-8.77,1352],["Skagway",-8.93,1134],["Aleutians East",-12.32,3023]]};
+
+  function drawPop(start,pop){
+    const svg=document.getElementById('c-pop'),W=680,H=280,L=44,R=56,T=16,B=26,n=pop.length;
+    const y0=250,y1=Math.max(800,Math.ceil(Math.max(...pop)/100)*100);
+    const X=i=>L+i/(n-1)*(W-L-R), Y=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B);
     let s='';
-    // era bands
     [[1974,1977,'Pipeline'],[1986,1988,'Oil bust'],[2015,2018,'AK recession']].forEach(([a,b,l])=>{
-      s+=`<rect x="${X(a-1970)}" y="${T}" width="${X(b-1970)-X(a-1970)}" height="${H-T-B}" fill="var(--rule)" opacity=".55"/><text x="${(X(a-1970)+X(b-1970))/2}" y="${T+11}" text-anchor="middle">${l}</text>`});
-    [300,400,500,600,700,800].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`});
-    [1970,1980,1990,2000,2010,2020].forEach(y=>{s+=`<text x="${X(y-1970)}" y="${H-8}" text-anchor="middle">${y}</text>`});
+      s+=`<rect x="${X(a-start)}" y="${T}" width="${X(b-start)-X(a-start)}" height="${H-T-B}" fill="var(--rule)" opacity=".55"/><text x="${(X(a-start)+X(b-start))/2}" y="${T+11}" text-anchor="middle">${l}</text>`});
+    for(let t=300;t<=y1;t+=100){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t}</text>`}
+    for(let y=Math.ceil(start/10)*10;y<=start+n-1;y+=10){s+=`<text x="${X(y-start)}" y="${H-8}" text-anchor="middle">${y}</text>`}
     const pts=pop.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
     s+=`<polygon points="${X(0)},${Y(y0)} ${pts} ${X(n-1)},${Y(y0)}" fill="var(--accent)" opacity=".10"/>`;
     s+=`<polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>`;
-    const pk=46; s+=`<circle cx="${X(pk)}" cy="${Y(pop[pk])}" r="3" fill="var(--ink)"/><text class="strong" x="${X(pk)-6}" y="${Y(pop[pk])-8}" text-anchor="end">2016 peak 742.6</text>`;
-    s+=`<circle cx="${X(n-1)}" cy="${Y(pop[n-1])}" r="3.6" fill="var(--accent)"/><text class="strong" x="${X(n-1)+6}" y="${Y(pop[n-1])+14}">737.3</text>`;
+    const pk=pop.indexOf(Math.max(...pop));
+    if(pk<n-1) s+=`<circle cx="${X(pk)}" cy="${Y(pop[pk])}" r="3" fill="var(--ink)"/><text class="strong" x="${X(pk)-6}" y="${Y(pop[pk])-8}" text-anchor="end">${start+pk} peak ${pop[pk].toFixed(1)}</text>`;
+    s+=`<circle cx="${X(n-1)}" cy="${Y(pop[n-1])}" r="3.6" fill="var(--accent)"/><text class="strong" x="${X(n-1)+6}" y="${Y(pop[n-1])+14}">${pop[n-1].toFixed(1)}</text>`;
     svg.innerHTML=s;
-  })();
+    svg.setAttribute('aria-label',`Alaska resident population ${start} to ${start+n-1}, thousands, from ${pop[0].toFixed(1)} to ${pop[n-1].toFixed(1)}`+(pk<n-1?`, with a peak of ${pop[pk].toFixed(1)} in ${start+pk}`:''));
+  }
 
-  // --- Components waterfall
-  (function(){
-    const svg=document.getElementById('c-comp'),W=320,H=210,L=46,R=12,T=18,B=34;
-    const items=[['Natural\nincrease',0,3389,'var(--accent)'],['Net\nmigration',3389,1649,'var(--series2)'],['Total\nchange',0,1649,'var(--ink)']];
-    const y0=0,y1=4000,Y=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B),bw=56,gap=(W-L-R-3*bw)/3;
-    let s='';[0,1000,2000,3000,4000].forEach(t=>{s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`});
-    const lab=['+3,389','−1,740','+1,649'];
+  function drawComp(nat,mig){
+    const svg=document.getElementById('c-comp'),W=320,H=210,L=46,R=12,T=18,B=34,tot=nat+mig;
+    const items=[['Natural\nincrease',0,nat,'var(--accent)'],['Net\nmigration',nat,tot,'var(--series2)'],['Total\nchange',0,tot,'var(--ink)']];
+    const vals=[0,nat,tot],step=1000,y0=Math.floor(Math.min(...vals)/step)*step,y1=Math.max(step,Math.ceil(Math.max(...vals)*1.1/step)*step);
+    const Y=v=>T+(1-(v-y0)/(y1-y0))*(H-T-B),bw=56,gap=(W-L-R-3*bw)/3;
+    let s='';for(let t=y0;t<=y1;t+=step){s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${L-6}" y="${Y(t)+3.5}" text-anchor="end">${t.toLocaleString()}</text>`}
+    const lab=[nat,mig,tot].map(v=>TC.signed(v));
     items.forEach(([name,a,b,c],i)=>{
-      const x=L+gap/2+i*(bw+gap), top=Y(Math.max(a,b)), h=Math.abs(Y(a)-Y(b));
+      const x=L+gap/2+i*(bw+gap), top=Y(Math.max(a,b)), h=Math.max(1,Math.abs(Y(a)-Y(b)));
       s+=`<rect x="${x}" y="${top}" width="${bw}" height="${h}" fill="${c}"/>`;
       s+=`<text class="strong" x="${x+bw/2}" y="${top-5}" text-anchor="middle">${lab[i]}</text>`;
       name.split('\n').forEach((w,k)=>{s+=`<text x="${x+bw/2}" y="${H-B+14+k*12}" text-anchor="middle">${w}</text>`});
-      if(i===0) s+=`<line x1="${x+bw}" x2="${x+bw+gap}" y1="${Y(3389)}" y2="${Y(3389)}" stroke="var(--muted)" stroke-dasharray="2 2"/>`;
+      if(i===0) s+=`<line x1="${x+bw}" x2="${x+bw+gap}" y1="${Y(nat)}" y2="${Y(nat)}" stroke="var(--muted)" stroke-dasharray="2 2"/>`;
     });
     svg.innerHTML=s;
-  })();
+    svg.setAttribute('aria-label',`Natural increase ${lab[0]}, net migration ${lab[1]}, total change ${lab[2]}`);
+  }
 
-  // --- Borough ranking
-  const boro=[["Matanuska-Susitna",9.20,117412],["Kenai Peninsula",4.21,61327],["Southeast Fairbanks",3.51,7051],["Fairbanks North Star",1.48,97083],["Denali",0.74,1631],["Copper River",0.42,2628],["Prince of Wales-Hyder",0.26,5768],["Petersburg",-0.09,3395],["Anchorage",-0.70,289221],["Bethel",-2.59,18188],["Juneau",-3.38,31182],["Ketchikan Gateway",-4.18,13377],["Wrangell",-4.32,2037],["North Slope",-4.41,10555],["Yakutat",-4.48,633],["Nome",-4.56,9598],["Kusilvak",-4.83,7973],["Sitka",-5.17,8032],["Kodiak Island",-5.26,12430],["Aleutians West",-5.28,4963],["Hoonah-Angoon",-5.97,2228],["Haines*",-6.87,2447],["Yukon-Koyukuk",-6.87,4988],["Bristol Bay",-6.99,787],["Chugach",-7.42,6594],["Northwest Arctic",-7.48,7231],["Dillingham",-8.32,4469],["Lake and Peninsula",-8.77,1352],["Skagway",-8.93,1134],["Aleutians East",-12.32,3023]];
-  (function(){
-    const svg=document.getElementById('c-boro'),W=680,T=22,row=20.5,LBL=160,RPAD=70,x0=-16,x1=11;
+  function drawBoro(boro){
+    const svg=document.getElementById('c-boro'),W=680,T=22,row=20.5,LBL=160,RPAD=70;
+    const x0=Math.min(-16,Math.floor(Math.min(...boro.map(b=>b[1]))/4)*4),x1=Math.max(11,Math.ceil(Math.max(...boro.map(b=>b[1]))/4)*4+2);
     const X=v=>LBL+(v-x0)/(x1-x0)*(W-LBL-RPAD);
     let s='';
-    [-12,-8,-4,0,4,8].forEach(t=>{s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T-6}" y2="${T+boro.length*row}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${X(t)}" y="${T-9}" text-anchor="middle">${t>0?'+':''}${t}%</text>`});
+    for(let t=Math.ceil(x0/4)*4;t<=x1;t+=4){s+=`<line class="grid" x1="${X(t)}" x2="${X(t)}" y1="${T-6}" y2="${T+boro.length*row}" ${t===0?'style="stroke:var(--muted)"':''}/><text x="${X(t)}" y="${T-9}" text-anchor="middle">${t>0?'+':''}${t}%</text>`}
     boro.forEach(([n,v,p],i)=>{
       const y=T+i*row, c=v>=0?'var(--accent)':'var(--series2)', a=X(Math.min(0,v)), w=Math.abs(X(v)-X(0));
-      s+=`<text class="ink" x="${LBL-8}" y="${y+row/2+3.5}" text-anchor="end">${n}</text>`;
+      s+=`<text class="ink" x="${LBL-8}" y="${y+row/2+3.5}" text-anchor="end">${TC.esc(n)}</text>`;
       s+=`<rect x="${a}" y="${y+3}" width="${Math.max(w,1)}" height="${row-6}" fill="${c}"/>`;
       const lx=v>=0?X(v)+5:X(v)-5, an=v>=0?'start':'end';
       s+=`<text class="strong" x="${lx}" y="${y+row/2+3.5}" text-anchor="${an}">${v>0?'+':''}${v.toFixed(1)}%</text>`;
@@ -272,7 +278,17 @@ footer{border-top:4px double var(--ink)}
     });
     svg.setAttribute('viewBox',`0 0 ${W} ${T+boro.length*row+8}`);
     svg.innerHTML=s;
-  })();
+  }
+
+  TC.load().then(({auto,manual})=>{
+    const s=auto&&auto.series.AKPOP;
+    if(s){const i0=s.dates.findIndex(d=>d>='1970');drawPop(+s.dates[i0].slice(0,4),s.values.slice(i0));}
+    else drawPop(FALLBACK.start,FALLBACK.pop);
+    const c=manual&&manual.components;
+    drawComp(c?c.natural_increase:FALLBACK.nat,c?c.net_migration:FALLBACK.mig);
+    drawBoro(manual&&manual.boroughs?manual.boroughs.rows:FALLBACK.boro);
+    TC.fillLatest(auto);
+  });
 })();
 </script>
 </body>

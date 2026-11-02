@@ -1,0 +1,37 @@
+{
+ "_about": "Hand-maintained numbers for the Cost of Living page. Edit and commit; the chart redraws and the AI summary is redrafted on the next refresh run. The category chart is live from the BLS API and is not kept here.",
+ "annual_inflation": {
+  "label": "Annual average CPI change, percent",
+  "source": "AK DOLWD CPI tables from BLS data (official annual averages)",
+  "as_of": "2025",
+  "next_update": "Feb 2027, after BLS publishes 2026 annual averages",
+  "note": "Kept by hand because the keyless BLS API does not return official annual averages, and October 2025 prices were never collected during the federal shutdown.",
+  "years": [
+   "2019",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ],
+  "urban_alaska": [
+   1.4,
+   -1.1,
+   4.9,
+   8.1,
+   1.5,
+   2.2,
+   2.1
+  ],
+  "us_city_average": [
+   1.8,
+   1.2,
+   4.7,
+   8.0,
+   4.1,
+   2.9,
+   2.6
+  ]
+ }
+}

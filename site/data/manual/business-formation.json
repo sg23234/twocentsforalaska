@@ -1,0 +1,29 @@
+{
+ "_about": "Hand-maintained numbers for the New Business Formation page. Edit and commit; the chart redraws and the AI summary is redrafted on the next refresh run. Monthly applications are live from FRED (BABATOTALNSAAK) and are not kept here.",
+ "openings_closings": {
+  "label": "Jobs gained at opening establishments and lost at closing establishments, Alaska, seasonally adjusted",
+  "source": "BLS Business Employment Dynamics",
+  "as_of": "Q4 2024",
+  "quarters": [
+   "Q4 2023",
+   "Q1 2024",
+   "Q2 2024",
+   "Q3 2024",
+   "Q4 2024"
+  ],
+  "jobs_gained_openings": [
+   4425,
+   3807,
+   3798,
+   3420,
+   4208
+  ],
+  "jobs_lost_closings": [
+   3700,
+   4008,
+   4047,
+   4055,
+   3793
+  ]
+ }
+}

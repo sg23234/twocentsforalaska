@@ -1,0 +1,120 @@
+{
+ "_about": "Hand-maintained numbers for the Housing page. Edit and commit; the charts and table redraw and the AI summary is redrafted on the next refresh run. Building permits and the mortgage rate are live from FRED and are not kept here.",
+ "anchorage": {
+  "label": "Anchorage, from the Municipality's Housing Action Plan",
+  "source": "Municipality of Anchorage, 2026 progress report",
+  "as_of": "2025",
+  "next_update": "2027 progress report",
+  "years": [
+   "2018",
+   "2019",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ],
+  "median_december_listing_price": [
+   299999,
+   311500,
+   328450,
+   374500,
+   439000,
+   425000,
+   447625,
+   457250
+  ],
+  "rental_vacancy_rate_pct": [
+   6.2,
+   5.2,
+   5.7,
+   4.3,
+   3.2,
+   4.1,
+   4.6,
+   5.6
+  ],
+  "vacancy_target_pct": 5
+ },
+ "rents": {
+  "label": "Median adjusted rent for a two-bedroom apartment (utilities included), March survey",
+  "source": "AK DOLWD rental market survey",
+  "as_of": "Mar 2026",
+  "next_update": "Mar 2027 survey",
+  "columns": [
+   "area",
+   "rent_2026",
+   "rent_2025",
+   "vacancy_2026_pct"
+  ],
+  "rows": [
+   [
+    "Bethel",
+    2030,
+    2075,
+    8.0
+   ],
+   [
+    "Kodiak Island",
+    1728,
+    1713,
+    7.8
+   ],
+   [
+    "Anchorage",
+    1720,
+    1680,
+    4.9
+   ],
+   [
+    "Fairbanks North Star",
+    1710,
+    1676,
+    10.1
+   ],
+   [
+    "Juneau",
+    1708,
+    1661,
+    4.1
+   ],
+   [
+    "Ketchikan Gateway",
+    1671,
+    1600,
+    8.4
+   ],
+   [
+    "Sitka",
+    1579,
+    1564,
+    5.8
+   ],
+   [
+    "Matanuska-Susitna",
+    1567,
+    1389,
+    3.5
+   ],
+   [
+    "Valdez-Cordova",
+    1393,
+    1375,
+    4.2
+   ],
+   [
+    "Kenai Peninsula",
+    1336,
+    1203,
+    5.8
+   ],
+   [
+    "Wrangell-Petersburg",
+    1288,
+    1235,
+    1.1
+   ]
+  ]
+ }
+}

@@ -225,15 +225,20 @@ def fetch_dolwd(names, tries=3):
                 raise RuntimeError(f"DOLWD CSV: {e}") from e
             time.sleep(10 * (attempt + 1))
     found = {}
-    for row in csv.DictReader(io.StringIO(text)):
-        name = (row.get("industry") or "").strip()
-        if name not in names or (row.get("adjusted") or "0").strip() != "0":
+    reader = csv.DictReader(io.StringIO(text))
+    for raw in reader:
+        row = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items()}
+        name = row.get("industry", "")
+        if name not in names or row.get("adjusted", "0") not in ("0", ""):
             continue
-        year = row["year"].strip()
+        year = row.get("year", "")
         for i, m in enumerate(MONTHS):
-            v = (row.get(f"emp_{m}") or "").replace(",", "").strip()
+            v = row.get(f"emp_{m}", "").replace(",", "")
             if v:
                 found.setdefault(name, {})[f"{year}-{i + 1:02d}-01"] = float(v)
+    if not found:
+        snippet = " ".join(text[:300].split())
+        raise RuntimeError(f"DOLWD CSV had none of the expected rows; it began: {snippet!r}")
     out = {}
     for name, obs in found.items():
         d = sorted(obs)
