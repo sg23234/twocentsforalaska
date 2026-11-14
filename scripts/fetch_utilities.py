@@ -21,6 +21,7 @@ OUT = ROOT / "electricity-utilities.json"
 REGIONS = ROOT / "manual" / "electricity-regions.json"
 ZIP = "https://www.eia.gov/electricity/data/eia861/zip/f861{}.zip"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
+DIAG = {}
 SECTORS = ["residential", "commercial", "industrial", "transportation", "total"]
 
 
@@ -55,6 +56,7 @@ def read_sales(zf, year):
     """Return list of dicts from Sales_Ult_Cust and Sales_Ult_Cust_CS sheets."""
     import openpyxl
     out = []
+    DIAG["files"] = [n for n in zf.namelist() if n.lower().endswith((".xlsx", ".xls"))]
     names = [n for n in zf.namelist() if re.search(r"sales_ult_cust(_cs)?_\d{4}\.xlsx$", n, re.I)]
     if not names:
         raise RuntimeError(f"{year}: no Sales_Ult_Cust sheet in {zf.namelist()[:30]}")
@@ -63,6 +65,7 @@ def read_sales(zf, year):
         ws = wb.worksheets[0]
         rows = ws.iter_rows(values_only=True)
         top, mid, low = next(rows), next(rows), next(rows)   # three header rows
+        DIAG.setdefault("headers", {})[name] = [list(map(str, top[:12])), list(map(str, mid[:12])), list(map(str, low[:12]))]
         cols, group, sub = [], "", ""
         for i in range(len(low)):
             if top[i]: group = str(top[i]).strip().lower()
@@ -90,6 +93,7 @@ def read_sales(zf, year):
                 for k, i in m.items():
                     d[f"{s}_{k}"] = num(r[i]) if i is not None else None
             out.append(d)
+        DIAG.setdefault("ak_rows", {})[name] = sum(1 for x in out if x["state"] == "AK")
     return out
 
 
@@ -192,6 +196,7 @@ def main():
         "regions": dict(sorted(reg.items())),
         "unassigned": sorted(u["utility"] for u in utils if u["region"] == "Unassigned"),
         "utilities": utils,
+        "diagnostics": DIAG,
     }
     old = json.loads(OUT.read_text()) if OUT.exists() else {}
     if {k: v for k, v in old.items() if k != "fetched"} == data:
