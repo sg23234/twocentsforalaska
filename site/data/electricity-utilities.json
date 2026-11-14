@@ -5,18 +5,18 @@
  "prev_year": 2024,
  "units": "cents per kWh (revenue / sales)",
  "us": {
-  "residential": 16.19,
-  "commercial": 11.02,
-  "industrial": 7.24,
-  "transportation": 7.8,
-  "total": 11.89
+  "residential": 17.38,
+  "commercial": 13.23,
+  "industrial": 8.67,
+  "transportation": 14.16,
+  "total": 13.67
  },
  "us_prev": {
-  "residential": 15.41,
-  "commercial": 10.46,
-  "industrial": 6.91,
-  "transportation": 7.13,
-  "total": 11.31
+  "residential": 16.57,
+  "commercial": 12.52,
+  "industrial": 8.34,
+  "transportation": 12.87,
+  "total": 13.02
  },
  "states": {
   "AK": {
@@ -35,10 +35,10 @@
   },
   "WA": {
    "residential": 13.19,
-   "commercial": 10.93,
-   "industrial": 6.34,
+   "commercial": 11.04,
+   "industrial": 7.06,
    "transportation": 12.24,
-   "total": 10.9
+   "total": 11.18
   }
  },
  "regions": {
@@ -48,7 +48,7 @@
    "utilities": 6,
    "customers": 3088,
    "sales_mwh": 40976,
-   "prev_avg_price": 59.01,
+   "prev_avg_price": 59.0,
    "change_pct": -1.1
   },
   "Copper River / Chugach": {
@@ -57,71 +57,71 @@
    "utilities": 4,
    "customers": 5897,
    "sales_mwh": 112658,
-   "prev_avg_price": 28.77,
-   "change_pct": -0.9
+   "prev_avg_price": 28.79,
+   "change_pct": -1.0
   },
   "Interior villages": {
-   "avg_price": 39.97,
+   "avg_price": 39.98,
    "commercial_price": null,
    "utilities": 7,
    "customers": 1488,
    "sales_mwh": 24982,
-   "prev_avg_price": 54.08,
-   "change_pct": -26.1
+   "prev_avg_price": 62.25,
+   "change_pct": -35.8
   },
   "Kodiak / Aleutians": {
    "avg_price": 24.06,
-   "commercial_price": null,
+   "commercial_price": 19.28,
    "utilities": 10,
    "customers": 8452,
    "sales_mwh": 203405,
-   "prev_avg_price": 23.51,
-   "change_pct": 2.3
+   "prev_avg_price": 24.0,
+   "change_pct": 0.2
   },
   "North Slope": {
    "avg_price": 22.29,
-   "commercial_price": null,
+   "commercial_price": 23.94,
    "utilities": 3,
    "customers": 3403,
    "sales_mwh": 127861,
-   "prev_avg_price": 20.37,
-   "change_pct": 9.4
+   "prev_avg_price": 21.58,
+   "change_pct": 3.3
   },
   "Northwest Arctic / Bering Strait": {
    "avg_price": 44.25,
-   "commercial_price": null,
+   "commercial_price": 48.59,
    "utilities": 5,
    "customers": 4243,
    "sales_mwh": 57272,
-   "prev_avg_price": 44.03,
+   "prev_avg_price": 44.01,
    "change_pct": 0.5
   },
   "Railbelt": {
    "avg_price": 22.25,
-   "commercial_price": null,
+   "commercial_price": 19.94,
    "utilities": 5,
    "customers": 272483,
    "sales_mwh": 4444470,
-   "prev_avg_price": 21.4,
-   "change_pct": 4.0
+   "prev_avg_price": 21.36,
+   "change_pct": 4.2
   },
   "Southeast": {
    "avg_price": 16.61,
-   "commercial_price": null,
+   "commercial_price": 17.36,
    "utilities": 11,
    "customers": 47559,
    "sales_mwh": 896402,
-   "prev_avg_price": 15.4,
-   "change_pct": 7.9
+   "prev_avg_price": 15.27,
+   "change_pct": 8.8
   },
   "Yukon-Kuskokwim": {
    "avg_price": 59.0,
-   "commercial_price": null,
+   "commercial_price": 53.47,
    "utilities": 8,
    "customers": 12740,
    "sales_mwh": 138538,
-   "prev_avg_price": 61.93,
-   "change_pct": -4.7
+   "prev_avg_price": 62.04,
+   "change_pct": -4.9
   }
  },
  "unassigned": [],
