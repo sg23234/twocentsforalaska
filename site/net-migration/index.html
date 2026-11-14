@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Net migration · Two Cents for Alaska</title>
+<meta name="description" content="People moving to Alaska minus people leaving. Migration is the main way a small state&#x27;s workforce grows or shrinks quickly, and Alaska has lost more people">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#FFFFFF;--ink:#14213D;--body:#33405C;--muted:#5A6580;--rule:#C9D2DE;--tile:#F6F8FB;--accent:#B42318;
+--display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
+.kick{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mast{display:flex;flex-direction:column;align-items:center;gap:10px;padding-block:28px 18px;border-bottom:4px double var(--ink);text-align:center}
+.mast nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent} .mast nav a:hover{border-color:var(--accent)}
+.name{font-family:var(--display);font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.head{display:flex;flex-direction:column;gap:12px}
+.head h1{font-size:clamp(34px,5vw,50px);line-height:1.05}
+.head .lead{margin:0;font-size:18px;color:var(--body);max-width:68ch}
+.badge{display:inline-block;width:fit-content;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ink)}
+.badge.planned{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.stat{background:var(--tile);border:1px solid var(--rule);border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:2px;min-height:118px}
+.stat b{font-family:var(--display);font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;order:2;margin-top:auto}
+.stat b.na{color:var(--rule)}
+.stat span{font-size:13px;font-weight:600;color:var(--ink);order:1}
+.stat em{font-style:normal;font-size:12.5px;color:var(--muted);order:3}
+.sec{display:flex;flex-direction:column;gap:18px}
+.sech{display:flex;flex-direction:column;gap:4px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sech h2{font-size:28px} .sech p{margin:0;font-size:15px;color:var(--body);max-width:72ch}
+figure.chart{margin:0;display:flex;flex-direction:column;gap:8px}
+figure.chart h3{font-size:19px}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:12.5px;color:var(--muted)}
+svg text{font-family:var(--sans)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.tbl{overflow-x:auto;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{text-align:left;padding:9px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body)}
+th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+.plan,.textblock{border:1px dashed var(--muted);border-radius:4px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+.textblock{border-style:solid;border-color:var(--rule)}
+.plan h3,.textblock h3{font-size:18px} .plan ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;color:var(--body)}
+.textblock p{margin:0;color:var(--body)}
+.notes ul,.sources ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;color:var(--body);font-size:14.5px}
+.note{margin:0;font-size:13px;color:var(--muted)}
+footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<!-- Built by scripts/build_pages.py. Edit the PAGES entry there, not this file. -->
+<div class="wrap">
+<header class="mast">
+  <nav aria-label="Sections"><a href="/#micro">Micro</a><a href="/#macro">Macro</a><a href="/sources/">Sources</a></nav>
+  <a class="name" href="/">Two Cents for Alaska</a>
+</header>
+<div class="head">
+  <span class="kick">Micro · Labor market</span>
+  <h1>Net migration</h1>
+  <span class="badge">Partly live · draft</span>
+  <p class="lead">People moving to Alaska minus people leaving. Migration is the main way a small state&#x27;s workforce grows or shrinks quickly, and Alaska has lost more people than it gained for more than a decade.</p>
+</div>
+<div class="stats"><div class="stat"><b>−1,740</b><span>Net migration</span><em>July 2024 to July 2025</em></div><div class="stat"><b>+3,389</b><span>Natural increase</span><em>Births minus deaths, same year</em></div><div class="stat" data-spec="{&quot;file&quot;:&quot;population&quot;,&quot;series&quot;:&quot;AKPOP&quot;,&quot;scale&quot;:1000}"><b>—</b><span data-t="Population, {year}">Population, {year}</span><em data-t="Census Bureau estimate, July 1">Census Bureau estimate, July 1</em></div><div class="stat"><b>13</b><span>Years in a row of net out-migration</span><em>Through 2025 · AK DOLWD</em></div></div>
+<section class="sec"><div class="sech"><h2>Population since 1970</h2><p>Resident population, Census Bureau estimates.</p></div><figure class="chart" data-chart="{&quot;kind&quot;:&quot;line&quot;,&quot;series&quot;:[{&quot;file&quot;:&quot;population&quot;,&quot;id&quot;:&quot;AKPOP&quot;,&quot;label&quot;:&quot;Alaska&quot;,&quot;scale&quot;:1000}],&quot;title&quot;:&quot;Alaska population&quot;,&quot;zero&quot;:false}"><h3>Alaska population</h3><div class="plot"></div><figcaption data-t="July 1 estimates. Latest: {date}.">July 1 estimates. Latest: {date}.</figcaption></figure></section><section class="sec"><div class="sech"><h2>Change by borough, 2020–2025</h2><p>Percent change in population, with 2025 population.</p></div><figure class="chart"><h3>Population change, 2020–2025</h3><div class="plot"><svg viewBox="0 0 680 908" role="img" aria-label="Population change, 2020–2025"><text x="200" y="23" text-anchor="end" font-size="13" fill="#14213D">Matanuska-Susitna</text><rect x="210" y="11" width="291.2" height="16" fill="#1F5FA8"></rect><text x="509.2" y="23" font-size="13" font-weight="600" fill="#14213D">+9.2%</text><text x="200" y="53" text-anchor="end" font-size="13" fill="#14213D">Kenai Peninsula</text><rect x="210" y="41" width="133.3" height="16" fill="#1F5FA8"></rect><text x="351.3" y="53" font-size="13" font-weight="600" fill="#14213D">+4.2%</text><text x="200" y="83" text-anchor="end" font-size="13" fill="#14213D">Southeast Fairbanks</text><rect x="210" y="71" width="111.1" height="16" fill="#1F5FA8"></rect><text x="329.1" y="83" font-size="13" font-weight="600" fill="#14213D">+3.5%</text><text x="200" y="113" text-anchor="end" font-size="13" fill="#14213D">Fairbanks North Star</text><rect x="210" y="101" width="46.9" height="16" fill="#1F5FA8"></rect><text x="264.9" y="113" font-size="13" font-weight="600" fill="#14213D">+1.5%</text><text x="200" y="143" text-anchor="end" font-size="13" fill="#14213D">Denali</text><rect x="210" y="131" width="23.4" height="16" fill="#1F5FA8"></rect><text x="241.4" y="143" font-size="13" font-weight="600" fill="#14213D">+0.7%</text><text x="200" y="173" text-anchor="end" font-size="13" fill="#14213D">Copper River</text><rect x="210" y="161" width="13.3" height="16" fill="#1F5FA8"></rect><text x="231.3" y="173" font-size="13" font-weight="600" fill="#14213D">+0.4%</text><text x="200" y="203" text-anchor="end" font-size="13" fill="#14213D">Prince of Wales-Hyder</text><rect x="210" y="191" width="8.2" height="16" fill="#1F5FA8"></rect><text x="226.2" y="203" font-size="13" font-weight="600" fill="#14213D">+0.3%</text><text x="200" y="233" text-anchor="end" font-size="13" fill="#14213D">Petersburg</text><rect x="210" y="221" width="2.8" height="16" fill="#C2610C"></rect><text x="220.8" y="233" font-size="13" font-weight="600" fill="#14213D">−0.1%</text><text x="200" y="263" text-anchor="end" font-size="13" fill="#14213D">Anchorage</text><rect x="210" y="251" width="22.2" height="16" fill="#C2610C"></rect><text x="240.2" y="263" font-size="13" font-weight="600" fill="#14213D">−0.7%</text><text x="200" y="293" text-anchor="end" font-size="13" fill="#14213D">Bethel</text><rect x="210" y="281" width="82.0" height="16" fill="#C2610C"></rect><text x="300.0" y="293" font-size="13" font-weight="600" fill="#14213D">−2.6%</text><text x="200" y="323" text-anchor="end" font-size="13" fill="#14213D">Juneau</text><rect x="210" y="311" width="107.0" height="16" fill="#C2610C"></rect><text x="325.0" y="323" font-size="13" font-weight="600" fill="#14213D">−3.4%</text><text x="200" y="353" text-anchor="end" font-size="13" fill="#14213D">Ketchikan Gateway</text><rect x="210" y="341" width="132.3" height="16" fill="#C2610C"></rect><text x="350.3" y="353" font-size="13" font-weight="600" fill="#14213D">−4.2%</text><text x="200" y="383" text-anchor="end" font-size="13" fill="#14213D">Wrangell</text><rect x="210" y="371" width="136.8" height="16" fill="#C2610C"></rect><text x="354.8" y="383" font-size="13" font-weight="600" fill="#14213D">−4.3%</text><text x="200" y="413" text-anchor="end" font-size="13" fill="#14213D">North Slope</text><rect x="210" y="401" width="139.6" height="16" fill="#C2610C"></rect><text x="357.6" y="413" font-size="13" font-weight="600" fill="#14213D">−4.4%</text><text x="200" y="443" text-anchor="end" font-size="13" fill="#14213D">Yakutat</text><rect x="210" y="431" width="141.8" height="16" fill="#C2610C"></rect><text x="359.8" y="443" font-size="13" font-weight="600" fill="#14213D">−4.5%</text><text x="200" y="473" text-anchor="end" font-size="13" fill="#14213D">Nome</text><rect x="210" y="461" width="144.4" height="16" fill="#C2610C"></rect><text x="362.4" y="473" font-size="13" font-weight="600" fill="#14213D">−4.6%</text><text x="200" y="503" text-anchor="end" font-size="13" fill="#14213D">Kusilvak</text><rect x="210" y="491" width="152.9" height="16" fill="#C2610C"></rect><text x="370.9" y="503" font-size="13" font-weight="600" fill="#14213D">−4.8%</text><text x="200" y="533" text-anchor="end" font-size="13" fill="#14213D">Sitka</text><rect x="210" y="521" width="163.7" height="16" fill="#C2610C"></rect><text x="381.7" y="533" font-size="13" font-weight="600" fill="#14213D">−5.2%</text><text x="200" y="563" text-anchor="end" font-size="13" fill="#14213D">Kodiak Island</text><rect x="210" y="551" width="166.5" height="16" fill="#C2610C"></rect><text x="384.5" y="563" font-size="13" font-weight="600" fill="#14213D">−5.3%</text><text x="200" y="593" text-anchor="end" font-size="13" fill="#14213D">Aleutians West</text><rect x="210" y="581" width="167.1" height="16" fill="#C2610C"></rect><text x="385.1" y="593" font-size="13" font-weight="600" fill="#14213D">−5.3%</text><text x="200" y="623" text-anchor="end" font-size="13" fill="#14213D">Hoonah-Angoon</text><rect x="210" y="611" width="189.0" height="16" fill="#C2610C"></rect><text x="407.0" y="623" font-size="13" font-weight="600" fill="#14213D">−6.0%</text><text x="200" y="653" text-anchor="end" font-size="13" fill="#14213D">Haines*</text><rect x="210" y="641" width="217.5" height="16" fill="#C2610C"></rect><text x="435.5" y="653" font-size="13" font-weight="600" fill="#14213D">−6.9%</text><text x="200" y="683" text-anchor="end" font-size="13" fill="#14213D">Yukon-Koyukuk</text><rect x="210" y="671" width="217.5" height="16" fill="#C2610C"></rect><text x="435.5" y="683" font-size="13" font-weight="600" fill="#14213D">−6.9%</text><text x="200" y="713" text-anchor="end" font-size="13" fill="#14213D">Bristol Bay</text><rect x="210" y="701" width="221.3" height="16" fill="#C2610C"></rect><text x="439.3" y="713" font-size="13" font-weight="600" fill="#14213D">−7.0%</text><text x="200" y="743" text-anchor="end" font-size="13" fill="#14213D">Chugach</text><rect x="210" y="731" width="234.9" height="16" fill="#C2610C"></rect><text x="452.9" y="743" font-size="13" font-weight="600" fill="#14213D">−7.4%</text><text x="200" y="773" text-anchor="end" font-size="13" fill="#14213D">Northwest Arctic</text><rect x="210" y="761" width="236.8" height="16" fill="#C2610C"></rect><text x="454.8" y="773" font-size="13" font-weight="600" fill="#14213D">−7.5%</text><text x="200" y="803" text-anchor="end" font-size="13" fill="#14213D">Dillingham</text><rect x="210" y="791" width="263.4" height="16" fill="#C2610C"></rect><text x="481.4" y="803" font-size="13" font-weight="600" fill="#14213D">−8.3%</text><text x="200" y="833" text-anchor="end" font-size="13" fill="#14213D">Lake and Peninsula</text><rect x="210" y="821" width="277.6" height="16" fill="#C2610C"></rect><text x="495.6" y="833" font-size="13" font-weight="600" fill="#14213D">−8.8%</text><text x="200" y="863" text-anchor="end" font-size="13" fill="#14213D">Skagway</text><rect x="210" y="851" width="282.7" height="16" fill="#C2610C"></rect><text x="500.7" y="863" font-size="13" font-weight="600" fill="#14213D">−8.9%</text><text x="200" y="893" text-anchor="end" font-size="13" fill="#14213D">Aleutians East</text><rect x="210" y="881" width="390.0" height="16" fill="#C2610C"></rect><text x="608.0" y="893" font-size="13" font-weight="600" fill="#14213D">−12.3%</text></svg></div><figcaption>Source: AK DOLWD via Alaska Economic Trends, Apr 2026. Haines is 2021-2025 (marked *).</figcaption></figure></section><div class="plan"><h3>What this page will add</h3><ul><li>Net migration each year back to 1945 from the state&#x27;s components-of-change table.</li><li>Migration by age, from Permanent Fund Dividend applications, which show who moves in and out each year.</li></ul></div>
+<section class="sec notes"><div class="sech"><h2>Data notes</h2></div><ul><li>Alaska&#x27;s migration estimates come from Permanent Fund Dividend applications, an unusually good source that most states lack.</li></ul></section>
+<section class="sec sources"><div class="sech"><h2>Sources</h2></div><ul><li><a href="https://live.laborstats.alaska.gov/data-pages/alaska-population-estimates" target="_blank" rel="noopener">Alaska DOLWD, population estimates</a></li><li><a href="https://live.laborstats.alaska.gov/sites/default/files/trends/apr26art2.pdf" target="_blank" rel="noopener">Alaska Economic Trends, Apr 2026: population change in the 2020s</a></li><li><a href="https://fred.stlouisfed.org/series/AKPOP" target="_blank" rel="noopener">FRED, AKPOP</a></li></ul></section>
+<footer>Independent and nonpartisan. Built from public data. <a href="/sources/">All sources</a> · <a href="/">Front page</a></footer>
+</div>
+<script src="/js/ind.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ANC air cargo · Two Cents for Alaska</title>
+<meta name="description" content="Anchorage sits on the great-circle route between Asia and North America, and most trans-Pacific freighters stop there to refuel. Ted Stevens Anchorage Inte">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#FFFFFF;--ink:#14213D;--body:#33405C;--muted:#5A6580;--rule:#C9D2DE;--tile:#F6F8FB;--accent:#B42318;
+--display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
+.kick{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mast{display:flex;flex-direction:column;align-items:center;gap:10px;padding-block:28px 18px;border-bottom:4px double var(--ink);text-align:center}
+.mast nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent} .mast nav a:hover{border-color:var(--accent)}
+.name{font-family:var(--display);font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.head{display:flex;flex-direction:column;gap:12px}
+.head h1{font-size:clamp(34px,5vw,50px);line-height:1.05}
+.head .lead{margin:0;font-size:18px;color:var(--body);max-width:68ch}
+.badge{display:inline-block;width:fit-content;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ink)}
+.badge.planned{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.stat{background:var(--tile);border:1px solid var(--rule);border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:2px;min-height:118px}
+.stat b{font-family:var(--display);font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;order:2;margin-top:auto}
+.stat b.na{color:var(--rule)}
+.stat span{font-size:13px;font-weight:600;color:var(--ink);order:1}
+.stat em{font-style:normal;font-size:12.5px;color:var(--muted);order:3}
+.sec{display:flex;flex-direction:column;gap:18px}
+.sech{display:flex;flex-direction:column;gap:4px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sech h2{font-size:28px} .sech p{margin:0;font-size:15px;color:var(--body);max-width:72ch}
+figure.chart{margin:0;display:flex;flex-direction:column;gap:8px}
+figure.chart h3{font-size:19px}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:12.5px;color:var(--muted)}
+svg text{font-family:var(--sans)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.tbl{overflow-x:auto;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{text-align:left;padding:9px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body)}
+th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+.plan,.textblock{border:1px dashed var(--muted);border-radius:4px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+.textblock{border-style:solid;border-color:var(--rule)}
+.plan h3,.textblock h3{font-size:18px} .plan ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;color:var(--body)}
+.textblock p{margin:0;color:var(--body)}
+.notes ul,.sources ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;color:var(--body);font-size:14.5px}
+.note{margin:0;font-size:13px;color:var(--muted)}
+footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<!-- Built by scripts/build_pages.py. Edit the PAGES entry there, not this file. -->
+<div class="wrap">
+<header class="mast">
+  <nav aria-label="Sections"><a href="/#micro">Micro</a><a href="/#macro">Macro</a><a href="/sources/">Sources</a></nav>
+  <a class="name" href="/">Two Cents for Alaska</a>
+</header>
+<div class="head">
+  <span class="kick">Micro · Physical volumes</span>
+  <h1>ANC air cargo</h1>
+  <span class="badge planned">Draft · figures updated by hand</span>
+  <p class="lead">Anchorage sits on the great-circle route between Asia and North America, and most trans-Pacific freighters stop there to refuel. Ted Stevens Anchorage International Airport handles more all-cargo landed weight than any other airport in the country.</p>
+</div>
+<div class="stats"><div class="stat"><b>#1</b><span>Rank among U.S. airports</span><em>All-cargo landed weight · 2025</em></div><div class="stat"><b>26.3</b><span>All-cargo landed weight</span><em>Billions of pounds · 2025, preliminary</em></div><div class="stat"><b>+3.2%</b><span>Change from 2024</span><em>Landed weight · FAA preliminary</em></div></div>
+<section class="sec"><div class="sech"><h2>Busiest U.S. cargo airports</h2><p>All-cargo landed weight, billions of pounds.</p></div><figure class="chart"><h3>Top U.S. all-cargo airports by landed weight, billions of pounds, preliminary</h3><div class="plot"><svg viewBox="0 0 680 158" role="img" aria-label="Top U.S. all-cargo airports by landed weight, billions of pounds, preliminary"><text x="200" y="23" text-anchor="end" font-size="13" fill="#14213D">Anchorage</text><rect x="210" y="11" width="390.0" height="16" fill="#B42318"></rect><text x="608.0" y="23" font-size="13" font-weight="600" fill="#14213D">26.28</text><text x="200" y="53" text-anchor="end" font-size="13" fill="#14213D">Louisville</text><rect x="210" y="41" width="291.9" height="16" fill="#1F5FA8"></rect><text x="509.9" y="53" font-size="13" font-weight="600" fill="#14213D">19.67</text><text x="200" y="83" text-anchor="end" font-size="13" fill="#14213D">Memphis</text><rect x="210" y="71" width="241.4" height="16" fill="#1F5FA8"></rect><text x="459.4" y="83" font-size="13" font-weight="600" fill="#14213D">16.27</text><text x="200" y="113" text-anchor="end" font-size="13" fill="#14213D">Miami</text><rect x="210" y="101" width="154.0" height="16" fill="#1F5FA8"></rect><text x="372.0" y="113" font-size="13" font-weight="600" fill="#14213D">10.38</text><text x="200" y="143" text-anchor="end" font-size="13" fill="#14213D">Cincinnati</text><rect x="210" y="131" width="126.9" height="16" fill="#1F5FA8"></rect><text x="344.9" y="143" font-size="13" font-weight="600" fill="#14213D">8.55</text></svg></div><figcaption>2025. Source: FAA CY2025 all-cargo airports. Next: FAA CY2026 preliminary, about Sep 2027.</figcaption></figure></section><div class="plan"><h3>What this page will add</h3><ul><li>Monthly cargo tonnage and freighter landings from the Alaska International Airport System reports.</li><li>Cargo-related jobs and fuel sales at the airport.</li></ul></div>
+<section class="sec notes"><div class="sech"><h2>Data notes</h2></div><ul><li>Landed weight is the maximum weight of the aircraft that land, the FAA&#x27;s standard measure. Anchorage&#x27;s count includes freight that only stops to refuel.</li></ul></section>
+<section class="sec sources"><div class="sech"><h2>Sources</h2></div><ul><li><a href="https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/arp-CY2025-all-cargo-airports-preliminary.pdf" target="_blank" rel="noopener">FAA, CY2025 all-cargo airports, preliminary</a></li><li><a href="https://dot.alaska.gov/aias/" target="_blank" rel="noopener">Alaska International Airport System, reports</a></li></ul></section>
+<footer>Independent and nonpartisan. Built from public data. <a href="/sources/">All sources</a> · <a href="/">Front page</a></footer>
+</div>
+<script src="/js/ind.js"></script>
+</body>
+</html>

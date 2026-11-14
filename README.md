@@ -6,7 +6,9 @@ Source for **twocentsforalaska.org**, a monthly read on Alaska's economy.
 
 ```
 site/                        ← everything the public sees (Cloudflare Pages serves this folder)
-  index.html                 ← front page (Micro matrix + Macro)
+  index.html                 ← front page (Micro matrix + Macro); the matrix and Macro panels are built by build_pages.py
+  <slug>/index.html …        ← one page per front-page box (built by build_pages.py; electricity/ is hand-written)
+  js/ind.js                  ← fills live numbers and charts on those pages and the front-page tiles
   sources/index.html         ← where each front-page number comes from; add an entry when a tile goes live
   gdp/index.html …           ← one folder per dashboard → twocentsforalaska.org/gdp/ (12 total)
   js/tc.js                   ← shared page code: loads data, draws simple charts, shows the AI summary
@@ -17,6 +19,7 @@ site/                        ← everything the public sees (Cloudflare Pages se
 scripts/
   fetch_data.py              ← pulls live series (FRED, BLS, Alaska DOLWD, EIA) into site/data/
   write_summaries.py         ← drafts each page's summary with Claude and checks its numbers
+  build_pages.py             ← writes every box's page, the front-page matrix and /sources/ from the PAGES list
 .github/workflows/
   refresh-data.yml           ← runs both scripts on the 2nd and 16th, and whenever scripts,
                                manual data or pages change; commits the results
@@ -90,6 +93,10 @@ The front page's Electricity tile shows Alaska's average electricity price (all 
 
 ### 6. BLS key (optional)
 The CPI detail comes from the BLS API, which works without a key but allows only 25 requests a day per network, shared with everyone on GitHub's servers. If `status.json` ever shows a BLS limit message, register for a free key at data.bls.gov/registrationEngine and add it as a secret named `BLS_API_KEY`. A failed BLS fetch keeps the previous data and only fails the run once that data is 75 days old.
+
+## Box pages
+
+Every box on the front page links to its own page. They are built from the `PAGES` list in `scripts/build_pages.py`: title, intro, headline numbers, charts, tables, notes and sources. To change a page, edit its entry there and run `python3 scripts/build_pages.py` (the refresh job also runs it). Numbers from live data files are filled in by `site/js/ind.js` in the browser; tables and bars from hand-kept files are written at build time. Each page shows a status badge: live, partly live, updated by hand, or in development.
 
 ## Day-to-day
 

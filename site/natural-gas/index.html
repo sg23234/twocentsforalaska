@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Railbelt natural gas · Two Cents for Alaska</title>
+<meta name="description" content="Southcentral Alaska heats homes and generates most of its electricity with natural gas from Cook Inlet. As older fields decline, what utilities pay for gas">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#FFFFFF;--ink:#14213D;--body:#33405C;--muted:#5A6580;--rule:#C9D2DE;--tile:#F6F8FB;--accent:#B42318;
+--display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
+.kick{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mast{display:flex;flex-direction:column;align-items:center;gap:10px;padding-block:28px 18px;border-bottom:4px double var(--ink);text-align:center}
+.mast nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent} .mast nav a:hover{border-color:var(--accent)}
+.name{font-family:var(--display);font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.head{display:flex;flex-direction:column;gap:12px}
+.head h1{font-size:clamp(34px,5vw,50px);line-height:1.05}
+.head .lead{margin:0;font-size:18px;color:var(--body);max-width:68ch}
+.badge{display:inline-block;width:fit-content;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ink)}
+.badge.planned{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.stat{background:var(--tile);border:1px solid var(--rule);border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:2px;min-height:118px}
+.stat b{font-family:var(--display);font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;order:2;margin-top:auto}
+.stat b.na{color:var(--rule)}
+.stat span{font-size:13px;font-weight:600;color:var(--ink);order:1}
+.stat em{font-style:normal;font-size:12.5px;color:var(--muted);order:3}
+.sec{display:flex;flex-direction:column;gap:18px}
+.sech{display:flex;flex-direction:column;gap:4px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sech h2{font-size:28px} .sech p{margin:0;font-size:15px;color:var(--body);max-width:72ch}
+figure.chart{margin:0;display:flex;flex-direction:column;gap:8px}
+figure.chart h3{font-size:19px}
+figure.chart svg{width:100%;height:auto;display:block}
+figure.chart figcaption{font-size:12.5px;color:var(--muted)}
+svg text{font-family:var(--sans)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.tbl{overflow-x:auto;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{text-align:left;padding:9px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body)}
+th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+.plan,.textblock{border:1px dashed var(--muted);border-radius:4px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+.textblock{border-style:solid;border-color:var(--rule)}
+.plan h3,.textblock h3{font-size:18px} .plan ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;color:var(--body)}
+.textblock p{margin:0;color:var(--body)}
+.notes ul,.sources ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;color:var(--body);font-size:14.5px}
+.note{margin:0;font-size:13px;color:var(--muted)}
+footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<!-- Built by scripts/build_pages.py. Edit the PAGES entry there, not this file. -->
+<div class="wrap">
+<header class="mast">
+  <nav aria-label="Sections"><a href="/#micro">Micro</a><a href="/#macro">Macro</a><a href="/sources/">Sources</a></nav>
+  <a class="name" href="/">Two Cents for Alaska</a>
+</header>
+<div class="head">
+  <span class="kick">Micro · Input costs</span>
+  <h1>Railbelt natural gas</h1>
+  <span class="badge planned">Draft · figures updated by hand</span>
+  <p class="lead">Southcentral Alaska heats homes and generates most of its electricity with natural gas from Cook Inlet. As older fields decline, what utilities pay for gas, and whether they can get enough of it, is one of the biggest input costs for Railbelt households and businesses.</p>
+</div>
+<div class="stats"><div class="stat"><b>~$11</b><span>Utility cost of gas</span><em>Enstar, per thousand cubic feet · Sep 2026</em></div><div class="stat"><b>$24</b><span>Asian LNG spot price</span><em>Japan–Korea benchmark, per Mcf · Sep 2026</em></div><div class="stat"><b>70%+</b><span>Share of Southcentral power from gas</span><em>2026 · ISER via KBBI</em></div><div class="stat"><b>18 days</b><span>Possible winter shortfall</span><em>Enstar estimate if deliveries don&#x27;t rise · Sep 2026</em></div></div>
+<section class="sec"><div class="sech"><h2>Gas prices</h2><p>What the Railbelt&#x27;s gas utility pays now, compared with the price of imported liquefied natural gas.</p></div><figure class="chart"><h3>Natural gas price, dollars per thousand cubic feet</h3><div class="plot"><svg viewBox="0 0 680 68" role="img" aria-label="Natural gas price, dollars per thousand cubic feet"><text x="200" y="23" text-anchor="end" font-size="13" fill="#14213D">Enstar current cost</text><rect x="210" y="11" width="178.8" height="16" fill="#1F5FA8"></rect><text x="396.8" y="23" font-size="13" font-weight="600" fill="#14213D">$11</text><text x="200" y="53" text-anchor="end" font-size="13" fill="#14213D">Asian LNG spot</text><rect x="210" y="41" width="390.0" height="16" fill="#1F5FA8"></rect><text x="608.0" y="53" font-size="13" font-weight="600" fill="#14213D">$24</text></svg></div><figcaption>As of Sep 2026. Source: KDLL/KBBI, Sep 11, 2026.</figcaption></figure></section><div class="plan"><h3>What this page will add</h3><ul><li>Monthly Alaska natural gas prices from EIA (city-gate, commercial and residential), updated automatically.</li><li>Cook Inlet production by month from the Alaska Oil and Gas Conservation Commission.</li><li>Enstar&#x27;s gas cost adjustment each year, and LNG import contracts as they are signed.</li></ul></div>
+<section class="sec notes"><div class="sech"><h2>Data notes</h2></div><ul><li>Gas prices here are utility costs, not customer bills. Enstar adjusts rates each summer.</li><li>Figures are kept by hand in data/manual/energy.json until the EIA series is wired in.</li></ul></section>
+<section class="sec sources"><div class="sech"><h2>Sources</h2></div><ul><li><a href="https://www.kbbi.org/2026-09-11/what-to-know-about-the-cook-inlet-natural-gas-crunch" target="_blank" rel="noopener">KDLL/KBBI, What to know about the Cook Inlet natural gas crunch, Sep 2026</a></li><li><a href="https://alaskapublic.org/news/economy/energy/2026-07-28/southcentral-alaska-gas-utility-says-bills-likely-to-rise-amid-supply-shortage" target="_blank" rel="noopener">Alaska Public Media, Enstar says bills likely to rise, Jul 2026</a></li></ul></section>
+<footer>Independent and nonpartisan. Built from public data. <a href="/sources/">All sources</a> · <a href="/">Front page</a></footer>
+</div>
+<script src="/js/ind.js"></script>
+</body>
+</html>
