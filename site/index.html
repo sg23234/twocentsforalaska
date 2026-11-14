@@ -49,6 +49,7 @@ a.tile:hover{border-color:var(--ink)}
 .tile .val{font-family:var(--display);font-size:28px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums;margin-top:auto}
 .tile .val.na,.headline b.na,.sub b{color:var(--rule)}
 .tile .meta{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.tile .cmp{font-size:13px;font-weight:600;color:var(--muted)}
 .chg.up{color:var(--up)} .chg.down{color:var(--down)}
 @media (max-width:720px){.row{grid-template-columns:1fr}}
 
@@ -91,7 +92,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <div class="row">
       <div class="row-head"><h3>Input costs</h3><span>What every business has to buy</span></div>
       <div class="tiles">
-        <div class="tile"><span class="lbl">Electricity</span><span class="val na">—</span><span class="meta"><span>per kWh</span><span></span></span></div>
+        <div class="tile" id="t-elec"><span class="lbl">Electricity</span><span class="val na" data-v>—</span><span class="cmp" data-c>— × U.S.</span><span class="meta"><span>commercial, ¢/kWh</span><span data-d></span></span></div>
         <div class="tile"><span class="lbl">Railbelt natural gas</span><span class="val na">—</span><span class="meta"><span>per Mcf</span><span></span></span></div>
         <div class="tile"><span class="lbl">Rural heating fuel</span><span class="val na">—</span><span class="meta"><span>per gallon</span><span></span></span></div>
         <div class="tile"><span class="lbl">Freight rate index</span><span class="val na">—</span><span class="meta"><span>Seattle–Anchorage</span><span></span></span></div>
@@ -184,5 +185,23 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
 <footer>Independent and nonpartisan. Built from public data. Layout draft · placeholder values</footer>
 
 </div>
+<script>
+/* Electricity tile: commercial price, Alaska vs U.S., from the EIA refresh (data/energy.json). */
+(function () {
+  const t = document.getElementById('t-elec'); if (!t) return;
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  fetch('/data/energy.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(d => {
+    const ak = d && d.series['AK-COM'], us = d && d.series['US-COM']; if (!ak || !us) return;
+    const usBy = new Map(us.dates.map((x, i) => [x, us.values[i]]));
+    for (let i = ak.dates.length - 1; i >= 0; i--) {          // latest month both have
+      const u = usBy.get(ak.dates[i]); if (u == null) continue;
+      const v = t.querySelector('[data-v]'); v.textContent = ak.values[i].toFixed(1) + '¢'; v.classList.remove('na');
+      t.querySelector('[data-c]').textContent = (ak.values[i] / u).toFixed(1) + '× U.S.';
+      t.querySelector('[data-d]').textContent = MON[+ak.dates[i].slice(5, 7) - 1] + ' ' + ak.dates[i].slice(0, 4);
+      return;
+    }
+  }).catch(() => {});
+})();
+</script>
 </body>
 </html>

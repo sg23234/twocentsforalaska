@@ -33,6 +33,7 @@ jobs:
         continue-on-error: true   # still commit whatever did update; the last step fails the run
         env:
           BLS_API_KEY: ${{ secrets.BLS_API_KEY }}   # optional
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}   # needed for the electricity price
         run: python3 scripts/fetch_data.py
 
       - name: Draft AI summaries

@@ -36,7 +36,8 @@ The loop: **GitHub Action runs the scripts → new JSON committed → Cloudflare
 | Key sectors | Payroll jobs by industry (Alaska DOLWD) | Visitors, air cargo |
 | Spending | Public and private payrolls (DOLWD) | State budget (UGF) and scale charts |
 | State capacity | — | All charts, incl. the capital-asset running total |
-| Energy, Connectivity | — | All charts |
+| Energy | Commercial & residential electricity price, AK vs U.S. (EIA API; front-page tile) | All charts |
+| Connectivity | — | All charts |
 | Education | — (no charts) | — |
 
 Payroll jobs come from DOLWD's own CSV, not FRED: for recent months the federal (BLS) numbers on FRED differ from DOLWD's monthly estimates, and DOLWD's are the ones Alaska news reports.
@@ -80,7 +81,13 @@ How it stays honest: the script sends Claude only what the page shows (tiles, ca
 
 To preview what Claude would be sent for a page, without calling it: `python3 scripts/write_summaries.py --dry-run housing`.
 
-### 5. BLS key (optional)
+### 5. EIA key (needed for the electricity tile, about 2 minutes)
+The front page's Electricity tile shows Alaska's average commercial electricity price and how it compares with the U.S., from EIA's monthly retail sales data. EIA's API needs a free key.
+1. Register at **eia.gov/opendata/register.php**. The key arrives by email.
+2. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**. Name: `EIA_API_KEY`. Paste the key. Save.
+3. **Actions → Refresh data → Run workflow.** `site/data/energy.json` appears and the tile fills in. Until then the tile shows "—" and the rest of the run is unaffected.
+
+### 6. BLS key (optional)
 The CPI detail comes from the BLS API, which works without a key but allows only 25 requests a day per network, shared with everyone on GitHub's servers. If `status.json` ever shows a BLS limit message, register for a free key at data.bls.gov/registrationEngine and add it as a secret named `BLS_API_KEY`. A failed BLS fetch keeps the previous data and only fails the run once that data is 75 days old.
 
 ## Day-to-day

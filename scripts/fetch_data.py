@@ -9,6 +9,9 @@ Sources
           carries just twice a year. Works without a key (25 requests a day,
           shared by everyone on GitHub's servers); add a free key as the
           BLS_API_KEY secret to make it dependable.
+  EIA   - the EIA API (v2). Retail electricity prices by state and sector.
+          Needs a free key as the EIA_API_KEY secret; without one the energy
+          dashboard is skipped with a warning and nothing else is affected.
 
 Standard library only, so GitHub Actions can run it without installing anything.
 
@@ -25,6 +28,7 @@ import json
 import os
 import sys
 import time
+import urllib.parse
 import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -33,6 +37,7 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "site" / "data"
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}"
 BLS_V1 = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 BLS_V2 = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
+EIA_RETAIL = "https://api.eia.gov/v2/electricity/retail-sales/data/"
 DOLWD_CES = "https://live.laborstats.alaska.gov/labforce/csv/000000/01/ces.csv"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
 
@@ -107,6 +112,14 @@ DASHBOARDS = {
         "State Government": s("Payroll jobs, state government", "jobs", "monthly", "level"),
         "Federal Government": s("Payroll jobs, federal government (civilian)", "jobs", "monthly", "level"),
     }},
+    # Retail electricity price, cents per kWh, keyed "<state>-<sector>".
+    # Sectors: COM commercial, RES residential, IND industrial, ALL all sectors.
+    "energy": {"source": "eia", "soft": True, "series": {
+        "AK-COM": s("Average retail electricity price, commercial, Alaska", "cents per kWh", "monthly", "rate"),
+        "US-COM": s("Average retail electricity price, commercial, United States", "cents per kWh", "monthly", "rate"),
+        "AK-RES": s("Average retail electricity price, residential, Alaska", "cents per kWh", "monthly", "rate", optional=True),
+        "US-RES": s("Average retail electricity price, residential, United States", "cents per kWh", "monthly", "rate", optional=True),
+    }},
     "spending": {"source": "dolwd", "soft": True, "series": {
         "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
         "Government": s("Payroll jobs, government", "jobs", "monthly", "level"),
@@ -119,6 +132,7 @@ DASHBOARDS = {
 SOURCE_NAMES = {
     "fred": "FRED, Federal Reserve Bank of St. Louis",
     "bls": "U.S. Bureau of Labor Statistics API",
+    "eia": "U.S. Energy Information Administration, Electric Power Monthly (retail sales)",
     "dolwd": "Alaska Department of Labor and Workforce Development, Current Employment Statistics",
 }
 
@@ -206,6 +220,50 @@ def fetch_bls(series_ids, tries=3):
     return out
 
 
+# ---------- EIA ----------
+
+def fetch_eia(series_ids, tries=3):
+    """Return {"<state>-<sector>": {"dates", "values"}} of monthly retail electricity
+    prices (cents/kWh) from the EIA API v2, from 2001 on."""
+    key = os.environ.get("EIA_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError("EIA_API_KEY secret not set (free key: eia.gov/opendata/register.php)")
+    wanted = [tuple(x.split("-", 1)) for x in series_ids]
+    params = [("api_key", key), ("frequency", "monthly"), ("data[0]", "price"), ("start", "2001-01"),
+              ("sort[0][column]", "period"), ("sort[0][direction]", "asc"), ("length", "5000")]
+    params += [("facets[stateid][]", st) for st in sorted({w[0] for w in wanted})]
+    params += [("facets[sectorid][]", sec) for sec in sorted({w[1] for w in wanted})]
+    url = EIA_RETAIL + "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers=UA)
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                res = json.loads(r.read().decode("utf-8"))
+            break
+        except Exception as e:
+            if attempt == tries - 1:
+                # Don't echo the URL: it carries the key.
+                raise RuntimeError(f"EIA request failed: {type(e).__name__}") from e
+            time.sleep(10 * (attempt + 1))
+    rows = (res.get("response") or {}).get("data") or []
+    if not rows:
+        raise RuntimeError(f"EIA returned no rows: {str(res.get('error') or res)[:200]}")
+    found = {}
+    for row in rows:
+        try:
+            v = float(row["price"])
+        except (TypeError, ValueError, KeyError):
+            continue
+        sid = f"{row.get('stateid')}-{row.get('sectorid')}"
+        if sid in series_ids:
+            found.setdefault(sid, {})[f"{row['period']}-01"] = v
+    out = {}
+    for sid, obs in found.items():
+        d = sorted(obs)
+        out[sid] = {"dates": d, "values": [obs[x] for x in d]}
+    return out
+
+
 # ---------- Alaska DOLWD ----------
 
 MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august",
@@ -266,6 +324,8 @@ def build(slug, cfg):
         got = fetch_bls(meta.keys())
     elif cfg["source"] == "dolwd":
         got = fetch_dolwd(set(meta))
+    elif cfg["source"] == "eia":
+        got = fetch_eia(set(meta))
     else:
         got = {}
         for sid, m in meta.items():
