@@ -67,6 +67,8 @@ DASHBOARDS = {
     "housing": {"source": "fred", "series": {
         "AKBPPRIV": s("New private housing units authorized by building permits, Alaska", "units", "monthly", "flow"),
         "MORTGAGE30US": s("30-year fixed mortgage rate, U.S. average (Freddie Mac)", "percent", "weekly", "rate"),
+        "AKSTHPI": s("All-transactions house price index, Alaska (FHFA)", "index 1980Q1=100", "quarterly", "index", optional=True),
+        "USSTHPI": s("All-transactions house price index, United States (FHFA)", "index 1980Q1=100", "quarterly", "index", optional=True),
     }},
     "cost-of-living": {"source": "bls", "soft": True, "series": {
         "CUURS49GSA0": s("CPI, all items, Urban Alaska", "index 1982-84=100", "bimonthly", "index"),
@@ -112,6 +114,14 @@ DASHBOARDS = {
         "State Government": s("Payroll jobs, state government", "jobs", "monthly", "level"),
         "Federal Government": s("Payroll jobs, federal government (civilian)", "jobs", "monthly", "level"),
     }},
+    "labor": {"source": "fred", "series": {
+        "LBSSA02": s("Labor force participation rate, Alaska", "percent", "monthly", "rate"),
+        "CIVPART": s("Labor force participation rate, United States", "percent", "monthly", "rate"),
+        "AKUR": s("Unemployment rate, Alaska", "percent", "monthly", "rate"),
+        "UNRATE": s("Unemployment rate, United States", "percent", "monthly", "rate"),
+        "SMU02000000500000003": s("Average hourly earnings, all private employees, Alaska", "dollars", "monthly", "level", optional=True),
+        "CES0500000003": s("Average hourly earnings, all private employees, United States", "dollars", "monthly", "level", optional=True),
+    }},
     # Retail electricity price, cents per kWh, keyed "<state>-<sector>".
     # Sectors: COM commercial, RES residential, IND industrial, ALL all sectors.
     "energy": {"source": "eia", "soft": True, "series": {
@@ -119,6 +129,7 @@ DASHBOARDS = {
         "US-ALL": s("Average retail electricity price, all sectors, United States", "cents per kWh", "monthly", "rate", optional=True),
         "AK-COM": s("Average retail electricity price, commercial, Alaska", "cents per kWh", "monthly", "rate", optional=True),
         "AK-RES": s("Average retail electricity price, residential, Alaska", "cents per kWh", "monthly", "rate", optional=True),
+        "AK-ALL:sales": s("Retail electricity sales, all sectors, Alaska", "million kWh", "monthly", "flow", optional=True),
     }},
     "spending": {"source": "dolwd", "soft": True, "series": {
         "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
@@ -228,8 +239,8 @@ def fetch_eia(series_ids, tries=3):
     key = os.environ.get("EIA_API_KEY", "").strip()
     if not key:
         raise RuntimeError("EIA_API_KEY secret not set (free key: eia.gov/opendata/register.php)")
-    wanted = [tuple(x.split("-", 1)) for x in series_ids]
-    params = [("api_key", key), ("frequency", "monthly"), ("data[0]", "price"), ("start", "2001-01"),
+    wanted = [tuple(x.split(":")[0].split("-", 1)) for x in series_ids]
+    params = [("api_key", key), ("frequency", "monthly"), ("data[0]", "price"), ("data[1]", "sales"), ("start", "2001-01"),
               ("sort[0][column]", "period"), ("sort[0][direction]", "asc"), ("length", "5000")]
     params += [("facets[stateid][]", st) for st in sorted({w[0] for w in wanted})]
     params += [("facets[sectorid][]", sec) for sec in sorted({w[1] for w in wanted})]
@@ -250,13 +261,14 @@ def fetch_eia(series_ids, tries=3):
         raise RuntimeError(f"EIA returned no rows: {str(res.get('error') or res)[:200]}")
     found = {}
     for row in rows:
-        try:
-            v = float(row["price"])
-        except (TypeError, ValueError, KeyError):
-            continue
-        sid = f"{row.get('stateid')}-{row.get('sectorid')}"
-        if sid in series_ids:
-            found.setdefault(sid, {})[f"{row['period']}-01"] = v
+        base = f"{row.get('stateid')}-{row.get('sectorid')}"
+        for field, sid in (("price", base), ("sales", base + ":sales")):
+            try:
+                v = float(row[field])
+            except (TypeError, ValueError, KeyError):
+                continue
+            if sid in series_ids:
+                found.setdefault(sid, {})[f"{row['period']}-01"] = v
     out = {}
     for sid, obs in found.items():
         d = sorted(obs)
