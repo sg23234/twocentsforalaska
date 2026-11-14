@@ -22,6 +22,7 @@ REGIONS = ROOT / "manual" / "electricity-regions.json"
 ZIP = "https://www.eia.gov/electricity/data/eia861/zip/f861{}.zip"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
 DIAG = {}
+STATES = {}
 SECTORS = ["residential", "commercial", "industrial", "transportation", "total"]
 
 
@@ -123,13 +124,19 @@ def load_year(year):
     return read_sales(zipfile.ZipFile(io.BytesIO(blob)), year)
 
 
+COMPARE_STATES = ["AK", "HI", "WA"]
+
+
 def summarize(rows, regions):
     ak = {}
     us = {s: [0.0, 0.0] for s in SECTORS}
+    st = {x: {s: [0.0, 0.0] for s in SECTORS} for x in COMPARE_STATES}
     for r in rows:
         for s in SECTORS:
             if r.get(f"{s}_rev") and r.get(f"{s}_mwh"):
                 us[s][0] += r[f"{s}_rev"]; us[s][1] += r[f"{s}_mwh"]
+                if r["state"] in st:
+                    st[r["state"]][s][0] += r[f"{s}_rev"]; st[r["state"]][s][1] += r[f"{s}_mwh"]
         if r["state"] != "AK":
             continue
         u = ak.setdefault(r["utility"], {"utility": r["utility"], "id": r["id"], "ownership": r["ownership"]})
@@ -142,6 +149,7 @@ def summarize(rows, regions):
         u["region"] = region_for(u["utility"], regions)
         for s in SECTORS:
             u[f"{s}_price"] = price(u.get(f"{s}_rev"), u.get(f"{s}_mwh"))
+    STATES.update({x: {s: price(*v) for s, v in d.items()} for x, d in st.items()})
     return ak, {s: price(*v) for s, v in us.items()}
 
 
@@ -174,6 +182,7 @@ def main():
     except Exception as e:
         print(f"::warning::EIA-861 {y-1}: {e}")
     ak, us = summarize(cur[1], regions)
+    states_cur = dict(STATES)
     ak_prev, us_prev = summarize(prev[1], regions) if prev else ({}, {})
     utils = []
     for u in sorted(ak.values(), key=lambda u: -(u.get("total_price") or 0)):
@@ -207,10 +216,11 @@ def main():
         "year": y, "prev_year": prev[0] if prev else None,
         "units": "cents per kWh (revenue / sales)",
         "us": us, "us_prev": us_prev,
+        "states": states_cur,
         "regions": dict(sorted(reg.items())),
         "unassigned": sorted(u["utility"] for u in utils if u["region"] == "Unassigned"),
         "utilities": utils,
-        "diagnostics": DIAG,
+        "rows_read": DIAG.get("ak_rows"),
     }
     old = json.loads(OUT.read_text()) if OUT.exists() else {}
     if {k: v for k, v in old.items() if k != "fetched"} == data:
