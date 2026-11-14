@@ -106,6 +106,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <span class="kick">Input costs</span>
     <h1>Electricity</h1>
     <div class="stats" id="stats"></div>
+    <p class="note" id="period" style="margin-top:14px;max-width:46ch"></p>
   </div>
   <figure style="margin:0">
     <div id="trend"></div>
@@ -191,6 +192,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       `<div><b>${ago >= 0 ? sgn((v / ak.values[ago] - 1) * 100) : '—'}</b><span>vs ${MON[+last.slice(5, 7) - 1]} ${+last.slice(0, 4) - 1}</span></div>` +
       (usNow ? `<div><b style="color:var(--us)">${fmt(v / usNow, 1)}×</b><span>U.S. average (${cents(usNow)})</span></div>` : '');
     trend(E);
+    $('period').textContent = `These figures are for ${month}, from EIA's monthly survey. Everything below uses ${U.year} annual averages, the most recent full year available.`;
 
     // ----- regions + table (EIA-861, annual) -----
     const Y = U.year, PY = U.prev_year;
