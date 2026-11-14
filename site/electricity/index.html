@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Electricity · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#14213D; --body:#33405C; --muted:#5A6580; --rule:#C9D2DE; --tile:#F6F8FB; --accent:#B42318;
+  --ak:#1F5FA8; --us:#C2610C;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
+.kick{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mast{display:flex;flex-direction:column;align-items:center;gap:10px;padding-block:28px 18px;border-bottom:4px double var(--ink);text-align:center}
+.mast nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+.mast nav a:hover{border-color:var(--accent)}
+.name{font-family:var(--display);font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.top{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.top h1{font-size:clamp(34px,5vw,52px);line-height:1.05;margin-bottom:14px}
+.stats{display:flex;flex-wrap:wrap;gap:14px 36px}
+.stats div{display:flex;flex-direction:column}
+.stats b{font-family:var(--display);font-size:42px;line-height:1.1;font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--muted)}
+.sec{display:flex;flex-direction:column;gap:16px}
+.sech{display:flex;flex-direction:column;gap:4px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sech h2{font-size:28px}
+.sech p{margin:0;font-size:15px;color:var(--body);max-width:72ch}
+.regions{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.reg{all:unset;box-sizing:border-box;cursor:pointer;background:var(--tile);border:1px solid var(--rule);border-radius:4px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-height:112px}
+.reg:hover{border-color:var(--ink)}
+.reg[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.reg[aria-pressed="true"] .m{color:#C3CCDB}
+.reg .n{font-size:13px;font-weight:600;line-height:1.3}
+.reg .v{font-family:var(--display);font-size:28px;font-weight:700;line-height:1.15;margin-top:auto;font-variant-numeric:tabular-nums}
+.reg .m{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.tbl{overflow-x:auto;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:720px}
+th{text-align:left;padding:10px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:middle}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+td.p{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink)}
+td.u{font-weight:600;color:var(--ink)}
+tr.g th{padding:18px 12px 6px;font-family:var(--display);font-size:19px;letter-spacing:0;text-transform:none;color:var(--ink);border-bottom:2px solid var(--ink)}
+tr.g th span{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);margin-left:10px}
+.note{margin:0;font-size:13px;color:var(--muted)}
+.calc{border:1px solid var(--rule);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.calc .row{display:flex;flex-wrap:wrap;gap:14px}
+.calc label{display:flex;flex-direction:column;gap:6px;flex:1 1 200px;font-size:13px;font-weight:600;color:var(--ink)}
+.calc select,.calc input{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--rule);border-radius:4px;background:#fff;color:var(--ink);min-height:44px}
+.calc .out{display:flex;flex-wrap:wrap;gap:24px;padding-top:14px;border-top:1px solid var(--rule)}
+.calc .out div{display:flex;flex-direction:column;flex:1 1 150px}
+.calc .out b{font-family:var(--display);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.calc .out span{font-size:13px;color:var(--muted)}
+svg text{font-family:var(--sans)}
+footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
+@media (max-width:760px){.top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav aria-label="Sections"><a href="/#micro">Micro</a><a href="/#macro">Macro</a><a href="/sources/">Sources</a></nav>
+  <a class="name" href="/">Two Cents for Alaska</a>
+</header>
+
+<section class="top">
+  <div>
+    <span class="kick">Input costs</span>
+    <h1>Electricity</h1>
+    <div class="stats" id="stats"></div>
+  </div>
+  <figure style="margin:0">
+    <div id="trend"></div>
+    <figcaption class="note" id="trendcap">Average retail price, all sectors, cents per kWh.</figcaption>
+  </figure>
+</section>
+
+<section class="sec" aria-labelledby="h-reg">
+  <div class="sech">
+    <span class="kick">By region</span>
+    <h2 id="h-reg">Electricity prices by region</h2>
+    <p id="regsub">Average price per kWh for each region and its utilities, and how each compares with the U.S. average. Select a region to show only its utilities.</p>
+  </div>
+  <div class="regions" id="regions"></div>
+  <div class="tbl"><table>
+    <thead><tr><th scope="col">#</th><th scope="col">Utility</th><th scope="col" class="r">¢/kWh</th><th scope="col" class="r">× U.S.</th><th scope="col" class="r" id="chgh">Change</th><th scope="col" class="r">Customers</th><th scope="col">vs U.S. average</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <p class="note" id="tblnote"></p>
+</section>
+
+<section class="sec" aria-labelledby="h-calc">
+  <div class="sech"><span class="kick">Your bill</span><h2 id="h-calc">Estimate a monthly bill</h2>
+    <p>Monthly use × the utility's average rate for that type of customer. Average rates include fixed charges spread over every kWh, so an actual bill will differ.</p></div>
+  <form class="calc" id="calc">
+    <div class="row">
+      <label>Utility<select id="c-u"></select></label>
+      <label>Customer type<select id="c-s"><option value="commercial">Business (commercial)</option><option value="residential">Household (residential)</option></select></label>
+      <label>Use per month, kWh<input id="c-k" type="number" min="0" step="50" value="1000" inputmode="numeric"></label>
+    </div>
+    <div class="out">
+      <div><b id="o-here" style="color:var(--ak)">—</b><span id="o-here-l">With this utility</span></div>
+      <div><b id="o-us" style="color:var(--us)">—</b><span>Same use at the U.S. average</span></div>
+      <div><b id="o-x">—</b><span>Difference</span></div>
+    </div>
+  </form>
+</section>
+
+<section class="sec" aria-labelledby="h-lad">
+  <div class="sech"><span class="kick">Comparisons</span><h2 id="h-lad">Where Alaska stands</h2>
+    <p>Average price per kWh, all sectors, on a log scale so the full range fits.</p></div>
+  <div id="ladder"></div>
+  <p class="note" id="ladnote"></p>
+</section>
+
+<p class="note" id="src"></p>
+<footer>Independent and nonpartisan. Built from public data. <a href="/sources/#electricity">Sources</a> · <a href="/">Front page</a></footer>
+</div>
+
+<script>
+window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-01","2001-03-01","2001-04-01","2001-05-01","2001-06-01","2001-07-01","2001-08-01","2001-09-01","2001-10-01","2001-11-01","2001-12-01","2002-01-01","2002-02-01","2002-03-01","2002-04-01","2002-05-01","2002-06-01","2002-07-01","2002-08-01","2002-09-01","2002-10-01","2002-11-01","2002-12-01","2003-01-01","2003-02-01","2003-03-01","2003-04-01","2003-05-01","2003-06-01","2003-07-01","2003-08-01","2003-09-01","2003-10-01","2003-11-01","2003-12-01","2004-01-01","2004-02-01","2004-03-01","2004-04-01","2004-05-01","2004-06-01","2004-07-01","2004-08-01","2004-09-01","2004-10-01","2004-11-01","2004-12-01","2005-01-01","2005-02-01","2005-03-01","2005-04-01","2005-05-01","2005-06-01","2005-07-01","2005-08-01","2005-09-01","2005-10-01","2005-11-01","2005-12-01","2006-01-01","2006-02-01","2006-03-01","2006-04-01","2006-05-01","2006-06-01","2006-07-01","2006-08-01","2006-09-01","2006-10-01","2006-11-01","2006-12-01","2007-01-01","2007-02-01","2007-03-01","2007-04-01","2007-05-01","2007-06-01","2007-07-01","2007-08-01","2007-09-01","2007-10-01","2007-11-01","2007-12-01","2008-01-01","2008-02-01","2008-03-01","2008-04-01","2008-05-01","2008-06-01","2008-07-01","2008-08-01","2008-09-01","2008-10-01","2008-11-01","2008-12-01","2009-01-01","2009-02-01","2009-03-01","2009-04-01","2009-05-01","2009-06-01","2009-07-01","2009-08-01","2009-09-01","2009-10-01","2009-11-01","2009-12-01","2010-01-01","2010-02-01","2010-03-01","2010-04-01","2010-05-01","2010-06-01","2010-07-01","2010-08-01","2010-09-01","2010-10-01","2010-11-01","2010-12-01","2011-01-01","2011-02-01","2011-03-01","2011-04-01","2011-05-01","2011-06-01","2011-07-01","2011-08-01","2011-09-01","2011-10-01","2011-11-01","2011-12-01","2012-01-01","2012-02-01","2012-03-01","2012-04-01","2012-05-01","2012-06-01","2012-07-01","2012-08-01","2012-09-01","2012-10-01","2012-11-01","2012-12-01","2013-01-01","2013-02-01","2013-03-01","2013-04-01","2013-05-01","2013-06-01","2013-07-01","2013-08-01","2013-09-01","2013-10-01","2013-11-01","2013-12-01","2014-01-01","2014-02-01","2014-03-01","2014-04-01","2014-05-01","2014-06-01","2014-07-01","2014-08-01","2014-09-01","2014-10-01","2014-11-01","2014-12-01","2015-01-01","2015-02-01","2015-03-01","2015-04-01","2015-05-01","2015-06-01","2015-07-01","2015-08-01","2015-09-01","2015-10-01","2015-11-01","2015-12-01","2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01","2020-07-01","2020-08-01","2020-09-01","2020-10-01","2020-11-01","2020-12-01","2021-01-01","2021-02-01","2021-03-01","2021-04-01","2021-05-01","2021-06-01","2021-07-01","2021-08-01","2021-09-01","2021-10-01","2021-11-01","2021-12-01","2022-01-01","2022-02-01","2022-03-01","2022-04-01","2022-05-01","2022-06-01","2022-07-01","2022-08-01","2022-09-01","2022-10-01","2022-11-01","2022-12-01","2023-01-01","2023-02-01","2023-03-01","2023-04-01","2023-05-01","2023-06-01","2023-07-01","2023-08-01","2023-09-01","2023-10-01","2023-11-01","2023-12-01","2024-01-01","2024-02-01","2024-03-01","2024-04-01","2024-05-01","2024-06-01","2024-07-01","2024-08-01","2024-09-01","2024-10-01","2024-11-01","2024-12-01","2025-01-01","2025-02-01","2025-03-01","2025-04-01","2025-05-01","2025-06-01","2025-07-01","2025-08-01","2025-09-01","2025-10-01","2025-11-01","2025-12-01","2026-01-01","2026-02-01","2026-03-01","2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01"],"values":[9.97,9.92,10.91,10.59,10.55,10.58,10.39,10.78,10.24,11.19,10.68,10.75,10.25,10.15,10.75,10.68,10.87,10.71,10.65,10.39,10.43,10.46,10.24,10.14,10.13,10.42,10.36,10.31,10.1,10.35,10.82,10.42,10.49,10.82,10.75,11.01,10.56,10.71,10.92,10.77,11.16,11.18,11.05,10.78,11.07,11.17,11.21,11.35,11.13,11.28,11.39,11.4,12.1,11.73,11.78,12.25,11.25,11.8,12.09,12.48,12.14,12.0,12.59,12.55,13.24,13.15,13.4,13.53,12.84,12.66,12.92,13.37,12.92,12.68,13.29,12.68,12.91,13.0,13.46,13.44,13.18,14.2,13.27,14.37,13.88,14.06,14.33,15.24,15.42,14.9,15.79,15.27,14.88,14.64,14.6,14.36,15.32,14.68,15.17,14.8,15.26,15.52,15.67,14.8,15.26,14.8,15.16,14.76,14.32,14.6,14.44,14.94,15.21,15.0,14.76,14.67,14.58,14.52,15.06,15.12,15.47,15.56,15.86,16.02,15.87,16.28,16.74,16.24,16.4,16.49,16.23,16.03,16.98,15.93,16.84,15.87,16.76,16.29,17.17,16.72,15.56,16.37,15.62,15.93,15.67,16.06,16.21,16.87,16.78,16.43,17.03,16.15,16.16,16.35,16.97,17.21,16.32,16.67,16.6,16.6,17.98,18.47,18.61,18.34,17.76,18.13,18.01,16.64,17.2,17.18,17.36,17.26,17.61,18.21,18.36,17.99,17.76,17.69,17.92,16.86,17.06,17.16,17.46,18.16,18.16,18.22,18.4,17.98,17.87,18.26,18.38,18.22,18.55,18.6,19.67,19.32,19.72,19.75,19.23,18.7,18.57,18.88,19.11,19.21,19.34,18.87,19.02,19.11,19.24,19.41,20.33,19.48,19.1,19.76,18.9,19.83,19.65,19.88,20.03,20.6,19.85,20.3,20.51,19.82,20.63,20.4,20.34,20.72,20.28,19.61,19.55,19.11,19.95,20.5,20.39,20.05,20.11,20.19,19.36,19.01,19.07,19.81,19.66,19.79,20.12,20.62,20.21,20.13,20.29,20.68,20.21,19.93,20.33,20.24,20.64,20.52,21.68,21.43,21.43,20.71,19.94,21.1,20.79,20.2,20.28,21.1,21.27,21.36,22.34,21.99,20.92,21.39,21.15,21.2,21.85,22.17,21.91,21.02,23.21,22.25,22.11,22.64,22.18,23.12,22.14,22.51,22.36,20.98,22.63,22.74,22.95,22.88,22.57,23.49,23.4,23.88,23.44,22.99,23.0,22.67,23.1,23.43,25.06,24.82,26.75,24.27,25.41,25.32]},"US-ALL":{"dates":["2001-01-01","2001-02-01","2001-03-01","2001-04-01","2001-05-01","2001-06-01","2001-07-01","2001-08-01","2001-09-01","2001-10-01","2001-11-01","2001-12-01","2002-01-01","2002-02-01","2002-03-01","2002-04-01","2002-05-01","2002-06-01","2002-07-01","2002-08-01","2002-09-01","2002-10-01","2002-11-01","2002-12-01","2003-01-01","2003-02-01","2003-03-01","2003-04-01","2003-05-01","2003-06-01","2003-07-01","2003-08-01","2003-09-01","2003-10-01","2003-11-01","2003-12-01","2004-01-01","2004-02-01","2004-03-01","2004-04-01","2004-05-01","2004-06-01","2004-07-01","2004-08-01","2004-09-01","2004-10-01","2004-11-01","2004-12-01","2005-01-01","2005-02-01","2005-03-01","2005-04-01","2005-05-01","2005-06-01","2005-07-01","2005-08-01","2005-09-01","2005-10-01","2005-11-01","2005-12-01","2006-01-01","2006-02-01","2006-03-01","2006-04-01","2006-05-01","2006-06-01","2006-07-01","2006-08-01","2006-09-01","2006-10-01","2006-11-01","2006-12-01","2007-01-01","2007-02-01","2007-03-01","2007-04-01","2007-05-01","2007-06-01","2007-07-01","2007-08-01","2007-09-01","2007-10-01","2007-11-01","2007-12-01","2008-01-01","2008-02-01","2008-03-01","2008-04-01","2008-05-01","2008-06-01","2008-07-01","2008-08-01","2008-09-01","2008-10-01","2008-11-01","2008-12-01","2009-01-01","2009-02-01","2009-03-01","2009-04-01","2009-05-01","2009-06-01","2009-07-01","2009-08-01","2009-09-01","2009-10-01","2009-11-01","2009-12-01","2010-01-01","2010-02-01","2010-03-01","2010-04-01","2010-05-01","2010-06-01","2010-07-01","2010-08-01","2010-09-01","2010-10-01","2010-11-01","2010-12-01","2011-01-01","2011-02-01","2011-03-01","2011-04-01","2011-05-01","2011-06-01","2011-07-01","2011-08-01","2011-09-01","2011-10-01","2011-11-01","2011-12-01","2012-01-01","2012-02-01","2012-03-01","2012-04-01","2012-05-01","2012-06-01","2012-07-01","2012-08-01","2012-09-01","2012-10-01","2012-11-01","2012-12-01","2013-01-01","2013-02-01","2013-03-01","2013-04-01","2013-05-01","2013-06-01","2013-07-01","2013-08-01","2013-09-01","2013-10-01","2013-11-01","2013-12-01","2014-01-01","2014-02-01","2014-03-01","2014-04-01","2014-05-01","2014-06-01","2014-07-01","2014-08-01","2014-09-01","2014-10-01","2014-11-01","2014-12-01","2015-01-01","2015-02-01","2015-03-01","2015-04-01","2015-05-01","2015-06-01","2015-07-01","2015-08-01","2015-09-01","2015-10-01","2015-11-01","2015-12-01","2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01","2020-07-01","2020-08-01","2020-09-01","2020-10-01","2020-11-01","2020-12-01","2021-01-01","2021-02-01","2021-03-01","2021-04-01","2021-05-01","2021-06-01","2021-07-01","2021-08-01","2021-09-01","2021-10-01","2021-11-01","2021-12-01","2022-01-01","2022-02-01","2022-03-01","2022-04-01","2022-05-01","2022-06-01","2022-07-01","2022-08-01","2022-09-01","2022-10-01","2022-11-01","2022-12-01","2023-01-01","2023-02-01","2023-03-01","2023-04-01","2023-05-01","2023-06-01","2023-07-01","2023-08-01","2023-09-01","2023-10-01","2023-11-01","2023-12-01","2024-01-01","2024-02-01","2024-03-01","2024-04-01","2024-05-01","2024-06-01","2024-07-01","2024-08-01","2024-09-01","2024-10-01","2024-11-01","2024-12-01","2025-01-01","2025-02-01","2025-03-01","2025-04-01","2025-05-01","2025-06-01","2025-07-01","2025-08-01","2025-09-01","2025-10-01","2025-11-01","2025-12-01","2026-01-01","2026-02-01","2026-03-01","2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01"],"values":[6.75,6.87,7.01,7.02,7.17,7.58,7.88,7.84,7.62,7.43,7.02,7.03,6.95,6.97,6.95,6.95,7.11,7.45,7.68,7.58,7.36,7.2,6.94,6.96,7.0,7.05,7.16,7.27,7.42,7.78,8.02,7.97,7.61,7.39,7.19,7.14,7.22,7.25,7.3,7.34,7.46,7.93,8.11,8.18,7.97,7.6,7.42,7.36,7.47,7.58,7.59,7.65,7.84,8.38,8.6,8.71,8.68,8.37,8.21,8.21,8.31,8.49,8.44,8.56,8.71,9.3,9.55,9.58,9.32,8.89,8.63,8.55,8.71,8.74,8.8,8.82,8.96,9.45,9.64,9.68,9.43,9.17,8.94,8.91,8.92,8.9,9.03,9.22,9.47,10.27,10.65,10.59,10.27,9.94,9.67,9.53,9.68,9.78,9.64,9.57,9.77,10.13,10.28,10.27,10.09,9.7,9.34,9.4,9.28,9.47,9.48,9.53,9.72,10.18,10.46,10.4,10.17,9.81,9.55,9.52,9.48,9.56,9.55,9.54,9.78,10.26,10.47,10.49,10.29,9.83,9.58,9.53,9.61,9.58,9.52,9.47,9.64,10.13,10.3,10.32,10.26,9.74,9.58,9.64,9.64,9.77,9.71,9.66,9.92,10.45,10.69,10.58,10.43,10.02,9.79,9.86,10.12,10.33,10.28,10.0,10.21,10.75,11.03,10.91,10.83,10.34,10.13,10.12,10.18,10.36,10.29,10.01,10.21,10.64,10.95,10.85,10.79,10.31,10.05,9.98,9.97,10.0,10.0,9.83,10.06,10.52,10.7,10.81,10.68,10.15,10.1,10.09,10.13,10.28,10.28,10.07,10.34,10.83,10.95,10.91,10.86,10.4,10.28,10.17,10.41,10.42,10.34,10.18,10.35,10.75,10.99,11.01,10.66,10.41,10.35,10.21,10.24,10.4,10.34,10.24,10.38,10.74,11.0,11.05,10.82,10.39,10.38,10.22,10.22,10.22,10.21,10.34,10.39,10.88,11.06,11.02,10.99,10.65,10.38,10.37,10.29,11.16,10.84,10.63,10.69,11.25,11.45,11.55,11.59,11.24,11.14,11.03,11.24,11.42,11.48,11.56,11.98,12.75,13.12,13.44,13.31,12.66,12.3,12.4,12.68,12.67,12.46,12.16,12.21,12.72,13.06,13.27,13.14,12.67,12.44,12.34,12.65,12.66,12.57,12.54,12.47,13.14,13.63,13.48,13.34,12.96,12.57,12.82,13.04,13.17,13.16,12.92,13.07,13.8,14.29,14.15,14.13,13.59,13.34,13.62,14.15,14.35,14.09,13.86,13.82,14.47,14.99,14.87]}}},"utilities":{"source":"U.S. Energy Information Administration, Form EIA-861 Annual Electric Power Industry Report (Sales to Ultimate Customers, long and short form)","url":"https://www.eia.gov/electricity/data/eia861/","year":2025,"prev_year":2024,"units":"cents per kWh (revenue / sales)","us":{"residential":16.19,"commercial":11.02,"industrial":7.24,"transportation":7.8,"total":11.89},"us_prev":{"residential":15.41,"commercial":10.46,"industrial":6.91,"transportation":7.13,"total":11.31},"states":{"AK":{"residential":25.6,"commercial":21.1,"industrial":19.36,"transportation":null,"total":22.98},"HI":{"residential":40.79,"commercial":36.37,"industrial":31.46,"transportation":null,"total":35.77},"WA":{"residential":13.19,"commercial":10.93,"industrial":6.34,"transportation":12.24,"total":10.9}},"regions":{"Bristol Bay":{"avg_price":58.35,"commercial_price":null,"utilities":6,"customers":3088,"sales_mwh":40976,"prev_avg_price":59.0,"change_pct":-1.1},"Copper River / Chugach":{"avg_price":28.5,"commercial_price":null,"utilities":4,"customers":5897,"sales_mwh":112658,"prev_avg_price":28.79,"change_pct":-1.0},"Interior":{"avg_price":39.44,"commercial_price":null,"utilities":6,"customers":1351,"sales_mwh":24635,"prev_avg_price":61.67,"change_pct":-36.0},"Kodiak / Aleutians":{"avg_price":24.06,"commercial_price":19.28,"utilities":10,"customers":8452,"sales_mwh":203405,"prev_avg_price":24.0,"change_pct":0.2},"North Slope":{"avg_price":22.29,"commercial_price":23.94,"utilities":3,"customers":3403,"sales_mwh":127861,"prev_avg_price":21.58,"change_pct":3.3},"Northwest Arctic / Bering Strait":{"avg_price":44.25,"commercial_price":48.59,"utilities":5,"customers":4243,"sales_mwh":57272,"prev_avg_price":44.01,"change_pct":0.5},"Railbelt":{"avg_price":22.25,"commercial_price":19.94,"utilities":5,"customers":272483,"sales_mwh":4444470,"prev_avg_price":21.36,"change_pct":4.2},"Southeast":{"avg_price":16.61,"commercial_price":17.36,"utilities":11,"customers":47559,"sales_mwh":896402,"prev_avg_price":15.27,"change_pct":8.8},"Unassigned":{"avg_price":77.81,"commercial_price":null,"utilities":1,"customers":137,"sales_mwh":347,"prev_avg_price":84.64,"change_pct":-8.1},"Yukon-Kuskokwim":{"avg_price":59.57,"commercial_price":53.47,"utilities":9,"customers":12877,"sales_mwh":139048,"prev_avg_price":62.17,"change_pct":-4.2}},"unassigned":["Gold Country Energy"],"utilities":[{"utility":"Napakiak Ircinraq Power Co","id":13211,"region":"Yukon-Kuskokwim","ownership":"Investor Owned","total_price":214.12,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":137,"sales_mwh":510,"prev_total_price":88.15,"change_pct":142.9},{"utility":"Middle Kuskokwim Elec Coop Inc","id":12485,"region":"Yukon-Kuskokwim","ownership":"Cooperative","total_price":161.83,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":179,"sales_mwh":830,"prev_total_price":130.86,"change_pct":23.7},{"utility":"G & K, Inc","id":6866,"region":"Kodiak / Aleutians","ownership":"Investor Owned","total_price":110.24,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":122,"sales_mwh":2002,"prev_total_price":118.07,"change_pct":-6.6},{"utility":"Chitina Electric Inc","id":3465,"region":"Copper River / Chugach","ownership":"Investor Owned","total_price":100.47,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":92,"sales_mwh":407,"prev_total_price":88.78,"change_pct":13.2},{"utility":"TDX Manley Generating LLC","id":56503,"region":"Interior","ownership":"Investor Owned","total_price":95.77,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":116,"sales_mwh":544,"prev_total_price":95.33,"change_pct":0.5},{"utility":"Hughes Power & Light Co","id":9000,"region":"Interior","ownership":"Investor Owned","total_price":90.18,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":58,"sales_mwh":450,"prev_total_price":89.79,"change_pct":0.4},{"utility":"Igiugig Electric Company","id":9192,"region":"Bristol Bay","ownership":"Political Subdivision","total_price":87.16,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":63,"sales_mwh":296,"prev_total_price":82.9,"change_pct":5.1},{"utility":"Aniak Light & Power Co Inc","id":4959,"region":"Yukon-Kuskokwim","ownership":"Investor Owned","total_price":81.73,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":181,"sales_mwh":2036,"prev_total_price":90.47,"change_pct":-9.7},{"utility":"Pedro Bay Village Council - (AK)","id":14633,"region":"Bristol Bay","ownership":"Municipal","total_price":81.03,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":48,"sales_mwh":232,"prev_total_price":80.91,"change_pct":0.1},{"utility":"Gold Country Energy","id":56739,"region":"Unassigned","ownership":"Investor Owned","total_price":77.81,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":137,"sales_mwh":347,"prev_total_price":84.64,"change_pct":-8.1},{"utility":"Tuntutuliak Comm Services Assn","id":19267,"region":"Yukon-Kuskokwim","ownership":"Cooperative","total_price":75.02,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":145,"sales_mwh":1009,"prev_total_price":63.33,"change_pct":18.5},{"utility":"McGrath Light & Power Co","id":12119,"region":"Interior","ownership":"Investor Owned","total_price":72.97,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":256,"sales_mwh":2107,"prev_total_price":68.97,"change_pct":5.8},{"utility":"Tanana Power Co Inc","id":18474,"region":"Interior","ownership":"Investor Owned","total_price":70.18,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":161,"sales_mwh":1247,"prev_total_price":50.56,"change_pct":38.8},{"utility":"City of Akutan - (AK)","id":24486,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":69.98,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":80,"sales_mwh":652,"prev_total_price":null,"change_pct":null},{"utility":"Akiachak Native Community Electric","id":192,"region":"Yukon-Kuskokwim","ownership":"Cooperative","total_price":69.8,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":274,"sales_mwh":1873,"prev_total_price":64.24,"change_pct":8.7},{"utility":"Kokhanok Village Council","id":10455,"region":"Bristol Bay","ownership":"Political Subdivision","total_price":67.71,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":99,"sales_mwh":484,"prev_total_price":91.21,"change_pct":-25.8},{"utility":"Galena Electric Utility","id":6915,"region":"Interior","ownership":"Municipal","total_price":67.22,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":394,"sales_mwh":4811,"prev_total_price":67.22,"change_pct":0.0},{"utility":"Atmautluak Tribal Utilities","id":878,"region":"Yukon-Kuskokwim","ownership":"Municipal","total_price":67.16,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":104,"sales_mwh":1042,"prev_total_price":66.0,"change_pct":1.8},{"utility":"Unalakleet Valley Elec Coop","id":40548,"region":"Northwest Arctic / Bering Strait","ownership":"Cooperative","total_price":66.38,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":385,"sales_mwh":3635,"prev_total_price":62.53,"change_pct":6.2},{"utility":"Inside Passage Elec Coop, Inc","id":18963,"region":"Southeast","ownership":"Cooperative","total_price":66.06,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1425,"sales_mwh":11375,"prev_total_price":63.18,"change_pct":4.6},{"utility":"City of Tenakee Springs - (AK)","id":18541,"region":"Southeast","ownership":"Municipal","total_price":64.32,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":175,"sales_mwh":419,"prev_total_price":64.71,"change_pct":-0.6},{"utility":"City of Saint Paul - (AK)","id":17898,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":64.3,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":210,"sales_mwh":3266,"prev_total_price":64.72,"change_pct":-0.6},{"utility":"Kuiggluum Kallugvia","id":9832,"region":"Yukon-Kuskokwim","ownership":"Investor Owned","total_price":62.76,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":241,"sales_mwh":2072,"prev_total_price":52.88,"change_pct":18.7},{"utility":"Naknek Electric Assn, Inc","id":13201,"region":"Bristol Bay","ownership":"Cooperative","total_price":61.97,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1100,"sales_mwh":19785,"prev_total_price":64.52,"change_pct":-4.0},{"utility":"City of Elfin Cove - (AK)","id":5721,"region":"Southeast","ownership":"Municipal","total_price":61.62,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":84,"sales_mwh":400,"prev_total_price":74.61,"change_pct":-17.4},{"utility":"I-N-N Electric Coop, Inc","id":9188,"region":"Bristol Bay","ownership":"Cooperative","total_price":58.77,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":293,"sales_mwh":2740,"prev_total_price":54.71,"change_pct":7.4},{"utility":"Alaska Village Elec Coop, Inc","id":221,"region":"Yukon-Kuskokwim","ownership":"Cooperative","total_price":57.94,"commercial_price":53.47,"residential_price":65.93,"industrial_price":null,"customers":11487,"sales_mwh":127186,"prev_total_price":61.4,"change_pct":-5.6},{"utility":"Nelson Lagoon Elec Coop Inc","id":13477,"region":"Kodiak / Aleutians","ownership":"Cooperative","total_price":55.19,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":59,"sales_mwh":270,"prev_total_price":72.55,"change_pct":-23.9},{"utility":"City of Ouzinkie - (AK)","id":14234,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":54.28,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":115,"sales_mwh":759,"prev_total_price":48.25,"change_pct":12.5},{"utility":"Nushagak Electric Coop, Inc","id":13870,"region":"Bristol Bay","ownership":"Cooperative","total_price":53.13,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1485,"sales_mwh":17439,"prev_total_price":51.84,"change_pct":2.5},{"utility":"Kotzebue Electric Assn Inc","id":10451,"region":"Northwest Arctic / Bering Strait","ownership":"Cooperative","total_price":50.04,"commercial_price":48.59,"residential_price":52.23,"industrial_price":null,"customers":1342,"sales_mwh":19296,"prev_total_price":46.45,"change_pct":7.7},{"utility":"Ipnatchiaq Electric Company","id":9416,"region":"Northwest Arctic / Bering Strait","ownership":"Municipal","total_price":49.8,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":76,"sales_mwh":919,"prev_total_price":81.26,"change_pct":-38.7},{"utility":"Tatitlek Electric Utility","id":18480,"region":"Copper River / Chugach","ownership":"Municipal","total_price":48.03,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":64,"sales_mwh":456,"prev_total_price":47.16,"change_pct":1.8},{"utility":"City of White Mountain - (AK)","id":20535,"region":"Northwest Arctic / Bering Strait","ownership":"Municipal","total_price":47.33,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":107,"sales_mwh":959,"prev_total_price":46.85,"change_pct":1.0},{"utility":"City of Larsen Bay - (AK)","id":10716,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":45.47,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":69,"sales_mwh":700,"prev_total_price":42.82,"change_pct":6.2},{"utility":"City of Chignik - (AK)","id":3421,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":43.8,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":97,"sales_mwh":539,"prev_total_price":62.44,"change_pct":-29.9},{"utility":"City of Chefornak","id":3422,"region":"Yukon-Kuskokwim","ownership":"Municipal","total_price":39.22,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":129,"sales_mwh":2490,"prev_total_price":46.24,"change_pct":-15.2},{"utility":"Alaska Power and Telephone Co","id":219,"region":"Southeast","ownership":"Investor Owned","total_price":39.21,"commercial_price":37.75,"residential_price":41.78,"industrial_price":null,"customers":8536,"sales_mwh":78783,"prev_total_price":33.39,"change_pct":17.4},{"utility":"City of Unalaska - (AK)","id":19454,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":38.14,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1044,"sales_mwh":36468,"prev_total_price":38.1,"change_pct":0.1},{"utility":"Nome Joint Utility Systems","id":13642,"region":"Northwest Arctic / Bering Strait","ownership":"Municipal","total_price":38.09,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":2333,"sales_mwh":32463,"prev_total_price":39.38,"change_pct":-3.3},{"utility":"City of Seward - (AK)","id":16955,"region":"Railbelt","ownership":"Municipal","total_price":32.08,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":2870,"sales_mwh":50940,"prev_total_price":31.31,"change_pct":2.5},{"utility":"City of King Cove - (AK)","id":9897,"region":"Kodiak / Aleutians","ownership":"Municipal","total_price":32.0,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":319,"sales_mwh":3060,"prev_total_price":null,"change_pct":null},{"utility":"Cordova Electric Coop, Inc","id":40215,"region":"Copper River / Chugach","ownership":"Cooperative","total_price":31.3,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1686,"sales_mwh":25369,"prev_total_price":30.85,"change_pct":1.5},{"utility":"Copper Valley Elec Assn, Inc","id":4329,"region":"Copper River / Chugach","ownership":"Cooperative","total_price":27.24,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":4055,"sales_mwh":86426,"prev_total_price":27.78,"change_pct":-1.9},{"utility":"North Slope Borough Power & Light (AK)","id":26616,"region":"North Slope","ownership":"Municipal","total_price":25.98,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1243,"sales_mwh":31336,"prev_total_price":null,"change_pct":null},{"utility":"Homer Electric Assn Inc","id":19558,"region":"Railbelt","ownership":"Cooperative","total_price":24.98,"commercial_price":27.93,"residential_price":31.51,"industrial_price":14.66,"customers":34600,"sales_mwh":480762,"prev_total_price":23.32,"change_pct":7.1},{"utility":"Golden Valley Elec Assn Inc","id":7353,"region":"Railbelt","ownership":"Cooperative","total_price":24.75,"commercial_price":30.24,"residential_price":31.47,"industrial_price":21.87,"customers":48554,"sales_mwh":1270410,"prev_total_price":24.58,"change_pct":0.7},{"utility":"Pelican Utility","id":29297,"region":"Southeast","ownership":"Municipal","total_price":23.99,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":104,"sales_mwh":1088,"prev_total_price":25.79,"change_pct":-7.0},{"utility":"TDX North Slope Generating Co","id":19277,"region":"North Slope","ownership":"Investor Owned","total_price":23.94,"commercial_price":23.94,"residential_price":null,"industrial_price":null,"customers":162,"sales_mwh":51610,"prev_total_price":24.81,"change_pct":-3.5},{"utility":"Matanuska Electric Assn Inc","id":11824,"region":"Railbelt","ownership":"Cooperative","total_price":23.23,"commercial_price":21.32,"residential_price":24.54,"industrial_price":null,"customers":72296,"sales_mwh":780530,"prev_total_price":22.1,"change_pct":5.1},{"utility":"Gwitchyaa Zhee Utility Co","id":7833,"region":"Interior","ownership":"Investor Owned","total_price":20.31,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":366,"sales_mwh":15476,"prev_total_price":45.07,"change_pct":-54.9},{"utility":"Chugach Electric Assn Inc","id":3522,"region":"Railbelt","ownership":"Cooperative","total_price":19.17,"commercial_price":17.59,"residential_price":22.97,"industrial_price":14.76,"customers":114163,"sales_mwh":1861828,"prev_total_price":18.17,"change_pct":5.5},{"utility":"Kodiak Electric Assn Inc","id":10433,"region":"Kodiak / Aleutians","ownership":"Cooperative","total_price":18.09,"commercial_price":19.28,"residential_price":19.47,"industrial_price":17.19,"customers":6337,"sales_mwh":155689,"prev_total_price":17.58,"change_pct":2.9},{"utility":"City & Borough of Sitka - (AK)","id":17271,"region":"Southeast","ownership":"Municipal","total_price":18.07,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":5800,"sales_mwh":114569,"prev_total_price":17.77,"change_pct":1.7},{"utility":"Barrow Utils & Elec Coop, Inc","id":1276,"region":"North Slope","ownership":"Cooperative","total_price":17.82,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1998,"sales_mwh":44915,"prev_total_price":15.26,"change_pct":16.8},{"utility":"Metlakatla Power & Light","id":12385,"region":"Southeast","ownership":"Municipal","total_price":15.39,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1024,"sales_mwh":19268,"prev_total_price":16.13,"change_pct":-4.6},{"utility":"City of Wrangell - (AK)","id":21015,"region":"Southeast","ownership":"Municipal","total_price":13.93,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":1881,"sales_mwh":37175,"prev_total_price":13.52,"change_pct":3.0},{"utility":"Ketchikan Public Utilities","id":10210,"region":"Southeast","ownership":"Municipal","total_price":13.46,"commercial_price":13.45,"residential_price":13.88,"industrial_price":11.8,"customers":8030,"sales_mwh":176167,"prev_total_price":12.02,"change_pct":12.0},{"utility":"Petersburg Borough - (AK)","id":14856,"region":"Southeast","ownership":"Municipal","total_price":13.11,"commercial_price":null,"residential_price":null,"industrial_price":null,"customers":2334,"sales_mwh":56015,"prev_total_price":12.56,"change_pct":4.4},{"utility":"Alaska Electric Light & Power Co.","id":213,"region":"Southeast","ownership":"Investor Owned","total_price":12.41,"commercial_price":11.48,"residential_price":13.73,"industrial_price":11.43,"customers":18166,"sales_mwh":401143,"prev_total_price":11.72,"change_pct":5.9}],"rows_read":{"Sales_Ult_Cust_2025.xlsx":11,"Short_Form_2025.xlsx":55,"Short_Form_2024.xlsx":55,"Sales_Ult_Cust_2024.xlsx":11},"fetched":"2026-11-14"}};
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fmt = (v, d = 0) => v.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const sgn = v => v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + fmt(Math.abs(v), 1) + '%';
+  const cents = v => v == null ? '—' : fmt(v, 1) + '¢';
+  const tidy = n => n.replace(/ - \(AK\)$/, '').replace(/ \(AK\)$/, '').replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op');
+  const get = u => fetch(u, {cache: 'no-cache'}).then(r => r.ok ? r.json() : Promise.reject(r.status));
+
+  Promise.all([get('/data/energy.json'), get('/data/electricity-utilities.json')])
+    .catch(() => window.SNAPSHOT ? [window.SNAPSHOT.energy, window.SNAPSHOT.utilities] : Promise.reject('no data'))
+    .then(([E, U]) => render(E, U))
+    .catch(() => { $('stats').textContent = 'Data unavailable.'; });
+
+  function render(E, U) {
+    const ak = E.series['AK-ALL'], us = E.series['US-ALL'];
+    const n = ak.dates.length - 1, last = ak.dates[n], v = ak.values[n];
+    const usBy = new Map(us.dates.map((d, i) => [d, us.values[i]]));
+    const ago = ak.dates.indexOf((+last.slice(0, 4) - 1) + last.slice(4));
+    const month = MON[+last.slice(5, 7) - 1] + ' ' + last.slice(0, 4);
+    const usNow = usBy.get(last);
+    $('stats').innerHTML =
+      `<div><b style="color:var(--ak)">${cents(v)}</b><span>Alaska average, ${month}</span></div>` +
+      `<div><b>${ago >= 0 ? sgn((v / ak.values[ago] - 1) * 100) : '—'}</b><span>vs ${MON[+last.slice(5, 7) - 1]} ${+last.slice(0, 4) - 1}</span></div>` +
+      (usNow ? `<div><b style="color:var(--us)">${fmt(v / usNow, 1)}×</b><span>U.S. average (${cents(usNow)})</span></div>` : '');
+    trend(E);
+
+    // ----- regions + table (EIA-861, annual) -----
+    const Y = U.year, PY = U.prev_year, usT = U.us.total;
+    $('chgh').textContent = PY ? `vs ${PY}` : 'Change';
+    const regs = Object.entries(U.regions).filter(([k]) => k !== 'Unassigned').sort((a, b) => b[1].avg_price - a[1].avg_price);
+    if (U.regions.Unassigned) regs.push(['Unassigned', U.regions.Unassigned]);
+    let active = null;
+    const regEl = $('regions');
+    regEl.innerHTML = regs.map(([k, r]) => `<button class="reg" type="button" aria-pressed="false" data-r="${esc(k)}">
+      <span class="n">${esc(k)}</span><span class="v">${cents(r.avg_price)}</span>
+      <span class="m"><span>${fmt(r.avg_price / usT, 1)}× U.S.</span><span>${sgn(r.change_pct)}</span></span>
+      <span class="m"><span>${r.utilities} ${r.utilities === 1 ? 'utility' : 'utilities'}</span><span>${fmt(r.customers)} cust.</span></span></button>`).join('');
+    regEl.addEventListener('click', e => {
+      const b = e.target.closest('.reg'); if (!b) return;
+      active = active === b.dataset.r ? null : b.dataset.r;
+      regEl.querySelectorAll('.reg').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.r === active)));
+      table();
+    });
+    const MAX = Math.max(...U.utilities.map(u => u.total_price));
+    const bar = p => `<svg width="170" height="12" viewBox="0 0 170 12" aria-hidden="true"><rect x="0" y="2" width="170" height="8" fill="#F6F8FB"/><rect x="0" y="2" width="${(p / MAX * 170).toFixed(1)}" height="8" fill="#1F5FA8"/><line x1="${(usT / MAX * 170).toFixed(1)}" x2="${(usT / MAX * 170).toFixed(1)}" y1="0" y2="12" stroke="#C2610C" stroke-width="2"/></svg>`;
+    function table() {
+      let i = 0, html = '';
+      for (const [k, r] of regs) {
+        if (active && k !== active) continue;
+        const us_ = U.utilities.filter(u => u.region === k).sort((a, b) => b.total_price - a.total_price);
+        html += `<tr class="g"><th colspan="7" scope="rowgroup">${esc(k)}<span>${cents(r.avg_price)} average · ${us_.length} ${us_.length === 1 ? 'utility' : 'utilities'}</span></th></tr>`;
+        for (const u of us_) html += `<tr><td class="r" style="color:var(--muted);font-weight:600">${++i}</td><td class="u">${esc(tidy(u.utility))}</td>
+          <td class="r p">${fmt(u.total_price, 1)}</td><td class="r">${fmt(u.total_price / usT, 1)}×</td><td class="r">${sgn(u.change_pct)}</td>
+          <td class="r">${fmt(u.customers)}</td><td>${bar(u.total_price)}</td></tr>`;
+      }
+      $('rows').innerHTML = html;
+    }
+    table();
+    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} (orange tick). Bars run from 0 to the highest-priced utility. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
+
+    // ----- calculator -----
+    const sel = $('c-u');
+    const byName = [...U.utilities].sort((a, b) => tidy(a.utility).localeCompare(tidy(b.utility)));
+    sel.innerHTML = byName.map((u, i) => `<option value="${i}"${/^Chugach/.test(u.utility) ? ' selected' : ''}>${esc(tidy(u.utility))}</option>`).join('');
+    function calc() {
+      const u = byName[+sel.value], s = $('c-s').value, k = Math.max(0, +$('c-k').value || 0);
+      const rate = u[s + '_price'] || u.total_price, usr = U.us[s] || usT;
+      const here = k * rate / 100, there = k * usr / 100;
+      $('o-here').textContent = '$' + fmt(here); $('o-us').textContent = '$' + fmt(there);
+      $('o-x').textContent = there ? fmt(here / there, 1) + '×' : '—';
+      $('o-here-l').textContent = `With ${tidy(u.utility)} (${cents(rate)}/kWh${u[s + '_price'] ? '' : ', all-customer average'})`;
+    }
+    $('calc').addEventListener('input', calc); $('calc').addEventListener('submit', e => e.preventDefault()); calc();
+
+    // ----- ladder -----
+    const hi = U.utilities[0], lo = U.utilities[U.utilities.length - 1];
+    const pts = [
+      {l: `Highest Alaska utility: ${tidy(hi.utility)}`, v: hi.total_price, w: Y, c: '#14213D'},
+      {l: 'Hawaii', v: U.states.HI && U.states.HI.total, w: Y, c: '#5A6580'},
+      {l: 'Alaska', v: v, w: month, c: '#1F5FA8', b: 1},
+      {l: 'U.S.', v: usNow, w: month, c: '#C2610C', b: 1},
+      {l: 'Washington', v: U.states.WA && U.states.WA.total, w: Y, c: '#5A6580'},
+      {l: `Lowest Alaska utility: ${tidy(lo.utility)}`, v: lo.total_price, w: Y, c: '#14213D'},
+    ].filter(p => p.v);
+    ladder(pts);
+    $('ladnote').textContent = 'Still to add: British Columbia, Iceland and Norway (converted to U.S. cents). Alaska and U.S. are the latest monthly averages; Hawaii, Washington and the Alaska utilities are ' + Y + ' annual averages.';
+    $('src').innerHTML = `Sources: U.S. Energy Information Administration — Electric Power Monthly (state averages) and <a href="https://www.eia.gov/electricity/data/eia861/">Form EIA-861</a> (${Y} utility data, long and short form). Region grouping is Two Cents for Alaska's own.`;
+  }
+
+  function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+
+  function trend(E) {
+    const ann = s => { const a = {}; s.dates.forEach((d, i) => (a[d.slice(0, 4)] = a[d.slice(0, 4)] || []).push(s.values[i])); return Object.entries(a).filter(([, v]) => v.length === 12).map(([y, v]) => [+y, v.reduce((x, z) => x + z) / 12]); };
+    const A = ann(E.series['AK-ALL']), B = ann(E.series['US-ALL']);
+    const W = 560, H = 230, L = 40, R = 86, T = 10, Bm = 28, y0 = A[0][0], y1 = A[A.length - 1][0];
+    const ymax = Math.ceil(Math.max(...A.map(a => a[1])) / 10) * 10;
+    const X = y => L + (y - y0) / (y1 - y0) * (W - L - R), Y = v => T + (1 - v / ymax) * (H - T - Bm);
+    const s = el('svg', {viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': `Average electricity price, Alaska and U.S., ${y0} to ${y1}`});
+    for (let g = 0; g <= ymax; g += 10) { el('line', {x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: '#C9D2DE'}, s); el('text', {x: L - 6, y: Y(g) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#5A6580'}, s, g + '¢'); }
+    [y0, Math.round((y0 + y1) / 2), y1].forEach(y => el('text', {x: X(y), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: '#5A6580'}, s, y));
+    [[A, '#1F5FA8', 'Alaska'], [B, '#C2610C', 'U.S.']].forEach(([d, c, lab]) => {
+      el('polyline', {points: d.map(p => X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1)).join(' '), fill: 'none', stroke: c, 'stroke-width': 2.5}, s);
+      const p = d[d.length - 1]; el('text', {x: X(p[0]) + 6, y: Y(p[1]) + 4, 'font-size': 12, 'font-weight': 600, fill: c}, s, `${lab} ${p[1].toFixed(1)}¢`);
+    });
+    $('trend').appendChild(s);
+    $('trendcap').textContent = `Annual average retail price, all sectors, cents per kWh, ${y0}–${y1}.`;
+  }
+
+  function ladder(pts) {
+    const W = 760, H = 420, T = 16, B = 16, ax = 120, lo = Math.log(8), hi = Math.log(Math.max(...pts.map(p => p.v)) * 1.15);
+    const Y = v => T + (1 - (Math.log(v) - lo) / (hi - lo)) * (H - T - B);
+    const s = el('svg', {viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': 'Electricity price ladder, cents per kWh, log scale'});
+    el('line', {x1: ax, x2: ax, y1: T, y2: H - B, stroke: '#14213D', 'stroke-width': 2}, s);
+    [10, 20, 40, 80, 160].filter(v => Math.log(v) < hi).forEach(v => { el('line', {x1: ax - 6, x2: ax, y1: Y(v), y2: Y(v), stroke: '#14213D'}, s); el('text', {x: ax - 12, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 12, fill: '#5A6580'}, s, v + '¢'); });
+    let lastY = -99;
+    pts.sort((a, b) => b.v - a.v).forEach(p => {
+      const y = Y(p.v), ty = Math.max(y, lastY + 22); lastY = ty;
+      el('circle', {cx: ax, cy: y, r: p.b ? 7 : 5, fill: p.c}, s);
+      el('polyline', {points: `${ax + 8},${y} ${ax + 26},${ty} ${ax + 34},${ty}`, fill: 'none', stroke: p.c}, s);
+      const t = el('text', {x: ax + 40, y: ty + 4, 'font-size': 14, fill: '#14213D'}, s);
+      el('tspan', {'font-weight': 700, fill: p.c}, t, p.v.toFixed(1) + '¢ ');
+      el('tspan', {}, t, p.l + ' ');
+      el('tspan', {fill: '#5A6580', 'font-size': 12}, t, '· ' + p.w);
+    });
+    $('ladder').appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>

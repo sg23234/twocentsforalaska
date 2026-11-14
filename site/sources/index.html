@@ -65,6 +65,16 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
       <dt>Notes</dt><dd>A statewide average. It blends lower Railbelt and Southeast hydro rates with much higher rates in rural communities, and EIA coverage of the smallest rural utilities is limited. Prices are before Power Cost Equalization credits.</dd>
     </dl>
   </div>
+  <div class="src" id="electricity-utilities">
+    <h3>Electricity page: utilities and regions</h3>
+    <dl>
+      <dt>Shows</dt><dd>Average price per kWh for each Alaska utility and for groups of utilities by region, how each compares with the U.S. average, the change from the year before, and a monthly bill estimate.</dd>
+      <dt>Source</dt><dd>U.S. Energy Information Administration, <a href="https://www.eia.gov/electricity/data/eia861/" target="_blank" rel="noopener">Form EIA-861 Annual Electric Power Industry Report</a>: Sales to Ultimate Customers (long form) and the Short Form (EIA-861S) for small utilities. Hawaii, Washington and U.S. averages come from the same files.</dd>
+      <dt>Method</dt><dd>Price = revenue ÷ kWh sold, by customer type and for all customers. Region averages are weighted by kWh sold. Regions are Two Cents for Alaska's own grouping, loosely following Alaska Energy Authority energy regions, and are listed in <code>data/manual/electricity-regions.json</code>. The bill estimate multiplies monthly use by the utility's average rate for that customer type.</dd>
+      <dt>Updates</dt><dd>Annual. EIA publishes final data for a year in the fall of the following year; this site picks up a new year automatically.</dd>
+      <dt>Notes</dt><dd>Covers utilities that report to EIA. Some of the smallest village utilities report only to the state's Power Cost Equalization program and are not included. Prices are before Power Cost Equalization credits.</dd>
+    </dl>
+  </div>
 </section>
 
 <footer>Independent and nonpartisan. Built from public data. <a href="/">Back to the front page</a></footer>
