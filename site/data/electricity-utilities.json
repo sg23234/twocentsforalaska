@@ -18,24 +18,47 @@
   "transportation": 7.13,
   "total": 11.31
  },
+ "states": {
+  "AK": {
+   "residential": 25.6,
+   "commercial": 21.1,
+   "industrial": 19.36,
+   "transportation": null,
+   "total": 22.98
+  },
+  "HI": {
+   "residential": 40.79,
+   "commercial": 36.37,
+   "industrial": 31.46,
+   "transportation": null,
+   "total": 35.77
+  },
+  "WA": {
+   "residential": 13.19,
+   "commercial": 10.93,
+   "industrial": 6.34,
+   "transportation": 12.24,
+   "total": 10.9
+  }
+ },
  "regions": {
   "Bristol Bay": {
-   "avg_price": 58.02,
+   "avg_price": 58.35,
    "commercial_price": null,
-   "utilities": 4,
-   "customers": 2926,
-   "sales_mwh": 40196,
-   "prev_avg_price": 58.44,
-   "change_pct": -0.7
+   "utilities": 6,
+   "customers": 3088,
+   "sales_mwh": 40976,
+   "prev_avg_price": 59.0,
+   "change_pct": -1.1
   },
   "Copper River / Chugach": {
-   "avg_price": 28.16,
+   "avg_price": 28.5,
    "commercial_price": null,
-   "utilities": 2,
-   "customers": 5741,
-   "sales_mwh": 111795,
-   "prev_avg_price": 28.47,
-   "change_pct": -1.1
+   "utilities": 4,
+   "customers": 5897,
+   "sales_mwh": 112658,
+   "prev_avg_price": 28.79,
+   "change_pct": -1.0
   },
   "Interior": {
    "avg_price": 39.44,
@@ -47,13 +70,13 @@
    "change_pct": -36.0
   },
   "Kodiak / Aleutians": {
-   "avg_price": 22.32,
+   "avg_price": 24.06,
    "commercial_price": 19.28,
-   "utilities": 6,
-   "customers": 7936,
-   "sales_mwh": 196678,
-   "prev_avg_price": 22.17,
-   "change_pct": 0.7
+   "utilities": 10,
+   "customers": 8452,
+   "sales_mwh": 203405,
+   "prev_avg_price": 24.0,
+   "change_pct": 0.2
   },
   "North Slope": {
    "avg_price": 22.29,
@@ -65,13 +88,13 @@
    "change_pct": 3.3
   },
   "Northwest Arctic / Bering Strait": {
-   "avg_price": 44.16,
+   "avg_price": 44.25,
    "commercial_price": 48.59,
-   "utilities": 4,
-   "customers": 4167,
-   "sales_mwh": 56353,
-   "prev_avg_price": 43.48,
-   "change_pct": 1.6
+   "utilities": 5,
+   "customers": 4243,
+   "sales_mwh": 57272,
+   "prev_avg_price": 44.01,
+   "change_pct": 0.5
   },
   "Railbelt": {
    "avg_price": 22.25,
@@ -83,22 +106,22 @@
    "change_pct": 4.2
   },
   "Southeast": {
-   "avg_price": 16.56,
+   "avg_price": 16.61,
    "commercial_price": 17.36,
-   "utilities": 8,
-   "customers": 47196,
-   "sales_mwh": 894495,
-   "prev_avg_price": 15.21,
-   "change_pct": 8.9
+   "utilities": 11,
+   "customers": 47559,
+   "sales_mwh": 896402,
+   "prev_avg_price": 15.27,
+   "change_pct": 8.8
   },
   "Unassigned": {
-   "avg_price": 67.19,
+   "avg_price": 77.81,
    "commercial_price": null,
-   "utilities": 13,
-   "customers": 1410,
-   "sales_mwh": 11543,
-   "prev_avg_price": 72.42,
-   "change_pct": -7.2
+   "utilities": 1,
+   "customers": 137,
+   "sales_mwh": 347,
+   "prev_avg_price": 84.64,
+   "change_pct": -8.1
   },
   "Yukon-Kuskokwim": {
    "avg_price": 59.57,
@@ -111,19 +134,7 @@
   }
  },
  "unassigned": [
-  "Chitina Electric Inc",
-  "City of Elfin Cove - (AK)",
-  "City of Larsen Bay - (AK)",
-  "City of Ouzinkie - (AK)",
-  "City of Saint Paul - (AK)",
-  "City of Tenakee Springs - (AK)",
-  "G & K, Inc",
-  "Gold Country Energy",
-  "Igiugig Electric Company",
-  "Ipnatchiaq Electric Company",
-  "Kokhanok Village Council",
-  "Pelican Utility",
-  "Tatitlek Electric Utility"
+  "Gold Country Energy"
  ],
  "utilities": [
   {
@@ -157,7 +168,7 @@
   {
    "utility": "G & K, Inc",
    "id": 6866,
-   "region": "Unassigned",
+   "region": "Kodiak / Aleutians",
    "ownership": "Investor Owned",
    "total_price": 110.24,
    "commercial_price": null,
@@ -171,7 +182,7 @@
   {
    "utility": "Chitina Electric Inc",
    "id": 3465,
-   "region": "Unassigned",
+   "region": "Copper River / Chugach",
    "ownership": "Investor Owned",
    "total_price": 100.47,
    "commercial_price": null,
@@ -213,7 +224,7 @@
   {
    "utility": "Igiugig Electric Company",
    "id": 9192,
-   "region": "Unassigned",
+   "region": "Bristol Bay",
    "ownership": "Political Subdivision",
    "total_price": 87.16,
    "commercial_price": null,
@@ -339,7 +350,7 @@
   {
    "utility": "Kokhanok Village Council",
    "id": 10455,
-   "region": "Unassigned",
+   "region": "Bristol Bay",
    "ownership": "Political Subdivision",
    "total_price": 67.71,
    "commercial_price": null,
@@ -409,7 +420,7 @@
   {
    "utility": "City of Tenakee Springs - (AK)",
    "id": 18541,
-   "region": "Unassigned",
+   "region": "Southeast",
    "ownership": "Municipal",
    "total_price": 64.32,
    "commercial_price": null,
@@ -423,7 +434,7 @@
   {
    "utility": "City of Saint Paul - (AK)",
    "id": 17898,
-   "region": "Unassigned",
+   "region": "Kodiak / Aleutians",
    "ownership": "Municipal",
    "total_price": 64.3,
    "commercial_price": null,
@@ -465,7 +476,7 @@
   {
    "utility": "City of Elfin Cove - (AK)",
    "id": 5721,
-   "region": "Unassigned",
+   "region": "Southeast",
    "ownership": "Municipal",
    "total_price": 61.62,
    "commercial_price": null,
@@ -521,7 +532,7 @@
   {
    "utility": "City of Ouzinkie - (AK)",
    "id": 14234,
-   "region": "Unassigned",
+   "region": "Kodiak / Aleutians",
    "ownership": "Municipal",
    "total_price": 54.28,
    "commercial_price": null,
@@ -563,7 +574,7 @@
   {
    "utility": "Ipnatchiaq Electric Company",
    "id": 9416,
-   "region": "Unassigned",
+   "region": "Northwest Arctic / Bering Strait",
    "ownership": "Municipal",
    "total_price": 49.8,
    "commercial_price": null,
@@ -577,7 +588,7 @@
   {
    "utility": "Tatitlek Electric Utility",
    "id": 18480,
-   "region": "Unassigned",
+   "region": "Copper River / Chugach",
    "ownership": "Municipal",
    "total_price": 48.03,
    "commercial_price": null,
@@ -605,7 +616,7 @@
   {
    "utility": "City of Larsen Bay - (AK)",
    "id": 10716,
-   "region": "Unassigned",
+   "region": "Kodiak / Aleutians",
    "ownership": "Municipal",
    "total_price": 45.47,
    "commercial_price": null,
@@ -787,7 +798,7 @@
   {
    "utility": "Pelican Utility",
    "id": 29297,
-   "region": "Unassigned",
+   "region": "Southeast",
    "ownership": "Municipal",
    "total_price": 23.99,
    "commercial_price": null,
@@ -967,340 +978,11 @@
    "change_pct": 5.9
   }
  ],
- "diagnostics": {
-  "files": [
-   "Service_Territory_2024.xlsx",
-   "Short_Form_2024.xlsx",
-   "Utility_Data_2024.xlsx",
-   "2024 EIA-861 Form.xlsx",
-   "Advanced_Meters_2024.xlsx",
-   "Balancing_Authority_2024.xlsx",
-   "Delivery_Companies_2024.xlsx",
-   "Demand_Response_2024.xlsx",
-   "Distribution_Systems_2024.xlsx",
-   "Dynamic_Pricing_2024.xlsx",
-   "Energy_Efficiency_2024.xlsx",
-   "Frame_2024.xlsx",
-   "Mergers_2024.xlsx",
-   "Net_Metering_2024.xlsx",
-   "Non_Net_Metering_Distributed_2024.xlsx",
-   "Operational_Data_2024.xlsx",
-   "Reliability_2024.xlsx",
-   "Sales_Ult_Cust_2024.xlsx",
-   "Sales_Ult_Cust_CS_2024.xlsx"
-  ],
-  "headers": {
-   "Sales_Ult_Cust_2025.xlsx": [
-    [
-     "utility characteristics",
-     "data year"
-    ],
-    [
-     "utility characteristics",
-     "utility number"
-    ],
-    [
-     "utility characteristics",
-     "utility name"
-    ],
-    [
-     "utility characteristics",
-     "part"
-    ],
-    [
-     "utility characteristics",
-     "service type"
-    ],
-    [
-     "utility characteristics",
-     "data type o = observed i = imputed"
-    ],
-    [
-     "utility characteristics",
-     "state"
-    ],
-    [
-     "utility characteristics",
-     "ownership"
-    ],
-    [
-     "utility characteristics",
-     "ba code"
-    ],
-    [
-     "residential revenues",
-     "thousand dollars"
-    ],
-    [
-     "residential sales",
-     "megawatthours"
-    ],
-    [
-     "residential customers",
-     "count"
-    ],
-    [
-     "commercial revenues",
-     "thousand dollars"
-    ],
-    [
-     "commercial sales",
-     "megawatthours"
-    ],
-    [
-     "commercial customers",
-     "count"
-    ],
-    [
-     "industrial revenues",
-     "thousand dollars"
-    ],
-    [
-     "industrial sales",
-     "megawatthours"
-    ],
-    [
-     "industrial customers",
-     "count"
-    ],
-    [
-     "transportation revenues",
-     "thousand dollars"
-    ],
-    [
-     "transportation sales",
-     "megawatthours"
-    ],
-    [
-     "transportation customers",
-     "count"
-    ],
-    [
-     "total revenues",
-     "thousand dollars"
-    ],
-    [
-     "total sales",
-     "megawatthours"
-    ],
-    [
-     "total customers",
-     "count"
-    ]
-   ],
-   "Short_Form_2025.xlsx": [
-    [
-     "",
-     "data year"
-    ],
-    [
-     "",
-     "utility number"
-    ],
-    [
-     "",
-     "utility name"
-    ],
-    [
-     "",
-     "ownership"
-    ],
-    [
-     "",
-     "state"
-    ],
-    [
-     "",
-     "ba code"
-    ],
-    [
-     "",
-     "total revenue (thousand dollars)"
-    ],
-    [
-     "",
-     "total sales (mwh)"
-    ],
-    [
-     "",
-     "total customers"
-    ],
-    [
-     "",
-     "water heater"
-    ],
-    [
-     "",
-     "net metering"
-    ],
-    [
-     "",
-     "demand side management"
-    ],
-    [
-     "",
-     "time based programs"
-    ]
-   ],
-   "Short_Form_2024.xlsx": [
-    [
-     "",
-     "data year"
-    ],
-    [
-     "",
-     "utility number"
-    ],
-    [
-     "",
-     "utility name"
-    ],
-    [
-     "",
-     "ownership"
-    ],
-    [
-     "",
-     "state"
-    ],
-    [
-     "",
-     "ba code"
-    ],
-    [
-     "",
-     "total revenue (thousand dollars)"
-    ],
-    [
-     "",
-     "total sales (mwh)"
-    ],
-    [
-     "",
-     "total customers"
-    ],
-    [
-     "",
-     "water heater"
-    ],
-    [
-     "",
-     "net metering"
-    ],
-    [
-     "",
-     "demand side management"
-    ],
-    [
-     "",
-     "time based programs"
-    ]
-   ],
-   "Sales_Ult_Cust_2024.xlsx": [
-    [
-     "utility characteristics",
-     "data year"
-    ],
-    [
-     "utility characteristics",
-     "utility number"
-    ],
-    [
-     "utility characteristics",
-     "utility name"
-    ],
-    [
-     "utility characteristics",
-     "part"
-    ],
-    [
-     "utility characteristics",
-     "service type"
-    ],
-    [
-     "utility characteristics",
-     "data type o = observed i = imputed"
-    ],
-    [
-     "utility characteristics",
-     "state"
-    ],
-    [
-     "utility characteristics",
-     "ownership"
-    ],
-    [
-     "utility characteristics",
-     "ba code"
-    ],
-    [
-     "residential revenues",
-     "thousand dollars"
-    ],
-    [
-     "residential sales",
-     "megawatthours"
-    ],
-    [
-     "residential customers",
-     "count"
-    ],
-    [
-     "commercial revenues",
-     "thousand dollars"
-    ],
-    [
-     "commercial sales",
-     "megawatthours"
-    ],
-    [
-     "commercial customers",
-     "count"
-    ],
-    [
-     "industrial revenues",
-     "thousand dollars"
-    ],
-    [
-     "industrial sales",
-     "megawatthours"
-    ],
-    [
-     "industrial customers",
-     "count"
-    ],
-    [
-     "transportation revenues",
-     "thousand dollars"
-    ],
-    [
-     "transportation sales",
-     "megawatthours"
-    ],
-    [
-     "transportation customers",
-     "count"
-    ],
-    [
-     "total revenues",
-     "thousand dollars"
-    ],
-    [
-     "total sales",
-     "megawatthours"
-    ],
-    [
-     "total customers",
-     "count"
-    ]
-   ]
-  },
-  "ak_rows": {
-   "Sales_Ult_Cust_2025.xlsx": 11,
-   "Short_Form_2025.xlsx": 55,
-   "Short_Form_2024.xlsx": 55,
-   "Sales_Ult_Cust_2024.xlsx": 11
-  }
+ "rows_read": {
+  "Sales_Ult_Cust_2025.xlsx": 11,
+  "Short_Form_2025.xlsx": 55,
+  "Short_Form_2024.xlsx": 55,
+  "Sales_Ult_Cust_2024.xlsx": 11
  },
  "fetched": "2026-11-14"
 }
