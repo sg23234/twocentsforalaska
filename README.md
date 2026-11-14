@@ -16,7 +16,6 @@ site/                        ← everything the public sees (Cloudflare Pages se
   data/status.json           ← what each live source returned on the last run, and any problems
 scripts/
   fetch_data.py              ← pulls live series (FRED, BLS, Alaska DOLWD, EIA) into site/data/
-  fetch_communities.py       ← community electricity rates (Alaska Energy Data Gateway) → data/electricity-communities.json
   write_summaries.py         ← drafts each page's summary with Claude and checks its numbers
 .github/workflows/
   refresh-data.yml           ← runs both scripts on the 2nd and 16th, and whenever scripts,
