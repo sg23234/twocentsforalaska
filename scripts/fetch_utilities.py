@@ -53,50 +53,59 @@ def num(v):
 
 
 def read_sales(zf, year):
-    """Return list of dicts from Sales_Ult_Cust and Sales_Ult_Cust_CS sheets."""
+    """Rows from Sales_Ult_Cust (long form, EIA-861) and Short_Form (EIA-861S, small utilities).
+    Sales_Ult_Cust_CS (customer-sited sales) is left out."""
     import openpyxl
     out = []
     DIAG["files"] = [n for n in zf.namelist() if n.lower().endswith((".xlsx", ".xls"))]
-    names = [n for n in zf.namelist() if re.search(r"sales_ult_cust(_cs)?_\d{4}\.xlsx$", n, re.I)]
+    names = [n for n in zf.namelist() if re.search(r"(sales_ult_cust|short_form)_\d{4}\.xlsx$", n, re.I)]
     if not names:
-        raise RuntimeError(f"{year}: no Sales_Ult_Cust sheet in {zf.namelist()[:30]}")
+        raise RuntimeError(f"{year}: no Sales_Ult_Cust sheet in {DIAG['files'][:30]}")
     for name in names:
         wb = openpyxl.load_workbook(io.BytesIO(zf.read(name)), read_only=True, data_only=True)
         ws = wb.worksheets[0]
         rows = ws.iter_rows(values_only=True)
-        top, mid, low = next(rows), next(rows), next(rows)   # three header rows
-        DIAG.setdefault("headers", {})[name] = [list(map(str, top[:12])), list(map(str, mid[:12])), list(map(str, low[:12]))]
-        cols, group, sub = [], "", ""
-        for i in range(len(low)):
-            if top[i]: group = str(top[i]).strip().lower()
-            if mid[i]: sub = str(mid[i]).strip().lower()
-            cols.append((group, sub, str(low[i] or "").strip().lower()))
+        head = []
+        for _ in range(6):
+            r = next(rows)
+            head.append(r)
+            if any(str(c or "").strip().lower() == "utility name" for c in r):
+                break
+        else:
+            raise RuntimeError(f"{name}: no 'Utility Name' header in first rows")
+        low = head[-1]
+        groups = [""] * len(low)
+        for hr in head[:-1]:
+            cur = ""
+            for i in range(len(low)):
+                if i < len(hr) and hr[i] not in (None, ""):
+                    cur = str(hr[i]).strip().lower()
+                groups[i] = (groups[i] + " " + cur).strip()
+        cols = [(groups[i], str(low[i] or "").strip().lower().replace("\n", " ")) for i in range(len(low))]
+        DIAG.setdefault("headers", {})[name] = cols[:40]
         def idx(pred):
             for i, c in enumerate(cols):
                 if pred(*c): return i
             return None
-        meta = {k: idx(lambda g, s, l, k=k: l == k) for k in
-                ["data year", "utility number", "utility name", "service type", "state", "ownership"]}
+        meta = {k: idx(lambda g, l, k=k: l == k) for k in ["utility number", "utility name", "service type", "state", "ownership"]}
         if meta["utility name"] is None or meta["state"] is None:
             raise RuntimeError(f"{name}: unexpected headers {cols[:12]}")
-        sec = {}
-        for s in SECTORS:
-            sec[s] = {m: idx(lambda g, sb, l, s=s, m=m: s in g and l.startswith({"rev": "thousand", "mwh": "megawatt", "cust": "count"}[m]))
-                      for m in ("rev", "mwh", "cust")}
+        units = {"rev": "thousand", "mwh": "megawatt", "cust": "count"}
+        sec = {s: {m: idx(lambda g, l, s=s, m=m: s in g and units[m] in l) for m in units} for s in SECTORS}
+        n0 = len(out)
         for r in rows:
-            if not r or r[meta["utility name"]] in (None, "") or str(r[meta["utility name"]]).lower().startswith("adjustment"):
+            nm = r[meta["utility name"]] if r and len(r) > meta["utility name"] else None
+            if nm in (None, "") or str(nm).strip().lower() in ("withheld",) or str(nm).lower().startswith("adjustment"):
                 continue
-            d = {"utility": str(r[meta["utility name"]]).strip(), "state": str(r[meta["state"]] or "").strip(),
-                 "id": r[meta["utility number"]], "ownership": str(r[meta["ownership"]] or "").strip() if meta["ownership"] is not None else "",
-                 "service": str(r[meta["service type"]] or "").strip() if meta["service type"] is not None else ""}
+            g = lambda k: r[meta[k]] if meta[k] is not None and meta[k] < len(r) else None
+            d = {"utility": str(nm).strip(), "state": str(g("state") or "").strip(), "id": g("utility number"),
+                 "ownership": str(g("ownership") or "").strip(), "service": str(g("service type") or "").strip(),
+                 "form": "861S" if "short" in name.lower() else "861"}
             for s, m in sec.items():
                 for k, i in m.items():
-                    d[f"{s}_{k}"] = num(r[i]) if i is not None else None
+                    d[f"{s}_{k}"] = num(r[i]) if i is not None and i < len(r) else None
             out.append(d)
-        DIAG.setdefault("ak_rows", {})[name] = sum(1 for x in out if x["state"] == "AK")
-        DIAG.setdefault("meta", {})[name] = meta
-        DIAG.setdefault("sample", {})[name] = [ {k: x[k] for k in ("utility", "state", "total_rev", "total_mwh", "residential_rev")} for x in out[-3:]]
-        DIAG.setdefault("states", {})[name] = sorted({x["state"] for x in out})[:80]
+        DIAG.setdefault("ak_rows", {})[name] = sum(1 for x in out[n0:] if x["state"] == "AK")
     return out
 
 
