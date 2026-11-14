@@ -36,6 +36,13 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}   # needed for the electricity price
         run: python3 scripts/fetch_data.py
 
+      - name: Fetch electricity prices by utility (EIA-861)
+        id: utilities
+        continue-on-error: true
+        run: |
+          pip install --quiet openpyxl
+          python3 scripts/fetch_utilities.py
+
       - name: Draft AI summaries
         id: summaries
         continue-on-error: true
@@ -58,7 +65,7 @@ jobs:
           fi
 
       - name: Report failures
-        if: steps.fetch.outcome == 'failure' || steps.summaries.outcome == 'failure'
+        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.summaries.outcome == 'failure'
         run: |
-          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
+          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
           exit 1
