@@ -1,7 +1,7 @@
 {
  "dashboard": "housing",
  "source": "FRED, Federal Reserve Bank of St. Louis",
- "fetched": "2026-11-02",
+ "fetched": "2026-11-14",
  "series": {
   "AKBPPRIV": {
    "label": "New private housing units authorized by building permits, Alaska",
@@ -3849,7 +3849,9 @@
     "2026-10-08",
     "2026-10-15",
     "2026-10-22",
-    "2026-10-29"
+    "2026-10-29",
+    "2026-11-05",
+    "2026-11-12"
    ],
    "values": [
     7.33,
@@ -6752,7 +6754,9 @@
     7.4,
     7.4,
     7.32,
-    7.24
+    7.24,
+    7.18,
+    7.11
    ]
   }
  }
