@@ -90,8 +90,10 @@ def read_sales(zf, year):
         meta = {k: idx(lambda g, l, k=k: l == k) for k in ["utility number", "utility name", "service type", "state", "ownership"]}
         if meta["utility name"] is None or meta["state"] is None:
             raise RuntimeError(f"{name}: unexpected headers {cols[:12]}")
-        units = {"rev": "thousand", "mwh": "megawatt", "cust": "count"}
-        sec = {s: {m: idx(lambda g, l, s=s, m=m: s in g and units[m] in l) for m in units} for s in SECTORS}
+        units = {"rev": ("thousand",), "mwh": ("megawatt", "(mwh)"), "cust": ("count", "customers")}
+        # Long form: sector in the group header, unit in the label. Short form: one label like "total sales (mwh)".
+        sec = {s: {m: idx(lambda g, l, s=s, m=m: (s in g or (not g and l.startswith(s))) and any(u in l for u in units[m]))
+                   for m in units} for s in SECTORS}
         n0 = len(out)
         for r in rows:
             nm = r[meta["utility name"]] if r and len(r) > meta["utility name"] else None
