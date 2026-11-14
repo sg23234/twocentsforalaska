@@ -94,6 +94,9 @@ def read_sales(zf, year):
                     d[f"{s}_{k}"] = num(r[i]) if i is not None else None
             out.append(d)
         DIAG.setdefault("ak_rows", {})[name] = sum(1 for x in out if x["state"] == "AK")
+        DIAG.setdefault("meta", {})[name] = meta
+        DIAG.setdefault("sample", {})[name] = [ {k: x[k] for k in ("utility", "state", "total_rev", "total_mwh", "residential_rev")} for x in out[-3:]]
+        DIAG.setdefault("states", {})[name] = sorted({x["state"] for x in out})[:80]
     return out
 
 
