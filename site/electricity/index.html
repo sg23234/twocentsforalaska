@@ -163,7 +163,8 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     trend(E);
 
     // ----- regions + table (EIA-861, annual) -----
-    const Y = U.year, PY = U.prev_year, usT = U.us.total;
+    const Y = U.year, PY = U.prev_year;
+    const usAnn = new Map(annual(E, 'US')), usT = usAnn.get(Y) || U.us.total;
     $('chgh').textContent = PY ? `vs ${PY}` : 'Change';
     const regs = Object.entries(U.regions).filter(([k]) => k !== 'Unassigned').sort((a, b) => b[1].avg_price - a[1].avg_price);
     if (U.regions.Unassigned) regs.push(['Unassigned', U.regions.Unassigned]);
@@ -194,7 +195,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       $('rows').innerHTML = html;
     }
     table();
-    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} (orange tick). Bars run from 0 to the highest-priced utility. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
+    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y} (orange tick), the same figure as in the chart at the top. Bars run from 0 to the highest-priced utility. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
 
     // ----- calculator -----
     const sel = $('c-u');
@@ -225,11 +226,19 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     $('src').innerHTML = `Sources: U.S. Energy Information Administration — Electric Power Monthly (state averages) and <a href="https://www.eia.gov/electricity/data/eia861/">Form EIA-861</a> (${Y} utility data, long and short form). Region grouping is Two Cents for Alaska's own.`;
   }
 
+  // Calendar-year average price. Weighted by kWh sold when monthly sales are present
+  // (revenue ÷ kWh, how EIA computes annual averages); otherwise a simple mean of months.
+  function annual(E, st) {
+    const p = E.series[st + '-ALL'], q = E.series[st + '-ALL:sales'];
+    const w = q ? new Map(q.dates.map((d, i) => [d, q.values[i]])) : null, a = {};
+    p.dates.forEach((d, i) => { const y = d.slice(0, 4), k = w && w.get(d); (a[y] = a[y] || []).push([p.values[i], w ? k : 1]); });
+    return Object.entries(a).filter(([, v]) => v.length === 12 && v.every(x => x[1] != null))
+      .map(([y, v]) => [+y, v.reduce((t, x) => t + x[0] * x[1], 0) / v.reduce((t, x) => t + x[1], 0)]);
+  }
   function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
 
   function trend(E) {
-    const ann = s => { const a = {}; s.dates.forEach((d, i) => (a[d.slice(0, 4)] = a[d.slice(0, 4)] || []).push(s.values[i])); return Object.entries(a).filter(([, v]) => v.length === 12).map(([y, v]) => [+y, v.reduce((x, z) => x + z) / 12]); };
-    const A = ann(E.series['AK-ALL']), B = ann(E.series['US-ALL']);
+    const A = annual(E, 'AK'), B = annual(E, 'US');
     const W = 560, H = 230, L = 40, R = 86, T = 10, Bm = 28, y0 = A[0][0], y1 = A[A.length - 1][0];
     const ymax = Math.ceil(Math.max(...A.map(a => a[1])) / 10) * 10;
     const X = y => L + (y - y0) / (y1 - y0) * (W - L - R), Y = v => T + (1 - v / ymax) * (H - T - Bm);

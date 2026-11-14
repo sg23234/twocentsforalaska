@@ -48,7 +48,7 @@
    "utilities": 6,
    "customers": 3088,
    "sales_mwh": 40976,
-   "prev_avg_price": 59.0,
+   "prev_avg_price": 59.01,
    "change_pct": -1.1
   },
   "Copper River / Chugach": {
@@ -57,100 +57,75 @@
    "utilities": 4,
    "customers": 5897,
    "sales_mwh": 112658,
-   "prev_avg_price": 28.79,
-   "change_pct": -1.0
+   "prev_avg_price": 28.77,
+   "change_pct": -0.9
   },
-  "Interior": {
-   "avg_price": 39.44,
+  "Interior villages": {
+   "avg_price": 39.97,
    "commercial_price": null,
-   "utilities": 6,
-   "customers": 1351,
-   "sales_mwh": 24635,
-   "prev_avg_price": 61.67,
-   "change_pct": -36.0
+   "utilities": 7,
+   "customers": 1488,
+   "sales_mwh": 24982,
+   "prev_avg_price": 54.08,
+   "change_pct": -26.1
   },
   "Kodiak / Aleutians": {
    "avg_price": 24.06,
-   "commercial_price": 19.28,
+   "commercial_price": null,
    "utilities": 10,
    "customers": 8452,
    "sales_mwh": 203405,
-   "prev_avg_price": 24.0,
-   "change_pct": 0.2
+   "prev_avg_price": 23.51,
+   "change_pct": 2.3
   },
   "North Slope": {
    "avg_price": 22.29,
-   "commercial_price": 23.94,
+   "commercial_price": null,
    "utilities": 3,
    "customers": 3403,
    "sales_mwh": 127861,
-   "prev_avg_price": 21.58,
-   "change_pct": 3.3
+   "prev_avg_price": 20.37,
+   "change_pct": 9.4
   },
   "Northwest Arctic / Bering Strait": {
    "avg_price": 44.25,
-   "commercial_price": 48.59,
+   "commercial_price": null,
    "utilities": 5,
    "customers": 4243,
    "sales_mwh": 57272,
-   "prev_avg_price": 44.01,
+   "prev_avg_price": 44.03,
    "change_pct": 0.5
   },
   "Railbelt": {
    "avg_price": 22.25,
-   "commercial_price": 19.94,
+   "commercial_price": null,
    "utilities": 5,
    "customers": 272483,
    "sales_mwh": 4444470,
-   "prev_avg_price": 21.36,
-   "change_pct": 4.2
+   "prev_avg_price": 21.4,
+   "change_pct": 4.0
   },
   "Southeast": {
    "avg_price": 16.61,
-   "commercial_price": 17.36,
+   "commercial_price": null,
    "utilities": 11,
    "customers": 47559,
    "sales_mwh": 896402,
-   "prev_avg_price": 15.27,
-   "change_pct": 8.8
-  },
-  "Unassigned": {
-   "avg_price": 77.81,
-   "commercial_price": null,
-   "utilities": 1,
-   "customers": 137,
-   "sales_mwh": 347,
-   "prev_avg_price": 84.64,
-   "change_pct": -8.1
+   "prev_avg_price": 15.4,
+   "change_pct": 7.9
   },
   "Yukon-Kuskokwim": {
-   "avg_price": 59.57,
-   "commercial_price": 53.47,
-   "utilities": 9,
-   "customers": 12877,
-   "sales_mwh": 139048,
-   "prev_avg_price": 62.17,
-   "change_pct": -4.2
+   "avg_price": 59.0,
+   "commercial_price": null,
+   "utilities": 8,
+   "customers": 12740,
+   "sales_mwh": 138538,
+   "prev_avg_price": 61.93,
+   "change_pct": -4.7
   }
  },
- "unassigned": [
-  "Gold Country Energy"
- ],
+ "unassigned": [],
  "utilities": [
-  {
-   "utility": "Napakiak Ircinraq Power Co",
-   "id": 13211,
-   "region": "Yukon-Kuskokwim",
-   "ownership": "Investor Owned",
-   "total_price": 214.12,
-   "commercial_price": null,
-   "residential_price": null,
-   "industrial_price": null,
-   "customers": 137,
-   "sales_mwh": 510,
-   "prev_total_price": 88.15,
-   "change_pct": 142.9
-  },
   {
    "utility": "Middle Kuskokwim Elec Coop Inc",
    "id": 12485,
@@ -196,7 +171,7 @@
   {
    "utility": "TDX Manley Generating LLC",
    "id": 56503,
-   "region": "Interior",
+   "region": "Interior villages",
    "ownership": "Investor Owned",
    "total_price": 95.77,
    "commercial_price": null,
@@ -210,7 +185,7 @@
   {
    "utility": "Hughes Power & Light Co",
    "id": 9000,
-   "region": "Interior",
+   "region": "Interior villages",
    "ownership": "Investor Owned",
    "total_price": 90.18,
    "commercial_price": null,
@@ -266,7 +241,7 @@
   {
    "utility": "Gold Country Energy",
    "id": 56739,
-   "region": "Unassigned",
+   "region": "Interior villages",
    "ownership": "Investor Owned",
    "total_price": 77.81,
    "commercial_price": null,
@@ -294,7 +269,7 @@
   {
    "utility": "McGrath Light & Power Co",
    "id": 12119,
-   "region": "Interior",
+   "region": "Interior villages",
    "ownership": "Investor Owned",
    "total_price": 72.97,
    "commercial_price": null,
@@ -308,7 +283,7 @@
   {
    "utility": "Tanana Power Co Inc",
    "id": 18474,
-   "region": "Interior",
+   "region": "Interior villages",
    "ownership": "Investor Owned",
    "total_price": 70.18,
    "commercial_price": null,
@@ -364,7 +339,7 @@
   {
    "utility": "Galena Electric Utility",
    "id": 6915,
-   "region": "Interior",
+   "region": "Interior villages",
    "ownership": "Municipal",
    "total_price": 67.22,
    "commercial_price": null,
@@ -840,7 +815,7 @@
   {
    "utility": "Gwitchyaa Zhee Utility Co",
    "id": 7833,
-   "region": "Interior",
+   "region": "Interior villages",
    "ownership": "Investor Owned",
    "total_price": 20.31,
    "commercial_price": null,

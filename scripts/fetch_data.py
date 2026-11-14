@@ -136,6 +136,7 @@ DASHBOARDS = {
         "AK-COM": s("Average retail electricity price, commercial, Alaska", "cents per kWh", "monthly", "rate", optional=True),
         "AK-RES": s("Average retail electricity price, residential, Alaska", "cents per kWh", "monthly", "rate", optional=True),
         "AK-ALL:sales": s("Retail electricity sales, all sectors, Alaska", "million kWh", "monthly", "flow", optional=True),
+        "US-ALL:sales": s("Retail electricity sales, all sectors, United States", "million kWh", "monthly", "flow", optional=True),
     }},
     # Food trucks: Census counts for NAICS 722330 (mobile food services), keyed
     # "<dataset>-<geo>:<variable>". cbp = employer establishments (County Business

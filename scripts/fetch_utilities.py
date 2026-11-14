@@ -5,7 +5,7 @@ reads "Sales to Ultimate Customers" (long form and short form), keeps Alaska
 utilities, and works out average prices = revenue / kWh sold, by sector.
 
 Region for each utility comes from site/data/manual/electricity-regions.json
-(name patterns, edit by hand). Region averages are weighted by sales (total
+(name patterns, edit by hand); its "exclude" list drops utilities entirely. Region averages are weighted by sales (total
 revenue / total kWh across that region's utilities). U.S. averages come from the
 same file, all states.
 
@@ -127,17 +127,25 @@ def load_year(year):
 COMPARE_STATES = ["AK", "HI", "WA"]
 
 
-def summarize(rows, regions):
+def summarize(rows, regions, exclude=()):
+    """Delivery-only rows (retail-choice states) report the same kWh as the energy-only
+    row for that customer, but only the wires charge as revenue. Their revenue counts;
+    their kWh do not, so electricity is not counted twice. This matches EIA's own
+    state and U.S. averages."""
     ak = {}
     us = {s: [0.0, 0.0] for s in SECTORS}
     st = {x: {s: [0.0, 0.0] for s in SECTORS} for x in COMPARE_STATES}
     for r in rows:
+        delivery = r.get("service", "").lower().startswith("delivery")
         for s in SECTORS:
-            if r.get(f"{s}_rev") and r.get(f"{s}_mwh"):
-                us[s][0] += r[f"{s}_rev"]; us[s][1] += r[f"{s}_mwh"]
+            rev, mwh = r.get(f"{s}_rev") or 0, 0 if delivery else (r.get(f"{s}_mwh") or 0)
+            if rev or mwh:
+                us[s][0] += rev; us[s][1] += mwh
                 if r["state"] in st:
-                    st[r["state"]][s][0] += r[f"{s}_rev"]; st[r["state"]][s][1] += r[f"{s}_mwh"]
-        if r["state"] != "AK":
+                    st[r["state"]][s][0] += rev; st[r["state"]][s][1] += mwh
+        if r["state"] != "AK" or delivery:
+            continue
+        if any(re.search(p, r["utility"], re.I) for p in exclude):
             continue
         u = ak.setdefault(r["utility"], {"utility": r["utility"], "id": r["id"], "ownership": r["ownership"]})
         for s in SECTORS:
@@ -162,7 +170,8 @@ def region_for(name, regions):
 
 
 def main():
-    regions = json.loads(REGIONS.read_text())["regions"]
+    cfg = json.loads(REGIONS.read_text())
+    regions, exclude = cfg["regions"], cfg.get("exclude", [])
     this = date.today().year
     cur = prev = None
     for y in range(this - 1, this - 4, -1):
@@ -181,9 +190,9 @@ def main():
         prev = (y - 1, p) if p else None
     except Exception as e:
         print(f"::warning::EIA-861 {y-1}: {e}")
-    ak, us = summarize(cur[1], regions)
+    ak, us = summarize(cur[1], regions, exclude)
     states_cur = dict(STATES)
-    ak_prev, us_prev = summarize(prev[1], regions) if prev else ({}, {})
+    ak_prev, us_prev = summarize(prev[1], regions, exclude) if prev else ({}, {})
     utils = []
     for u in sorted(ak.values(), key=lambda u: -(u.get("total_price") or 0)):
         if not u.get("total_price"):

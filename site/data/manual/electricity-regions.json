@@ -147,7 +147,8 @@
    "wainwright",
    "prudhoe"
   ],
-  "Interior": [
+  "Interior villages": [
+   "gold country",
    "hughes",
    "mcgrath",
    "tok",
@@ -190,5 +191,9 @@
    "holy cross",
    "middle yukon"
   ]
- }
+ },
+ "exclude": [
+  "napakiak"
+ ],
+ "_exclude_about": "Utilities left off the Electricity page entirely (name patterns, case-insensitive). Napakiak Ircinraq Power Co: its 2025 EIA-861 figures (214 cents/kWh, +143% from 2024) look like a reporting error."
 }
