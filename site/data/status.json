@@ -37,7 +37,8 @@
    "AK-ALL": "2026-08-01",
    "US-ALL": "2026-08-01",
    "AK-COM": "2026-08-01",
-   "AK-RES": "2026-08-01"
+   "AK-RES": "2026-08-01",
+   "AK-ALL:sales": "2026-08-01"
   }
  },
  "gdp": {
@@ -53,7 +54,9 @@
   "source": "fred",
   "latest": {
    "AKBPPRIV": "2026-09-01",
-   "MORTGAGE30US": "2026-11-12"
+   "MORTGAGE30US": "2026-11-12",
+   "AKSTHPI": "2026-04-01",
+   "USSTHPI": "2026-04-01"
   }
  },
  "key-sectors": {
@@ -73,6 +76,17 @@
    "Local Government": "2026-09-01",
    "State Government": "2026-09-01",
    "Federal Government": "2026-09-01"
+  }
+ },
+ "labor": {
+  "source": "fred",
+  "latest": {
+   "LBSSA02": "2026-09-01",
+   "CIVPART": "2026-10-01",
+   "AKUR": "2026-09-01",
+   "UNRATE": "2026-10-01",
+   "SMU02000000500000003": "2026-09-01",
+   "CES0500000003": "2026-10-01"
   }
  },
  "population": {
