@@ -6,7 +6,8 @@ Source for **twocentsforalaska.org**, a monthly read on Alaska's economy.
 
 ```
 site/                        ← everything the public sees (Cloudflare Pages serves this folder)
-  index.html                 ← front page (monthly issue)
+  index.html                 ← front page (Micro matrix + Macro)
+  sources/index.html         ← where each front-page number comes from; add an entry when a tile goes live
   gdp/index.html …           ← one folder per dashboard → twocentsforalaska.org/gdp/ (12 total)
   js/tc.js                   ← shared page code: loads data, draws simple charts, shows the AI summary
   data/<topic>.json          ← live series, written by the refresh job. Don't edit by hand.

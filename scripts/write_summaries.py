@@ -335,7 +335,7 @@ def draft(slug, mat, key):
 
 
 def pages():
-    return sorted(p.parent.name for p in SITE.glob("*/index.html") if p.parent.name not in ("data", "js"))
+    return sorted(p.parent.name for p in SITE.glob("*/index.html") if p.parent.name not in ("data", "js", "sources"))
 
 
 def main(argv):

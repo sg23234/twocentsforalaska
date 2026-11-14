@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sources · Two Cents for Alaska</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#14213D; --body:#33405C; --muted:#5A6580; --rule:#C9D2DE; --accent:#B42318;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
+.mast{display:flex;flex-direction:column;align-items:center;gap:10px;padding-block:32px 20px;border-bottom:4px double var(--ink);text-align:center}
+.mast nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+.mast nav a:hover{border-color:var(--accent)}
+.name{font-family:var(--display);font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.intro h1{font-size:clamp(28px,4vw,38px)}
+.intro p{margin:8px 0 0;color:var(--body);max-width:65ch}
+section > h2{font-size:24px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.src{padding:18px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:180px 1fr;gap:6px 24px}
+.src h3{font-size:19px;line-height:1.25}
+.src dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;font-size:15px}
+.src dt{color:var(--muted);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding-top:2px}
+.src dd{margin:0;color:var(--body)}
+@media (max-width:640px){.src{grid-template-columns:1fr}.src dl{grid-template-columns:1fr}.src dt{padding-top:6px}}
+footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <nav aria-label="Sections"><a href="/#micro">Micro</a><a href="/#macro">Macro</a><a href="/sources/">Sources</a></nav>
+  <a class="name" href="/">Two Cents for Alaska</a>
+</header>
+
+<div class="intro">
+  <h1>Sources</h1>
+  <p>Where each number on the front page comes from, how it is calculated and how often it updates. Every figure is from public data.</p>
+</div>
+
+<section aria-labelledby="h-micro">
+  <h2 id="h-micro">Micro · Input costs</h2>
+
+  <div class="src" id="electricity">
+    <h3>Electricity</h3>
+    <dl>
+      <dt>Shows</dt><dd>Average retail price of electricity in Alaska, all customer sectors combined, in cents per kilowatt-hour, and the percent change from the same month a year earlier.</dd>
+      <dt>Source</dt><dd>U.S. Energy Information Administration (EIA), <a href="https://www.eia.gov/electricity/monthly/" target="_blank" rel="noopener">Electric Power Monthly</a>, retail sales of electricity by state and sector. Retrieved through the <a href="https://www.eia.gov/opendata/" target="_blank" rel="noopener">EIA Open Data API</a> (electricity/retail-sales).</dd>
+      <dt>Series</dt><dd>State: Alaska (AK). Sector: all sectors (ALL). Measure: average price.</dd>
+      <dt>Method</dt><dd>The price is revenue divided by kilowatt-hours sold, as reported by utilities to EIA. The change compares the latest month with the same month one year earlier, which avoids seasonal swings.</dd>
+      <dt>Updates</dt><dd>Monthly, about two months after the month it covers. This site checks for new data on the 2nd and 16th of each month.</dd>
+      <dt>Notes</dt><dd>A statewide average. It blends lower Railbelt and Southeast hydro rates with much higher rates in rural communities, and EIA coverage of the smallest rural utilities is limited. Prices are before Power Cost Equalization credits.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>Independent and nonpartisan. Built from public data. <a href="/">Back to the front page</a></footer>
+
+</div>
+</body>
+</html>
