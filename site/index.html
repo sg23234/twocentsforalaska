@@ -92,7 +92,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <div class="row">
       <div class="row-head"><h3>Input costs</h3><span>What every business has to buy</span></div>
       <div class="tiles">
-        <div class="tile" id="t-elec"><span class="lbl">Electricity</span><span class="val na" data-v>—</span><span class="cmp" data-c>— × U.S.</span><span class="meta"><span>commercial, ¢/kWh</span><span data-d></span></span></div>
+        <div class="tile" id="t-elec"><span class="lbl">Electricity</span><span class="val na" data-v>—</span><span class="cmp" data-c>— y/y</span><span class="meta"><span>avg price, ¢/kWh</span><span data-d></span></span></div>
         <div class="tile"><span class="lbl">Railbelt natural gas</span><span class="val na">—</span><span class="meta"><span>per Mcf</span><span></span></span></div>
         <div class="tile"><span class="lbl">Rural heating fuel</span><span class="val na">—</span><span class="meta"><span>per gallon</span><span></span></span></div>
         <div class="tile"><span class="lbl">Freight rate index</span><span class="val na">—</span><span class="meta"><span>Seattle–Anchorage</span><span></span></span></div>
@@ -186,19 +186,19 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
 
 </div>
 <script>
-/* Electricity tile: commercial price, Alaska vs U.S., from the EIA refresh (data/energy.json). */
+/* Electricity tile: average retail price (all sectors) and change from a year earlier, from data/energy.json (EIA). */
 (function () {
   const t = document.getElementById('t-elec'); if (!t) return;
   const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   fetch('/data/energy.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(d => {
-    const ak = d && d.series['AK-COM'], us = d && d.series['US-COM']; if (!ak || !us) return;
-    const usBy = new Map(us.dates.map((x, i) => [x, us.values[i]]));
-    for (let i = ak.dates.length - 1; i >= 0; i--) {          // latest month both have
-      const u = usBy.get(ak.dates[i]); if (u == null) continue;
-      const v = t.querySelector('[data-v]'); v.textContent = ak.values[i].toFixed(1) + '¢'; v.classList.remove('na');
-      t.querySelector('[data-c]').textContent = (ak.values[i] / u).toFixed(1) + '× U.S.';
-      t.querySelector('[data-d]').textContent = MON[+ak.dates[i].slice(5, 7) - 1] + ' ' + ak.dates[i].slice(0, 4);
-      return;
+    const ak = d && d.series['AK-ALL']; if (!ak || !ak.dates.length) return;
+    const n = ak.dates.length - 1, date = ak.dates[n], val = ak.values[n];
+    const v = t.querySelector('[data-v]'); v.textContent = val.toFixed(1) + '¢'; v.classList.remove('na');
+    t.querySelector('[data-d]').textContent = MON[+date.slice(5, 7) - 1] + ' ' + date.slice(0, 4);
+    const ago = ak.dates.indexOf((+date.slice(0, 4) - 1) + date.slice(4));
+    if (ago >= 0) {
+      const pct = (val / ak.values[ago] - 1) * 100, c = t.querySelector('[data-c]');
+      c.textContent = (pct > 0 ? '+' : pct < 0 ? '−' : '') + Math.abs(pct).toFixed(1) + '% y/y';
     }
   }).catch(() => {});
 })();

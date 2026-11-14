@@ -36,7 +36,7 @@ The loop: **GitHub Action runs the scripts → new JSON committed → Cloudflare
 | Key sectors | Payroll jobs by industry (Alaska DOLWD) | Visitors, air cargo |
 | Spending | Public and private payrolls (DOLWD) | State budget (UGF) and scale charts |
 | State capacity | — | All charts, incl. the capital-asset running total |
-| Energy | Commercial & residential electricity price, AK vs U.S. (EIA API; front-page tile) | All charts |
+| Energy | Average electricity price, all sectors plus commercial and residential (EIA API; front-page tile) | All charts |
 | Connectivity | — | All charts |
 | Education | — (no charts) | — |
 
@@ -82,7 +82,7 @@ How it stays honest: the script sends Claude only what the page shows (tiles, ca
 To preview what Claude would be sent for a page, without calling it: `python3 scripts/write_summaries.py --dry-run housing`.
 
 ### 5. EIA key (needed for the electricity tile, about 2 minutes)
-The front page's Electricity tile shows Alaska's average commercial electricity price and how it compares with the U.S., from EIA's monthly retail sales data. EIA's API needs a free key.
+The front page's Electricity tile shows Alaska's average electricity price (all sectors) and its change from a year earlier, from EIA's monthly retail sales data. EIA's API needs a free key.
 1. Register at **eia.gov/opendata/register.php**. The key arrives by email.
 2. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**. Name: `EIA_API_KEY`. Paste the key. Save.
 3. **Actions → Refresh data → Run workflow.** `site/data/energy.json` appears and the tile fills in. Until then the tile shows "—" and the rest of the run is unaffected.

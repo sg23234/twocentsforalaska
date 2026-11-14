@@ -115,10 +115,10 @@ DASHBOARDS = {
     # Retail electricity price, cents per kWh, keyed "<state>-<sector>".
     # Sectors: COM commercial, RES residential, IND industrial, ALL all sectors.
     "energy": {"source": "eia", "soft": True, "series": {
-        "AK-COM": s("Average retail electricity price, commercial, Alaska", "cents per kWh", "monthly", "rate"),
-        "US-COM": s("Average retail electricity price, commercial, United States", "cents per kWh", "monthly", "rate"),
+        "AK-ALL": s("Average retail electricity price, all sectors, Alaska", "cents per kWh", "monthly", "rate"),
+        "US-ALL": s("Average retail electricity price, all sectors, United States", "cents per kWh", "monthly", "rate", optional=True),
+        "AK-COM": s("Average retail electricity price, commercial, Alaska", "cents per kWh", "monthly", "rate", optional=True),
         "AK-RES": s("Average retail electricity price, residential, Alaska", "cents per kWh", "monthly", "rate", optional=True),
-        "US-RES": s("Average retail electricity price, residential, United States", "cents per kWh", "monthly", "rate", optional=True),
     }},
     "spending": {"source": "dolwd", "soft": True, "series": {
         "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
