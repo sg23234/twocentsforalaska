@@ -41,6 +41,13 @@
    "AK-ALL:sales": "2026-08-01"
   }
  },
+ "food-trucks": {
+  "source": "census",
+  "latest": {},
+  "problems": [
+   "*: Expecting value: line 1 column 1 (char 0)"
+  ]
+ },
  "gdp": {
   "source": "fred",
   "latest": {
