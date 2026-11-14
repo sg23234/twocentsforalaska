@@ -387,6 +387,9 @@ def main(argv):
     for slug in wanted:
         cfg = DASHBOARDS[slug]
         print(slug)
+        if cfg["source"] == "eia" and not os.environ.get("EIA_API_KEY", "").strip():
+            note("warning", f"{slug}: skipped, EIA_API_KEY secret not set")
+            continue
         try:
             data, problems = build(slug, cfg)
         except Exception as e:
