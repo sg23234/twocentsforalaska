@@ -231,5 +231,212 @@
    "change_pct": 5.9
   }
  ],
+ "diagnostics": {
+  "files": [
+   "Service_Territory_2024.xlsx",
+   "Short_Form_2024.xlsx",
+   "Utility_Data_2024.xlsx",
+   "2024 EIA-861 Form.xlsx",
+   "Advanced_Meters_2024.xlsx",
+   "Balancing_Authority_2024.xlsx",
+   "Delivery_Companies_2024.xlsx",
+   "Demand_Response_2024.xlsx",
+   "Distribution_Systems_2024.xlsx",
+   "Dynamic_Pricing_2024.xlsx",
+   "Energy_Efficiency_2024.xlsx",
+   "Frame_2024.xlsx",
+   "Mergers_2024.xlsx",
+   "Net_Metering_2024.xlsx",
+   "Non_Net_Metering_Distributed_2024.xlsx",
+   "Operational_Data_2024.xlsx",
+   "Reliability_2024.xlsx",
+   "Sales_Ult_Cust_2024.xlsx",
+   "Sales_Ult_Cust_CS_2024.xlsx"
+  ],
+  "headers": {
+   "Sales_Ult_Cust_2025.xlsx": [
+    [
+     "Utility Characteristics",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "RESIDENTIAL",
+     "None",
+     "None"
+    ],
+    [
+     "",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "Revenues",
+     "Sales",
+     "Customers"
+    ],
+    [
+     "Data Year",
+     "Utility Number",
+     "Utility Name",
+     "Part",
+     "Service Type",
+     "Data Type\nO = Observed\nI = Imputed",
+     "State",
+     "Ownership",
+     "BA Code",
+     "Thousand Dollars",
+     "Megawatthours",
+     "Count"
+    ]
+   ],
+   "Sales_Ult_Cust_CS_2025.xlsx": [
+    [
+     "Utility Characteristics",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "RESIDENTIAL",
+     "None",
+     "None",
+     "COMMERCIAL",
+     "None"
+    ],
+    [
+     "",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "Revenues",
+     "Sales",
+     "Customers",
+     "Revenues",
+     "Sales"
+    ],
+    [
+     "Data Year",
+     "Facility Number",
+     "Facility Name",
+     "Utility Number",
+     "Utility Name",
+     "STATE",
+     "BA Code",
+     "Thousand Dollars",
+     "Megawatthours",
+     "Count",
+     "Thousand Dollars",
+     "Megawatthours"
+    ]
+   ],
+   "Sales_Ult_Cust_2024.xlsx": [
+    [
+     "Utility Characteristics",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "RESIDENTIAL",
+     "None",
+     "None"
+    ],
+    [
+     "",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "Revenues",
+     "Sales",
+     "Customers"
+    ],
+    [
+     "Data Year",
+     "Utility Number",
+     "Utility Name",
+     "Part",
+     "Service Type",
+     "Data Type\nO = Observed\nI = Imputed",
+     "State",
+     "Ownership",
+     "BA Code",
+     "Thousand Dollars",
+     "Megawatthours",
+     "Count"
+    ]
+   ],
+   "Sales_Ult_Cust_CS_2024.xlsx": [
+    [
+     "Utility Characteristics",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "RESIDENTIAL",
+     "None",
+     "None",
+     "COMMERCIAL",
+     "None"
+    ],
+    [
+     "",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "None",
+     "Revenues",
+     "Sales",
+     "Customers",
+     "Revenues",
+     "Sales"
+    ],
+    [
+     "Data Year",
+     "Facility Number",
+     "Facility Name",
+     "Utility Number",
+     "Utility Name",
+     "STATE",
+     "BA Code",
+     "Thousand Dollars",
+     "Megawatthours",
+     "Count",
+     "Thousand Dollars",
+     "Megawatthours"
+    ]
+   ]
+  },
+  "ak_rows": {
+   "Sales_Ult_Cust_2025.xlsx": 11,
+   "Sales_Ult_Cust_CS_2025.xlsx": 11,
+   "Sales_Ult_Cust_2024.xlsx": 11,
+   "Sales_Ult_Cust_CS_2024.xlsx": 11
+  }
+ },
  "fetched": "2026-11-14"
 }
