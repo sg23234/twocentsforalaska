@@ -31,6 +31,13 @@
    "CUUR0000SA0": "2026-10-01"
   }
  },
+ "energy": {
+  "source": "eia",
+  "latest": {},
+  "problems": [
+   "*: EIA_API_KEY secret not set (free key: eia.gov/opendata/register.php)"
+  ]
+ },
  "gdp": {
   "source": "fred",
   "latest": {
