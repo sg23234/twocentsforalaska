@@ -1,0 +1,73 @@
+{
+ "_about": "Hand-kept numbers for the Food trucks page. Permit counts come from news reports quoting state and city health departments; update when DEC or the Anchorage Health Department releases a new count. Census business counts (County Business Patterns, Nonemployer Statistics) are live in site/data/food-trucks.json and are not kept here.",
+ "dec_permits": {
+  "label": "Food truck permits (DEC FN-3, self-contained mobile food service)",
+  "value": "300+",
+  "as_of": "Jul 2026",
+  "source": "Alaska DEC, as reported by Alaska's News Source, Jul 24, 2026"
+ },
+ "permit_counts": {
+  "columns": [
+   "Year",
+   "Count",
+   "What was counted",
+   "Reported by"
+  ],
+  "rows": [
+   [
+    "2012",
+    "164",
+    "DEC permitted mobile food units, all types (outside Anchorage)",
+    "Anchorage Daily News, Jul 2013"
+   ],
+   [
+    "2013",
+    "175",
+    "DEC permitted mobile food units, all types (outside Anchorage), as of April",
+    "Anchorage Daily News, Jul 2013"
+   ],
+   [
+    "2026",
+    "300+",
+    "DEC food truck permits, FN-3 only (outside Anchorage)",
+    "Alaska's News Source, Jul 2026"
+   ],
+   [
+    "2012",
+    "37",
+    "Registered mobile food vendors, Municipality of Anchorage",
+    "Anchorage Daily News, Jul 2013"
+   ],
+   [
+    "2013",
+    "62",
+    "Registered mobile food vendors, Municipality of Anchorage",
+    "Anchorage Daily News, Jul 2013"
+   ],
+   [
+    "2016",
+    "67",
+    "Licensed food trucks and mobile vendors, Municipality of Anchorage",
+    "Anchorage Daily News, Oct 2016"
+   ]
+  ]
+ },
+ "dec_fees": {
+  "label": "DEC annual permit fee (plan review fee is the same amount, paid once)",
+  "as_of": "2026",
+  "rows": [
+   [
+    "FN-2 cart or commissary unit",
+    215
+   ],
+   [
+    "FN-3 self-contained truck",
+    215
+   ],
+   [
+    "FN-3A truck that also caters",
+    460
+   ]
+  ]
+ }
+}

@@ -473,6 +473,39 @@ def pages():
         sources=[src("Census Bureau, Business Dynamics Statistics", "https://www.census.gov/programs-surveys/bds.html")],
         tile=tile(unit="share of employment")))
 
+    m_ft = manual("food-trucks")
+    dp, pc, fees = m_ft.get("dec_permits", {}), m_ft.get("permit_counts", {}), m_ft.get("dec_fees", {})
+    P.append(dict(slug="food-trucks", group=G, title="Food trucks", row="Business dynamism", status="partial",
+        lead="Food trucks are one of the lowest-cost ways to open a restaurant in Alaska: a truck or trailer, a state permit of a few hundred dollars and a commissary agreement, instead of a lease and a build-out. The number of trucks is a small, visible gauge of how readily Alaskans start food businesses.",
+        stats=[stat("Food truck permits, outside Anchorage", f"DEC FN-3 permits · {dp.get('as_of', '')}", value=dp.get("value", "—")),
+               stat("Businesses with employees, {year}", "Census County Business Patterns", {"file": "food-trucks", "series": "cbp-AK:ESTAB"}),
+               stat("Owner-operated, no employees, {year}", "Census Nonemployer Statistics", {"file": "food-trucks", "series": "nonemp-AK:NESTAB"}),
+               stat("Employees, mid-March {year}", "At businesses with employees", {"file": "food-trucks", "series": "cbp-AK:EMP"})],
+        body=[section("Permit counts", "Health permits are the closest thing to a headcount of trucks. The state and Anchorage keep separate counts, and the state has changed what it reports, so compare like with like.",
+                      table("Food truck and mobile vendor permits", pc.get("columns", []), pc.get("rows", []),
+                            "The 2012–13 state counts cover every type of mobile unit; the 2026 count covers self-contained trucks only, so growth since 2013 is at least as large as the gap suggests.", right=(1,))),
+              section("Food truck businesses", "Census counts of businesses classified as mobile food services (NAICS 722330), by whether they have paid employees.",
+                      chart("Mobile food businesses, Alaska", "line", [{"file": "food-trucks", "id": "nonemp-AK:NESTAB", "label": "No employees"}, {"file": "food-trucks", "id": "cbp-AK:ESTAB", "label": "With employees"}],
+                            "Annual. Latest: {date}. Source: Census Bureau Nonemployer Statistics and County Business Patterns.")),
+              section("What it costs to get permitted", "State health permit fees for mobile units, outside Anchorage.",
+                      hbar(fees.get("label", "DEC permit fees"), [(r[0], r[1]) for r in fees.get("rows", [])], f"Annual fee, {fees.get('as_of', '')}. Source: Alaska DEC Food Safety and Sanitation fee schedule.", prefix="$")),
+              plan(["A current statewide count from DEC's active-permit list (FN-2, FN-3, FN-3A and retail mobile vendors), by community, refreshed automatically.",
+                    "Anchorage Health Department mobile food unit permits, so the count covers the whole state.",
+                    "Food trucks per 100,000 residents, Alaska vs. the U.S.",
+                    "How many permits stay active through winter."])],
+        notes=["DEC permits food businesses everywhere in Alaska except the Municipality of Anchorage, which runs its own program. The DEC count therefore likely leaves out Anchorage trucks.",
+               "FN-3 is DEC's self-contained mobile food service permit (a truck or trailer with its own water and wastewater). Carts and units that rely on a commissary are permitted separately as FN-2; trucks that also cater, as FN-3A.",
+               "Census counts are by industry (NAICS 722330). A truck run by a restaurant or caterer may be counted under that business instead. Nonemployer counts appear about two and a half years after the year they cover, and small Alaska figures can be withheld.",
+               "Permit counts are kept by hand in data/manual/food-trucks.json."],
+        sources=[src("Alaska's News Source, Spenard food truck carnival highlights Alaska's growing mobile food scene, Jul 2026", "https://www.alaskasnewssource.com/2026/07/24/spenard-food-truck-carnival-draws-crowd-highlights-alaskas-growing-mobile-food-scene/"),
+                 src("Anchorage Daily News, Food trucks proliferate, Jul 2013", "https://adn.com/food-drink/article/food-truck-craze-alaska-keeps-truckin-restaurants-wheels-proliferate-0/2013/07/24"),
+                 src("Anchorage Daily News, Anchorage food trucks face winter, Oct 2016", "https://adn.com/business-economy/2016/10/23/anchorage-food-trucks-get-ready-to-face-one-of-their-biggest-challenges-winter"),
+                 src("Alaska DEC, Food permit fees", "https://dec.alaska.gov/eh/fss/fees"),
+                 src("Alaska DEC, Mobile food units, carts, kiosks", "https://dec.alaska.gov/eh/fss/food/food-service/mobile"),
+                 src("Census Bureau, County Business Patterns", "https://www.census.gov/programs-surveys/cbp.html"),
+                 src("Census Bureau, Nonemployer Statistics", "https://www.census.gov/programs-surveys/nonemployer-statistics.html")],
+        tile=tile(value=dp.get("value"), change=f"DEC permits, {dp.get('as_of', '')}", unit="food trucks, outside Anchorage")))
+
     # ======================= LABOR MARKET =======================
     G = "Micro · Labor market"
     rows = []

@@ -12,6 +12,10 @@ Sources
   EIA   - the EIA API (v2). Retail electricity prices by state and sector.
           Needs a free key as the EIA_API_KEY secret; without one the energy
           dashboard is skipped with a warning and nothing else is affected.
+  Census - the Census Bureau data API. Annual counts of businesses by industry
+          (County Business Patterns for employers, Nonemployer Statistics for
+          owner-operators). Used for food trucks (NAICS 722330). No key needed;
+          add one as the CENSUS_API_KEY secret if requests are ever refused.
 
 Standard library only, so GitHub Actions can run it without installing anything.
 
@@ -28,6 +32,7 @@ import json
 import os
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date, datetime, timezone
@@ -38,6 +43,7 @@ FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}"
 BLS_V1 = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 BLS_V2 = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 EIA_RETAIL = "https://api.eia.gov/v2/electricity/retail-sales/data/"
+CENSUS_API = "https://api.census.gov/data/{year}/{dataset}"
 DOLWD_CES = "https://live.laborstats.alaska.gov/labforce/csv/000000/01/ces.csv"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
 
@@ -131,6 +137,17 @@ DASHBOARDS = {
         "AK-RES": s("Average retail electricity price, residential, Alaska", "cents per kWh", "monthly", "rate", optional=True),
         "AK-ALL:sales": s("Retail electricity sales, all sectors, Alaska", "million kWh", "monthly", "flow", optional=True),
     }},
+    # Food trucks: Census counts for NAICS 722330 (mobile food services), keyed
+    # "<dataset>-<geo>:<variable>". cbp = employer establishments (County Business
+    # Patterns); nonemp = businesses with no employees (Nonemployer Statistics).
+    # All optional: small Alaska cells can be withheld, and a miss only warns.
+    "food-trucks": {"source": "census", "naics": "722330", "series": {
+        "cbp-AK:ESTAB": s("Mobile food services establishments with employees, Alaska (County Business Patterns)", "establishments", "annual", "level", optional=True),
+        "cbp-AK:EMP": s("Employees at mobile food services establishments, Alaska, mid-March", "jobs", "annual", "level", optional=True),
+        "nonemp-AK:NESTAB": s("Mobile food services businesses without employees, Alaska (Nonemployer Statistics)", "businesses", "annual", "level", optional=True),
+        "cbp-US:ESTAB": s("Mobile food services establishments with employees, United States", "establishments", "annual", "level", optional=True),
+        "nonemp-US:NESTAB": s("Mobile food services businesses without employees, United States", "businesses", "annual", "level", optional=True),
+    }},
     "spending": {"source": "dolwd", "soft": True, "series": {
         "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
         "Government": s("Payroll jobs, government", "jobs", "monthly", "level"),
@@ -144,6 +161,7 @@ SOURCE_NAMES = {
     "fred": "FRED, Federal Reserve Bank of St. Louis",
     "bls": "U.S. Bureau of Labor Statistics API",
     "eia": "U.S. Energy Information Administration, Electric Power Monthly (retail sales)",
+    "census": "U.S. Census Bureau, County Business Patterns and Nonemployer Statistics (data API)",
     "dolwd": "Alaska Department of Labor and Workforce Development, Current Employment Statistics",
 }
 
@@ -276,6 +294,77 @@ def fetch_eia(series_ids, tries=3):
     return out
 
 
+# ---------- Census ----------
+
+def census_vars(year):
+    """The industry-code variable each Census year uses, newest scheme first."""
+    if year >= 2022:
+        return ["NAICS2022", "NAICS2017"]
+    return ["NAICS2017"] if year >= 2017 else ["NAICS2012"]
+
+
+def census_get(year, dataset, fields, geo, naics):
+    """One Census API call. Returns {field: number} or None if the year/geo has no data."""
+    key = os.environ.get("CENSUS_API_KEY", "").strip()
+    for var in census_vars(year):
+        params = [("get", ",".join(fields)), ("for", geo), (var, naics)]
+        if key:
+            params.append(("key", key))
+        url = CENSUS_API.format(year=year, dataset=dataset) + "?" + urllib.parse.urlencode(params)
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+                body = r.read().decode("utf-8").strip()
+        except urllib.error.HTTPError as e:
+            if e.code in (400, 404):   # wrong code variable for this year, or year not published
+                continue
+            note("warning", f"Census {dataset} {year} {geo}: HTTP {e.code}")
+            return None
+        except Exception as e:          # network trouble: skip this year, keep the rest
+            note("warning", f"Census {dataset} {year} {geo}: {type(e).__name__}")
+            return None
+        if not body:                    # 204: no data for this geography/industry
+            return None
+        rows = json.loads(body)
+        if len(rows) < 2:
+            return None
+        rec = dict(zip(rows[0], rows[1]))
+        out = {}
+        for f in fields:
+            try:
+                out[f] = float(rec.get(f))
+            except (TypeError, ValueError):
+                pass
+        return out or None
+    return None
+
+
+def fetch_census(series_ids, naics):
+    """Return {"<dataset>-<geo>:<field>": {"dates", "values"}} of annual counts,
+    trying every year from 2012 to last year (unpublished years are skipped)."""
+    geos = {"AK": "state:02", "US": "us:1"}
+    want = {}
+    for sid in series_ids:
+        ds_geo, field = sid.split(":")
+        ds, geo = ds_geo.split("-")
+        want.setdefault((ds, geo), []).append(field)
+    found = {}
+    for (ds, geo), fields in want.items():
+        for year in range(2012, date.today().year):
+            got = census_get(year, ds, fields, geos[geo], naics)
+            time.sleep(0.3)
+            for f, v in (got or {}).items():
+                found.setdefault(f"{ds}-{geo}:{f}", {})[f"{year}-01-01"] = v
+    out = {}
+    for sid, obs in found.items():
+        d = sorted(obs)
+        # County Business Patterns reports 0 when a value is withheld; drop those.
+        vals = [obs[x] for x in d]
+        keep = [i for i, v in enumerate(vals) if v > 0]
+        if keep:
+            out[sid] = {"dates": [d[i] for i in keep], "values": [vals[i] for i in keep]}
+    return out
+
+
 # ---------- Alaska DOLWD ----------
 
 MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august",
@@ -338,6 +427,8 @@ def build(slug, cfg):
         got = fetch_dolwd(set(meta))
     elif cfg["source"] == "eia":
         got = fetch_eia(set(meta))
+    elif cfg["source"] == "census":
+        got = fetch_census(set(meta), cfg["naics"])
     else:
         got = {}
         for sid, m in meta.items():
