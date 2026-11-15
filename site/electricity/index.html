@@ -107,11 +107,6 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .pce-fig figcaption{display:flex;flex-direction:column;gap:2px}
 .pce-fig figcaption b{font-family:var(--display)}
 .pce-fig figcaption span{font-size:13px;color:var(--muted)}
-.pce-calc label{min-width:0}
-.pce-calc select{width:100%;min-width:0;text-overflow:ellipsis}
-.pce-calc .out div{flex:1 1 130px}
-.pce-calc .pv{font-family:var(--display);font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
-.pce-calc input[type=range]{accent-color:var(--ink);padding:0;border:0;min-height:44px}
 @media (max-width:860px){.pce-grid{grid-template-columns:1fr}}
 .things{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
 .thing{border:1px solid var(--rule);border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:4px;background:#fff}
@@ -202,19 +197,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
       <figcaption><b>Who pays for one kWh</b><span id="pce-figsub"></span></figcaption>
       <div id="pce-stack"></div>
     </figure>
-  </div>
-  <div class="calc pce-calc">
-    <div class="row">
-      <label>Place<select id="p-u"></select></label>
-      <label>Use per month <span id="p-kv" class="pv">500 kWh</span><input id="p-k" type="range" min="0" max="1500" step="25" value="500"></label>
-    </div>
-    <div id="pce-chart"></div>
-    <div class="out">
-      <div><b id="p-before">—</b><span>Bill without PCE</span></div>
-      <div><b id="p-after" style="color:var(--ak)">—</b><span>Household pays with PCE</span></div>
-      <div><b id="p-state" style="color:var(--pce)">—</b><span>State pays</span></div>
-      <div><b id="p-eff">—</b><span>Household's price per kWh</span></div>
-    </div>
   </div>
   <p class="note" id="pcenote"></p>
 </section>
@@ -322,20 +304,8 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     // are set per community from utility costs and can be lower.
     const PCE = {base: 22.11, cap: 100, share: 0.95, kwh: 750, fy: 'FY2027'};  // updated each July; FY2026 was 20.38
     const credit = c => c > PCE.base ? PCE.share * (Math.min(c, PCE.cap) - PCE.base) : 0;
-    const PCE_PLACES = [
-      [/^Alaska Village Elec/, 'Rural villages (AVEC, 58 communities)'],
-      [/^Kotzebue/, 'Kotzebue'],
-      [/^Alaska Power and Tel/, 'Tok, Skagway, Craig (AP&T)'],
-    ];
-    const pl = [];
-    for (const [re, l] of PCE_PLACES) { const u = U.utilities.find(x => re.test(x.utility)); if (u && u.residential_price) pl.push({l, c: u.residential_price}); }
-    // utilities that report only an all-customer price: use it, labelled
-    U.utilities.filter(u => u.customers < 1000 && u.total_price > 40 && u.total_price < 100 && u.region !== 'Railbelt')
-      .sort((a, b) => b.total_price - a.total_price).slice(0, 6)
-      .forEach(u => pl.push({l: tidy(u.utility) + ' (all-customer average)', c: u.total_price}));
-    pl.push({l: 'Anchorage (Chugach, not eligible)', c: (U.utilities.find(x => /^Chugach Elec/.test(x.utility)) || {}).residential_price || PCE.base, none: 1});
-    const ps = $('p-u');
-    ps.innerHTML = pl.map((x, i) => `<option value="${i}">${esc(x.l)} · ${fmt(x.c, 1)}¢</option>`).join('');
+    const avec = U.utilities.find(x => /^Alaska Village Elec/.test(x.utility));
+    const stackPrice = (avec && (avec.residential_price || avec.total_price)) || 60;
     function stack(c, none) {
       const host = $('pce-stack'); host.innerHTML = '';
       const cr = none ? 0 : credit(c), hh = c - cr;
@@ -356,43 +326,10 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       el('text', {x: x0 - 18, y: Y(PCE.base) + 4, 'text-anchor': 'end', 'font-size': 11, 'font-weight': 600, fill: '#14213D'}, sv, 'base');
       el('text', {x: x0 + bw / 2, y: H - 8, 'text-anchor': 'middle', 'font-size': 12, fill: '#5A6580'}, sv, `${fmt(c, 1)}¢ per kWh`);
       host.appendChild(sv);
-      $('pce-figsub').textContent = none ? 'Railbelt and Juneau households are not eligible.' : `First 750 kWh a month, at ${fmt(c, 1)}¢ per kWh.`;
+      $('pce-figsub').textContent = none ? 'Railbelt and Juneau households are not eligible.' : `Rural villages served by AVEC, first 750 kWh a month, at ${fmt(c, 1)}¢ per kWh.`;
     }
-    function curve(c, none, k) {
-      const host = $('pce-chart'); host.innerHTML = '';
-      const W = Math.max(340, Math.min(760, host.clientWidth || 760)), H = W < 500 ? 230 : 260, L = 54, R = W < 500 ? 90 : 120, T = 12, B = 30, KM = 1500;
-      const full = q => q * c / 100, paid = q => none ? full(q) : full(q) - Math.min(q, PCE.kwh) * credit(c) / 100;
-      const ymax = Math.max(100, Math.ceil(full(KM) / 100) * 100);
-      const X = q => L + q / KM * (W - L - R), Y = v => T + (1 - v / ymax) * (H - T - B);
-      const sv = el('svg', {viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': 'Monthly bill by kWh used, with and without PCE'});
-      const step = ymax / 4;
-      for (let g = 0; g <= ymax + 1; g += step) { el('line', {x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: '#E4E9F0'}, sv); el('text', {x: L - 6, y: Y(g) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#5A6580'}, sv, '$' + fmt(g)); }
-      (W < 500 ? [0, 750, 1500] : [0, 250, 500, 750, 1000, 1250, 1500]).forEach(q => el('text', {x: X(q), y: H - 10, 'text-anchor': 'middle', 'font-size': 11, fill: '#5A6580'}, sv, q === 1500 ? '1,500 kWh' : fmt(q)));
-      if (!none) {
-        const pts = [0, PCE.kwh, KM];
-        el('polygon', {points: pts.map(q => `${X(q)},${Y(full(q))}`).concat(pts.slice().reverse().map(q => `${X(q)},${Y(paid(q))}`)).join(' '), fill: '#2F8F6B', 'fill-opacity': .14}, sv);
-        el('line', {x1: X(PCE.kwh), x2: X(PCE.kwh), y1: T, y2: H - B, stroke: '#14213D', 'stroke-dasharray': '4 3'}, sv);
-        el('text', {x: X(PCE.kwh) + 6, y: T + 12, 'font-size': 11, fill: '#14213D'}, sv, 'PCE stops at 750 kWh');
-      }
-      el('polyline', {points: [0, KM].map(q => `${X(q)},${Y(full(q))}`).join(' '), fill: 'none', stroke: '#7A8499', 'stroke-width': 2.5}, sv);
-      el('polyline', {points: [0, PCE.kwh, KM].map(q => `${X(q)},${Y(paid(q))}`).join(' '), fill: 'none', stroke: '#1F5FA8', 'stroke-width': 3}, sv);
-      el('text', {x: X(KM) + 6, y: Y(full(KM)) + 4, 'font-size': 12, 'font-weight': 600, fill: '#7A8499'}, sv, 'Without PCE');
-      if (!none) el('text', {x: X(KM) + 6, y: Y(paid(KM)) + 4, 'font-size': 12, 'font-weight': 600, fill: '#1F5FA8'}, sv, 'With PCE');
-      el('circle', {cx: X(k), cy: Y(paid(k)), r: 6, fill: '#1F5FA8', stroke: '#fff', 'stroke-width': 2}, sv);
-      if (!none) el('circle', {cx: X(k), cy: Y(full(k)), r: 5, fill: '#7A8499', stroke: '#fff', 'stroke-width': 2}, sv);
-      host.appendChild(sv);
-      return [full(k), paid(k)];
-    }
-    function pce() {
-      const x = pl[+ps.value], k = +$('p-k').value; $('p-kv').textContent = fmt(k) + ' kWh';
-      stack(x.c, x.none);
-      const [b, a] = curve(x.c, x.none, k);
-      $('p-before').textContent = '$' + fmt(b); $('p-after').textContent = '$' + fmt(a);
-      $('p-state').textContent = '$' + fmt(b - a); $('p-eff').textContent = k ? fmt(a / k * 100, 1) + '¢' : '—';
-    }
-    ps.addEventListener('change', pce); $('p-k').addEventListener('input', pce); pce();
-    let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(pce, 150); });
-    $('pcenote').textContent = `Estimates. They apply ${PCE.fy} program rules (base rate ${PCE.base}¢, 95% of the gap, $1.00 cap, 750 kWh) to each utility's ${Y} average residential price from EIA-861, or its all-customer price where no residential figure is reported. Actual PCE credits are set for each community from the utility's costs, so they can be lower, and are cut when the fund falls short. Bills leave out fixed customer charges and taxes.`;
+    stack(stackPrice);
+    $('pcenote').textContent = `The bar uses AVEC's ${Y} average household price (${fmt(stackPrice, 1)}¢ per kWh) with ${PCE.fy} program rules: base rate ${PCE.base}¢, 95% of the gap, $1.00 cap. Actual PCE credits are set for each community from the utility's costs, so they can be lower, and are cut when the fund falls short.`;
     // ----- everyday things -----
     // kWh per use: typical figures for an average U.S. home (DOE/ENERGY STAR typical wattages).
     const THINGS = [
