@@ -124,6 +124,16 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .things-ctl .chk input{width:20px;height:20px;min-height:0;accent-color:var(--pce)}
 .things-ctl .chk small{font-weight:400;color:var(--muted);display:block}
 .things-ctl .chk[hidden]{display:none}
+.lat-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.latest h3{font-size:18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:4px}
+.latest h3 span{font-family:var(--sans);font-size:12px;font-weight:400;color:var(--muted)}
+.lat{list-style:none;margin:0;padding:0}
+.lat li{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:15px;color:var(--body);line-height:1.4}
+.lat li.na{display:block;color:var(--muted);font-size:14px}
+.lat .d{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.lat b{color:var(--ink)}
+.lat .up{color:var(--accent)} .lat .dn{color:var(--ak)}
+@media (max-width:760px){.lat-grid{grid-template-columns:1fr}}
 svg text{font-family:var(--sans)}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:760px){.top{grid-template-columns:1fr}}
@@ -150,6 +160,19 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   </figure>
 </section>
 
+<section class="sec latest" aria-labelledby="h-latest">
+  <div class="sech"><span class="kick">Latest</span><h2 id="h-latest">What changed recently</h2></div>
+  <div class="lat-grid">
+    <div>
+      <h3>Prices and sales <span>EIA, monthly</span></h3>
+      <ol class="lat" id="lat-price"></ol>
+    </div>
+    <div>
+      <h3>Power plants <span>EIA plant inventory, monthly</span></h3>
+      <ol class="lat" id="lat-plants"><li class="na">Loads after the next data refresh.</li></ol>
+    </div>
+  </div>
+</section>
 <section class="sec" aria-labelledby="h-reg">
   <div class="sech">
     <span class="kick">By region</span>
@@ -452,6 +475,35 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
 })();
 
 
+
+// ----- latest changes -----
+(function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fmt = (v, d = 0) => v.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const mlab = d => MON[+d.slice(5, 7) - 1] + ' ' + d.slice(0, 4);
+  const chg = (v, plain) => v == null ? '' : `<span class="${plain ? '' : v > 0 ? 'up' : v < 0 ? 'dn' : ''}">${v > 0 ? '+' : v < 0 ? '−' : ''}${fmt(Math.abs(v), 1)}%</span>`;
+  const get = u => fetch(u, {cache: 'no-cache'}).then(r => r.ok ? r.json() : Promise.reject());
+  const fb = () => (window.SNAPSHOT || {}).energy;
+  get('/data/energy.json').catch(fb).then(E => {
+    const S = k => { const s = E && E.series[k]; return s ? new Map(s.dates.map((d, i) => [d, s.values[i]])) : new Map(); };
+    const P = S('AK-ALL'), R = S('AK-RES'), Q = S('AK-ALL:sales'), US = S('US-ALL');
+    const dates = [...P.keys()].sort().slice(-3).reverse();
+    const yoy = (m, d) => { const a = m.get((+d.slice(0, 4) - 1) + d.slice(4)), b = m.get(d); return a && b ? (b / a - 1) * 100 : null; };
+    $('lat-price').innerHTML = dates.map(d => {
+      const p = P.get(d), r = R.get(d), q = Q.get(d), u = US.get(d);
+      return `<li><span class="d">${mlab(d)}</span><span><b>${fmt(p, 1)}¢</b> average price, ${chg(yoy(P, d))} from a year earlier${u ? ` (U.S. ${fmt(u, 1)}¢)` : ''}.` +
+        (r ? ` Households ${fmt(r, 1)}¢.` : '') + (q ? ` <b>${fmt(q)} GWh</b> sold, ${chg(yoy(Q, d), true)}.` : '') + `</span></li>`;
+    }).join('') || '<li class="na">Not available right now.</li>';
+  }).catch(() => {});
+  get('/data/electricity-plant-changes.json').then(D => {
+    const items = [...(D.additions || []).map(g => ({...g, kind: 'add'})), ...(D.retirements || []).map(g => ({...g, kind: 'ret'}))]
+      .filter(g => g.month).sort((a, b) => b.month.localeCompare(a.month)).slice(0, 3);
+    if (!items.length) return;
+    $('lat-plants').innerHTML = items.map(g => `<li><span class="d">${mlab(g.month + '-01')}</span><span>${g.kind === 'add' ? '<b>Added:</b>' : '<b>Retired:</b>'} ${esc(g.plant)}, ${g.mw ? fmt(g.mw, g.mw < 10 ? 1 : 0) + ' MW ' : ''}${esc((g.fuel || '').toLowerCase())}${g.owner ? ' (' + esc(g.owner.replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op').replace(/^U S /, 'U.S. ')) + ')' : ''}.</span></li>`).join('');
+  }).catch(() => {});
+})();
 </script>
 </body>
 </html>
