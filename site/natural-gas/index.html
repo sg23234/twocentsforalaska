@@ -87,13 +87,19 @@ td small{display:block;font-size:12px;color:var(--muted);font-weight:400}
 .hrow .t{height:18px;background:var(--tile);border-radius:2px;overflow:hidden}
 .hrow .t i{display:block;height:100%;background:var(--ak)}
 .hrow .p{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-size:14px}
+.tmh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tmh b{font-family:var(--display);font-size:clamp(36px,4.6vw,48px);line-height:1;color:var(--ak);font-variant-numeric:tabular-nums}
+.tmh span{font-size:14px;color:var(--body);max-width:30ch}
+.tm{position:relative;height:300px;border-radius:4px;overflow:hidden}
+.tm div{position:absolute;padding:10px 12px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;border:2px solid #fff;transition:filter .15s}
+.tm div:hover{filter:brightness(1.08)}
+.tm b{font-family:var(--display);font-size:clamp(22px,3vw,34px);line-height:1;font-variant-numeric:tabular-nums}
+.tm span{font-size:13px;font-weight:600;line-height:1.2}
+.tm small{display:block;font-size:11px;font-weight:400;opacity:.85}
+.tm .sm b{font-size:20px}.tm .sm small{display:none}
+.tm .xs{padding:8px 4px;align-items:center}.tm .xs b{font-size:15px}.tm .xs span{display:none}
 /* contract timeline */
 #cliff{height:330px}
-/* winter */
-.log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:2px solid var(--ink)}
-.log li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;padding:12px 0;border-bottom:1px solid var(--rule)}
-.log time{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap}
-.log p{font-size:15px;color:var(--body);max-width:78ch}
 .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--tile);border:1px solid var(--rule);color:var(--body);white-space:nowrap}
 .notes{margin:0;padding-left:18px;font-size:14px;color:var(--body);display:flex;flex-direction:column;gap:6px;max-width:90ch}
 .srcs{margin:0;padding-left:18px;font-size:13px;color:var(--muted);columns:2 380px;column-gap:32px}
@@ -101,7 +107,7 @@ td small{display:block;font-size:12px;color:var(--muted);font-weight:400}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:860px){.top,.two{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:600px){
-  .log li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .tm{height:360px}
   .slab{grid-template-columns:minmax(0,1fr)}
   .cols{height:190px}.col b{font-size:16px}
   #projects thead{display:none}
@@ -170,7 +176,9 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <div class="panel">
       <h3>Which fields produce it</h3>
       <p id="fldsub"></p>
-      <div id="fld"></div>
+      <div class="tmh"><b id="fldhero">—</b><span id="fldherol"></span></div>
+      <div class="tm" id="fld" role="img"></div>
+      <div class="key" id="fldkey"></div>
     </div>
   </div>
   <p class="note" id="supnote"></p>
@@ -181,12 +189,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <p>Utilities buy most of their gas under long-term contracts with Hilcorp. Chugach Electric's ends first, in 2028. The earliest new sources, an import terminal or the North Slope pipeline, are not expected before 2029.</p></div>
   <div class="fig" id="cliff"></div>
   <p class="note" id="cliffnote"></p>
-</section>
-
-<section class="sec" aria-labelledby="h-win">
-  <div class="sech"><span class="kick">This winter</span><h2 id="h-win">Will there be enough gas?</h2>
-    <p id="winsub">Southcentral uses several times more gas on a cold January day than in summer. Producers can't raise output that fast, so utilities fill storage reservoirs in summer and draw them down in winter.</p></div>
-  <ul class="log" id="win"></ul>
 </section>
 
 <section class="sec" aria-labelledby="h-proj">
@@ -204,7 +206,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <li>Mcf is a thousand cubic feet of gas. Bcf is a billion cubic feet, a million Mcf.</li>
     <li>EIA's city gate price for Alaska is close to what Enstar pays producers, including storage. Customer prices add delivery charges and are averages of all bills in a month, so they swing with the season.</li>
     <li>The Gas Cost Adjustment is Enstar's own figure for the year ahead, filed each May and in effect from July, subject to review by the Regulatory Commission of Alaska.</li>
-    <li>Supply figures for the coming winter change quickly; the dates on each item show when it was reported. <span id="asof"></span></li>
+    <li>Contract, production and project details are kept by hand. <span id="asof"></span></li>
   </ul>
 </section>
 
@@ -306,9 +308,26 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     $('dem').setAttribute('aria-label', P.demand.map(r => `${r.label} ${r.value} billion cubic feet`).join(', '));
     $('dem').innerHTML = P.demand.map((r, i) => `<div style="width:${r.value / dTot * 100}%;background:${DC[i]}">${fmt(r.value / dTot * 100)}%</div>`).join('');
     $('demlab').innerHTML = P.demand.map((r, i) => `<span><b style="color:${DC[i]}">~${r.value} Bcf</b>${esc(r.label)}</span>`).join('');
-    const F = P.fields, fMax = Math.max(...F.rows.map(r => r.value));
+    const F = P.fields;
     $('fldsub').textContent = `Share of Cook Inlet gas production, ${F.year}.`;
-    $('fld').innerHTML = F.rows.map(r => `<div class="hrow"><div class="n">${esc(r.label)}<small>${esc(r.op)}</small></div><div class="t"><i style="width:${r.value / fMax * 100}%"></i></div><div class="p">${r.value}%</div></div>`).join('');
+    // Treemap: blocks sized by share, colored by operator.
+    const opOf = r => /^Hilcorp/.test(r.op) ? 'Hilcorp' : /Furie/.test(r.op) ? 'HEX / Furie' : 'Others';
+    const OPC = {'Hilcorp': ['#123E73', '#1F5FA8', '#3B7BC4', '#6A9BD4'], 'HEX / Furie': ['#0E7C86'], 'Others': ['#7A8499']}, used = {};
+    const items = F.rows.map(r => { const o = opOf(r); used[o] = (used[o] || 0); return Object.assign({}, r, {o, c: OPC[o][Math.min(used[o]++, OPC[o].length - 1)]}); });
+    const hil = items.filter(r => r.o === 'Hilcorp').reduce((t, r) => t + r.value, 0);
+    $('fldhero').textContent = hil + '%';
+    $('fldherol').textContent = `of Cook Inlet gas comes from the four largest fields, all run by Hilcorp.`;
+    $('fld').setAttribute('aria-label', items.map(r => `${r.label} ${r.value}%`).join(', '));
+    $('fldkey').innerHTML = Object.keys(OPC).map(o => `<span><i style="background:${OPC[o][o === 'Hilcorp' ? 1 : 0]}"></i>${o}</span>`).join('');
+    const fl = $('fld');
+    const tm = () => {
+      const W = fl.clientWidth, H = fl.clientHeight; if (!W) return;
+      fl.innerHTML = squarify(items.slice().sort((a, b) => b.value - a.value), 0, 0, W, H).map(b => {
+        const sm = b.w < 120 || b.h < 80, xs = b.w < 64;
+        return `<div class="${xs ? 'xs' : sm ? 'sm' : ''}" style="left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px;background:${b.r.c}" title="${esc(b.r.label)}: ${b.r.value}%"><b>${b.r.value}%</b><span>${esc(b.r.label)}<small>${esc(b.r.op)}</small></span></div>`;
+      }).join('');
+    };
+    new ResizeObserver(tm).observe(fl);
     $('supnote').textContent = `Production is gas sold, net of gas reinjected into oil fields and gas cycled through storage. Source: ${P.source}.`;
 
     // ----- contract timeline -----
@@ -316,14 +335,27 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     new ResizeObserver(() => cliff(cl, P)).observe(cl);
     $('cliffnote').textContent = 'Bars show the term of each utility\'s main Hilcorp contract; labels on the right are each utility\'s share of utility gas under contract in 2025. Homer Electric buys gas from Enstar; Interior Gas Utility trucks LNG to Fairbanks. New-supply dates are developers\' targets and have already slipped once.';
 
-    // ----- winter -----
-    $('win').innerHTML = M.winter.items.map(w => `<li><time>${esc(w.date)}</time><p>${esc(w.text)}</p></li>`).join('');
-
     // ----- projects -----
     $('proj').innerHTML = M.projects.map(p => `<tr><td class="n">${esc(p.name)}<small>${esc(p.who)}</small></td><td>${esc(p.what)}</td><td>${esc(p.when)}</td><td><span class="badge">${esc(p.status)}</span></td></tr>`).join('');
 
     $('asof').textContent = `Hand-kept figures last checked ${M.as_of}.`;
     $('srcs').innerHTML += M.sources.map(([n, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('');
+  }
+
+  // Squarified treemap layout: returns [{r, x, y, w, h}].
+  function squarify(rs, x, y, w, h) {
+    const out = [], total = rs.reduce((t, r) => t + r.value, 0);
+    let rest = rs.map(r => ({r, a: r.value / total * w * h}));
+    while (rest.length) {
+      const side = Math.min(w, h); let row = [rest[0]], i = 1;
+      const worst = row => { const s = row.reduce((t, o) => t + o.a, 0), mx = Math.max(...row.map(o => o.a)), mn = Math.min(...row.map(o => o.a)); return Math.max(side * side * mx / (s * s), s * s / (side * side * mn)); };
+      while (i < rest.length && worst(row.concat(rest[i])) <= worst(row)) row.push(rest[i++]);
+      const s = row.reduce((t, o) => t + o.a, 0);
+      if (w >= h) { const cw = s / h; let cy = y; row.forEach(o => { const ch = o.a / cw; out.push({r: o.r, x, y: cy, w: cw, h: ch}); cy += ch; }); x += cw; w -= cw; }
+      else { const ch = s / w; let cx = x; row.forEach(o => { const cw = o.a / ch; out.push({r: o.r, x: cx, y, w: cw, h: ch}); cx += cw; }); y += ch; h -= ch; }
+      rest = rest.slice(i);
+    }
+    return out;
   }
 
   function trend(host, lines) {
