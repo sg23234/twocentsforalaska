@@ -53,6 +53,7 @@ td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body);vertic
 td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
 td.p{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink)}
 td.u{font-weight:600;color:var(--ink)}
+td.bill{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
 tr.g th{padding:18px 12px 6px;font-family:var(--display);font-size:19px;letter-spacing:0;text-transform:none;color:var(--ink);border-bottom:2px solid var(--ink)}
 tr.g th span{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);margin-left:10px}
 .note{margin:0;font-size:13px;color:var(--muted)}
@@ -158,7 +159,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   </div>
   <div class="regions" id="regions"></div>
   <div class="tbl"><table>
-    <thead><tr><th scope="col">#</th><th scope="col">Utility</th><th scope="col" class="r">¢/kWh</th><th scope="col" class="r">× U.S.</th><th scope="col" class="r" id="chgh">Change</th><th scope="col" class="r">Customers</th><th scope="col">vs U.S. average</th></tr></thead>
+    <thead><tr><th scope="col">#</th><th scope="col">Utility</th><th scope="col" class="r">¢/kWh</th><th scope="col" class="r">× U.S.</th><th scope="col" class="r" id="chgh">Change</th><th scope="col" class="r">Customers</th><th scope="col" class="r">Bill, 1,000 kWh</th></tr></thead>
     <tbody id="rows"></tbody>
   </table></div>
   <p class="note" id="tblnote"></p>
@@ -283,13 +284,11 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       regEl.querySelectorAll('.reg').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.r === active)));
       table();
     });
-    const MAX = Math.max(...U.utilities.filter(u => u.customers >= 1000).map(u => u.total_price)) * 1.15;
-    const bar = p => (p = Math.min(p, MAX), `<svg width="170" height="12" viewBox="0 0 170 12" aria-hidden="true"><rect x="0" y="2" width="170" height="8" fill="#F6F8FB"/><rect x="0" y="2" width="${(p / MAX * 170).toFixed(1)}" height="8" fill="#1F5FA8"/><line x1="${(usT / MAX * 170).toFixed(1)}" x2="${(usT / MAX * 170).toFixed(1)}" y1="0" y2="12" stroke="#C2610C" stroke-width="2"/></svg>`);
     // Utilities with fewer than SMALL customers fold into one row per region (still counted in region averages).
     const SMALL = 1000, open_ = new Set();
     const row = (u, i, cls = '') => `<tr${cls}><td class="r" style="color:var(--muted);font-weight:600">${i}</td><td class="u">${esc(tidy(u.utility))}</td>
           <td class="r p">${fmt(u.total_price, 1)}</td><td class="r">${fmt(u.total_price / usT, 1)}×</td><td class="r">${sgn(u.change_pct)}</td>
-          <td class="r">${fmt(u.customers)}</td><td>${bar(u.total_price)}</td></tr>`;
+          <td class="r">${fmt(u.customers)}</td><td class="r bill">$${fmt(u.total_price * 10)}</td></tr>`;
     function table() {
       let i = 0, html = '';
       for (const [k, r] of regs) {
@@ -302,7 +301,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
           const mwh = sm.reduce((t, u) => t + u.sales_mwh, 0), p = sm.reduce((t, u) => t + u.total_price * u.sales_mwh, 0) / (mwh || 1);
           const cust = sm.reduce((t, u) => t + u.customers, 0), on = open_.has(k);
           html += `<tr class="sm"><td></td><td class="u"><button type="button" class="tog" data-r="${esc(k)}" aria-expanded="${on}">${on ? '▾' : '▸'} ${sm.length} small ${sm.length === 1 ? 'utility' : 'utilities'} <span>under ${fmt(SMALL)} customers each</span></button></td>
-            <td class="r p">${fmt(p, 1)}</td><td class="r">${fmt(p / usT, 1)}×</td><td class="r"></td><td class="r">${fmt(cust)}</td><td>${bar(p)}</td></tr>`;
+            <td class="r p">${fmt(p, 1)}</td><td class="r">${fmt(p / usT, 1)}×</td><td class="r"></td><td class="r">${fmt(cust)}</td><td class="r bill">$${fmt(p * 10)}</td></tr>`;
           if (on) for (const u of sm) html += row(u, '', ' class="sub"');
         }
       }
@@ -314,7 +313,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       const nb = $('rows').querySelector(`.tog[data-r="${CSS.escape(k)}"]`); if (nb) nb.focus();
     });
     table();
-    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y} (orange tick), the same figure as in the chart at the top. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Bars are cut off at the right edge for the highest-priced small utilities. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
+    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y}, the same figure as in the chart at the top. The bill is 1,000 kWh at the utility's all-customer average price, so fixed monthly charges are spread over each kWh. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
 
     // ----- Power Cost Equalization -----
     // Program rules (AEA / RCA): base rate = Anchorage-Fairbanks-Juneau residential average,
