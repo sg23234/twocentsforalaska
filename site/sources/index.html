@@ -69,10 +69,31 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <h3>Electricity page: utilities and regions</h3>
     <dl>
       <dt>Shows</dt><dd>Average price per kWh for each Alaska utility and for groups of utilities by region, how each compares with the U.S. average, the change from the year before, and a monthly bill estimate.</dd>
-      <dt>Source</dt><dd>U.S. Energy Information Administration, <a href="https://www.eia.gov/electricity/data/eia861/" target="_blank" rel="noopener">Form EIA-861 Annual Electric Power Industry Report</a>: Sales to Ultimate Customers (long form) and the Short Form (EIA-861S) for small utilities. Hawaii, Washington and U.S. averages come from the same files.</dd>
-      <dt>Method</dt><dd>Price = revenue ÷ kWh sold, by customer type and for all customers. Region averages are weighted by kWh sold. Regions are Two Cents for Alaska's own grouping, loosely following Alaska Energy Authority energy regions, and are listed in <code>data/manual/electricity-regions.json</code>. The bill estimate multiplies monthly use by the utility's average rate for that customer type.</dd>
+      <dt>Source</dt><dd>U.S. Energy Information Administration, <a href="https://www.eia.gov/electricity/data/eia861/" target="_blank" rel="noopener">Form EIA-861 Annual Electric Power Industry Report</a>: Sales to Ultimate Customers (long form) and the Short Form (EIA-861S) for small utilities. Hawaii and Washington averages come from the same files.</dd>
+      <dt>Method</dt><dd>Price = revenue ÷ kWh sold, by customer type and for all customers. Region averages are weighted by kWh sold. Regions are Two Cents for Alaska's own grouping, loosely following Alaska Energy Authority energy regions, and are listed in <code>data/manual/electricity-regions.json</code>. Regions are ordered by customers served. In the table, utilities with fewer than 1,000 customers are grouped into one row per region, priced by kWh-weighted average; they are still counted in region averages. The bill estimate multiplies monthly use by the utility's average rate for that customer type.</dd>
+      <dt>U.S. average</dt><dd>One figure is used for each year across the page: the U.S. all-sector average price from EIA's monthly data, averaged over the year weighted by kWh sold (revenue ÷ kWh, EIA's own method). U.S. averages computed from EIA-861 count only the energy-supplier row for customers in retail-choice states. The delivery utility's row repeats the same kWh and is counted for revenue only, so electricity is not counted twice.</dd>
+      <dt>Excluded</dt><dd>Napakiak Ircinraq Power Co. Its 2025 EIA-861 figures (214¢ per kWh, up 143% from 2024) look like a reporting error. Exclusions are listed in <code>data/manual/electricity-regions.json</code>.</dd>
       <dt>Updates</dt><dd>Annual. EIA publishes final data for a year in the fall of the following year; this site picks up a new year automatically.</dd>
       <dt>Notes</dt><dd>Covers utilities that report to EIA. Some of the smallest village utilities report only to the state's Power Cost Equalization program and are not included. Prices are before Power Cost Equalization credits.</dd>
+    </dl>
+  </div>
+  <div class="src" id="electricity-pce">
+    <h3>Electricity page: Power Cost Equalization</h3>
+    <dl>
+      <dt>Shows</dt><dd>How the state's Power Cost Equalization (PCE) credit is set, program totals, and an estimate of what a village household pays after the credit.</dd>
+      <dt>Source</dt><dd>Alaska Energy Authority, <a href="https://www.akenergyauthority.org/What-We-Do/Power-Cost-Equalization" target="_blank" rel="noopener">Power Cost Equalization program</a> materials (program rules; FY2025: $46 million, 188 communities, 81,000+ Alaskans). Base rate from the Regulatory Commission of Alaska: 20.38¢ per kWh for FY2026, with 22.11¢ proposed for FY2027.</dd>
+      <dt>Method</dt><dd>Credit per kWh = 95% × (cost − base rate), with cost capped at $1.00, on a home's first 750 kWh a month. The estimate uses each utility's average residential price from EIA-861 as its cost, or the all-customer price where no residential figure is reported.</dd>
+      <dt>Updates</dt><dd>By hand when the base rate changes (each July) or new program totals are published.</dd>
+      <dt>Notes</dt><dd>Estimates only. Actual PCE levels are set for each community from the utility's own costs and can be lower, and payments are cut in proportion when fund earnings fall short.</dd>
+    </dl>
+  </div>
+  <div class="src" id="electricity-compare">
+    <h3>Electricity page: household comparison</h3>
+    <dl>
+      <dt>Shows</dt><dd>Monthly household bill at the average residential price per kWh for selected Alaska places, Hawaii, Washington, the U.S., Iceland, Norway and British Columbia.</dd>
+      <dt>Sources</dt><dd>Alaska, Hawaii, Washington and U.S.: EIA-861 residential averages. Norway: <a href="https://www.ssb.no/en/energi-og-industri/energi/statistikk/elektrisitetspriser" target="_blank" rel="noopener">Statistics Norway</a>, 2025 household price including grid rent and taxes, before state support (141.7 øre/kWh). Iceland: <a href="https://www.globalpetrolprices.com/Iceland/electricity_prices/" target="_blank" rel="noopener">GlobalPetrolPrices</a>, March 2025, all taxes and fees (USD 0.201/kWh). British Columbia: <a href="https://www.bcuc.com/WhatWeDo/ResidentialEnergyRates" target="_blank" rel="noopener">BC Utilities Commission</a>, BC Hydro residential rate from April 2025 (basic charge, step 1 and step 2), at 750 kWh a month, with 5% GST. Exchange rates: <a href="https://www.federalreserve.gov/releases/g5a/" target="_blank" rel="noopener">Federal Reserve G.5A</a> 2025 averages (NOK 10.3852, CAD 1.3973 per USD).</dd>
+      <dt>Updates</dt><dd>U.S. figures update automatically each year. The figures for Iceland, Norway and British Columbia are entered by hand in the page and need a yearly update.</dd>
+      <dt>Notes</dt><dd>U.S. figures exclude sales tax; the figures outside the U.S. include taxes. Alaska figures are before PCE credits.</dd>
     </dl>
   </div>
 </section>
