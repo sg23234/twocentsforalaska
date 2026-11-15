@@ -375,10 +375,10 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     sel.addEventListener('change', calc); $('c-pce').addEventListener('change', calc); $('things').addEventListener('input', calc); calc();
     // ----- household comparison -----
     // Outside the U.S.: 2025 household prices including taxes and grid charges,
-    // converted at Federal Reserve 2025 average exchange rates (NOK 10.3852, CAD 1.3973 per USD, USD 1.1306 per EUR).
+    // converted at Federal Reserve 2025 average exchange rates (CAD 1.3973 per USD, USD 1.1306 per EUR).
     const ABROAD = [
       {l: 'Iceland', d: 'Household average, 2025 (Eurostat)', v: 23.2},
-      {l: 'Norway', d: 'Household average, 2025, before state support', v: 13.6},
+      {l: 'Norway', d: 'Household average, 2025 (Eurostat)', v: 22.1},
       {l: 'British Columbia', d: 'BC Hydro, 2025 rate', v: 9.7},
     ];
     const PLACES = [  // one place for each part of Alaska
@@ -410,8 +410,8 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       });
     }
     cmp();
-    $('ladnote').textContent = `Bill = use × average household price per kWh, with fixed monthly charges spread over each kWh. Alaska, Hawaii, Washington and U.S. figures are ${Y} EIA-861 residential averages, before sales tax and before Power Cost Equalization credits, which lower the price of the first 750 kWh a month for village households. Iceland: Eurostat, 2025 average of both half-years, households using 2,500–5,000 kWh a year, all taxes included, converted at the Federal Reserve's 2025 average rate. Norway: Statistics Norway, including grid rent and taxes. British Columbia: BC Hydro's 2025 residential rate at 750 kWh a month, including the basic charge and 5% GST.`;
-    $('src').innerHTML = `Sources: U.S. Energy Information Administration — Electric Power Monthly (state averages) and <a href="https://www.eia.gov/electricity/data/eia861/">Form EIA-861</a> (${Y} utility data, long and short form). Region grouping is Two Cents for Alaska's own. PCE: <a href="https://www.akenergyauthority.org/What-We-Do/Power-Cost-Equalization">Alaska Energy Authority</a> program rules and FY2025 totals; base rate from the Regulatory Commission of Alaska. Comparisons: <a href="https://www.ssb.no/en/energi-og-industri/energi/statistikk/elektrisitetspriser">Statistics Norway</a>, <a href="https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table">Eurostat</a> (Iceland), <a href="https://www.bcuc.com/WhatWeDo/ResidentialEnergyRates">BC Utilities Commission</a>; exchange rates from <a href="https://www.federalreserve.gov/releases/g5a/">Federal Reserve G.5A</a>.`;
+    $('ladnote').textContent = `Bill = use × average household price per kWh, with fixed monthly charges spread over each kWh. Alaska, Hawaii, Washington and U.S. figures are ${Y} EIA-861 residential averages, before sales tax and before Power Cost Equalization credits, which lower the price of the first 750 kWh a month for village households. Iceland and Norway: Eurostat, 2025 average of both half-years, households using 2,500–5,000 kWh a year, all taxes included and, for Norway, after state electricity support; converted at the Federal Reserve's 2025 average rate. British Columbia: BC Hydro's 2025 residential rate at 750 kWh a month, including the basic charge and 5% GST.`;
+    $('src').innerHTML = `Sources: U.S. Energy Information Administration — Electric Power Monthly (state averages) and <a href="https://www.eia.gov/electricity/data/eia861/">Form EIA-861</a> (${Y} utility data, long and short form). Region grouping is Two Cents for Alaska's own. PCE: <a href="https://www.akenergyauthority.org/What-We-Do/Power-Cost-Equalization">Alaska Energy Authority</a> program rules and FY2025 totals; base rate from the Regulatory Commission of Alaska. Comparisons: <a href="https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table">Eurostat</a> (Iceland, Norway), <a href="https://www.bcuc.com/WhatWeDo/ResidentialEnergyRates">BC Utilities Commission</a>; exchange rates from <a href="https://www.federalreserve.gov/releases/g5a/">Federal Reserve G.5A</a>.`;
   }
 
   // Calendar-year average price. Weighted by kWh sold when monthly sales are present
