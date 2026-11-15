@@ -490,7 +490,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
   get('/data/energy.json').catch(fb).then(E => {
     const S = k => { const s = E && E.series[k]; return s ? new Map(s.dates.map((d, i) => [d, s.values[i]])) : new Map(); };
     const P = S('AK-ALL'), R = S('AK-RES'), Q = S('AK-ALL:sales'), US = S('US-ALL');
-    const dates = [...P.keys()].sort().slice(-3).reverse();
+    const dates = [...P.keys()].sort().slice(-5).reverse();
     const yoy = (m, d) => { const a = m.get((+d.slice(0, 4) - 1) + d.slice(4)), b = m.get(d); return a && b ? (b / a - 1) * 100 : null; };
     $('lat-price').innerHTML = dates.map(d => {
       const p = P.get(d), r = R.get(d), q = Q.get(d), u = US.get(d);
