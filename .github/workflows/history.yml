@@ -1,0 +1,15 @@
+name: History pull
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: python3 scripts/fetch_history.py
+      - run: |
+          git config user.name "data-bot"; git config user.email "data-bot@users.noreply.github.com"
+          git add site/data/manual/usaspending-ak.json
+          git diff --cached --quiet || (git commit -m "USAspending history for Alaska" && git pull --rebase -q origin main && git push)
