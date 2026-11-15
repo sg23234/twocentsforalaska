@@ -83,57 +83,6 @@
     }
    ]
   },
-  "contracts": [
-   {
-    "label": "Enstar",
-    "share": 49,
-    "sub": "Gas for about 150,000 homes and businesses; also supplies Homer Electric",
-    "end": "2033-03",
-    "note": "Hilcorp firm contract, 28 Bcf a year plus 4.4 Bcf of options, ends March 2033"
-   },
-   {
-    "label": "Chugach Electric",
-    "share": 28,
-    "sub": "Anchorage power",
-    "end": "2028-03",
-    "note": "Firm Hilcorp contract ends March 31, 2028"
-   },
-   {
-    "label": "Matanuska Electric",
-    "share": 10,
-    "sub": "Mat-Su power",
-    "end": "2029-03",
-    "note": "Hilcorp contract through March 2029; Enstar will buy MEA's gas after that"
-   },
-   {
-    "label": "Homer Electric",
-    "share": 7,
-    "sub": "Kenai Peninsula power",
-    "end": null,
-    "note": "Buys its gas from Enstar"
-   },
-   {
-    "label": "Interior Gas Utility",
-    "share": 6,
-    "sub": "Fairbanks, gas trucked as LNG",
-    "end": null,
-    "note": ""
-   }
-  ],
-  "new_supply": [
-   {
-    "label": "Kenai LNG import terminal (Harvest)",
-    "start": "2029-01"
-   },
-   {
-    "label": "Alaska LNG pipeline, first gas target",
-    "start": "2029-01"
-   },
-   {
-    "label": "Cook Inlet Gateway terminal (Glenfarne, Enstar)",
-    "start": "2029-06"
-   }
-  ],
   "source": "Alaska Department of Natural Resources, Division of Oil and Gas, legislative presentations Jan 2026; AOGCC production data via Petroleum News"
  },
  "projects": [
@@ -247,10 +196,6 @@
   [
    "Alaska Beacon, Second Cook Inlet lease sale planned after first sale flops, Oct 12, 2026",
    "https://alaskabeacon.com/2026/10/12/second-big-beautiful-lease-sale-in-alaskas-cook-inlet-planned-after-first-sale-flops/"
-  ],
-  [
-   "MEA, Board approves agreement for Enstar to seek future natural gas supply, Nov 10, 2026",
-   "https://www.mea.coop/news/mea-board-approves-agreement-for-enstar-to-seek-future-natural-gas-supply"
   ]
  ]
 }

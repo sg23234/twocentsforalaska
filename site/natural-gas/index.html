@@ -98,8 +98,6 @@ td small{display:block;font-size:12px;color:var(--muted);font-weight:400}
 .tm small{display:block;font-size:11px;font-weight:400;opacity:.85}
 .tm .sm b{font-size:20px}.tm .sm small{display:none}
 .tm .xs{padding:8px 4px;align-items:center}.tm .xs b{font-size:15px}.tm .xs span{display:none}
-/* contract timeline */
-#cliff{height:330px}
 .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--tile);border:1px solid var(--rule);color:var(--body);white-space:nowrap}
 .notes{margin:0;padding-left:18px;font-size:14px;color:var(--body);display:flex;flex-direction:column;gap:6px;max-width:90ch}
 .srcs{margin:0;padding-left:18px;font-size:13px;color:var(--muted);columns:2 380px;column-gap:32px}
@@ -182,13 +180,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     </div>
   </div>
   <p class="note" id="supnote"></p>
-</section>
-
-<section class="sec" aria-labelledby="h-cliff">
-  <div class="sech"><span class="kick">Contracts</span><h2 id="h-cliff">When today's contracts run out</h2>
-    <p>Utilities buy most of their gas under long-term contracts with Hilcorp. Chugach Electric's ends first, in 2028. The earliest new sources, an import terminal or the North Slope pipeline, are not expected before 2029.</p></div>
-  <div class="fig" id="cliff"></div>
-  <p class="note" id="cliffnote"></p>
 </section>
 
 <section class="sec" aria-labelledby="h-proj">
@@ -330,11 +321,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     new ResizeObserver(tm).observe(fl);
     $('supnote').textContent = `Production is gas sold, net of gas reinjected into oil fields and gas cycled through storage. Source: ${P.source}.`;
 
-    // ----- contract timeline -----
-    const cl = $('cliff');
-    new ResizeObserver(() => cliff(cl, P)).observe(cl);
-    $('cliffnote').textContent = 'Bars show the term of each utility\'s main Hilcorp contract; labels on the right are each utility\'s share of utility gas under contract in 2025. Homer Electric buys gas from Enstar; Interior Gas Utility trucks LNG to Fairbanks. New-supply dates are developers\' targets and have already slipped once.';
-
     // ----- projects -----
     $('proj').innerHTML = M.projects.map(p => `<tr><td class="n">${esc(p.name)}<small>${esc(p.who)}</small></td><td>${esc(p.what)}</td><td>${esc(p.when)}</td><td><span class="badge">${esc(p.status)}</span></td></tr>`).join('');
 
@@ -384,45 +370,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     }
   }
 
-  function cliff(host, P) {
-    const W = host.clientWidth;
-    if (!W) return;
-    host.innerHTML = '';
-    const small = W < 560, Y0 = 2026, Y1 = 2035;
-    const rows = P.contracts.filter(c => c.end), N = P.new_supply;
-    const L = small ? 112 : 170, R = small ? 40 : 64, T = 26, rh = 46, gap = 20;
-    const H = T + rows.length * rh + gap + N.length * 30 + 10;
-    host.style.height = H + 'px';
-    const X = d => L + ((+d.slice(0, 4) + (+d.slice(5, 7) - 1) / 12) - Y0) / (Y1 - Y0) * (W - L - R);
-    const sv = el('svg', {viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Utility gas contract end dates against the earliest dates for new gas supply'}, host);
-    for (let y = Y0; y <= Y1; y++) {
-      const x = X(`${y}-01`);
-      el('line', {x1: x, x2: x, y1: T - 6, y2: H - 4, stroke: '#E4E9F0'}, sv);
-      if (!small || y % 2 === 0) txt(sv, x, 14, String(y), {'text-anchor': 'middle'});
-    }
-    const today = '2026-11';
-    el('line', {x1: X(today), x2: X(today), y1: T - 6, y2: H - 4, stroke: '#14213D', 'stroke-dasharray': '3 3', opacity: .5}, sv);
-    rows.forEach((c, i) => {
-      const y = T + i * rh;
-      txt(sv, 0, y + 18, c.label, {fill: '#14213D', 'font-weight': 600, 'font-size': small ? 13 : 14});
-      if (!small) txt(sv, 0, y + 34, c.sub.length > 26 ? c.sub.split(';')[0].slice(0, 26) + '…' : c.sub, {'font-size': 11});
-      const x2 = X(c.end);
-      el('rect', {x: X(today), y: y + 6, width: Math.max(0, x2 - X(today)), height: 22, rx: 3, fill: '#1F5FA8', opacity: .85}, sv);
-      txt(sv, x2 + 6, y + 21, `${c.share}%`, {fill: '#14213D', 'font-weight': 600});
-      const endTxt = MON[+c.end.slice(5, 7) - 1] + ' ' + c.end.slice(0, 4);
-      if (x2 - X(today) > 70) txt(sv, x2 - 6, y + 21, 'ends ' + endTxt, {fill: '#fff', 'text-anchor': 'end', 'font-size': 11, 'font-weight': 600});
-    });
-    const y0 = T + rows.length * rh + gap;
-    txt(sv, 0, y0 - 4, 'Earliest new supply', {fill: '#14213D', 'font-weight': 600, 'font-size': 13});
-    N.forEach((n, i) => {
-      const y = y0 + 8 + i * 30, x = X(n.start);
-      el('path', {d: `M${x},${y} l7,7 l-7,7 l-7,-7z`, fill: '#B42318'}, sv);
-      el('line', {x1: x + 9, x2: W - R + 30, y1: y + 7, y2: y + 7, stroke: '#B42318', 'stroke-dasharray': '2 4', opacity: .5}, sv);
-      const label = small ? n.label.replace(/ \(.*\)/, '').replace(', first gas target', '') : n.label;
-      const left = x > W / 2;
-      txt(sv, left ? x - 12 : x + 12, y + 11, label, {fill: '#33405C', 'text-anchor': left ? 'end' : 'start', 'font-size': 12, class: 'halo'});
-    });
-  }
 }
 </script>
 </body>
