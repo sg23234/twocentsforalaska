@@ -285,24 +285,14 @@ def pages():
     P.append(dict(slug="electricity", group=G, title="Electricity", custom=True, row="Input costs",
         tile=tile({"file": "energy", "series": "AK-ALL", "dec": 1, "suffix": "¢"}, {"file": "energy", "series": "AK-ALL", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True, "after": " y/y"}, unit="avg price, ¢/kWh")))
 
-    gas = (m_en.get("charts") or {}).get("gas_price", {})
-    P.append(dict(slug="natural-gas", group=G, title="Railbelt natural gas", row="Input costs", status="static",
-        lead="Southcentral Alaska heats homes and generates most of its electricity with natural gas from Cook Inlet. As older fields decline, what utilities pay for gas, and whether they can get enough of it, is one of the biggest input costs for Railbelt households and businesses.",
-        stats=[stat("Utility cost of gas", "Enstar, per thousand cubic feet · Sep 2026", value="~$11"),
-               stat("Asian LNG spot price", "Japan–Korea benchmark, per Mcf · Sep 2026", value="$24"),
-               stat("Share of Southcentral power from gas", "2026 · ISER via KBBI", value="70%+"),
-               stat("Possible winter shortfall", "Enstar estimate if deliveries don't rise · Sep 2026", value="18 days")],
-        body=[section("Gas prices", "What the Railbelt's gas utility pays now, compared with the price of imported liquefied natural gas.",
-                      hbar(gas.get("title", "Natural gas price"), [(r["label"], r["value"]) for r in gas.get("rows", [])],
-                           f"As of {gas.get('as_of', '')}. Source: {gas.get('source', '')}.", prefix="$")),
-              plan(["Monthly Alaska natural gas prices from EIA (city-gate, commercial and residential), updated automatically.",
-                    "Cook Inlet production by month from the Alaska Oil and Gas Conservation Commission.",
-                    "Enstar's gas cost adjustment each year, and LNG import contracts as they are signed."])],
-        notes=["Gas prices here are utility costs, not customer bills. Enstar adjusts rates each summer.",
-               "Figures are kept by hand in data/manual/energy.json until the EIA series is wired in."],
-        sources=[src("KDLL/KBBI, What to know about the Cook Inlet natural gas crunch, Sep 2026", "https://www.kbbi.org/2026-09-11/what-to-know-about-the-cook-inlet-natural-gas-crunch"),
-                 src("Alaska Public Media, Enstar says bills likely to rise, Jul 2026", "https://alaskapublic.org/news/economy/energy/2026-07-28/southcentral-alaska-gas-utility-says-bills-likely-to-rise-amid-supply-shortage")],
-        tile=tile(value="~$11", change="Enstar cost", unit="per Mcf")))
+    # Hand-built page (site/natural-gas/index.html), like Electricity. Its figures live in
+    # data/manual/natural-gas.json (Enstar cost of gas, supply, projects) and data/natural-gas.json (EIA).
+    gca = manual("natural-gas").get("gca", {}).get("rows", [])
+    g_now, g_prev = (gca[-1], gca[-2]) if len(gca) >= 2 else (None, None)
+    P.append(dict(slug="natural-gas", group=G, title="Railbelt natural gas", custom=True, row="Input costs",
+        tile=tile(value=f"${g_now['value']:.2f}" if g_now else "—",
+                  change=f"{(g_now['value'] / g_prev['value'] - 1) * 100:+.1f}% from {g_prev['period']}" if g_now else "",
+                  unit="Enstar cost of gas, per Mcf")))
 
     P.append(dict(slug="freight", group=G, title="Freight rate index", row="Input costs", status="planned",
         lead="Almost everything sold in Alaska arrives by ship, barge, truck or plane, so shipping costs are built into the price of nearly every good. No public index tracks what it costs to move freight to and within Alaska. This page will build one.",

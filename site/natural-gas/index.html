@@ -4,79 +4,432 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Railbelt natural gas · Two Cents for Alaska</title>
-<meta name="description" content="Southcentral Alaska heats homes and generates most of its electricity with natural gas from Cook Inlet. As older fields decline, what utilities pay for gas">
+<meta name="description" content="What Southcentral Alaska pays for natural gas, where it comes from, and what the next supplies could cost.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#FFFFFF;--ink:#14213D;--body:#33405C;--muted:#5A6580;--rule:#C9D2DE;--tile:#F6F8FB;--accent:#B42318;
---display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
-padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
-.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
-a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:root{
+  --bg:#FFFFFF; --ink:#14213D; --body:#33405C; --muted:#5A6580; --rule:#C9D2DE; --tile:#F6F8FB; --accent:#B42318;
+  --ak:#1F5FA8; --us:#C2610C; --imp:#B42318; --pipe:#6B4FA0;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;overflow-x:clip;
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
+p{margin:0}
 .kick{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .mast{display:flex;flex-direction:column;align-items:center;gap:10px;padding-block:28px 18px;border-bottom:4px double var(--ink);text-align:center}
 .mast nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
-.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent} .mast nav a:hover{border-color:var(--accent)}
+.mast nav a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+.mast nav a:hover{border-color:var(--accent)}
 .name{font-family:var(--display);font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
-.head{display:flex;flex-direction:column;gap:12px}
-.head h1{font-size:clamp(34px,5vw,50px);line-height:1.05}
-.head .lead{margin:0;font-size:18px;color:var(--body);max-width:68ch}
-.badge{display:inline-block;width:fit-content;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ink)}
-.badge.planned{border-style:dashed;color:var(--muted);border-color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
-.stat{background:var(--tile);border:1px solid var(--rule);border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:2px;min-height:118px}
-.stat b{font-family:var(--display);font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;order:2;margin-top:auto}
-.stat b.na{color:var(--rule)}
-.stat span{font-size:13px;font-weight:600;color:var(--ink);order:1}
-.stat em{font-style:normal;font-size:12.5px;color:var(--muted);order:3}
-.sec{display:flex;flex-direction:column;gap:18px}
+.top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center}
+.top h1{font-size:clamp(34px,5vw,52px);line-height:1.05;margin-bottom:12px}
+.lede{font-size:17px;color:var(--body);max-width:52ch;margin-bottom:18px}
+.stats{display:flex;flex-wrap:wrap;gap:14px 36px}
+.stats div{display:flex;flex-direction:column}
+.stats b{font-family:var(--display);font-size:clamp(32px,4vw,42px);line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats span{font-size:13px;color:var(--muted);max-width:22ch}
+.sec{display:flex;flex-direction:column;gap:16px}
 .sech{display:flex;flex-direction:column;gap:4px;border-bottom:2px solid var(--ink);padding-bottom:8px}
-.sech h2{font-size:28px} .sech p{margin:0;font-size:15px;color:var(--body);max-width:72ch}
-figure.chart{margin:0;display:flex;flex-direction:column;gap:8px}
-figure.chart h3{font-size:19px}
-figure.chart svg{width:100%;height:auto;display:block}
-figure.chart figcaption{font-size:12.5px;color:var(--muted)}
+.sech h2{font-size:28px}
+.sech p{font-size:15px;color:var(--body);max-width:72ch}
+.note{font-size:13px;color:var(--muted)}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted)}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.fig{position:relative;width:100%}
+.fig svg{display:block;width:100%;height:100%}
 svg text{font-family:var(--sans)}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
-.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+svg text.halo{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+@media (max-width:420px){th,td{padding:8px 6px}table{font-size:14px}}
+#trend{height:300px}
+.empty{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;border:1px dashed var(--rule);border-radius:4px;background:var(--tile);color:var(--muted);font-size:14px}
+/* two-column panels */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.panel{display:flex;flex-direction:column;gap:10px}
+.panel h3{font-size:20px}
+.panel>p{font-size:14px;color:var(--body)}
+/* GCA columns */
+.cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:end;height:230px;border-bottom:1px solid var(--ink);padding-top:8px}
+.col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:6px}
+.col b{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.col i{display:block;width:72%;max-width:84px;background:var(--ak);border-radius:2px 2px 0 0;opacity:.55}
+.col.now i{opacity:1}
+.colx{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;font-size:13px;color:var(--muted);text-align:center}
+/* tables */
 .tbl{overflow-x:auto;border-top:2px solid var(--ink)}
 table{border-collapse:collapse;width:100%;font-size:15px}
-th{text-align:left;padding:9px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);white-space:nowrap}
-td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body)}
-th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
-.plan,.textblock{border:1px dashed var(--muted);border-radius:4px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
-.textblock{border-style:solid;border-color:var(--rule)}
-.plan h3,.textblock h3{font-size:18px} .plan ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;color:var(--body)}
-.textblock p{margin:0;color:var(--body)}
-.notes ul,.sources ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;color:var(--body);font-size:14.5px}
-.note{margin:0;font-size:13px;color:var(--muted)}
+th{text-align:left;padding:9px 10px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.n{font-weight:600;color:var(--ink)}
+td.p{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink)}
+td small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+/* price ladder */
+.lad{display:flex;flex-direction:column}
+.lrow{display:grid;grid-template-columns:minmax(180px,330px) minmax(0,1fr);gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
+.lrow .l b{display:block;font-size:15px;color:var(--ink);line-height:1.3}
+.lrow .l span{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:2px}
+.track{position:relative;height:34px}
+.track .now{position:absolute;top:-10px;bottom:-10px;width:0;border-left:2px dashed var(--ink);opacity:.35}
+.track .bar{position:absolute;top:9px;height:16px;border-radius:3px}
+.track .dot{position:absolute;top:7px;width:20px;height:20px;border-radius:50%;margin-left:-10px;border:2px solid #fff;box-shadow:0 0 0 1px rgba(20,33,61,.25)}
+.track .v{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--display);font-weight:700;font-size:16px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:minmax(180px,330px) minmax(0,1fr);gap:16px}
+.axis .ax{position:relative;height:22px;font-size:12px;color:var(--muted)}
+.axis .ax span{position:absolute;transform:translateX(-50%);top:4px;font-variant-numeric:tabular-nums}
+/* supply */
+.big{display:flex;flex-wrap:wrap;gap:14px 40px}
+.big div{display:flex;flex-direction:column}
+.big b{font-family:var(--display);font-size:clamp(28px,3.4vw,36px);line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.big span{font-size:13px;color:var(--muted);max-width:24ch}
+.stack{display:flex;height:42px;border-radius:3px;overflow:hidden}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.slab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13px;color:var(--body)}
+.slab span b{display:block;font-family:var(--display);font-size:18px;color:var(--ink)}
+.hrow{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr) 44px;gap:12px;align-items:center;padding:5px 0}
+.hrow .n{font-size:14px;font-weight:600;color:var(--ink);line-height:1.25}
+.hrow .n small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.hrow .t{height:18px;background:var(--tile);border-radius:2px;overflow:hidden}
+.hrow .t i{display:block;height:100%;background:var(--ak)}
+.hrow .p{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-size:14px}
+/* contract timeline */
+#cliff{height:330px}
+/* winter */
+.log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:2px solid var(--ink)}
+.log li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.log time{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap}
+.log p{font-size:15px;color:var(--body);max-width:78ch}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--tile);border:1px solid var(--rule);color:var(--body);white-space:nowrap}
+.notes{margin:0;padding-left:18px;font-size:14px;color:var(--body);display:flex;flex-direction:column;gap:6px;max-width:90ch}
+.srcs{margin:0;padding-left:18px;font-size:13px;color:var(--muted);columns:2 380px;column-gap:32px}
+.srcs li{break-inside:avoid;margin-bottom:4px}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
+@media (max-width:860px){.top,.two{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){
+  .lrow,.axis{grid-template-columns:minmax(0,1fr);gap:6px}
+  .axis .lsp{display:none}
+  .log li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .slab{grid-template-columns:minmax(0,1fr)}
+  .cols{height:190px}.col b{font-size:16px}
+  #projects thead{display:none}
+  #projects tr{display:grid;padding:10px 0;border-bottom:1px solid var(--rule)}
+  #projects td{border:0;padding:3px 0}
+  #projects td.r{text-align:left;white-space:normal}
+}
 </style>
 </head>
 <body>
-<!-- Built by scripts/build_pages.py. Edit the PAGES entry there, not this file. -->
 <div class="wrap">
+
 <header class="mast">
   <nav aria-label="Sections"><a href="/#micro">Micro</a><a href="/#macro">Macro</a><a href="/sources/">Sources</a></nav>
   <a class="name" href="/">Two Cents for Alaska</a>
 </header>
-<div class="head">
-  <span class="kick">Micro · Input costs</span>
-  <h1>Railbelt natural gas</h1>
-  <span class="badge planned">Draft · figures updated by hand</span>
-  <p class="lead">Southcentral Alaska heats homes and generates most of its electricity with natural gas from Cook Inlet. As older fields decline, what utilities pay for gas, and whether they can get enough of it, is one of the biggest input costs for Railbelt households and businesses.</p>
+
+<section class="top">
+  <div>
+    <span class="kick">Input costs</span>
+    <h1>Railbelt natural gas</h1>
+    <p class="lede">Gas from Cook Inlet heats most homes and businesses from Homer to the Mat-Su and fuels about four-fifths of Railbelt electricity. Its price has risen every year since 2023 as the basin's older fields decline, and the next supplies, imported or piped from the North Slope, are likely to cost more.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+  <figure style="margin:0">
+    <div class="key" style="margin-bottom:6px"><span><i style="background:var(--ak)"></i>Alaska</span><span><i style="background:var(--us)"></i>U.S. average</span></div>
+    <div class="fig" id="trend"></div>
+    <figcaption class="note" id="trendcap">City gate price: what gas utilities pay for gas delivered into their systems, dollars per thousand cubic feet (Mcf), 12-month average. Source: EIA.</figcaption>
+  </figure>
+</section>
+
+<section class="sec" aria-labelledby="h-cost">
+  <div class="sech"><span class="kick">Prices</span><h2 id="h-cost">What gas costs now</h2>
+    <p>Enstar, the gas utility for Southcentral, buys gas from producers under long-term contracts and passes the cost to customers without markup. That cost is reset each July. On top of it, customers pay Enstar's delivery charges.</p></div>
+  <div class="two">
+    <div class="panel">
+      <h3>Enstar's cost of gas</h3>
+      <p>Average cost per Mcf for each July-to-June year (the Gas Cost Adjustment).</p>
+      <div class="cols" id="gca"></div>
+      <div class="colx" id="gcax"></div>
+      <p class="note" id="gcanote"></p>
+    </div>
+    <div class="panel">
+      <h3>What each kind of customer pays</h3>
+      <p>All-in price per Mcf, average of the latest 12 months, Alaska against the U.S. average.</p>
+      <div class="tbl"><table>
+        <thead><tr><th scope="col">Customer</th><th scope="col" class="r">Alaska</th><th scope="col" class="r">U.S.</th><th scope="col" class="r">vs U.S.</th></tr></thead>
+        <tbody id="types"></tbody>
+      </table></div>
+      <p class="note" id="typesnote"></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-lad">
+  <div class="sech"><span class="kick">Outlook</span><h2 id="h-lad">What the next Mcf could cost</h2>
+    <p>Each new source of gas for Southcentral has a different price. The dashed line is Enstar's average cost today. Ranges show estimates that depend on world LNG prices or on how many utilities share a terminal.</p></div>
+  <div class="key"><span><i style="background:var(--ink)"></i>Today</span><span><i style="background:var(--ak)"></i>New Cook Inlet gas</span><span><i style="background:var(--imp)"></i>Imported LNG</span><span><i style="background:var(--pipe)"></i>North Slope pipeline</span></div>
+  <div class="lad" id="lad"></div>
+  <div class="axis"><div class="lsp"></div><div class="ax" id="ladax"></div></div>
+  <p class="note">Dollars per thousand cubic feet. The pipeline cap is quoted per million Btu; a thousand cubic feet of Cook Inlet gas holds about a million Btu, so the two are close. Import estimates are for gas delivered to Southcentral, including shipping and the terminal.</p>
+</section>
+
+<section class="sec" aria-labelledby="h-sup">
+  <div class="sech"><span class="kick">Supply</span><h2 id="h-sup">Where the gas comes from</h2>
+    <p>Nearly all of it comes from about 20 fields in and around Cook Inlet, most run by Hilcorp. Production peaked in 1990, when Southcentral also exported LNG and made fertilizer. New wells raised output in 2025, but wells here lose 30 to 40% of their production each year, so drilling has to continue just to hold steady.</p></div>
+  <div class="big" id="supbig"></div>
+  <div class="two">
+    <div class="panel">
+      <h3>Who uses it</h3>
+      <p id="demsub"></p>
+      <div class="stack" id="dem" role="img"></div>
+      <div class="slab" id="demlab"></div>
+    </div>
+    <div class="panel">
+      <h3>Which fields produce it</h3>
+      <p id="fldsub"></p>
+      <div id="fld"></div>
+    </div>
+  </div>
+  <p class="note" id="supnote"></p>
+</section>
+
+<section class="sec" aria-labelledby="h-cliff">
+  <div class="sech"><span class="kick">Contracts</span><h2 id="h-cliff">When today's contracts run out</h2>
+    <p>Utilities buy most of their gas under long-term contracts with Hilcorp. Chugach Electric's ends first, in 2028. The earliest new sources, an import terminal or the North Slope pipeline, are not expected before 2029.</p></div>
+  <div class="fig" id="cliff"></div>
+  <p class="note" id="cliffnote"></p>
+</section>
+
+<section class="sec" aria-labelledby="h-win">
+  <div class="sech"><span class="kick">This winter</span><h2 id="h-win">Will there be enough gas?</h2>
+    <p id="winsub">Southcentral uses several times more gas on a cold January day than in summer. Producers can't raise output that fast, so utilities fill storage reservoirs in summer and draw them down in winter.</p></div>
+  <ul class="log" id="win"></ul>
+</section>
+
+<section class="sec" aria-labelledby="h-proj">
+  <div class="sech"><span class="kick">What's coming</span><h2 id="h-proj">What could add supply</h2>
+    <p>Projects that could bring more gas to Southcentral, roughly in order of how soon.</p></div>
+  <div class="tbl"><table id="projects">
+    <thead><tr><th scope="col">Project</th><th scope="col">What it is</th><th scope="col">Earliest</th><th scope="col">Status</th></tr></thead>
+    <tbody id="proj"></tbody>
+  </table></div>
+</section>
+
+<section class="sec" aria-labelledby="h-notes">
+  <div class="sech"><h2 id="h-notes" style="font-size:22px">Notes</h2></div>
+  <ul class="notes">
+    <li>Mcf is a thousand cubic feet of gas. Bcf is a billion cubic feet, a million Mcf.</li>
+    <li>EIA's city gate price for Alaska is close to what Enstar pays producers, including storage. Customer prices add delivery charges and are averages of all bills in a month, so they swing with the season.</li>
+    <li>The Gas Cost Adjustment is Enstar's own figure for the year ahead, filed each May and in effect from July, subject to review by the Regulatory Commission of Alaska.</li>
+    <li>Supply figures for the coming winter change quickly; the dates on each item show when it was reported. <span id="asof"></span></li>
+  </ul>
+</section>
+
+<section class="sec" aria-labelledby="h-src">
+  <div class="sech"><h2 id="h-src" style="font-size:22px">Sources</h2></div>
+  <ul class="srcs" id="srcs"><li>U.S. Energy Information Administration, <a href="https://www.eia.gov/naturalgas/monthly/" target="_blank" rel="noopener">Natural Gas Monthly</a>, prices by state, through the EIA Open Data API.</li></ul>
+</section>
+
+<footer>Built from public data. <a href="/sources/#natural-gas">Sources</a> · <a href="/electricity/">Electricity</a> · <a href="/">Front page</a></footer>
 </div>
-<div class="stats"><div class="stat"><b>~$11</b><span>Utility cost of gas</span><em>Enstar, per thousand cubic feet · Sep 2026</em></div><div class="stat"><b>$24</b><span>Asian LNG spot price</span><em>Japan–Korea benchmark, per Mcf · Sep 2026</em></div><div class="stat"><b>70%+</b><span>Share of Southcentral power from gas</span><em>2026 · ISER via KBBI</em></div><div class="stat"><b>18 days</b><span>Possible winter shortfall</span><em>Enstar estimate if deliveries don&#x27;t rise · Sep 2026</em></div></div>
-<section class="sec"><div class="sech"><h2>Gas prices</h2><p>What the Railbelt&#x27;s gas utility pays now, compared with the price of imported liquefied natural gas.</p></div><figure class="chart"><h3>Natural gas price, dollars per thousand cubic feet</h3><div class="plot"><svg viewBox="0 0 680 68" role="img" aria-label="Natural gas price, dollars per thousand cubic feet"><text x="200" y="23" text-anchor="end" font-size="13" fill="#14213D">Enstar current cost</text><rect x="210" y="11" width="178.8" height="16" fill="#1F5FA8"></rect><text x="396.8" y="23" font-size="13" font-weight="600" fill="#14213D">$11</text><text x="200" y="53" text-anchor="end" font-size="13" fill="#14213D">Asian LNG spot</text><rect x="210" y="41" width="390.0" height="16" fill="#1F5FA8"></rect><text x="608.0" y="53" font-size="13" font-weight="600" fill="#14213D">$24</text></svg></div><figcaption>As of Sep 2026. Source: KDLL/KBBI, Sep 11, 2026.</figcaption></figure></section><div class="plan"><h3>What this page will add</h3><ul><li>Monthly Alaska natural gas prices from EIA (city-gate, commercial and residential), updated automatically.</li><li>Cook Inlet production by month from the Alaska Oil and Gas Conservation Commission.</li><li>Enstar&#x27;s gas cost adjustment each year, and LNG import contracts as they are signed.</li></ul></div>
-<section class="sec notes"><div class="sech"><h2>Data notes</h2></div><ul><li>Gas prices here are utility costs, not customer bills. Enstar adjusts rates each summer.</li><li>Figures are kept by hand in data/manual/energy.json until the EIA series is wired in.</li></ul></section>
-<section class="sec sources"><div class="sech"><h2>Sources</h2></div><ul><li><a href="https://www.kbbi.org/2026-09-11/what-to-know-about-the-cook-inlet-natural-gas-crunch" target="_blank" rel="noopener">KDLL/KBBI, What to know about the Cook Inlet natural gas crunch, Sep 2026</a></li><li><a href="https://alaskapublic.org/news/economy/energy/2026-07-28/southcentral-alaska-gas-utility-says-bills-likely-to-rise-amid-supply-shortage" target="_blank" rel="noopener">Alaska Public Media, Enstar says bills likely to rise, Jul 2026</a></li></ul></section>
-<footer>Built from public data. <a href="/sources/">All sources</a> · <a href="/">Front page</a></footer>
-</div>
-<script src="/js/ind.js"></script>
+
+<script>
+{
+  const NS = 'http://www.w3.org/2000/svg';
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fmt = (v, d = 0) => v.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const usd = (v, d = 2) => v == null ? '—' : '$' + fmt(v, d);
+  const month = d => MON[+d.slice(5, 7) - 1] + ' ' + d.slice(0, 4);
+  const get = u => fetch(u, {cache: 'no-cache'}).then(r => r.ok ? r.json() : Promise.reject(r.status));
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const txt = (parent, x, y, s, a = {}) => { const t = el('text', Object.assign({x, y, 'font-size': 12, fill: '#5A6580'}, a), parent); t.textContent = s; return t; };
+
+  // Trailing 12-month average on a monthly series with possible gaps (needs 10 of 12 months).
+  function roll12(s) {
+    if (!s || !s.dates.length) return null;
+    const by = new Map(s.dates.map((d, i) => [d, s.values[i]]));
+    const out = {dates: [], values: []};
+    let y = +s.dates[0].slice(0, 4), m = +s.dates[0].slice(5, 7);
+    const last = s.dates[s.dates.length - 1], win = [];
+    for (;;) {
+      const d = `${y}-${String(m).padStart(2, '0')}-01`;
+      win.push(by.has(d) ? by.get(d) : null); if (win.length > 12) win.shift();
+      const ok = win.filter(v => v != null);
+      if (win.length === 12 && ok.length >= 10) { out.dates.push(d); out.values.push(ok.reduce((a, b) => a + b, 0) / ok.length); }
+      if (d === last) break;
+      if (++m > 12) { m = 1; y++; }
+    }
+    return out.dates.length ? out : null;
+  }
+  const lastOf = s => s && s.dates.length ? {d: s.dates[s.dates.length - 1], v: s.values[s.values.length - 1]} : null;
+  const atDate = (s, d) => { if (!s) return null; const i = s.dates.indexOf(d); return i < 0 ? null : s.values[i]; };
+
+  Promise.all([get('/data/manual/natural-gas.json'), get('/data/natural-gas.json').catch(() => null)])
+    .then(([M, G]) => render(M, G))
+    .catch(() => { $('stats').textContent = 'Data unavailable.'; });
+
+  function render(M, G) {
+    const S = (G && G.series) || {};
+    const akC = roll12(S['AK-CITYGATE']), usC = roll12(S['US-CITYGATE']);
+
+    // ----- headline stats -----
+    const g = M.gca.rows, gNow = g[g.length - 1], gFirst = g[0];
+    let html = `<div><b style="color:var(--ak)">${usd(gNow.value)}</b><span>Enstar's cost of gas per Mcf, ${esc(gNow.period)}</span></div>` +
+      `<div><b>+${fmt((gNow.value / gFirst.value - 1) * 100)}%</b><span>since ${esc(gFirst.period)}</span></div>`;
+    const a = lastOf(akC), u = a && atDate(usC, a.d);
+    if (a && u) html += `<div><b style="color:var(--us)">${fmt(a.v / u, 1)}×</b><span>U.S. city gate price, 12 months to ${month(a.d)}</span></div>`;
+    $('stats').innerHTML = html;
+
+    // ----- trend -----
+    const tr = $('trend');
+    if (akC && usC) {
+      const draw = () => trend(tr, [{s: usC, c: '#C2610C'}, {s: akC, c: '#1F5FA8'}]);
+      new ResizeObserver(draw).observe(tr);
+      $('trendcap').textContent += ` Latest: ${month(a.d)}.`;
+    } else {
+      tr.innerHTML = '<div class="empty">The EIA price history fills in after the next data refresh.</div>';
+    }
+
+    // ----- GCA columns -----
+    const gMax = Math.max(...g.map(r => r.value)) * 1.08;
+    $('gca').innerHTML = g.map((r, i) => `<div class="col${i === g.length - 1 ? ' now' : ''}"><b>${usd(r.value)}</b><i style="height:${(r.value / gMax * 78).toFixed(1)}%"></i></div>`).join('');
+    $('gcax').innerHTML = g.map(r => `<span>${esc(r.period)}</span>`).join('');
+    const yoy = (gNow.value / g[g.length - 2].value - 1) * 100;
+    $('gcanote').textContent = `Up ${fmt(yoy, 1)}% this July. Enstar said in May that the change adds about $8.83 to an average monthly home bill. Source: ${M.gca.source}.`;
+
+    // ----- by customer type -----
+    const TYPES = [['RES', 'Homes', 'residential'], ['COM', 'Businesses', 'commercial'], ['ELEC', 'Power plants', 'electric power'], ['CITYGATE', 'Gas utilities', 'city gate, before delivery']];
+    let latest = null;
+    const rows = TYPES.map(([k, l, sub]) => {
+      const ak = lastOf(roll12(S['AK-' + k])), us = ak && atDate(roll12(S['US-' + k]), ak.d);
+      if (!ak) return '';
+      if (!latest || ak.d > latest) latest = ak.d;
+      return `<tr><td class="n">${l}<small>${sub}</small></td><td class="r p" style="color:var(--ak)">${usd(ak.v)}</td><td class="r">${usd(us)}</td><td class="r">${us ? (ak.v >= us ? fmt(ak.v / us, 1) + '×' : fmt((1 - ak.v / us) * 100) + '% less') : '—'}</td></tr>`;
+    }).join('');
+    $('types').innerHTML = rows || '<tr><td colspan="4" style="color:var(--muted)">EIA prices fill in after the next data refresh.</td></tr>';
+    $('typesnote').textContent = latest ? `12 months to ${month(latest)}. EIA withholds some Alaska months; averages need at least 10 of 12. Customer prices include delivery, so homes pay more per Mcf than power plants.` : '';
+
+    // ----- ladder -----
+    const L = M.ladder.rows, now = L.find(r => r.kind === 'now').value;
+    const top = Math.ceil(Math.max(...L.map(r => r.hi || r.value)) / 5) * 5 + 2;
+    const X = v => (v / top * 100).toFixed(2) + '%';
+    const COL = {now: 'var(--ink)', local: 'var(--ak)', import: 'var(--imp)', pipe: 'var(--pipe)'};
+    $('lad').innerHTML = L.map(r => {
+      const c = COL[r.kind];
+      const mark = r.lo != null
+        ? `<div class="bar" style="left:${X(r.lo)};width:calc(${X(r.hi)} - ${X(r.lo)});background:${c};opacity:.85"></div><span class="v" style="left:calc(${X(r.hi)} + 8px);color:${c}">$${fmt(r.lo)}–${fmt(r.hi)}</span>`
+        : `<div class="dot" style="left:${X(r.value)};background:${c}"></div><span class="v" style="${r.value / top > .8 ? `right:calc(100% - ${X(r.value)} + 16px)` : `left:calc(${X(r.value)} + 16px)`};color:${c}">${usd(r.value)}</span>`;
+      return `<div class="lrow"><div class="l"><b>${esc(r.label)}</b><span>${esc(r.sub)}</span></div><div class="track"><div class="now" style="left:${X(now)}"></div>${mark}</div></div>`;
+    }).join('');
+    $('ladax').innerHTML = [0, 5, 10, 15, 20, 25].filter(t => t <= top).map(t => `<span style="left:${X(t)}">$${t}</span>`).join('');
+
+    // ----- supply -----
+    const P = M.supply;
+    $('supbig').innerHTML =
+      `<div><b>${fmt(P.production_mmcfd)}</b><span>million cubic feet a day, ${esc(P.production_month)}</span></div>` +
+      `<div><b>+${fmt(P.production_yoy_pct, 1)}%</b><span>from a year earlier, after new wells</span></div>` +
+      `<div><b>${fmt(P.peak_mmcfd)}</b><span>million cubic feet a day at the ${P.peak_year} peak</span></div>` +
+      `<div><b>~${fmt(P.demand_bcf)} Bcf</b><span>used in a year, billion cubic feet</span></div>`;
+    const DC = ['#1F5FA8', '#14213D', '#7A8499'], dTot = P.demand.reduce((t, r) => t + r.value, 0);
+    $('demsub').textContent = `About ${P.demand_bcf} billion cubic feet a year, by use (DNR estimate).`;
+    $('dem').setAttribute('aria-label', P.demand.map(r => `${r.label} ${r.value} billion cubic feet`).join(', '));
+    $('dem').innerHTML = P.demand.map((r, i) => `<div style="width:${r.value / dTot * 100}%;background:${DC[i]}">${fmt(r.value / dTot * 100)}%</div>`).join('');
+    $('demlab').innerHTML = P.demand.map((r, i) => `<span><b style="color:${DC[i]}">~${r.value} Bcf</b>${esc(r.label)}</span>`).join('');
+    const F = P.fields, fMax = Math.max(...F.rows.map(r => r.value));
+    $('fldsub').textContent = `Share of Cook Inlet gas production, ${F.year}.`;
+    $('fld').innerHTML = F.rows.map(r => `<div class="hrow"><div class="n">${esc(r.label)}<small>${esc(r.op)}</small></div><div class="t"><i style="width:${r.value / fMax * 100}%"></i></div><div class="p">${r.value}%</div></div>`).join('');
+    $('supnote').textContent = `Production is gas sold, net of gas reinjected into oil fields and gas cycled through storage. Source: ${P.source}.`;
+
+    // ----- contract timeline -----
+    const cl = $('cliff');
+    new ResizeObserver(() => cliff(cl, P)).observe(cl);
+    $('cliffnote').textContent = 'Bars show the term of each utility\'s main Hilcorp contract; labels on the right are each utility\'s share of utility gas under contract in 2025. Homer Electric buys gas from Enstar; Interior Gas Utility trucks LNG to Fairbanks. New-supply dates are developers\' targets and have already slipped once.';
+
+    // ----- winter -----
+    $('win').innerHTML = M.winter.items.map(w => `<li><time>${esc(w.date)}</time><p>${esc(w.text)}</p></li>`).join('');
+
+    // ----- projects -----
+    $('proj').innerHTML = M.projects.map(p => `<tr><td class="n">${esc(p.name)}<small>${esc(p.who)}</small></td><td>${esc(p.what)}</td><td>${esc(p.when)}</td><td><span class="badge">${esc(p.status)}</span></td></tr>`).join('');
+
+    $('asof').textContent = `Hand-kept figures last checked ${M.as_of}.`;
+    $('srcs').innerHTML += M.sources.map(([n, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('');
+  }
+
+  function trend(host, lines) {
+    const W = host.clientWidth, H = host.clientHeight;
+    if (!W) return;
+    host.innerHTML = '';
+    const small = W < 520, L = 38, R = small ? 10 : 56, T = 10, B = 24;
+    const all = lines.flatMap(l => l.s.dates.map((d, i) => [+d.slice(0, 4) + (+d.slice(5, 7) - 1) / 12, l.s.values[i]]));
+    const x0 = Math.min(...all.map(p => p[0])), x1 = Math.max(...all.map(p => p[0]));
+    const yMax = Math.ceil(Math.max(...all.map(p => p[1])) / 2) * 2;
+    const X = x => L + (x - x0) / (x1 - x0) * (W - L - R), Y = v => T + (1 - v / yMax) * (H - T - B);
+    const sv = el('svg', {viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'City gate natural gas price, Alaska and U.S. average, 12-month average'}, host);
+    const step = yMax > 12 ? 4 : 2;
+    for (let v = 0; v <= yMax; v += step) {
+      el('line', {x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: v ? '#E4E9F0' : '#14213D'}, sv);
+      txt(sv, L - 6, Y(v) + 4, '$' + v, {'text-anchor': 'end'});
+    }
+    const yStep = small ? 10 : 5;
+    for (let y = Math.ceil(x0 / yStep) * yStep; y <= x1; y += yStep) txt(sv, X(y), H - 6, String(y), {'text-anchor': 'middle'});
+    for (const l of lines) {
+      const d = l.s.dates.map((dt, i) => `${i ? 'L' : 'M'}${X(+dt.slice(0, 4) + (+dt.slice(5, 7) - 1) / 12).toFixed(1)},${Y(l.s.values[i]).toFixed(1)}`).join('');
+      el('path', {d, fill: 'none', stroke: l.c, 'stroke-width': 2.4, 'stroke-linejoin': 'round'}, sv);
+      const n = l.s.values.length - 1, lx = X(+l.s.dates[n].slice(0, 4) + (+l.s.dates[n].slice(5, 7) - 1) / 12), ly = Y(l.s.values[n]);
+      el('circle', {cx: lx, cy: ly, r: 3.5, fill: l.c}, sv);
+      if (!small) txt(sv, lx + 6, ly + 4, '$' + fmt(l.s.values[n], 2), {fill: l.c, 'font-weight': 600});
+    }
+  }
+
+  function cliff(host, P) {
+    const W = host.clientWidth;
+    if (!W) return;
+    host.innerHTML = '';
+    const small = W < 560, Y0 = 2026, Y1 = 2035;
+    const rows = P.contracts.filter(c => c.end), N = P.new_supply;
+    const L = small ? 112 : 170, R = small ? 40 : 64, T = 26, rh = 46, gap = 20;
+    const H = T + rows.length * rh + gap + N.length * 30 + 10;
+    host.style.height = H + 'px';
+    const X = d => L + ((+d.slice(0, 4) + (+d.slice(5, 7) - 1) / 12) - Y0) / (Y1 - Y0) * (W - L - R);
+    const sv = el('svg', {viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Utility gas contract end dates against the earliest dates for new gas supply'}, host);
+    for (let y = Y0; y <= Y1; y++) {
+      const x = X(`${y}-01`);
+      el('line', {x1: x, x2: x, y1: T - 6, y2: H - 4, stroke: '#E4E9F0'}, sv);
+      if (!small || y % 2 === 0) txt(sv, x, 14, String(y), {'text-anchor': 'middle'});
+    }
+    const today = '2026-11';
+    el('line', {x1: X(today), x2: X(today), y1: T - 6, y2: H - 4, stroke: '#14213D', 'stroke-dasharray': '3 3', opacity: .5}, sv);
+    rows.forEach((c, i) => {
+      const y = T + i * rh;
+      txt(sv, 0, y + 18, c.label, {fill: '#14213D', 'font-weight': 600, 'font-size': small ? 13 : 14});
+      if (!small) txt(sv, 0, y + 34, c.sub.length > 26 ? c.sub.split(';')[0].slice(0, 26) + '…' : c.sub, {'font-size': 11});
+      const x2 = X(c.end);
+      el('rect', {x: X(today), y: y + 6, width: Math.max(0, x2 - X(today)), height: 22, rx: 3, fill: '#1F5FA8', opacity: .85}, sv);
+      txt(sv, x2 + 6, y + 21, `${c.share}%`, {fill: '#14213D', 'font-weight': 600});
+      const endTxt = MON[+c.end.slice(5, 7) - 1] + ' ' + c.end.slice(0, 4);
+      if (x2 - X(today) > 70) txt(sv, x2 - 6, y + 21, 'ends ' + endTxt, {fill: '#fff', 'text-anchor': 'end', 'font-size': 11, 'font-weight': 600});
+    });
+    const y0 = T + rows.length * rh + gap;
+    txt(sv, 0, y0 - 4, 'Earliest new supply', {fill: '#14213D', 'font-weight': 600, 'font-size': 13});
+    N.forEach((n, i) => {
+      const y = y0 + 8 + i * 30, x = X(n.start);
+      el('path', {d: `M${x},${y} l7,7 l-7,7 l-7,-7z`, fill: '#B42318'}, sv);
+      el('line', {x1: x + 9, x2: W - R + 30, y1: y + 7, y2: y + 7, stroke: '#B42318', 'stroke-dasharray': '2 4', opacity: .5}, sv);
+      const label = small ? n.label.replace(/ \(.*\)/, '').replace(', first gas target', '') : n.label;
+      const left = x > W / 2;
+      txt(sv, left ? x - 12 : x + 12, y + 11, label, {fill: '#33405C', 'text-anchor': left ? 'end' : 'start', 'font-size': 12, class: 'halo'});
+    });
+  }
+}
+</script>
 </body>
 </html>

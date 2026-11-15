@@ -9,9 +9,11 @@ Sources
           carries just twice a year. Works without a key (25 requests a day,
           shared by everyone on GitHub's servers); add a free key as the
           BLS_API_KEY secret to make it dependable.
-  EIA   - the EIA API (v2). Retail electricity prices by state and sector.
-          Needs a free key as the EIA_API_KEY secret; without one the energy
-          dashboard is skipped with a warning and nothing else is affected.
+  EIA   - the EIA API (v2). Retail electricity prices by state and sector, and
+          natural gas prices by state and customer type (city gate, homes,
+          businesses, power plants). Needs a free key as the EIA_API_KEY
+          secret; without one the EIA dashboards are skipped with a warning and
+          nothing else is affected.
   Census - the Census Bureau data API. Annual counts of businesses by industry
           (County Business Patterns for employers, Nonemployer Statistics for
           owner-operators). Used for food trucks (NAICS 722330). No key needed;
@@ -43,6 +45,7 @@ FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}"
 BLS_V1 = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 BLS_V2 = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 EIA_RETAIL = "https://api.eia.gov/v2/electricity/retail-sales/data/"
+EIA_GAS = "https://api.eia.gov/v2/natural-gas/pri/sum/data/"
 CENSUS_API = "https://api.census.gov/data/{year}/{dataset}"
 DOLWD_CES = "https://live.laborstats.alaska.gov/labforce/csv/000000/01/ces.csv"
 UA = {"User-Agent": "twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"}
@@ -150,6 +153,21 @@ DASHBOARDS = {
         "AK-ALL:sales": s("Retail electricity sales, all sectors, Alaska", "million kWh", "monthly", "flow", optional=True),
         "US-ALL:sales": s("Retail electricity sales, all sectors, United States", "million kWh", "monthly", "flow", optional=True),
     }},
+    # Natural gas prices, dollars per thousand cubic feet, keyed "<area>-<type>".
+    # Each maps to an EIA series ID (N30x0 + state + 3 = monthly). City gate is
+    # what local gas utilities (Enstar in Southcentral) pay for gas delivered to
+    # their system; the others are what each kind of customer pays, all-in.
+    # All optional: EIA withholds some Alaska months, and a miss only warns.
+    "natural-gas": {"source": "eia_gas", "soft": True, "series": {
+        "AK-CITYGATE": s("Natural gas city gate price, Alaska", "dollars per Mcf", "monthly", "rate", optional=True),
+        "US-CITYGATE": s("Natural gas city gate price, United States", "dollars per Mcf", "monthly", "rate", optional=True),
+        "AK-RES": s("Natural gas price, residential customers, Alaska", "dollars per Mcf", "monthly", "rate", optional=True),
+        "US-RES": s("Natural gas price, residential customers, United States", "dollars per Mcf", "monthly", "rate", optional=True),
+        "AK-COM": s("Natural gas price, commercial customers, Alaska", "dollars per Mcf", "monthly", "rate", optional=True),
+        "US-COM": s("Natural gas price, commercial customers, United States", "dollars per Mcf", "monthly", "rate", optional=True),
+        "AK-ELEC": s("Natural gas price, electric power plants, Alaska", "dollars per Mcf", "monthly", "rate", optional=True),
+        "US-ELEC": s("Natural gas price, electric power plants, United States", "dollars per Mcf", "monthly", "rate", optional=True),
+    }},
     # Food trucks: Census counts for NAICS 722330 (mobile food services), keyed
     # "<dataset>-<geo>:<variable>". cbp = employer establishments (County Business
     # Patterns); nonemp = businesses with no employees (Nonemployer Statistics).
@@ -174,6 +192,7 @@ SOURCE_NAMES = {
     "fred": "FRED, Federal Reserve Bank of St. Louis",
     "bls": "U.S. Bureau of Labor Statistics API",
     "eia": "U.S. Energy Information Administration, Electric Power Monthly (retail sales)",
+    "eia_gas": "U.S. Energy Information Administration, Natural Gas Monthly (prices by state)",
     "census": "U.S. Census Bureau, County Business Patterns and Nonemployer Statistics (data API)",
     "dolwd": "Alaska Department of Labor and Workforce Development, Current Employment Statistics",
 }
@@ -305,6 +324,47 @@ def fetch_eia(series_ids, tries=3):
         d = sorted(obs)
         out[sid] = {"dates": d, "values": [obs[x] for x in d]}
     return out
+
+
+GAS_TYPE = {"CITYGATE": "N3050", "RES": "N3010", "COM": "N3020", "IND": "N3035", "ELEC": "N3045"}
+
+
+def fetch_eia_gas(series_ids, tries=3):
+    """Return {"<area>-<type>": {"dates", "values"}} of monthly natural gas prices
+    ($/Mcf) from the EIA API v2 (natural-gas/pri/sum), from 1997 on."""
+    key = os.environ.get("EIA_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError("EIA_API_KEY secret not set (free key: eia.gov/opendata/register.php)")
+    eia_id = {}
+    for sid in series_ids:
+        area, kind = sid.split("-", 1)
+        eia_id[f"{GAS_TYPE[kind]}{area}3"] = sid
+    params = [("api_key", key), ("frequency", "monthly"), ("data[0]", "value"), ("start", "1997-01"),
+              ("sort[0][column]", "period"), ("sort[0][direction]", "asc"), ("length", "5000")]
+    params += [("facets[series][]", e) for e in sorted(eia_id)]
+    req = urllib.request.Request(EIA_GAS + "?" + urllib.parse.urlencode(params), headers=UA)
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                res = json.loads(r.read().decode("utf-8"))
+            break
+        except Exception as e:
+            if attempt == tries - 1:
+                raise RuntimeError(f"EIA gas request failed: {type(e).__name__}") from e  # no URL: it has the key
+            time.sleep(10 * (attempt + 1))
+    rows = (res.get("response") or {}).get("data") or []
+    if not rows:
+        raise RuntimeError(f"EIA gas returned no rows: {str(res.get('error') or res)[:200]}")
+    found = {}
+    for row in rows:
+        sid = eia_id.get(row.get("series"))
+        try:
+            v = float(row["value"])
+        except (TypeError, ValueError, KeyError):
+            continue  # withheld months come back empty
+        if sid:
+            found.setdefault(sid, {})[f"{row['period']}-01"] = v
+    return {sid: {"dates": sorted(o), "values": [o[d] for d in sorted(o)]} for sid, o in found.items()}
 
 
 # ---------- Census ----------
@@ -440,6 +500,8 @@ def build(slug, cfg):
         got = fetch_dolwd(set(meta))
     elif cfg["source"] == "eia":
         got = fetch_eia(set(meta))
+    elif cfg["source"] == "eia_gas":
+        got = fetch_eia_gas(set(meta))
     elif cfg["source"] == "census":
         got = fetch_census(set(meta), cfg["naics"])
     else:
@@ -503,7 +565,7 @@ def main(argv):
     for slug in wanted:
         cfg = DASHBOARDS[slug]
         print(slug)
-        if cfg["source"] == "eia" and not os.environ.get("EIA_API_KEY", "").strip():
+        if cfg["source"].startswith("eia") and not os.environ.get("EIA_API_KEY", "").strip():
             note("warning", f"{slug}: skipped, EIA_API_KEY secret not set")
             continue
         try:
