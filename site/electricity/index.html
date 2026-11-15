@@ -132,7 +132,8 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .lat li.na{display:block;color:var(--muted);font-size:14px}
 .lat .d{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:2px}
 .lat b{color:var(--ink)}
-.lat .up{color:var(--accent)} .lat .dn{color:var(--ak)}
+.lat .up{color:var(--accent)} .lat .dn{color:var(--ak)} .lat .dn2{color:var(--accent)}
+.lat li.na b{color:var(--body)}
 @media (max-width:760px){.lat-grid{grid-template-columns:1fr}}
 svg text{font-family:var(--sans)}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
@@ -494,27 +495,35 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     $('lat-price').innerHTML = dates.map(d => {
       const p = P.get(d), r = R.get(d), q = Q.get(d), u = US.get(d);
       return `<li><span class="d">${mlab(d)}</span><span><b>${fmt(p, 1)}¢</b> average price, ${chg(yoy(P, d))} from a year earlier.` +
-        (r ? ` Households ${fmt(r, 1)}¢.` : '') + (q ? ` <b>${fmt(q)} GWh</b> sold, ${chg(yoy(Q, d), true)}.` : '') + `</span></li>`;
+        (r ? ` Households ${fmt(r, 1)}¢.` : '') + `</span></li>`;
     }).join('') || '<li class="na">Not available right now.</li>';
   }).catch(() => {});
   get('/data/electricity-plant-changes.json').then(D => {
-    const items = [...(D.additions || []).map(g => ({...g, kind: 'add'})), ...(D.retirements || []).map(g => ({...g, kind: 'ret'}))]
-      .filter(g => g.month).sort((a, b) => b.month.localeCompare(a.month)).slice(0, 3);
-    if (!items.length) return;
-    const inv = D.inventory || {}, byPlant = {};
-    Object.entries(inv).forEach(([id, g]) => { const pid = id.split(':')[0]; (byPlant[pid] = byPlant[pid] || []).push({id, ...g}); });
-    const addMonth = {}; (D.additions || []).forEach(g => { addMonth[g.id] = g.month; });
-    const own = o => o.replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op').replace(/^U S /, 'U.S. ');
-    const mwf = v => fmt(v, v < 10 ? 1 : 0);
-    $('lat-plants').innerHTML = items.map(g => {
-      const pid = String(g.id || '').split(':')[0], units = byPlant[pid] || [], tot = units.reduce((t, u) => t + (u.mw || 0), 0);
-      const isNew = units.length && units.every(u => addMonth[u.id] === g.month);
-      let what;
-      if (g.kind === 'ret') what = `<b>Retired:</b> a ${mwf(g.mw || 0)} MW ${esc((g.fuel || '').toLowerCase())} unit at ${esc(g.plant)}${g.owner ? ' (' + esc(own(g.owner)) + ')' : ''}.`;
-      else if (isNew) what = `<b>New plant:</b> ${esc(g.plant)}, ${mwf(tot || g.mw || 0)} MW ${esc((g.fuel || '').toLowerCase())}${g.owner ? ', run by ' + esc(own(g.owner)) : ''}.`;
-      else what = `<b>New unit:</b> a ${mwf(g.mw || 0)} MW ${esc((g.fuel || '').toLowerCase())} generator at the ${esc(g.plant)} power plant${g.owner ? ' (' + esc(own(g.owner)) + ')' : ''}. The plant now has ${units.length} ${units.length === 1 ? 'unit' : 'units'} totaling ${mwf(tot)} MW.`;
-      return `<li><span class="d">${mlab(g.month + '-01')}</span><span>${what}</span></li>`;
-    }).join('') + `<li class="na">How a change is listed: EIA keeps a monthly inventory of every generator at Alaska power plants of 1 MW or more. A generator appears here in the month it first produced power, or as retired when it drops out of the inventory. New units at village diesel plants often replace older engines, so an addition does not always mean more capacity.</li>`;
+    const own = o => (o || '').replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op').replace(/^U S /, 'U.S. ');
+    const mwf = v => fmt(v || 0, (v || 0) < 10 ? 1 : 0), fl = g => esc((g.fuel || '').toLowerCase()), by = g => g.owner ? ` (${esc(own(g.owner))})` : '';
+    const ev = [
+      ...(D.additions || []).map(g => ({m: g.month, t: 'add', g})),
+      ...(D.retirements || []).map(g => ({m: g.month, t: 'ret', g})),
+      ...(D.capacity_down || []).map(g => ({m: g.month, t: 'down', g})),
+    ].filter(e => e.m).sort((a, b) => b.m.localeCompare(a.m)).slice(0, 3);
+    if (!ev.length) return;
+    const inv = D.inventory || {}, pt = {};
+    Object.entries(inv).forEach(([id, x]) => { const k = id.split(':')[0]; pt[k] = pt[k] || {n: 0, mw: 0}; pt[k].n++; pt[k].mw += x.mw || 0; });
+    ev.forEach(e => { if (e.t === 'add' && e.g.plant_units == null) { const k = String(e.g.id || '').split(':')[0]; if (pt[k]) { e.g.plant_units = pt[k].n; e.g.plant_mw = pt[k].mw; } } });
+    const LAB = {new_plant: 'New plant', backup: 'Backup unit', replacement: 'Replacement unit', added: 'Added capacity', unit: 'New unit'};
+    const line = e => {
+      const g = e.g;
+      if (e.t === 'ret') return `<b class="dn2">Capacity down:</b> a ${mwf(g.mw)} MW ${fl(g)} ${g.backup ? 'backup ' : ''}unit at ${esc(g.plant)}${by(g)} was retired.`;
+      if (e.t === 'down') return `<b class="dn2">Capacity down:</b> ${esc(g.plant)}${by(g)} fell from ${mwf(g.before)} MW to ${mwf(g.after)} MW.`;
+      const lab = LAB[g.label] || 'New unit', tot = `The plant now has ${g.plant_units} ${g.plant_units === 1 ? 'unit' : 'units'} totaling ${mwf(g.plant_mw)} MW.`;
+      if (g.label === 'new_plant') return `<b>New plant:</b> ${esc(g.plant)}, ${mwf(g.plant_mw)} MW ${fl(g)}${g.owner ? ', run by ' + esc(own(g.owner)) : ''}. Adds capacity.`;
+      if (g.label === 'backup') return `<b>Backup unit:</b> a ${mwf(g.mw)} MW ${fl(g)} generator at ${esc(g.plant)}${by(g)}, held for outages and peaks rather than everyday supply. ${tot}`;
+      if (g.label === 'replacement') return `<b>Replacement unit:</b> a ${mwf(g.mw)} MW ${fl(g)} generator at ${esc(g.plant)}${by(g)}, replacing a unit retired the same month. ${tot}`;
+      if (g.label === 'added') return `<b>Added capacity:</b> a ${mwf(g.mw)} MW ${fl(g)} generator at ${esc(g.plant)}${by(g)}. ${tot}`;
+      return `<b>${lab}:</b> a ${mwf(g.mw)} MW ${fl(g)} generator at ${esc(g.plant)}${by(g)}. ${tot} EIA does not say whether it replaced an older unit.`;
+    };
+    $('lat-plants').innerHTML = ev.map(e => `<li><span class="d">${mlab(e.m + '-01')}</span><span>${line(e)}</span></li>`).join('') +
+      `<li class="na">How a change is listed: EIA keeps a monthly inventory of every generator at Alaska power plants of 1 MW or more. A unit is listed in the month it first produced power. It is labeled a <b>new plant</b> if the whole plant started that month, a <b>backup unit</b> if EIA classes it as standby, a <b>replacement</b> if another unit at the plant was retired that month, or <b>added capacity</b> if the plant's total went up. <b>Capacity down</b> means a unit was retired or a plant's total capacity fell from one month to the next. Labels that depend on month-to-month changes start with the site's November 2026 data.</li>`;
   }).catch(() => {});
 })();
 </script>

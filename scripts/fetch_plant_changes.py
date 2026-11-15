@@ -1,13 +1,20 @@
-"""Latest Alaska power plant additions and retirements, for the Electricity page.
+"""Latest Alaska power plant changes, for the Electricity page.
 
 Source: EIA's monthly generator inventory (Form EIA-860M) through the EIA API v2
 route electricity/operating-generator-capacity. Needs EIA_API_KEY.
 
-- Additions: Alaska generators with the most recent first-operation month.
-- Retirements: generators that were in last run's inventory but are gone from
-  this one (found by comparing runs, so the list starts empty and fills over time).
+Writes site/data/electricity-plant-changes.json with:
+- additions: Alaska generators with the most recent first-operation month, each
+  labeled as a new plant, a backup unit (EIA status "standby/backup"), a
+  replacement (another unit at the plant retired the same month), added capacity
+  (plant total went up), or a new unit (no earlier inventory to compare with).
+- retirements: generators that were in last run's inventory and are gone now.
+- capacity_down: plants whose total capacity fell from one run to the next.
+- inventory / plant_mw: this run's generators and plant totals, kept so the next
+  run can find what changed.
 
-Writes site/data/electricity-plant-changes.json. Keeps the old file if EIA fails.
+Change-based labels (replacement, added capacity, retirements, capacity down)
+come from comparing runs, so they build up over time. Keeps the old file if EIA fails.
 """
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
@@ -58,28 +65,78 @@ def main():
     gens = {}
     for r in rows:
         gid = f'{r.get("plantid")}:{r.get("generatorid")}'
-        gens[gid] = {"plant": r.get("plantName"), "owner": r.get("entityName"), "mw": num(r.get("nameplate-capacity-mw")),
+        status = str(r.get("statusDescription") or r.get("status") or "")
+        gens[gid] = {"plant": r.get("plantName"), "owner": r.get("entityName"), "mw": num(r.get("nameplate-capacity-mw")) or 0,
                      "fuel": FUEL.get(r.get("energy_source_code"), r.get("technology") or "Other"),
+                     "backup": "standby" in status.lower() or "backup" in status.lower() or str(r.get("status")) == "SB",
                      "month": str(r.get("operating-year-month") or "")[:7]}
     if not gens:
         print("::warning::plant changes: empty inventory; kept old file"); return
+
+    plant_of = lambda gid: gid.split(":")[0]
+    plant_mw = {}
+    for gid, g in gens.items():
+        plant_mw[plant_of(gid)] = round(plant_mw.get(plant_of(gid), 0) + g["mw"], 1)
+
     old = json.loads(OUT.read_text()) if OUT.exists() else {}
-    prev_ids = old.get("inventory", {})
-    retired = old.get("retirements", [])
-    if prev_ids and old.get("period") != period:
-        for gid, g in prev_ids.items():
-            if gid not in gens:
-                retired.insert(0, {**g, "month": period, "id": gid})
-    adds = sorted(({**g, "id": gid} for gid, g in gens.items() if g["month"]), key=lambda g: g["month"], reverse=True)[:12]
+    prev_inv, prev_mw = old.get("inventory", {}), old.get("plant_mw", {})
+    retired, down = old.get("retirements", []), old.get("capacity_down", [])
+    labels = old.get("labels", {})  # generator id -> label decided when it first appeared
+    new_period = bool(prev_inv) and old.get("period") != period
+    if new_period:
+        gone = {gid: g for gid, g in prev_inv.items() if gid not in gens}
+        for gid, g in gone.items():
+            retired.insert(0, {**g, "month": period, "id": gid})
+        for pid, after in plant_mw.items():
+            before = prev_mw.get(pid)
+            if before is not None and after < before - 0.05:
+                any_g = next(g for gid, g in gens.items() if plant_of(gid) == pid)
+                down.insert(0, {"plant": any_g["plant"], "owner": any_g["owner"], "before": before, "after": after, "month": period, "id": pid})
+        for pid, before in prev_mw.items():
+            if pid not in plant_mw:  # whole plant gone
+                g = next((g for gid, g in prev_inv.items() if plant_of(gid) == pid), {})
+                down.insert(0, {"plant": g.get("plant"), "owner": g.get("owner"), "before": before, "after": 0, "month": period, "id": pid})
+        for gid, g in gens.items():
+            if gid in prev_inv or gid in labels:
+                continue
+            pid = plant_of(gid)
+            if g["backup"]:
+                labels[gid] = "backup"
+            elif pid not in prev_mw:
+                labels[gid] = "new_plant"
+            elif any(plant_of(r) == pid for r in gone):
+                labels[gid] = "replacement"
+            elif plant_mw[pid] > prev_mw[pid] + 0.05:
+                labels[gid] = "added"
+            else:
+                labels[gid] = "unit"
+
+    adds = []
+    for gid, g in sorted(gens.items(), key=lambda kv: kv[1]["month"], reverse=True)[:12]:
+        if not g["month"]:
+            continue
+        pid = plant_of(gid)
+        same = [x for x, y in gens.items() if plant_of(x) == pid]
+        if gid in labels:
+            lab = labels[gid]
+        elif g["backup"]:
+            lab = "backup"
+        elif all(gens[x]["month"] == g["month"] for x in same):
+            lab = "new_plant"
+        else:
+            lab = "unit"
+        adds.append({**g, "id": gid, "label": lab, "plant_mw": plant_mw[pid], "plant_units": len(same)})
+
     data = {"source": "U.S. Energy Information Administration, Form EIA-860M, via EIA API v2",
             "url": "https://www.eia.gov/electricity/data/eia860m/", "period": period,
-            "additions": adds, "retirements": retired[:12],
-            "inventory": {gid: {k: g[k] for k in ("plant", "owner", "mw", "fuel")} for gid, g in gens.items()}}
+            "additions": adds, "retirements": retired[:12], "capacity_down": down[:12],
+            "labels": labels, "plant_mw": plant_mw,
+            "inventory": {gid: {k: g[k] for k in ("plant", "owner", "mw", "fuel", "backup")} for gid, g in gens.items()}}
     if {k: v for k, v in old.items() if k != "fetched"} == data:
         print("plant changes: no change"); return
     data["fetched"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     OUT.write_text(json.dumps(data, separators=(",", ":")) + "\n")
-    print(f"plant changes: {period}, {len(gens)} generators, latest addition {adds[0]['month'] if adds else '-'}")
+    print(f"plant changes: {period}, {len(gens)} generators, {sum(g['backup'] for g in gens.values())} backup")
 
 
 if __name__ == "__main__":
