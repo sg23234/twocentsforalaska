@@ -137,6 +137,7 @@
    "industrial_price": null,
    "customers": 179,
    "sales_mwh": 830,
+   "commercial_mwh": null,
    "prev_total_price": 130.86,
    "change_pct": 23.7
   },
@@ -151,6 +152,7 @@
    "industrial_price": null,
    "customers": 122,
    "sales_mwh": 2002,
+   "commercial_mwh": null,
    "prev_total_price": 118.07,
    "change_pct": -6.6
   },
@@ -165,6 +167,7 @@
    "industrial_price": null,
    "customers": 92,
    "sales_mwh": 407,
+   "commercial_mwh": null,
    "prev_total_price": 88.78,
    "change_pct": 13.2
   },
@@ -179,6 +182,7 @@
    "industrial_price": null,
    "customers": 116,
    "sales_mwh": 544,
+   "commercial_mwh": null,
    "prev_total_price": 95.33,
    "change_pct": 0.5
   },
@@ -193,6 +197,7 @@
    "industrial_price": null,
    "customers": 58,
    "sales_mwh": 450,
+   "commercial_mwh": null,
    "prev_total_price": 89.79,
    "change_pct": 0.4
   },
@@ -207,6 +212,7 @@
    "industrial_price": null,
    "customers": 63,
    "sales_mwh": 296,
+   "commercial_mwh": null,
    "prev_total_price": 82.9,
    "change_pct": 5.1
   },
@@ -221,6 +227,7 @@
    "industrial_price": null,
    "customers": 181,
    "sales_mwh": 2036,
+   "commercial_mwh": null,
    "prev_total_price": 90.47,
    "change_pct": -9.7
   },
@@ -235,6 +242,7 @@
    "industrial_price": null,
    "customers": 48,
    "sales_mwh": 232,
+   "commercial_mwh": null,
    "prev_total_price": 80.91,
    "change_pct": 0.1
   },
@@ -249,6 +257,7 @@
    "industrial_price": null,
    "customers": 137,
    "sales_mwh": 347,
+   "commercial_mwh": null,
    "prev_total_price": 84.64,
    "change_pct": -8.1
   },
@@ -263,6 +272,7 @@
    "industrial_price": null,
    "customers": 145,
    "sales_mwh": 1009,
+   "commercial_mwh": null,
    "prev_total_price": 63.33,
    "change_pct": 18.5
   },
@@ -277,6 +287,7 @@
    "industrial_price": null,
    "customers": 256,
    "sales_mwh": 2107,
+   "commercial_mwh": null,
    "prev_total_price": 68.97,
    "change_pct": 5.8
   },
@@ -291,6 +302,7 @@
    "industrial_price": null,
    "customers": 161,
    "sales_mwh": 1247,
+   "commercial_mwh": null,
    "prev_total_price": 50.56,
    "change_pct": 38.8
   },
@@ -305,6 +317,7 @@
    "industrial_price": null,
    "customers": 80,
    "sales_mwh": 652,
+   "commercial_mwh": null,
    "prev_total_price": null,
    "change_pct": null
   },
@@ -319,6 +332,7 @@
    "industrial_price": null,
    "customers": 274,
    "sales_mwh": 1873,
+   "commercial_mwh": null,
    "prev_total_price": 64.24,
    "change_pct": 8.7
   },
@@ -333,6 +347,7 @@
    "industrial_price": null,
    "customers": 99,
    "sales_mwh": 484,
+   "commercial_mwh": null,
    "prev_total_price": 91.21,
    "change_pct": -25.8
   },
@@ -347,6 +362,7 @@
    "industrial_price": null,
    "customers": 394,
    "sales_mwh": 4811,
+   "commercial_mwh": null,
    "prev_total_price": 67.22,
    "change_pct": 0.0
   },
@@ -361,6 +377,7 @@
    "industrial_price": null,
    "customers": 104,
    "sales_mwh": 1042,
+   "commercial_mwh": null,
    "prev_total_price": 66.0,
    "change_pct": 1.8
   },
@@ -375,6 +392,7 @@
    "industrial_price": null,
    "customers": 385,
    "sales_mwh": 3635,
+   "commercial_mwh": null,
    "prev_total_price": 62.53,
    "change_pct": 6.2
   },
@@ -389,6 +407,7 @@
    "industrial_price": null,
    "customers": 1425,
    "sales_mwh": 11375,
+   "commercial_mwh": null,
    "prev_total_price": 63.18,
    "change_pct": 4.6
   },
@@ -403,6 +422,7 @@
    "industrial_price": null,
    "customers": 175,
    "sales_mwh": 419,
+   "commercial_mwh": null,
    "prev_total_price": 64.71,
    "change_pct": -0.6
   },
@@ -417,6 +437,7 @@
    "industrial_price": null,
    "customers": 210,
    "sales_mwh": 3266,
+   "commercial_mwh": null,
    "prev_total_price": 64.72,
    "change_pct": -0.6
   },
@@ -431,6 +452,7 @@
    "industrial_price": null,
    "customers": 241,
    "sales_mwh": 2072,
+   "commercial_mwh": null,
    "prev_total_price": 52.88,
    "change_pct": 18.7
   },
@@ -445,6 +467,7 @@
    "industrial_price": null,
    "customers": 1100,
    "sales_mwh": 19785,
+   "commercial_mwh": null,
    "prev_total_price": 64.52,
    "change_pct": -4.0
   },
@@ -459,6 +482,7 @@
    "industrial_price": null,
    "customers": 84,
    "sales_mwh": 400,
+   "commercial_mwh": null,
    "prev_total_price": 74.61,
    "change_pct": -17.4
   },
@@ -473,6 +497,7 @@
    "industrial_price": null,
    "customers": 293,
    "sales_mwh": 2740,
+   "commercial_mwh": null,
    "prev_total_price": 54.71,
    "change_pct": 7.4
   },
@@ -487,6 +512,7 @@
    "industrial_price": null,
    "customers": 11487,
    "sales_mwh": 127186,
+   "commercial_mwh": 81597,
    "prev_total_price": 61.4,
    "change_pct": -5.6
   },
@@ -501,6 +527,7 @@
    "industrial_price": null,
    "customers": 59,
    "sales_mwh": 270,
+   "commercial_mwh": null,
    "prev_total_price": 72.55,
    "change_pct": -23.9
   },
@@ -515,6 +542,7 @@
    "industrial_price": null,
    "customers": 115,
    "sales_mwh": 759,
+   "commercial_mwh": null,
    "prev_total_price": 48.25,
    "change_pct": 12.5
   },
@@ -529,6 +557,7 @@
    "industrial_price": null,
    "customers": 1485,
    "sales_mwh": 17439,
+   "commercial_mwh": null,
    "prev_total_price": 51.84,
    "change_pct": 2.5
   },
@@ -543,6 +572,7 @@
    "industrial_price": null,
    "customers": 1342,
    "sales_mwh": 19296,
+   "commercial_mwh": 11575,
    "prev_total_price": 46.45,
    "change_pct": 7.7
   },
@@ -557,6 +587,7 @@
    "industrial_price": null,
    "customers": 76,
    "sales_mwh": 919,
+   "commercial_mwh": null,
    "prev_total_price": 81.26,
    "change_pct": -38.7
   },
@@ -571,6 +602,7 @@
    "industrial_price": null,
    "customers": 64,
    "sales_mwh": 456,
+   "commercial_mwh": null,
    "prev_total_price": 47.16,
    "change_pct": 1.8
   },
@@ -585,6 +617,7 @@
    "industrial_price": null,
    "customers": 107,
    "sales_mwh": 959,
+   "commercial_mwh": null,
    "prev_total_price": 46.85,
    "change_pct": 1.0
   },
@@ -599,6 +632,7 @@
    "industrial_price": null,
    "customers": 69,
    "sales_mwh": 700,
+   "commercial_mwh": null,
    "prev_total_price": 42.82,
    "change_pct": 6.2
   },
@@ -613,6 +647,7 @@
    "industrial_price": null,
    "customers": 97,
    "sales_mwh": 539,
+   "commercial_mwh": null,
    "prev_total_price": 62.44,
    "change_pct": -29.9
   },
@@ -627,6 +662,7 @@
    "industrial_price": null,
    "customers": 129,
    "sales_mwh": 2490,
+   "commercial_mwh": null,
    "prev_total_price": 46.24,
    "change_pct": -15.2
   },
@@ -641,6 +677,7 @@
    "industrial_price": null,
    "customers": 8536,
    "sales_mwh": 78783,
+   "commercial_mwh": 50151,
    "prev_total_price": 33.39,
    "change_pct": 17.4
   },
@@ -655,6 +692,7 @@
    "industrial_price": null,
    "customers": 1044,
    "sales_mwh": 36468,
+   "commercial_mwh": null,
    "prev_total_price": 38.1,
    "change_pct": 0.1
   },
@@ -669,6 +707,7 @@
    "industrial_price": null,
    "customers": 2333,
    "sales_mwh": 32463,
+   "commercial_mwh": null,
    "prev_total_price": 39.38,
    "change_pct": -3.3
   },
@@ -683,6 +722,7 @@
    "industrial_price": null,
    "customers": 2870,
    "sales_mwh": 50940,
+   "commercial_mwh": null,
    "prev_total_price": 31.31,
    "change_pct": 2.5
   },
@@ -697,6 +737,7 @@
    "industrial_price": null,
    "customers": 319,
    "sales_mwh": 3060,
+   "commercial_mwh": null,
    "prev_total_price": null,
    "change_pct": null
   },
@@ -711,6 +752,7 @@
    "industrial_price": null,
    "customers": 1686,
    "sales_mwh": 25369,
+   "commercial_mwh": null,
    "prev_total_price": 30.85,
    "change_pct": 1.5
   },
@@ -725,6 +767,7 @@
    "industrial_price": null,
    "customers": 4055,
    "sales_mwh": 86426,
+   "commercial_mwh": null,
    "prev_total_price": 27.78,
    "change_pct": -1.9
   },
@@ -739,6 +782,7 @@
    "industrial_price": null,
    "customers": 1243,
    "sales_mwh": 31336,
+   "commercial_mwh": null,
    "prev_total_price": null,
    "change_pct": null
   },
@@ -753,6 +797,7 @@
    "industrial_price": 14.66,
    "customers": 34600,
    "sales_mwh": 480762,
+   "commercial_mwh": 155968,
    "prev_total_price": 23.32,
    "change_pct": 7.1
   },
@@ -767,6 +812,7 @@
    "industrial_price": 21.87,
    "customers": 48554,
    "sales_mwh": 1270410,
+   "commercial_mwh": 116489,
    "prev_total_price": 24.58,
    "change_pct": 0.7
   },
@@ -781,6 +827,7 @@
    "industrial_price": null,
    "customers": 104,
    "sales_mwh": 1088,
+   "commercial_mwh": null,
    "prev_total_price": 25.79,
    "change_pct": -7.0
   },
@@ -795,6 +842,7 @@
    "industrial_price": null,
    "customers": 162,
    "sales_mwh": 51610,
+   "commercial_mwh": 51610,
    "prev_total_price": 24.81,
    "change_pct": -3.5
   },
@@ -809,6 +857,7 @@
    "industrial_price": null,
    "customers": 72296,
    "sales_mwh": 780530,
+   "commercial_mwh": 318870,
    "prev_total_price": 22.1,
    "change_pct": 5.1
   },
@@ -823,6 +872,7 @@
    "industrial_price": null,
    "customers": 366,
    "sales_mwh": 15476,
+   "commercial_mwh": null,
    "prev_total_price": 45.07,
    "change_pct": -54.9
   },
@@ -837,6 +887,7 @@
    "industrial_price": 14.76,
    "customers": 114163,
    "sales_mwh": 1861828,
+   "commercial_mwh": 1230683,
    "prev_total_price": 18.17,
    "change_pct": 5.5
   },
@@ -851,6 +902,7 @@
    "industrial_price": 17.19,
    "customers": 6337,
    "sales_mwh": 155689,
+   "commercial_mwh": 25355,
    "prev_total_price": 17.58,
    "change_pct": 2.9
   },
@@ -865,6 +917,7 @@
    "industrial_price": null,
    "customers": 5800,
    "sales_mwh": 114569,
+   "commercial_mwh": null,
    "prev_total_price": 17.77,
    "change_pct": 1.7
   },
@@ -879,6 +932,7 @@
    "industrial_price": null,
    "customers": 1998,
    "sales_mwh": 44915,
+   "commercial_mwh": null,
    "prev_total_price": 15.26,
    "change_pct": 16.8
   },
@@ -893,6 +947,7 @@
    "industrial_price": null,
    "customers": 1024,
    "sales_mwh": 19268,
+   "commercial_mwh": null,
    "prev_total_price": 16.13,
    "change_pct": -4.6
   },
@@ -907,6 +962,7 @@
    "industrial_price": null,
    "customers": 1881,
    "sales_mwh": 37175,
+   "commercial_mwh": null,
    "prev_total_price": 13.52,
    "change_pct": 3.0
   },
@@ -921,6 +977,7 @@
    "industrial_price": 11.8,
    "customers": 8030,
    "sales_mwh": 176167,
+   "commercial_mwh": 77549,
    "prev_total_price": 12.02,
    "change_pct": 12.0
   },
@@ -935,6 +992,7 @@
    "industrial_price": null,
    "customers": 2334,
    "sales_mwh": 56015,
+   "commercial_mwh": null,
    "prev_total_price": 12.56,
    "change_pct": 4.4
   },
@@ -949,6 +1007,7 @@
    "industrial_price": 11.43,
    "customers": 18166,
    "sales_mwh": 401143,
+   "commercial_mwh": 122373,
    "prev_total_price": 11.72,
    "change_pct": 5.9
   }
@@ -959,5 +1018,5 @@
   "Short_Form_2024.xlsx": 55,
   "Sales_Ult_Cust_2024.xlsx": 11
  },
- "fetched": "2026-11-14"
+ "fetched": "2026-11-15"
 }
