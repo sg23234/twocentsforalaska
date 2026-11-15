@@ -53,6 +53,7 @@ td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body);vertic
 td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
 td.p{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink)}
 td.u{font-weight:600;color:var(--ink)}
+td.u .ar{display:block;font-weight:400;font-size:12px;color:var(--muted)}
 td.bill{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
 tr.g th{padding:18px 12px 6px;font-family:var(--display);font-size:19px;letter-spacing:0;text-transform:none;color:var(--ink);border-bottom:2px solid var(--ink)}
 tr.g th span{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);margin-left:10px}
@@ -228,7 +229,13 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
   const fmt = (v, d = 0) => v.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
   const sgn = v => v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + fmt(Math.abs(v), 1) + '%';
   const cents = v => v == null ? '—' : fmt(v, 1) + '¢';
-  const tidy = n => n.replace(/ - \(AK\)$/, '').replace(/ \(AK\)$/, '').replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op');
+  const tidy = n => n.replace(/ - \(AK\)$/, '').replace(/ \(AK\)$/, '').replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/\bUtils\b/, 'Utilities').replace(/ Coop\b/, ' Co-op');
+  // Main area served, for Railbelt and Southeast utilities (names readers may not recognize)
+  const AREA = [[/^Chugach Elec/, 'Anchorage'], [/^Matanuska/, 'Mat-Su'], [/^Golden Valley/, 'Fairbanks'], [/^Homer Elec/, 'Kenai Peninsula'],
+    [/^City of Seward/, 'Seward'], [/^Alaska Electric Light/, 'Juneau'], [/^Alaska Power and Tel/, 'Skagway, Haines, Prince of Wales, Tok'],
+    [/^Ketchikan/, 'Ketchikan'], [/^City & Borough of Sitka/, 'Sitka'], [/^Petersburg/, 'Petersburg'], [/^City of Wrangell/, 'Wrangell'],
+    [/^Inside Passage/, 'Hoonah, Kake, Angoon'], [/^Metlakatla/, 'Metlakatla'], [/^Barrow Utils/, 'Utqiaġvik']];
+  const area = n => (AREA.find(([re]) => re.test(n)) || [])[1] || '';
   const get = u => fetch(u, {cache: 'no-cache'}).then(r => r.ok ? r.json() : Promise.reject(r.status));
 
   Promise.all([get('/data/energy.json'), get('/data/electricity-utilities.json')])
@@ -270,7 +277,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     });
     // Utilities with fewer than SMALL customers fold into one row per region (still counted in region averages).
     const SMALL = 1000, open_ = new Set();
-    const row = (u, i, cls = '') => `<tr${cls}><td class="r" style="color:var(--muted);font-weight:600">${i}</td><td class="u">${esc(tidy(u.utility))}</td>
+    const row = (u, i, cls = '') => `<tr${cls}><td class="r" style="color:var(--muted);font-weight:600">${i}</td><td class="u">${esc(tidy(u.utility))}${area(u.utility) ? `<span class="ar">${esc(area(u.utility))}</span>` : ''}</td>
           <td class="r p">${fmt(u.total_price, 1)}</td><td class="r">${fmt(u.total_price / usT, 1)}×</td><td class="r">${sgn(u.change_pct)}</td>
           <td class="r">${fmt(u.customers)}</td><td class="r bill">$${fmt(u.total_price * 7.5)}</td></tr>`;
     function table() {
@@ -348,7 +355,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     ];
     const sel = $('c-u');
     const byName = [...U.utilities].sort((a, b) => tidy(a.utility).localeCompare(tidy(b.utility)));
-    sel.innerHTML = byName.map((u, i) => `<option value="${i}"${/^Chugach/.test(u.utility) ? ' selected' : ''}>${esc(tidy(u.utility))} · ${fmt(u.residential_price || u.total_price, 1)}¢</option>`).join('');
+    sel.innerHTML = byName.map((u, i) => `<option value="${i}"${/^Chugach/.test(u.utility) ? ' selected' : ''}>${esc(tidy(u.utility))}${area(u.utility) ? ' (' + esc(area(u.utility)) + ')' : ''} · ${fmt(u.residential_price || u.total_price, 1)}¢</option>`).join('');
     const usRes = U.us.residential || usT;
     $('things').innerHTML = THINGS.map((x, i) => `<div class="thing"><span class="t">${esc(x.t)}</span><span class="a">${esc(x.a)}</span>
       <div class="c"><b data-i="${i}">—</b><span data-u="${i}"></span></div></div>`).join('') +
