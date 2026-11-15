@@ -1,0 +1,38 @@
+name: Refresh Cook Inlet gas and Anchorage weather (weekly)
+
+# The main refresh runs twice a month. Degree days change daily in winter and AOGCC
+# posts production as operators report, so this lighter job runs every Monday.
+on:
+  schedule:
+    - cron: "41 17 * * 1"   # 9:41 a.m. Alaska standard time, Mondays
+  workflow_dispatch: {}
+
+concurrency:
+  group: refresh-data       # never overlaps the main refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Fetch Cook Inlet production, storage and Anchorage degree days
+        run: |
+          pip install --quiet openpyxl
+          python3 scripts/fetch_cook_inlet.py
+      - name: Commit any new data
+        if: always()
+        run: |
+          git config user.name "data-bot"
+          git config user.email "data-bot@users.noreply.github.com"
+          git add site/data/cook-inlet.json site/data/anchorage-hdd.json
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Weekly gas and weather refresh $(date -u +%Y-%m-%d)"
+            git pull --rebase --quiet origin main
+            git push
+          fi

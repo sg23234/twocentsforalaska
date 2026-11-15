@@ -43,6 +43,13 @@ jobs:
           pip install --quiet openpyxl
           python3 scripts/fetch_utilities.py
 
+      - name: Fetch Cook Inlet gas production and storage (AOGCC) and Anchorage degree days (NOAA)
+        id: cookinlet
+        continue-on-error: true
+        run: |
+          pip install --quiet openpyxl
+          python3 scripts/fetch_cook_inlet.py
+
       - name: Fetch Alaska power plant additions and retirements (EIA-860M)
         continue-on-error: true
         env:
@@ -78,7 +85,7 @@ jobs:
           fi
 
       - name: Report failures
-        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.summaries.outcome == 'failure'
+        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.cookinlet.outcome == 'failure' || steps.summaries.outcome == 'failure'
         run: |
-          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
+          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Cook Inlet: ${{ steps.cookinlet.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
           exit 1
