@@ -43,6 +43,12 @@ jobs:
           pip install --quiet openpyxl
           python3 scripts/fetch_utilities.py
 
+      - name: Fetch Alaska power plant additions and retirements (EIA-860M)
+        continue-on-error: true
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python3 scripts/fetch_plant_changes.py
+
       - name: Refresh the Electricity page's backup data
         continue-on-error: true
         run: python3 scripts/electricity_snapshot.py
