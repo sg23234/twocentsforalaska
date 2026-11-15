@@ -124,26 +124,6 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .things-ctl .chk input{width:20px;height:20px;min-height:0;accent-color:var(--pce)}
 .things-ctl .chk small{font-weight:400;color:var(--muted);display:block}
 .things-ctl .chk[hidden]{display:none}
-.biz-top{display:grid;grid-template-columns:minmax(260px,1fr) 2fr;gap:32px;align-items:start}
-.biz-head{display:flex;flex-direction:column;gap:6px;border-top:4px solid var(--accent);padding-top:12px}
-.biz-head>b{font-family:var(--display);font-size:72px;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
-.biz-head>span{font-size:15px;color:var(--body);max-width:30ch}
-.biz-pair{display:flex;gap:22px;margin-top:10px;flex-wrap:wrap}
-.biz-pair div{display:flex;flex-direction:column}
-.biz-pair b{font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums}
-.biz-pair span{font-size:12px;color:var(--muted)}
-.biz-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-bottom:8px}
-.biz-ctl label{font-size:13px;font-weight:600;color:var(--ink)}
-.biz-ctl label b{font-family:var(--display);font-size:18px;font-variant-numeric:tabular-nums}
-.biz-ctl input{flex:1 1 220px;accent-color:var(--ink);min-height:44px}
-.brow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 70px;gap:12px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
-.brow .n{font-size:14px;font-weight:600;color:var(--ink);line-height:1.25}
-.brow .n small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
-.brow .tr{position:relative;height:22px}
-.brow .bar{position:absolute;left:0;top:0;bottom:0;border-radius:2px;transition:width .3s ease}
-.brow .amt{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--display);font-weight:700;font-size:15px;white-space:nowrap;font-variant-numeric:tabular-nums;transition:left .3s ease}
-.brow .ck{text-align:right;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.brow.usr{border-bottom:2px solid var(--us)}
 .hist{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .hcard{border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:#fff}
 .hcard.none{background:var(--tile)}
@@ -155,9 +135,6 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .hcard li{font-size:14px;color:var(--body);line-height:1.4}
 .hcard li b{color:var(--ink)}
 .hcard li i{font-style:normal;font-size:12px;color:var(--muted);display:block}
-@media (max-width:860px){.biz-top{grid-template-columns:1fr}.biz-head>b{font-size:56px}}
-@media (max-width:600px){.brow{grid-template-columns:1fr 60px}.brow .tr{grid-column:1/-1;grid-row:2}}
-@media (prefers-reduced-motion:reduce){.brow .bar,.brow .amt{transition:none}}
 svg text{font-family:var(--sans)}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:760px){.top{grid-template-columns:1fr}}
@@ -188,7 +165,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <div class="sech">
     <span class="kick">By region</span>
     <h2 id="h-reg">Electricity prices by region</h2>
-    <p id="regsub">Average price per kWh for each region and its utilities, and how each compares with the U.S. average. Regions are ordered by number of customers. Select a region to show only its utilities. Village prices are before the state's Power Cost Equalization credit; <a href="#pce">see how it works</a>. For businesses, <a href="#business">see what businesses pay</a>.</p>
+    <p id="regsub">Average price per kWh for each region and its utilities, and how each compares with the U.S. average. Regions are ordered by number of customers. Select a region to show only its utilities. Village prices are before the state's Power Cost Equalization credit; <a href="#pce">see how it works</a>.</p>
   </div>
   <div class="regions" id="regions"></div>
   <div class="tbl"><table>
@@ -198,27 +175,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <p class="note" id="tblnote"></p>
 </section>
 
-<section class="sec" id="business" aria-labelledby="h-biz">
-  <div class="sech"><span class="kick">Business view</span><h2 id="h-biz">What businesses pay</h2>
-    <p>Stores, offices, processors and other commercial customers. Power Cost Equalization does not cover them, so a rural business pays the full price.</p></div>
-  <div class="biz-top">
-    <div class="biz-head">
-      <b id="biz-x">—</b>
-      <span id="biz-xl">Rural businesses pay this many times the Railbelt price</span>
-      <div class="biz-pair">
-        <div><b id="biz-rural" style="color:var(--accent)">—</b><span>Rural Alaska</span></div>
-        <div><b id="biz-rail" style="color:var(--ak)">—</b><span>Railbelt</span></div>
-        <div><b id="biz-us" style="color:var(--us)">—</b><span>U.S. average</span></div>
-      </div>
-    </div>
-    <div class="biz-bars">
-      <div class="biz-ctl"><label for="biz-k">A business using <b id="biz-kv">3,000 kWh</b> a month</label>
-        <input id="biz-k" type="range" min="500" max="20000" step="500" value="3000"></div>
-      <div id="biz-rows"></div>
-    </div>
-  </div>
-  <p class="note" id="biznote"></p>
-</section>
 <section class="sec" id="history" aria-labelledby="h-hist">
   <div class="sech"><span class="kick">History</span><h2 id="h-hist">Where cheap power came from</h2>
     <p>The places with the lowest prices today are the ones where the federal or state government built hydro dams and power lines decades ago. Most villages were never connected to projects like these and still run on diesel.</p></div>
@@ -378,37 +334,6 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     });
     table();
     $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y} (orange tick), the same figure as in the chart at the top. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Bars are cut off at the right edge for the highest-priced small utilities. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
-
-    // ----- business view -----
-    // Business price = utility's commercial price where it reports one (EIA-861 long form);
-    // small utilities file the short form with one all-customer price, used in its place.
-    // Weighted by commercial kWh where known, otherwise all kWh.
-    const bizP = u => u.commercial_price || u.total_price;
-    const bizW = u => (u.commercial_price && u.commercial_mwh) ? u.commercial_mwh : u.sales_mwh;
-    const wavg = list => { const w = list.reduce((t, u) => t + bizW(u), 0); return w ? list.reduce((t, u) => t + bizP(u) * bizW(u), 0) / w : null; };
-    const OFFGRID = k => k !== 'Railbelt' && k !== 'Southeast';
-    const rail = wavg(U.utilities.filter(u => u.region === 'Railbelt'));
-    const rural = wavg(U.utilities.filter(u => OFFGRID(u.region)));
-    const usC = U.us.commercial;
-    $('biz-x').textContent = rail && rural ? fmt(rural / rail, 1) + '×' : '—';
-    $('biz-rural').textContent = cents(rural); $('biz-rail').textContent = cents(rail); $('biz-us').textContent = cents(usC);
-    const brs = regs.map(([k]) => {
-      const list = U.utilities.filter(u => u.region === k), rep = list.filter(u => u.commercial_price).length;
-      return {l: k, v: wavg(list), d: rep === list.length ? 'commercial price' : rep ? `${rep} of ${list.length} utilities report a commercial price` : 'all-customer price', g: k === 'Railbelt' ? 'ak' : OFFGRID(k) ? 'r' : 'se'};
-    }).filter(r => r.v);
-    if (usC) brs.push({l: 'U.S. average', v: usC, d: 'commercial price', g: 'us', usr: 1});
-    brs.sort((a, b) => b.v - a.v);
-    const BC = {ak: 'var(--ak)', r: 'var(--accent)', se: '#4D7FBF', us: 'var(--us)'}, BMAX = Math.max(...brs.map(r => r.v));
-    $('biz-rows').innerHTML = brs.map(r => `<div class="brow${r.usr ? ' usr' : ''}"><div class="n">${esc(r.l)}<small>${esc(r.d)}</small></div>
-      <div class="tr"><div class="bar" style="background:${BC[r.g]}"></div><span class="amt" style="color:${BC[r.g]}"></span></div><div class="ck">${fmt(r.v, 1)}¢</div></div>`).join('');
-    const bEls = [...$('biz-rows').children];
-    function biz() {
-      const k = +$('biz-k').value; $('biz-kv').textContent = fmt(k) + ' kWh';
-      brs.forEach((r, i) => { const pct = r.v / BMAX * 74; bEls[i].querySelector('.bar').style.width = pct + '%';
-        const a = bEls[i].querySelector('.amt'); a.textContent = '$' + fmt(k * r.v / 100); a.style.left = `calc(${pct}% + 8px)`; });
-    }
-    $('biz-k').addEventListener('input', biz); biz();
-    $('biznote').textContent = `${Y} EIA-861. Rural means every region except the Railbelt and Southeast. Most rural utilities are small and report only one price for all customers; before Power Cost Equalization, homes and businesses in villages pay similar rates, so that price stands in for the commercial price. Prices are averages that spread fixed monthly and demand charges over each kWh; large users on special contracts pay less. A small store or office might use 2,000 to 5,000 kWh a month.`;
 
     // ----- where cheap power came from -----
     const RP = k => (U.regions[k] || {}).avg_price, UP = re => (U.utilities.find(u => re.test(u.utility)) || {}).total_price;
