@@ -28,9 +28,6 @@
   ]
  },
  "supply": {
-  "production_mmcfd": 209.5,
-  "production_month": "January 2026",
-  "production_yoy_pct": 11.9,
   "peak_mmcfd": 850,
   "peak_year": 1990,
   "demand_bcf": 70,
@@ -48,42 +45,7 @@
     "value": 10
    }
   ],
-  "fields": {
-   "year": 2025,
-   "rows": [
-    {
-     "label": "Beluga River",
-     "op": "Hilcorp, with Chugach Electric",
-     "value": 23
-    },
-    {
-     "label": "North Cook Inlet",
-     "op": "Hilcorp",
-     "value": 20
-    },
-    {
-     "label": "Ninilchik",
-     "op": "Hilcorp",
-     "value": 16
-    },
-    {
-     "label": "Kenai",
-     "op": "Hilcorp",
-     "value": 12
-    },
-    {
-     "label": "Kitchen Lights",
-     "op": "HEX / Furie",
-     "value": 8
-    },
-    {
-     "label": "All others",
-     "op": "About 15 smaller fields",
-     "value": 21
-    }
-   ]
-  },
-  "source": "Alaska Department of Natural Resources, Division of Oil and Gas, legislative presentations Jan 2026; AOGCC production data via Petroleum News"
+  "source": "Alaska Department of Natural Resources, Division of Oil and Gas, legislative presentations Jan 2026"
  },
  "projects": [
   {
@@ -168,10 +130,6 @@
   [
    "Petroleum News, House Energy hears plans for Cook Inlet LNG import terminals, Feb 15, 2026",
    "https://www.petroleumnews.com/pnads/814978922.shtml"
-  ],
-  [
-   "Petroleum News, Cook Inlet gas volumes hold steady (January 2026 production)",
-   "https://www.petroleumnews.com/pnads/820643292.shtml"
   ],
   [
    "Anchorage Daily News, Alaska threatens Cook Inlet producer with loss of gas field, Aug 21, 2026",

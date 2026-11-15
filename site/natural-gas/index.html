@@ -50,6 +50,7 @@ svg text{font-family:var(--sans)}
 svg text.halo{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
 @media (max-width:420px){th,td{padding:8px 6px}table{font-size:14px}}
 #trend{height:300px}
+#prod{height:280px}#stor{height:320px}#hdd{height:300px}
 .empty{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;border:1px dashed var(--rule);border-radius:4px;background:var(--tile);color:var(--muted);font-size:14px}
 /* two-column panels */
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
@@ -164,6 +165,11 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <div class="sech"><span class="kick">Supply</span><h2 id="h-sup">Where the gas comes from</h2>
     <p>Nearly all of it comes from about 20 fields in and around Cook Inlet, most run by Hilcorp. Production peaked in 1990, when Southcentral also exported LNG and made fertilizer. New wells raised output in 2025, but wells here lose 30 to 40% of their production each year, so drilling has to continue just to hold steady.</p></div>
   <div class="big" id="supbig"></div>
+  <figure style="margin:0">
+    <div class="key" style="margin-bottom:6px"><span><i style="background:#9DB6D6"></i>Each month</span><span><i style="background:var(--ak)"></i>12-month average</span></div>
+    <div class="fig" id="prod"></div>
+    <figcaption class="note" id="prodcap">Cook Inlet natural gas production, million cubic feet a day. Source: Alaska Oil and Gas Conservation Commission.</figcaption>
+  </figure>
   <div class="two">
     <div class="panel">
       <h3>Who uses it</h3>
@@ -180,6 +186,28 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     </div>
   </div>
   <p class="note" id="supnote"></p>
+</section>
+
+<section class="sec" aria-labelledby="h-stor">
+  <div class="sech"><span class="kick">Storage</span><h2 id="h-stor">How much gas is in storage</h2>
+    <p>Cook Inlet fields can't raise output fast enough for a cold January, so utilities fill storage in summer and draw it down in winter. Most of the utilities' gas is stored at CINGSA, a depleted gas field near Kenai. Each line below is one storage year, April to March.</p></div>
+  <div class="big" id="storbig"></div>
+  <figure style="margin:0">
+    <div class="key" id="storkey" style="margin-bottom:6px"></div>
+    <div class="fig" id="stor"></div>
+    <figcaption class="note" id="storcap"></figcaption>
+  </figure>
+</section>
+
+<section class="sec" aria-labelledby="h-hdd">
+  <div class="sech"><span class="kick">Weather</span><h2 id="h-hdd">How cold this winter has been</h2>
+    <p>Gas use rises and falls with the temperature. Heating degree days measure how cold it has been: each degree a day's average temperature falls below 65°F adds one. A colder winter means more gas burned and storage drawn down faster.</p></div>
+  <div class="big" id="hddbig"></div>
+  <figure style="margin:0">
+    <div class="key" style="margin-bottom:6px"><span><i style="background:var(--ak)"></i>This heating season</span><span><i style="background:#9AA3B5"></i>Last season</span><span><i style="background:var(--ink);height:2px;vertical-align:3px"></i>Normal</span></div>
+    <div class="fig" id="hdd"></div>
+    <figcaption class="note" id="hddcap"></figcaption>
+  </figure>
 </section>
 
 <section class="sec" aria-labelledby="h-proj">
@@ -203,7 +231,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
 
 <section class="sec" aria-labelledby="h-src">
   <div class="sech"><h2 id="h-src" style="font-size:22px">Sources</h2></div>
-  <ul class="srcs" id="srcs"><li>U.S. Energy Information Administration, <a href="https://www.eia.gov/naturalgas/monthly/" target="_blank" rel="noopener">Natural Gas Monthly</a>, prices by state, through the EIA Open Data API.</li></ul>
+  <ul class="srcs" id="srcs"><li>U.S. Energy Information Administration, <a href="https://www.eia.gov/naturalgas/monthly/" target="_blank" rel="noopener">Natural Gas Monthly</a>, prices by state, through the EIA Open Data API.</li><li>Alaska Oil and Gas Conservation Commission, <a href="https://commerce.alaska.gov/web/aogcc/Data" target="_blank" rel="noopener">Data Miner</a> production and storage tables (monthly, by well).</li><li>NOAA Regional Climate Centers, <a href="https://www.rcc-acis.org/" target="_blank" rel="noopener">Applied Climate Information System</a>, daily heating degree days for Anchorage airport with 1991–2020 normals.</li></ul>
 </section>
 
 <footer>Built from public data. <a href="/sources/#natural-gas">Sources</a> · <a href="/electricity/">Electricity</a> · <a href="/">Front page</a></footer>
@@ -242,8 +270,9 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   const lastOf = s => s && s.dates.length ? {d: s.dates[s.dates.length - 1], v: s.values[s.values.length - 1]} : null;
   const atDate = (s, d) => { if (!s) return null; const i = s.dates.indexOf(d); return i < 0 ? null : s.values[i]; };
 
-  Promise.all([get('/data/manual/natural-gas.json'), get('/data/natural-gas.json').catch(() => null)])
-    .then(([M, G]) => render(M, G))
+  Promise.all([get('/data/manual/natural-gas.json'), get('/data/natural-gas.json').catch(() => null),
+               get('/data/cook-inlet.json').catch(() => null), get('/data/anchorage-hdd.json').catch(() => null)])
+    .then(([M, G, CI, HD]) => { render(M, G); supply(M, CI); storage(CI); weather(HD); })
     .catch(() => { $('stats').textContent = 'Data unavailable.'; });
 
   function render(M, G) {
@@ -287,45 +316,175 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     $('types').innerHTML = rows || '<tr><td colspan="4" style="color:var(--muted)">EIA prices fill in after the next data refresh.</td></tr>';
     $('typesnote').textContent = latest ? `12 months to ${month(latest)}. EIA withholds some Alaska months; averages need at least 10 of 12. Customer prices include delivery, so homes pay more per Mcf than power plants. Alaska homes can pay less than the U.S. average even though the gas itself costs about twice as much: Enstar's delivery charges, about $3.67 per Mcf, are among the lowest in the country (the U.S. average is about $13).` : '';
 
-    // ----- supply -----
+    // ----- who uses it -----
     const P = M.supply;
-    $('supbig').innerHTML =
-      `<div><b>${fmt(P.production_mmcfd)}</b><span>million cubic feet a day, ${esc(P.production_month)}</span></div>` +
-      `<div><b>+${fmt(P.production_yoy_pct, 1)}%</b><span>from a year earlier, after new wells</span></div>` +
-      `<div><b>${fmt(P.peak_mmcfd)}</b><span>million cubic feet a day at the ${P.peak_year} peak</span></div>` +
-      `<div><b>~${fmt(P.demand_bcf)} Bcf</b><span>used in a year, billion cubic feet</span></div>`;
     const DC = ['#1F5FA8', '#14213D', '#7A8499'], dTot = P.demand.reduce((t, r) => t + r.value, 0);
     $('demsub').textContent = `About ${P.demand_bcf} billion cubic feet a year, by use (DNR estimate).`;
     $('dem').setAttribute('aria-label', P.demand.map(r => `${r.label} ${r.value} billion cubic feet`).join(', '));
     $('dem').innerHTML = P.demand.map((r, i) => `<div style="width:${r.value / dTot * 100}%;background:${DC[i]}">${fmt(r.value / dTot * 100)}%</div>`).join('');
     $('demlab').innerHTML = P.demand.map((r, i) => `<span><b style="color:${DC[i]}">~${r.value} Bcf</b>${esc(r.label)}</span>`).join('');
-    const F = P.fields;
-    $('fldsub').textContent = `Share of Cook Inlet gas production, ${F.year}.`;
-    // Treemap: blocks sized by share, colored by operator.
-    const opOf = r => /^Hilcorp/.test(r.op) ? 'Hilcorp' : /Furie/.test(r.op) ? 'HEX / Furie' : 'Others';
-    const OPC = {'Hilcorp': ['#123E73', '#1F5FA8', '#3B7BC4', '#6A9BD4'], 'HEX / Furie': ['#0E7C86'], 'Others': ['#7A8499']}, used = {};
-    const items = F.rows.map(r => { const o = opOf(r); used[o] = (used[o] || 0); return Object.assign({}, r, {o, c: OPC[o][Math.min(used[o]++, OPC[o].length - 1)]}); });
-    const hil = items.filter(r => r.o === 'Hilcorp').reduce((t, r) => t + r.value, 0);
-    $('fldhero').textContent = hil + '%';
-    $('fldherol').textContent = `of Cook Inlet gas comes from the four largest fields, all run by Hilcorp.`;
-    $('fld').setAttribute('aria-label', items.map(r => `${r.label} ${r.value}%`).join(', '));
-    $('fldkey').innerHTML = Object.keys(OPC).map(o => `<span><i style="background:${OPC[o][o === 'Hilcorp' ? 1 : 0]}"></i>${o}</span>`).join('');
-    const fl = $('fld');
-    const tm = () => {
-      const W = fl.clientWidth, H = fl.clientHeight; if (!W) return;
-      fl.innerHTML = squarify(items.slice().sort((a, b) => b.value - a.value), 0, 0, W, H).map(b => {
-        const sm = b.w < 120 || b.h < 80, xs = b.w < 64;
-        return `<div class="${xs ? 'xs' : sm ? 'sm' : ''}" style="left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px;background:${b.r.c}" title="${esc(b.r.label)}: ${b.r.value}%"><b>${b.r.value}%</b><span>${esc(b.r.label)}<small>${esc(b.r.op)}</small></span></div>`;
-      }).join('');
-    };
-    new ResizeObserver(tm).observe(fl);
-    $('supnote').textContent = `Production is gas sold, net of gas reinjected into oil fields and gas cycled through storage. Source: ${P.source}.`;
 
     // ----- projects -----
     $('proj').innerHTML = M.projects.map(p => `<tr><td class="n">${esc(p.name)}<small>${esc(p.who)}</small></td><td>${esc(p.what)}</td><td>${esc(p.when)}</td><td><span class="badge">${esc(p.status)}</span></td></tr>`).join('');
 
     $('asof').textContent = `Hand-kept figures last checked ${M.as_of}.`;
     $('srcs').innerHTML += M.sources.map(([n, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('');
+  }
+
+  const shortOp = o => /hilcorp/i.test(o) ? 'Hilcorp' : /HEX|Furie/i.test(o) ? 'HEX / Furie' : /Cook Inlet Energy|Glacier/i.test(o) ? 'Glacier' : /BlueCrest/i.test(o) ? 'BlueCrest' : String(o).replace(/,? (LLC|Inc)\.?$/i, '').replace(/ Alaska$/, '');
+  const empty = (id, msg) => { $(id).innerHTML = `<div class="empty">${msg}</div>`; };
+  const mIdx = d => +d.slice(0, 4) * 12 + +d.slice(5, 7) - 1;
+
+  // ----- production (AOGCC) -----
+  function supply(M, CI) {
+    const P = M.supply, pr = CI && CI.production;
+    if (!pr || !pr.months.length) {
+      $('supbig').innerHTML = `<div><b>${fmt(P.peak_mmcfd)}</b><span>million cubic feet a day at the ${P.peak_year} peak</span></div>`;
+      empty('prod', 'Cook Inlet production fills in after the next data refresh.'); empty('fld', 'Field shares fill in after the next data refresh.');
+      return;
+    }
+    const n = pr.months.length - 1, last = pr.total_mmcfd[n], lastD = pr.months[n];
+    const yAgoI = pr.months.indexOf(`${+lastD.slice(0, 4) - 1}${lastD.slice(4)}`), yAgo = yAgoI >= 0 ? pr.total_mmcfd[yAgoI] : null;
+    const tot12 = pr.fields.reduce((t, f) => t + f.last12_bcf, 0);
+    const chg = yAgo ? (last / yAgo - 1) * 100 : null;
+    $('supbig').innerHTML =
+      `<div><b style="color:var(--ak)">${fmt(last)}</b><span>million cubic feet a day, ${month(lastD)}</span></div>` +
+      (chg != null ? `<div><b>${chg >= 0 ? '+' : '−'}${fmt(Math.abs(chg), 1)}%</b><span>from ${month(pr.months[yAgoI])}</span></div>` : '') +
+      `<div><b>${fmt(tot12)} Bcf</b><span>produced in the last 12 months</span></div>` +
+      `<div><b>${fmt(P.peak_mmcfd)}</b><span>million cubic feet a day at the ${P.peak_year} peak</span></div>`;
+    // chart: monthly + trailing 12-month average
+    const avg = pr.total_mmcfd.map((v, i, a) => i < 11 ? null : a.slice(i - 11, i + 1).reduce((t, x) => t + x, 0) / 12);
+    const host = $('prod');
+    new ResizeObserver(() => lineChart(host, {
+      x: pr.months.map(d => mIdx(d) / 12),
+      series: [{y: pr.total_mmcfd, c: '#9DB6D6', w: 1.2}, {y: avg, c: '#1F5FA8', w: 2.6, label: true}],
+      yFmt: v => fmt(v), yMin: 0, xFmt: x => String(Math.floor(x)), xStep: 5,
+      aria: 'Cook Inlet natural gas production by month since 2000'})).observe(host);
+    $('prodcap').textContent = `Cook Inlet natural gas production, million cubic feet a day, January 2000 to ${month(lastD)}. AOGCC posts each month's figures about two months later. Source: Alaska Oil and Gas Conservation Commission.`;
+
+    // treemap: last 12 months by field, top 5 + others
+    const top = pr.fields.slice(0, 5), rest = pr.fields.slice(5);
+    const rows = top.map(f => ({label: f.name, op: shortOp(f.operator), bcf: f.last12_bcf}));
+    rows.push({label: 'All others', op: `${rest.length} smaller fields`, bcf: rest.reduce((t, f) => t + f.last12_bcf, 0), other: 1});
+    rows.forEach(r => { r.value = Math.round(r.bcf / tot12 * 100); });
+    const OPC = {'Hilcorp': ['#123E73', '#1F5FA8', '#3B7BC4', '#6A9BD4', '#8FB3E0'], 'HEX / Furie': ['#0E7C86'], 'Others': ['#7A8499']}, used = {};
+    const items = rows.map(r => { const o = r.other ? 'Others' : (OPC[r.op] ? r.op : 'Others'); used[o] = used[o] || 0; return Object.assign(r, {o, c: OPC[o][Math.min(used[o]++, OPC[o].length - 1)]}); });
+    const hil = pr.fields.filter(f => /hilcorp/i.test(f.operator)).reduce((t, f) => t + f.last12_bcf, 0) / tot12 * 100;
+    $('fldsub').textContent = `Share of Cook Inlet gas production, 12 months to ${month(lastD)}.`;
+    $('fldhero').textContent = fmt(hil) + '%';
+    $('fldherol').textContent = 'of Cook Inlet gas comes from fields run by Hilcorp.';
+    $('fld').setAttribute('aria-label', items.map(r => `${r.label} ${r.value}%`).join(', '));
+    $('fldkey').innerHTML = Object.keys(OPC).map(o => `<span><i style="background:${OPC[o][o === 'Hilcorp' ? 1 : 0]}"></i>${o}</span>`).join('');
+    const fl = $('fld');
+    new ResizeObserver(() => {
+      const W = fl.clientWidth, H = fl.clientHeight; if (!W) return;
+      fl.innerHTML = squarify(items.slice().sort((a, b) => b.value - a.value), 0, 0, W, H).map(b => {
+        const sm = b.w < 120 || b.h < 80, xs = b.w < 64;
+        return `<div class="${xs ? 'xs' : sm ? 'sm' : ''}" style="left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px;background:${b.r.c}" title="${esc(b.r.label)}: ${b.r.value}%"><b>${b.r.value}%</b><span>${esc(b.r.label)}<small>${esc(b.r.op)}</small></span></div>`;
+      }).join('');
+    }).observe(fl);
+    $('supnote').textContent = 'Production is gas produced from Cook Inlet fields, including gas from oil wells; gas withdrawn from storage is not counted. Use by sector: Alaska Department of Natural Resources, Division of Oil and Gas, January 2026.';
+  }
+
+  // ----- CINGSA storage (AOGCC storage table) -----
+  function storage(CI) {
+    const st = CI && CI.storage, g = st && st.groups.find(x => x.name === 'CINGSA');
+    if (!g) { empty('stor', 'Storage data fills in after the next data refresh.'); return; }
+    // Level = running total of gas injected minus gas withdrawn since CINGSA opened in 2012.
+    let cum = 0;
+    const lvl = st.months.map((d, i) => (cum += g.injected_bcf[i] - g.withdrawn_bcf[i]));
+    const by = new Map(st.months.map((d, i) => [d.slice(0, 7), lvl[i]]));
+    const lastD = st.months[st.months.length - 1], ly = +lastD.slice(0, 4), lm = +lastD.slice(5, 7);
+    const curY = lm >= 4 ? ly : ly - 1;                     // storage year starts in April
+    const ORDER = [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3], MS = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+    const yearLine = y => ORDER.map(m => { const k = `${m >= 4 ? y : y + 1}-${String(m).padStart(2, '0')}`; return by.has(k) ? by.get(k) : null; });
+    const years = [];
+    for (let y = curY - 5; y <= curY; y++) years.push({y, v: yearLine(y)});
+    const cur = by.get(lastD.slice(0, 7)), prev = by.get(`${ly - 1}-${lastD.slice(5, 7)}`);
+    const past = years.slice(0, -1).map(o => o.v[ORDER.indexOf(lm)]).filter(v => v != null);
+    const avg5 = past.length ? past.reduce((t, v) => t + v, 0) / past.length : null;
+    const MON3 = MON[lm - 1];
+    const d1 = prev != null ? cur - prev : null, d5 = avg5 != null ? cur - avg5 : null;
+    const sign = v => (v >= 0 ? '+' : '−') + fmt(Math.abs(v), 1);
+    $('storbig').innerHTML =
+      (d1 != null ? `<div><b style="color:${d1 < 0 ? 'var(--accent)' : 'var(--ak)'}">${sign(d1)} Bcf</b><span>gas in CINGSA at the end of ${MON3} ${ly}, compared with a year earlier</span></div>` : '') +
+      (d5 != null ? `<div><b>${sign(d5)} Bcf</b><span>compared with the average end of ${MON3} over the previous five years</span></div>` : '') +
+      `<div><b>${fmt(g.withdrawn_bcf.slice(-12).reduce((t, v) => t + v, 0), 1)} Bcf</b><span>withdrawn in the 12 months to ${month(lastD)}</span></div>`;
+    const COLS = ['#D5DAE3', '#C3CAD6', '#B0B9C9', '#9AA3B5', '#5A6580', '#1F5FA8'];
+    $('storkey').innerHTML = years.map((o, i) => `<span><i style="background:${COLS[i]}"></i>${o.y}–${String(o.y + 1).slice(2)}</span>`).join('');
+    const host = $('stor');
+    new ResizeObserver(() => lineChart(host, {
+      x: ORDER.map((m, i) => i),
+      series: years.map((o, i) => ({y: o.v, c: COLS[i], w: i === years.length - 1 ? 3 : i === years.length - 2 ? 2 : 1.4, label: i === years.length - 1})),
+      yFmt: v => fmt(v), yMin: 0, xFmt: i => MS[i], xStep: 1, xSmallStep: 2, fmtLabel: v => fmt(v, 1) + ' Bcf',
+      aria: 'Gas held in CINGSA storage by month, last six storage years'})).observe(host);
+    $('storcap').textContent = `Billion cubic feet (Bcf) of gas in CINGSA storage at the end of each month, through ${month(lastD)}. Measured as gas injected minus gas withdrawn since CINGSA opened in 2012; it leaves out roughly 3.5 Bcf of gas already in the reservoir, so totals are lower than CINGSA's own inventory figures, but changes and year-to-year comparisons are the same. Part of the gas is base gas that stays in the reservoir to keep pressure up. Hilcorp also stores gas at the Kenai field for its own customers; that storage is not shown. Source: Alaska Oil and Gas Conservation Commission, storage well reports.`;
+  }
+
+  // ----- Anchorage heating degree days (NOAA ACIS) -----
+  function weather(HD) {
+    if (!HD || !HD.dates.length) { empty('hdd', 'Degree days fill in after the next data refresh.'); return; }
+    const start = HD.season_start, prevStart = `${+start.slice(0, 4) - 1}${start.slice(4)}`;
+    const dayOf = (d, s0) => Math.round((Date.parse(d) - Date.parse(s0)) / 864e5);
+    const cur = [], prev = [], norm = [];
+    let c = 0, p = 0, nn = 0, nC = 0;
+    HD.dates.forEach((d, i) => {
+      if (d >= start) { c += HD.hdd[i]; nC += HD.normal[i]; cur[dayOf(d, start)] = c; }
+      else if (d >= prevStart) { p += HD.hdd[i]; nn += HD.normal[i]; prev[dayOf(d, prevStart)] = p; norm[dayOf(d, prevStart)] = nn; }
+    });
+    const nDays = cur.length, lastD = HD.dates[HD.dates.length - 1];
+    const pct = nC ? (c / nC - 1) * 100 : 0;
+    const wk = HD.hdd.slice(-7).reduce((t, v) => t + v, 0), wkN = HD.normal.slice(-7).reduce((t, v) => t + v, 0);
+    const lastSeason = HD.seasons[HD.seasons.length - 1], normalSeason = nn;
+    const colderS = HD.seasons.slice(0, -1).filter(s => s.hdd > lastSeason.hdd), since = colderS.length ? colderS[colderS.length - 1].season : null;
+    const word = v => v >= 0 ? 'colder' : 'warmer';
+    $('hddbig').innerHTML =
+      `<div><b style="color:var(--ak)">${fmt(Math.abs(pct))}% ${word(pct)}</b><span>than normal since July 1, through ${MON[+lastD.slice(5, 7) - 1]} ${+lastD.slice(8, 10)}</span></div>` +
+      `<div><b>${fmt(Math.abs((wk / wkN - 1) * 100))}% ${word(wk - wkN)}</b><span>than normal over the last 7 days</span></div>` +
+      `<div><b>${esc(lastSeason.season)}</b><span>last winter: ${fmt(Math.abs((lastSeason.hdd / normalSeason - 1) * 100))}% ${word(lastSeason.hdd - normalSeason)} than normal${lastSeason.hdd > normalSeason ? ', ' : ''}${lastSeason.hdd > normalSeason ? (since ? `the coldest since <span style="white-space:nowrap">${since}</span>` : `the coldest since records began in ${HD.seasons[0].season.slice(0, 4)}`) : ''}</span></div>`;
+    const host = $('hdd');
+    const L = Math.max(prev.length, norm.length);
+    const xs = Array.from({length: L}, (_, i) => i);
+    const MS = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], MD = [0, 31, 62, 92, 123, 153, 184, 215, 243, 274, 304, 335];
+    new ResizeObserver(() => lineChart(host, {
+      x: xs,
+      series: [{y: norm, c: '#14213D', w: 1.4, dash: '5 4'}, {y: prev, c: '#9AA3B5', w: 1.8}, {y: cur, c: '#1F5FA8', w: 3, label: true}],
+      yFmt: v => fmt(v), yMin: 0, ticks: MD.map((d, i) => [d, MS[i]]), smallTicks: MD.filter((d, i) => i % 2 === 0).map((d, i) => [d, MS[i * 2]]), fmtLabel: v => fmt(v),
+      aria: 'Cumulative heating degree days at Anchorage since July 1: this season, last season and normal'})).observe(host);
+    $('hddcap').textContent = `Heating degree days added up since July 1 at Anchorage's airport, through ${MON[+lastD.slice(5, 7) - 1]} ${+lastD.slice(8, 10)}, ${lastD.slice(0, 4)}. Normal is the 1991–2020 average. A full normal season is about ${fmt(normalSeason)} degree days. Source: NOAA, Applied Climate Information System; updated weekly.`;
+  }
+
+  // Generic line chart. opt: x (numbers), series [{y, c, w, dash, label}], yMin, yFmt, xFmt/xStep or ticks [[x, label]].
+  function lineChart(host, o) {
+    const W = host.clientWidth, H = host.clientHeight;
+    if (!W) return;
+    host.innerHTML = '';
+    const small = W < 520, L = 44, R = small ? 12 : 70, T = 12, B = 26;
+    const ys = o.series.flatMap(s => s.y.filter(v => v != null));
+    const x0 = Math.min(...o.x), x1 = Math.max(...o.x);
+    const rawMax = Math.max(...ys), mag = Math.pow(10, Math.floor(Math.log10(rawMax || 1))), step = rawMax / mag > 5 ? mag : rawMax / mag > 2 ? mag / 2 : mag / 5;
+    const yMax = Math.ceil(rawMax / step) * step, yMin = o.yMin ?? 0;
+    const X = x => L + (x - x0) / ((x1 - x0) || 1) * (W - L - R), Y = v => T + (1 - (v - yMin) / ((yMax - yMin) || 1)) * (H - T - B);
+    const sv = el('svg', {viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': o.aria || ''}, host);
+    for (let v = yMin; v <= yMax + 1e-9; v += step) {
+      el('line', {x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: v === yMin ? '#14213D' : '#E4E9F0'}, sv);
+      txt(sv, L - 6, Y(v) + 4, o.yFmt(v), {'text-anchor': 'end'});
+    }
+    const ticks = o.ticks ? (small && o.smallTicks ? o.smallTicks : o.ticks)
+      : (() => { const st = small && o.xSmallStep ? o.xSmallStep : small ? (o.xStep || 1) * 2 : (o.xStep || 1), out = []; for (let t = Math.ceil(x0 / st) * st; t <= x1; t += st) out.push([t, o.xFmt(t)]); return out; })();
+    ticks.forEach(([t, lab]) => txt(sv, X(t), H - 7, lab, {'text-anchor': 'middle'}));
+    for (const s of o.series) {
+      let d = '', pen = false;
+      s.y.forEach((v, i) => { if (v == null) { pen = false; return; } d += `${pen ? 'L' : 'M'}${X(o.x[i]).toFixed(1)},${Y(v).toFixed(1)}`; pen = true; });
+      el('path', Object.assign({d, fill: 'none', stroke: s.c, 'stroke-width': s.w || 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round'}, s.dash ? {'stroke-dasharray': s.dash} : {}), sv);
+      if (s.label) {
+        let k = s.y.length - 1; while (k >= 0 && s.y[k] == null) k--;
+        if (k >= 0) {
+          el('circle', {cx: X(o.x[k]), cy: Y(s.y[k]), r: 3.8, fill: s.c}, sv);
+          if (!small) txt(sv, X(o.x[k]) + 7, Y(s.y[k]) + 4, (o.fmtLabel || o.yFmt)(s.y[k]), {fill: s.c, 'font-weight': 600, class: 'halo'});
+        }
+      }
+    }
   }
 
   // Squarified treemap layout: returns [{r, x, y, w, h}].
