@@ -11,7 +11,7 @@
 <style>
 :root{
   --bg:#FFFFFF; --ink:#14213D; --body:#33405C; --muted:#5A6580; --rule:#C9D2DE; --tile:#F6F8FB; --accent:#B42318;
-  --ak:#1F5FA8; --us:#C2610C; --imp:#B42318; --pipe:#6B4FA0;
+  --ak:#1F5FA8; --us:#C2610C;
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:light;
@@ -72,19 +72,6 @@ td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 td.n{font-weight:600;color:var(--ink)}
 td.p{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink)}
 td small{display:block;font-size:12px;color:var(--muted);font-weight:400}
-/* price ladder */
-.lad{display:flex;flex-direction:column}
-.lrow{display:grid;grid-template-columns:minmax(180px,330px) minmax(0,1fr);gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
-.lrow .l b{display:block;font-size:15px;color:var(--ink);line-height:1.3}
-.lrow .l span{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:2px}
-.track{position:relative;height:34px}
-.track .now{position:absolute;top:-10px;bottom:-10px;width:0;border-left:2px dashed var(--ink);opacity:.35}
-.track .bar{position:absolute;top:9px;height:16px;border-radius:3px}
-.track .dot{position:absolute;top:7px;width:20px;height:20px;border-radius:50%;margin-left:-10px;border:2px solid #fff;box-shadow:0 0 0 1px rgba(20,33,61,.25)}
-.track .v{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--display);font-weight:700;font-size:16px;white-space:nowrap;font-variant-numeric:tabular-nums}
-.axis{display:grid;grid-template-columns:minmax(180px,330px) minmax(0,1fr);gap:16px}
-.axis .ax{position:relative;height:22px;font-size:12px;color:var(--muted)}
-.axis .ax span{position:absolute;transform:translateX(-50%);top:4px;font-variant-numeric:tabular-nums}
 /* supply */
 .big{display:flex;flex-wrap:wrap;gap:14px 40px}
 .big div{display:flex;flex-direction:column}
@@ -114,8 +101,6 @@ td small{display:block;font-size:12px;color:var(--muted);font-weight:400}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:860px){.top,.two{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:600px){
-  .lrow,.axis{grid-template-columns:minmax(0,1fr);gap:6px}
-  .axis .lsp{display:none}
   .log li{grid-template-columns:minmax(0,1fr);gap:2px}
   .slab{grid-template-columns:minmax(0,1fr)}
   .cols{height:190px}.col b{font-size:16px}
@@ -138,7 +123,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <div>
     <span class="kick">Input costs</span>
     <h1>Railbelt natural gas</h1>
-    <p class="lede">Gas from Cook Inlet heats most homes and businesses from Homer to the Mat-Su and fuels about four-fifths of Railbelt electricity. Its price has risen every year since 2023 as the basin's older fields decline, and the next supplies, imported or piped from the North Slope, are likely to cost more.</p>
+    <p class="lede">Gas from Cook Inlet heats most homes and businesses from Homer to the Mat-Su and fuels about four-fifths of Railbelt electricity. Its price has risen every year since 2023 as the basin's older fields decline, and the contracts that supply it start running out in 2028.</p>
     <div class="stats" id="stats"></div>
   </div>
   <figure style="margin:0">
@@ -169,15 +154,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
       <p class="note" id="typesnote"></p>
     </div>
   </div>
-</section>
-
-<section class="sec" aria-labelledby="h-lad">
-  <div class="sech"><span class="kick">Outlook</span><h2 id="h-lad">What the next Mcf could cost</h2>
-    <p>Each new source of gas for Southcentral has a different price. The dashed line is Enstar's average cost today. Ranges show estimates that depend on world LNG prices or on how many utilities share a terminal.</p></div>
-  <div class="key"><span><i style="background:var(--ink)"></i>Today</span><span><i style="background:var(--ak)"></i>New Cook Inlet gas</span><span><i style="background:var(--imp)"></i>Imported LNG</span><span><i style="background:var(--pipe)"></i>North Slope pipeline</span></div>
-  <div class="lad" id="lad"></div>
-  <div class="axis"><div class="lsp"></div><div class="ax" id="ladax"></div></div>
-  <p class="note">Dollars per thousand cubic feet. The pipeline cap is quoted per million Btu; a thousand cubic feet of Cook Inlet gas holds about a million Btu, so the two are close. Import estimates are for gas delivered to Southcentral, including shipping and the terminal.</p>
 </section>
 
 <section class="sec" aria-labelledby="h-sup">
@@ -317,20 +293,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     }).join('');
     $('types').innerHTML = rows || '<tr><td colspan="4" style="color:var(--muted)">EIA prices fill in after the next data refresh.</td></tr>';
     $('typesnote').textContent = latest ? `12 months to ${month(latest)}. EIA withholds some Alaska months; averages need at least 10 of 12. Customer prices include delivery, so homes pay more per Mcf than power plants. Alaska homes can pay less than the U.S. average even though the gas itself costs about twice as much: Enstar's delivery charges, about $3.67 per Mcf, are among the lowest in the country (the U.S. average is about $13).` : '';
-
-    // ----- ladder -----
-    const L = M.ladder.rows, now = L.find(r => r.kind === 'now').value;
-    const top = Math.ceil(Math.max(...L.map(r => r.hi || r.value)) / 5) * 5 + 2;
-    const X = v => (v / top * 100).toFixed(2) + '%';
-    const COL = {now: 'var(--ink)', local: 'var(--ak)', import: 'var(--imp)', pipe: 'var(--pipe)'};
-    $('lad').innerHTML = L.map(r => {
-      const c = COL[r.kind];
-      const mark = r.lo != null
-        ? `<div class="bar" style="left:${X(r.lo)};width:calc(${X(r.hi)} - ${X(r.lo)});background:${c};opacity:.85"></div><span class="v" style="left:calc(${X(r.hi)} + 8px);color:${c}">$${fmt(r.lo)}–${fmt(r.hi)}</span>`
-        : `<div class="dot" style="left:${X(r.value)};background:${c}"></div><span class="v" style="${r.value / top > .8 ? `right:calc(100% - ${X(r.value)} + 16px)` : `left:calc(${X(r.value)} + 16px)`};color:${c}">${usd(r.value)}</span>`;
-      return `<div class="lrow"><div class="l"><b>${esc(r.label)}</b><span>${esc(r.sub)}</span></div><div class="track"><div class="now" style="left:${X(now)}"></div>${mark}</div></div>`;
-    }).join('');
-    $('ladax').innerHTML = [0, 5, 10, 15, 20, 25].filter(t => t <= top).map(t => `<span style="left:${X(t)}">$${t}</span>`).join('');
 
     // ----- supply -----
     const P = M.supply;
