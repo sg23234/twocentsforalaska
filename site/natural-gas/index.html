@@ -286,7 +286,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     let html = `<div><b style="color:var(--ak)">${usd(gNow.value)}</b><span>Enstar's cost of gas per Mcf, ${esc(gNow.period)}</span></div>` +
       `<div><b>+${fmt((gNow.value / gFirst.value - 1) * 100)}%</b><span>since ${esc(gFirst.period)}</span></div>`;
     const a = lastOf(akC), u = a && atDate(usC, a.d);
-    if (a && u) html += `<div><b style="color:var(--us)">${fmt(a.v / u, 1)}×</b><span>U.S. city gate price, 12 months to ${month(a.d)}</span></div>`;
+    if (a && u) html += `<div><b style="color:var(--us)">${fmt(a.v / u, 1)}×</b><span>the U.S. city gate price, 12 months to ${month(a.d)}</span></div>`;
     $('stats').innerHTML = html;
 
     // ----- trend -----
@@ -316,7 +316,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
       return `<tr><td class="n">${l}<small>${sub}</small></td><td class="r p" style="color:var(--ak)">${usd(ak.v)}</td><td class="r">${usd(us)}</td><td class="r">${us ? (ak.v >= us ? fmt(ak.v / us, 1) + '×' : fmt((1 - ak.v / us) * 100) + '% less') : '—'}</td></tr>`;
     }).join('');
     $('types').innerHTML = rows || '<tr><td colspan="4" style="color:var(--muted)">EIA prices fill in after the next data refresh.</td></tr>';
-    $('typesnote').textContent = latest ? `12 months to ${month(latest)}. EIA withholds some Alaska months; averages need at least 10 of 12. Customer prices include delivery, so homes pay more per Mcf than power plants.` : '';
+    $('typesnote').textContent = latest ? `12 months to ${month(latest)}. EIA withholds some Alaska months; averages need at least 10 of 12. Customer prices include delivery, so homes pay more per Mcf than power plants. Alaska homes can pay less than the U.S. average even though the gas itself costs about twice as much: Enstar's delivery charges, about $3.67 per Mcf, are among the lowest in the country (the U.S. average is about $13).` : '';
 
     // ----- ladder -----
     const L = M.ladder.rows, now = L.find(r => r.kind === 'now').value;
