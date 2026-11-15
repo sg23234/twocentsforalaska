@@ -261,7 +261,7 @@ def page_html(p):
 {body}
 {f'<section class="sec notes"><div class="sech"><h2>Data notes</h2></div><ul>{notes}</ul></section>' if notes else ''}
 {f'<section class="sec sources"><div class="sech"><h2>Sources</h2></div><ul>{srcs}</ul></section>' if srcs else ''}
-<footer>Independent and nonpartisan. Built from public data. <a href="/sources/">All sources</a> · <a href="/">Front page</a></footer>
+<footer>Built from public data. <a href="/sources/">All sources</a> · <a href="/">Front page</a></footer>
 </div>
 <script src="/js/ind.js"></script>
 </body>
