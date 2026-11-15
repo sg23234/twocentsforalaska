@@ -304,18 +304,6 @@ def pages():
                  src("Alaska Public Media, Enstar says bills likely to rise, Jul 2026", "https://alaskapublic.org/news/economy/energy/2026-07-28/southcentral-alaska-gas-utility-says-bills-likely-to-rise-amid-supply-shortage")],
         tile=tile(value="~$11", change="Enstar cost", unit="per Mcf")))
 
-    P.append(dict(slug="heating-fuel", group=G, title="Rural heating fuel", row="Input costs", status="static",
-        lead="Most of rural Alaska heats with fuel oil delivered by barge or plane. The state surveys prices in about 100 communities twice a year, which makes it the best regular measure of costs off the road system, where consumer price indexes don't reach.",
-        stats=[stat("Average heating fuel price", "Across about 100 communities · Aug 2026", value="$7.97"),
-               stat("Change since January", "A record high · DCRA survey", value="+23%")],
-        body=[plan(["Prices by community and region from each Division of Community and Regional Affairs fuel price survey (heating fuel and gasoline).",
-                    "A long history of the statewide average, with Anchorage and Fairbanks for comparison.",
-                    "A ranked table of the most and least expensive communities, like the Electricity page."])],
-        notes=["The survey is taken twice a year (January and July). Prices are what residents pay, including delivery."],
-        sources=[src("Division of Community and Regional Affairs, Summer 2026 Alaska Fuel Price Report", "https://www.commerce.alaska.gov/web/Portals/4/pub/Summer%202026%20Alaska%20Fuel%20Price%20Report.pdf"),
-                 src("KYUK, State report shows heating fuel prices at a record high in rural Alaska, Oct 2026", "https://www.kyuk.org/economy/2026-10-09/state-report-shows-heating-fuel-prices-are-at-a-record-high-in-rural-alaska")],
-        tile=tile(value="$7.97", change="+23% since Jan", unit="per gallon, rural avg")))
-
     P.append(dict(slug="freight", group=G, title="Freight rate index", row="Input costs", status="planned",
         lead="Almost everything sold in Alaska arrives by ship, barge, truck or plane, so shipping costs are built into the price of nearly every good. No public index tracks what it costs to move freight to and within Alaska. This page will build one.",
         body=[plan(["Container rates from Tacoma to Anchorage from the carriers' published tariffs.",
