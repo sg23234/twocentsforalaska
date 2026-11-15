@@ -124,17 +124,6 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .things-ctl .chk input{width:20px;height:20px;min-height:0;accent-color:var(--pce)}
 .things-ctl .chk small{font-weight:400;color:var(--muted);display:block}
 .things-ctl .chk[hidden]{display:none}
-.hist{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.hcard{border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:#fff}
-.hcard.none{background:var(--tile)}
-.hcard .hh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid var(--rule);padding-bottom:8px}
-.hcard .hh b{font-family:var(--display);font-size:20px}
-.hcard .hh span{font-family:var(--display);font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ak)}
-.hcard.none .hh span{color:var(--accent)}
-.hcard ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-.hcard li{font-size:14px;color:var(--body);line-height:1.4}
-.hcard li b{color:var(--ink)}
-.hcard li i{font-style:normal;font-size:12px;color:var(--muted);display:block}
 svg text{font-family:var(--sans)}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:760px){.top{grid-template-columns:1fr}}
@@ -175,12 +164,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <p class="note" id="tblnote"></p>
 </section>
 
-<section class="sec" id="history" aria-labelledby="h-hist">
-  <div class="sech"><span class="kick">History</span><h2 id="h-hist">Where cheap power came from</h2>
-    <p>The places with the lowest prices today are the ones where the federal or state government built hydro dams and power lines decades ago. Most villages were never connected to projects like these and still run on diesel.</p></div>
-  <div class="hist" id="hist"></div>
-  <p class="note">Sources: Alaska Energy Authority; U.S. Department of Energy, Alaska Power Administration (1992 divestiture report); Alaska Legislature records on the Four Dam Pool; Southeast Alaska Power Agency. Prices are ${Y} averages for all customers.</p>
-</section>
 <section class="sec" id="pce" aria-labelledby="h-pce">
   <div class="sech"><span class="kick">Power Cost Equalization</span><h2 id="h-pce">What village households actually pay</h2>
     <p>The prices above are what electricity costs to produce and deliver. In about 190 rural communities, the state pays most of a household's bill for its first 750 kWh a month through Power Cost Equalization (PCE). It is one of Alaska's largest rural programs.</p></div>
@@ -334,27 +317,6 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     });
     table();
     $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y} (orange tick), the same figure as in the chart at the top. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Bars are cut off at the right edge for the highest-priced small utilities. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
-
-    // ----- where cheap power came from -----
-    const RP = k => (U.regions[k] || {}).avg_price, UP = re => (U.utilities.find(u => re.test(u.utility)) || {}).total_price;
-    const HIST = [
-      {r: 'Juneau', p: UP(/^Alaska Electric Light/), items: [
-        ['Snettisham hydro, 1973', '78 MW. Built by the federal government, later sold to the state, and run by the local utility (AEL&P).']]},
-      {r: 'Ketchikan, Wrangell, Petersburg', p: RP('Southeast'), sub: 'Southeast average', items: [
-        ['Swan Lake and Tyee Lake hydro, 1983–84', 'Built by the state\'s Alaska Power Authority as part of the "Four Dam Pool." Now owned by the communities\' power agency (SEAPA), linked by the Swan–Tyee Intertie.']]},
-      {r: 'Railbelt', p: RP('Railbelt'), sub: 'Anchorage to Fairbanks', items: [
-        ['Eklutna hydro, 1955', '30 MW. Built by the federal government; sold to Anchorage-area utilities in 1997.'],
-        ['Alaska Intertie, 1985, and Bradley Lake hydro, 1991', 'Built by the state. Bradley Lake (120 MW) is Alaska\'s largest hydro plant and supplies about a tenth of Railbelt power. Cook Inlet natural gas supplies most of the rest.']]},
-      {r: 'Kodiak', p: UP(/^Kodiak Elec/), items: [
-        ['Terror Lake hydro, 1985', '33.6 MW. Built by the state in the Four Dam Pool; bought by Kodiak Electric in 2009. Wind turbines added later.']]},
-      {r: 'Valdez and Glennallen', p: UP(/^Copper Valley/), items: [
-        ['Solomon Gulch hydro, 1982', '12 MW. Built in the Four Dam Pool; now owned by Copper Valley Electric.']]},
-      {r: 'Most villages', p: RP('Yukon-Kuskokwim'), sub: 'Yukon-Kuskokwim average', none: 1, items: [
-        ['No large hydro or grid connection', 'Each community runs its own diesel plant, with fuel delivered by barge or air. Some now add wind, solar or small hydro, much of it with state Renewable Energy Fund grants.']]},
-    ];
-    $('hist').innerHTML = HIST.map(h => `<div class="hcard${h.none ? ' none' : ''}"><div class="hh"><b>${esc(h.r)}</b><span title="${esc(h.sub || 'utility average')}">${h.p ? fmt(h.p, 1) + '¢' : ''}</span></div>
-      <ul>${h.items.map(([t, d]) => `<li><b>${esc(t)}</b><i>${esc(d)}</i></li>`).join('')}</ul></div>`).join('');
-    document.querySelector('#history .note').textContent = `Built in the 1950s–1980s, the four state hydro projects of the "Four Dam Pool" cost about $500 million. The state, through the Alaska Energy Authority and AIDEA, has backed more than two-thirds of Alaska's hydro capacity. Prices shown are ${Y} all-customer averages for the local utility or region. Sources: Alaska Energy Authority; U.S. Department of Energy, Alaska Power Administration; Alaska Legislature records; Southeast Alaska Power Agency.`;
 
     // ----- Power Cost Equalization -----
     // Program rules (AEA / RCA): base rate = Anchorage-Fairbanks-Juneau residential average,
