@@ -29,6 +29,11 @@ h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance}
 .intro h1{font-size:clamp(28px,4vw,38px)}
 .intro p{margin:8px 0 0;color:var(--body);max-width:65ch}
 section > h2{font-size:24px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.about{border:1px solid var(--rule);border-radius:6px;padding:20px 22px;margin-bottom:8px}
+.about h2{margin-bottom:12px}
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px 28px}
+.about h3{font-size:17px;margin-bottom:4px}
+.about p{margin:0;font-size:15px;color:var(--body);line-height:1.55}
 .src{padding:18px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:180px 1fr;gap:6px 24px}
 .src h3{font-size:19px;line-height:1.25}
 .src dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;font-size:15px}
@@ -48,8 +53,30 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
 
 <div class="intro">
   <h1>Sources</h1>
-  <p>Where each number on this site comes from, how it is calculated and how often it updates. Every figure is from public data. Pages marked as drafts are still being built.</p>
+  <p>Where each number on this site comes from, how it is calculated and how often it updates. Every figure is from public data. Pages marked as drafts are still being built. <a href="#about">About this site</a>.</p>
 </div>
+
+<section id="about" class="about" aria-labelledby="h-about">
+  <h2 id="h-about">About this site</h2>
+  <div class="about-grid">
+    <div>
+      <h3>Who makes it</h3>
+      <p>Two Cents for Alaska is a personal project by Steven Gagliardo<!--LINKEDIN-->. Steven is a portfolio manager on the private equity team at the Alaska Permanent Fund Corporation and lives in Palmer.</p>
+    </div>
+    <div>
+      <h3>Why it exists</h3>
+      <p>The site began as a project to put AI tools to work on public data: gathering Alaska figures that are scattered across dozens of agencies, organizing them around how Alaska's economy actually works rather than how national dashboards are laid out, and building measures that only make sense here, such as electricity prices by region and the cost of Power Cost Equalization. The aim is to be informative and useful, not to argue for a position.</p>
+    </div>
+    <div>
+      <h3>Independence</h3>
+      <p>This is a personal project. It is not affiliated with, reviewed by or endorsed by the Alaska Permanent Fund Corporation or the State of Alaska, and views expressed here are Steven's own. Every figure comes from public sources listed on this page; nothing comes from his work at APFC. The site does not comment on the Permanent Fund's investments or on APFC decisions.</p>
+    </div>
+    <div>
+      <h3>How AI is used</h3>
+      <p>AI tools help gather data, write the code and draft the text. Figures are pulled from the sources below, and each page links to them so readers can check the numbers.</p>
+    </div>
+  </div>
+</section>
 
 <section aria-labelledby="h-micro">
   <h2 id="h-micro">Micro · Input costs</h2>
