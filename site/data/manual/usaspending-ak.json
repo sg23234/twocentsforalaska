@@ -1,0 +1,138 @@
+{
+ "_about": "USAspending.gov award totals for Alaska recipients by federal fiscal year, dollars. From /api/v2/recipient/state/awards/02/.",
+ "years": {
+  "2008": {
+   "contracts": 2755598124.32,
+   "direct_payments": 1250664509.0,
+   "grants": 828550623.32,
+   "loans": -31668.0,
+   "other_financial_assistance": 5888343.0
+  },
+  "2009": {
+   "contracts": 2764355460.84,
+   "direct_payments": 1946848461.0,
+   "grants": 2638871187.0,
+   "loans": 3358861.0,
+   "other_financial_assistance": 257362402.0
+  },
+  "2010": {
+   "contracts": 2454073431.83,
+   "direct_payments": 1916935506.0,
+   "grants": 2357873675.19,
+   "loans": 9027897.0,
+   "other_financial_assistance": 142205205.0
+  },
+  "2011": {
+   "contracts": 2260846202.96,
+   "direct_payments": 1852811503.0,
+   "grants": 2094923542.69,
+   "loans": 5985326.0,
+   "other_financial_assistance": 707413029.0
+  },
+  "2012": {
+   "contracts": 2455902530.89,
+   "direct_payments": 2129222267.17,
+   "grants": 2090994250.49,
+   "loans": -1406901.0,
+   "other_financial_assistance": 696473214.0
+  },
+  "2013": {
+   "contracts": 1638205634.03,
+   "direct_payments": 2308241056.96,
+   "grants": 2090739104.34,
+   "loans": 11585603.01,
+   "other_financial_assistance": 783120936.0
+  },
+  "2014": {
+   "contracts": 1921743438.21,
+   "direct_payments": 2545078251.51,
+   "grants": 3154914731.58,
+   "loans": 92274.83,
+   "other_financial_assistance": 63766467.0
+  },
+  "2015": {
+   "contracts": 1871262107.88,
+   "direct_payments": 2798873287.2,
+   "grants": 3373514847.55,
+   "loans": 25596508.2,
+   "other_financial_assistance": 177408465.0
+  },
+  "2016": {
+   "contracts": 1651096972.36,
+   "direct_payments": 2937343683.74,
+   "grants": 3528125787.58,
+   "loans": 4880325.65,
+   "other_financial_assistance": 166871467.0
+  },
+  "2017": {
+   "contracts": 2006443828.3,
+   "direct_payments": 3021421820.67,
+   "grants": 3970554252.77,
+   "loans": 13256332.95,
+   "other_financial_assistance": 35158070.68
+  },
+  "2018": {
+   "contracts": 2239057284.33,
+   "direct_payments": 3146404912.25,
+   "grants": 4390761812.65,
+   "loans": 4115419.53,
+   "other_financial_assistance": 37864895.5
+  },
+  "2019": {
+   "contracts": 2336924381.35,
+   "direct_payments": 3329689473.83,
+   "grants": 4620218144.79,
+   "loans": 6442247.37,
+   "other_financial_assistance": 50428749.86
+  },
+  "2020": {
+   "contracts": 1968538791.92,
+   "direct_payments": 7868894248.73,
+   "grants": 5424660251.92,
+   "loans": 1380688652.99,
+   "other_financial_assistance": 34735539.41
+  },
+  "2021": {
+   "contracts": 2334760181.54,
+   "direct_payments": 9388204790.2,
+   "grants": 6130102842.02,
+   "loans": 771394764.32,
+   "other_financial_assistance": 47533949.06
+  },
+  "2022": {
+   "contracts": 3306063620.17,
+   "direct_payments": 5091465694.01,
+   "grants": 6360387801.57,
+   "loans": 38093138.26,
+   "other_financial_assistance": 55548025.39
+  },
+  "2023": {
+   "contracts": 3828726515.96,
+   "direct_payments": 5316861193.19,
+   "grants": 6951440766.79,
+   "loans": -4586045.81,
+   "other_financial_assistance": 77096626.65
+  },
+  "2024": {
+   "contracts": 3826549555.49,
+   "direct_payments": 5315595126.09,
+   "grants": 7339613334.41,
+   "loans": 75605758.27,
+   "other_financial_assistance": 97112961.1
+  },
+  "2025": {
+   "contracts": 3853458639.3,
+   "direct_payments": 6084572119.16,
+   "grants": 8328144097.82,
+   "loans": 119031217.65,
+   "other_financial_assistance": 68402964.66
+  },
+  "2026": {
+   "contracts": 4637974949.88,
+   "direct_payments": 7518821738.5,
+   "grants": 7409687787.3,
+   "loans": 1350326.92,
+   "other_financial_assistance": 61701878.18
+  }
+ }
+}
