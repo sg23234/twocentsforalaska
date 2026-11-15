@@ -493,7 +493,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     const yoy = (m, d) => { const a = m.get((+d.slice(0, 4) - 1) + d.slice(4)), b = m.get(d); return a && b ? (b / a - 1) * 100 : null; };
     $('lat-price').innerHTML = dates.map(d => {
       const p = P.get(d), r = R.get(d), q = Q.get(d), u = US.get(d);
-      return `<li><span class="d">${mlab(d)}</span><span><b>${fmt(p, 1)}¢</b> average price, ${chg(yoy(P, d))} from a year earlier${u ? ` (U.S. ${fmt(u, 1)}¢)` : ''}.` +
+      return `<li><span class="d">${mlab(d)}</span><span><b>${fmt(p, 1)}¢</b> average price, ${chg(yoy(P, d))} from a year earlier.` +
         (r ? ` Households ${fmt(r, 1)}¢.` : '') + (q ? ` <b>${fmt(q)} GWh</b> sold, ${chg(yoy(Q, d), true)}.` : '') + `</span></li>`;
     }).join('') || '<li class="na">Not available right now.</li>';
   }).catch(() => {});
