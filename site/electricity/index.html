@@ -294,7 +294,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       let i = 0, html = '';
       for (const [k, r] of regs) {
         if (active && k !== active) continue;
-        const us_ = U.utilities.filter(u => u.region === k).sort((a, b) => b.total_price - a.total_price);
+        const us_ = U.utilities.filter(u => u.region === k).sort((a, b) => b.customers - a.customers);  // largest first
         const big = us_.filter(u => u.customers >= SMALL), sm = us_.filter(u => u.customers < SMALL);
         html += `<tr class="g"><th colspan="7" scope="rowgroup">${esc(k)}<span>${cents(r.avg_price)} average · ${us_.length} ${us_.length === 1 ? 'utility' : 'utilities'}</span></th></tr>`;
         for (const u of big) html += row(u, ++i);
