@@ -200,6 +200,7 @@ def main():
         o = {k: u.get(k) for k in ("utility", "id", "region", "ownership", "total_price", "commercial_price", "residential_price", "industrial_price")}
         o["customers"] = int(u.get("total_cust") or 0)
         o["sales_mwh"] = round(u.get("total_mwh") or 0)
+        o["commercial_mwh"] = round(u.get("commercial_mwh") or 0) if u.get("commercial_price") else None
         pv = ak_prev.get(u["utility"], {}).get("total_price")
         o["prev_total_price"] = pv
         o["change_pct"] = round((u["total_price"] / pv - 1) * 100, 1) if pv else None
