@@ -31,6 +31,21 @@
    "CUUR0000SA0": "2026-10-01"
   }
  },
+ "current-account": {
+  "source": "fred",
+  "latest": {
+   "AKNGSP": "2025-01-01",
+   "AKPCE": "2025-01-01",
+   "AKODIV": "2026-04-01",
+   "AKGOVSLNGSP": "2025-01-01",
+   "AKGOVFEDCIVNGSP": "2025-01-01",
+   "AKGOVFEDMILNGSP": "2025-01-01",
+   "AKOILGASNGSP": "2025-01-01",
+   "AKMINNGSP": "2025-01-01",
+   "AKPINGSP": "2025-01-01",
+   "AKEADJ": "2026-04-01"
+  }
+ },
  "energy": {
   "source": "eia",
   "latest": {
