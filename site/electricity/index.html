@@ -53,6 +53,7 @@ td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body);vertic
 td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
 td.p{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink)}
 td.u{font-weight:600;color:var(--ink)}
+.na-chg{color:var(--muted);cursor:help}
 td.u .ar{display:block;font-weight:400;font-size:12px;color:var(--muted)}
 td.bill{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
 tr.g th{padding:18px 12px 6px;font-family:var(--display);font-size:19px;letter-spacing:0;text-transform:none;color:var(--ink);border-bottom:2px solid var(--ink)}
@@ -278,7 +279,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     // Utilities with fewer than SMALL customers fold into one row per region (still counted in region averages).
     const SMALL = 1000, open_ = new Set();
     const row = (u, i, cls = '') => `<tr${cls}><td class="r" style="color:var(--muted);font-weight:600">${i}</td><td class="u">${esc(tidy(u.utility))}${area(u.utility) ? `<span class="ar">${esc(area(u.utility))}</span>` : ''}</td>
-          <td class="r p">${fmt(u.total_price, 1)}</td><td class="r">${fmt(u.total_price / usT, 1)}×</td><td class="r">${sgn(u.change_pct)}</td>
+          <td class="r p">${fmt(u.total_price, 1)}</td><td class="r">${fmt(u.total_price / usT, 1)}×</td><td class="r">${u.customers < 500 && Math.abs(u.change_pct || 0) > 30 ? '<span class="na-chg" title="Change over 30% at a utility with fewer than 500 customers; likely a reporting change">N/A</span>' : sgn(u.change_pct)}</td>
           <td class="r">${fmt(u.customers)}</td><td class="r bill">$${fmt(u.total_price * 7.5)}</td></tr>`;
     function table() {
       let i = 0, html = '';
@@ -304,7 +305,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       const nb = $('rows').querySelector(`.tog[data-r="${CSS.escape(k)}"]`); if (nb) nb.focus();
     });
     table();
-    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y}, the same figure as in the chart at the top. The bill is 750 kWh, about what a typical Alaska home uses in a month, at the utility's all-customer average price, so fixed monthly charges are spread over each kWh. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
+    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y}, the same figure as in the chart at the top. The bill is 750 kWh, about what a typical Alaska home uses in a month, at the utility's all-customer average price, so fixed monthly charges are spread over each kWh. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}. For utilities with fewer than 500 customers, changes larger than 30% either way are shown as N/A, since they usually reflect a change in reporting rather than in prices.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
 
     // ----- Power Cost Equalization -----
     // Program rules (AEA / RCA): base rate = Anchorage-Fairbanks-Juneau residential average,
