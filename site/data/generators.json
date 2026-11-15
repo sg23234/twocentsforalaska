@@ -1,0 +1,2138 @@
+{
+ "source": "U.S. Energy Information Administration, Form EIA-860M (Monthly Update to the Annual Electric Generator Report), via EIA API v2",
+ "url": "https://www.eia.gov/electricity/data/eia860m/",
+ "period": "2026-08",
+ "plants": [
+  {
+   "id": "6559",
+   "name": "George M Sullivan Generation Plant 2",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 61.2297,
+   "lon": -149.7167,
+   "mix": {
+    "gas": 346.9
+   },
+   "year": 1979,
+   "sector": "Electric Utility",
+   "mw": 346.9,
+   "fuel": "gas"
+  },
+  {
+   "id": "96",
+   "name": "Beluga",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 61.1861,
+   "lon": -151.0356,
+   "mix": {
+    "gas": 312.4
+   },
+   "year": 1968,
+   "sector": "Electric Utility",
+   "mw": 312.4,
+   "fuel": "gas"
+  },
+  {
+   "id": "57036",
+   "name": "Southcentral Power Project",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 61.1674,
+   "lon": -149.9053,
+   "mix": {
+    "gas": 203.9
+   },
+   "year": 2013,
+   "sector": "Electric Utility",
+   "mw": 203.9,
+   "fuel": "gas"
+  },
+  {
+   "id": "6285",
+   "name": "North Pole",
+   "owner": "Golden Valley Elec Assn Inc",
+   "lat": 64.7356,
+   "lon": -147.3481,
+   "mix": {
+    "oil": 181.0
+   },
+   "year": 1976,
+   "sector": "Electric Utility",
+   "mw": 181.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "58989",
+   "name": "Eklutna Generation Station",
+   "owner": "Matanuska Electric Assn Inc",
+   "lat": 61.4578,
+   "lon": -149.3514,
+   "mix": {
+    "gas": 171.0
+   },
+   "year": 2015,
+   "sector": "Electric Utility",
+   "mw": 171.0,
+   "fuel": "gas"
+  },
+  {
+   "id": "7367",
+   "name": "Bradley Lake",
+   "owner": "Homer Electric Assn Inc",
+   "lat": 59.7786,
+   "lon": -150.9401,
+   "mix": {
+    "hydro": 126.0
+   },
+   "year": 1991,
+   "sector": "Electric Utility",
+   "mw": 126.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "57206",
+   "name": "Soldotna",
+   "owner": "Homer Electric Assn Inc",
+   "lat": 60.4994,
+   "lon": -150.9972,
+   "mix": {
+    "gas": 50.0,
+    "storage": 46.5
+   },
+   "year": 2014,
+   "sector": "Electric Utility",
+   "mw": 96.5,
+   "fuel": "gas"
+  },
+  {
+   "id": "6288",
+   "name": "Healy",
+   "owner": "Golden Valley Elec Assn Inc",
+   "lat": 63.8542,
+   "lon": -148.95,
+   "mix": {
+    "coal": 90.0,
+    "oil": 2.8
+   },
+   "year": 1967,
+   "sector": "Electric Utility",
+   "mw": 92.8,
+   "fuel": "coal"
+  },
+  {
+   "id": "55966",
+   "name": "Nikiski Combined Cycle",
+   "owner": "Homer Electric Assn Inc",
+   "lat": 60.6765,
+   "lon": -151.3777,
+   "mix": {
+    "gas": 80.8
+   },
+   "year": 1986,
+   "sector": "Electric Utility",
+   "mw": 80.8,
+   "fuel": "gas"
+  },
+  {
+   "id": "78",
+   "name": "Snettisham",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.1415,
+   "lon": -133.737,
+   "mix": {
+    "hydro": 78.2
+   },
+   "year": 1973,
+   "sector": "Electric Utility",
+   "mw": 78.2,
+   "fuel": "hydro"
+  },
+  {
+   "id": "75",
+   "name": "Hank Nikkels Plant 1",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 61.2221,
+   "lon": -149.8661,
+   "mix": {
+    "gas": 75.9,
+    "oil": 2.0
+   },
+   "year": 1972,
+   "sector": "Electric Utility",
+   "mw": 77.9,
+   "fuel": "gas"
+  },
+  {
+   "id": "6292",
+   "name": "Bernice Lake",
+   "owner": "Homer Electric Assn Inc",
+   "lat": 60.6935,
+   "lon": -151.3874,
+   "mix": {
+    "gas": 76.7
+   },
+   "year": 1971,
+   "sector": "Electric Utility",
+   "mw": 76.7,
+   "fuel": "gas"
+  },
+  {
+   "id": "64",
+   "name": "Lemon Creek",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.3536,
+   "lon": -134.4953,
+   "mix": {
+    "oil": 61.7
+   },
+   "year": 1969,
+   "sector": "Electric Utility",
+   "mw": 61.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "77",
+   "name": "Eklutna Hydro Project",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 61.4752,
+   "lon": -149.1501,
+   "mix": {
+    "hydro": 44.4
+   },
+   "year": 1955,
+   "sector": "Electric Utility",
+   "mw": 44.4,
+   "fuel": "hydro"
+  },
+  {
+   "id": "6286",
+   "name": "Fairbanks",
+   "owner": "Golden Valley Elec Assn Inc",
+   "lat": 64.8542,
+   "lon": -147.7194,
+   "mix": {
+    "oil": 42.2
+   },
+   "year": 1970,
+   "sector": "Electric Utility",
+   "mw": 42.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "59793",
+   "name": "Industrial Plant",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.3676,
+   "lon": -134.608,
+   "mix": {
+    "oil": 41.7
+   },
+   "year": 2016,
+   "sector": "Electric Utility",
+   "mw": 41.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "57583",
+   "name": "Battery Energy Storage System",
+   "owner": "Golden Valley Elec Assn Inc",
+   "lat": 64.8167,
+   "lon": -147.725,
+   "mix": {
+    "storage": 40.0
+   },
+   "year": 2003,
+   "sector": "Electric Utility",
+   "mw": 40.0,
+   "fuel": "storage"
+  },
+  {
+   "id": "68611",
+   "name": "International Battery Substation (IBSS)",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 61.1699,
+   "lon": -149.9131,
+   "mix": {
+    "storage": 40.0
+   },
+   "year": 2024,
+   "sector": "Electric Utility",
+   "mw": 40.0,
+   "fuel": "storage"
+  },
+  {
+   "id": "50711",
+   "name": "University of Alaska Fairbanks",
+   "owner": "University of Alaska",
+   "lat": 64.8542,
+   "lon": -147.8221,
+   "mix": {
+    "coal": 30.0,
+    "oil": 9.6
+   },
+   "year": 1964,
+   "sector": "Commercial CHP",
+   "mw": 39.6,
+   "fuel": "coal"
+  },
+  {
+   "id": "7250",
+   "name": "Auke Bay",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.3875,
+   "lon": -134.6446,
+   "mix": {
+    "oil": 36.2
+   },
+   "year": 1980,
+   "sector": "Electric Utility",
+   "mw": 36.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "50392",
+   "name": "Eielson AFB Central Heat & Power Plant",
+   "owner": "U S Air Force-Eielson AFB",
+   "lat": 64.6714,
+   "lon": -147.076,
+   "mix": {
+    "oil": 6.0,
+    "coal": 30.0
+   },
+   "year": 1955,
+   "sector": "Commercial CHP",
+   "mw": 36.0,
+   "fuel": "coal"
+  },
+  {
+   "id": "71",
+   "name": "Terror Lake Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.6861,
+   "lon": -152.895,
+   "mix": {
+    "hydro": 33.6
+   },
+   "year": 1984,
+   "sector": "Electric Utility",
+   "mw": 33.6,
+   "fuel": "hydro"
+  },
+  {
+   "id": "79",
+   "name": "Chena Power Plant",
+   "owner": "Aurora Energy LLC",
+   "lat": 64.8477,
+   "lon": -147.7351,
+   "mix": {
+    "coal": 27.5
+   },
+   "year": 1952,
+   "sector": "IPP CHP",
+   "mw": 27.5,
+   "fuel": "coal"
+  },
+  {
+   "id": "85",
+   "name": "S W Bailey",
+   "owner": "Ketchikan Public Utilities",
+   "lat": 55.3574,
+   "lon": -131.697,
+   "mix": {
+    "oil": 25.9
+   },
+   "year": 1969,
+   "sector": "Electric Utility",
+   "mw": 25.9,
+   "fuel": "oil"
+  },
+  {
+   "id": "58278",
+   "name": "TNSG North Plant",
+   "owner": "TDX North Slope Generating Inc.",
+   "lat": 70.2353,
+   "lon": -148.3836,
+   "mix": {
+    "oil": 0.3,
+    "gas": 25.4
+   },
+   "year": 2008,
+   "sector": "Electric Utility",
+   "mw": 25.7,
+   "fuel": "gas"
+  },
+  {
+   "id": "6801",
+   "name": "Jarvis Street",
+   "owner": "City & Borough of Sitka - (AK)",
+   "lat": 57.0497,
+   "lon": -135.3128,
+   "mix": {
+    "oil": 25.6
+   },
+   "year": 1979,
+   "sector": "Electric Utility",
+   "mw": 25.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "57935",
+   "name": "Eva Creek Wind",
+   "owner": "Golden Valley Elec Assn Inc",
+   "lat": 64.0583,
+   "lon": -148.9,
+   "mix": {
+    "wind": 24.6
+   },
+   "year": 2013,
+   "sector": "Electric Utility",
+   "mw": 24.6,
+   "fuel": "wind"
+  },
+  {
+   "id": "56325",
+   "name": "Delta Power",
+   "owner": "Golden Valley Elec Assn Inc",
+   "lat": 64.0281,
+   "lon": -145.7194,
+   "mix": {
+    "oil": 23.1
+   },
+   "year": 1976,
+   "sector": "Electric Utility",
+   "mw": 23.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "70",
+   "name": "Swan Lake",
+   "owner": "Southeast Alaska Power Agency",
+   "lat": 55.6152,
+   "lon": -131.3561,
+   "mix": {
+    "hydro": 22.6
+   },
+   "year": 1984,
+   "sector": "Commercial Non-CHP",
+   "mw": 22.6,
+   "fuel": "hydro"
+  },
+  {
+   "id": "61166",
+   "name": "Tyee Lake Hydroelectric Facility",
+   "owner": "Southeast Alaska Power Agency",
+   "lat": 56.2164,
+   "lon": -131.5043,
+   "mix": {
+    "hydro": 22.6
+   },
+   "year": 1983,
+   "sector": "Commercial Non-CHP",
+   "mw": 22.6,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7502",
+   "name": "Dutch Harbor",
+   "owner": "City of Unalaska - (AK)",
+   "lat": 53.8925,
+   "lon": -166.5382,
+   "mix": {
+    "oil": 21.9
+   },
+   "year": 1989,
+   "sector": "Electric Utility",
+   "mw": 21.9,
+   "fuel": "oil"
+  },
+  {
+   "id": "50308",
+   "name": "FWA Central Heat and Power Plant",
+   "owner": "Doyon Utilities - Ft. Wainwright",
+   "lat": 64.8256,
+   "lon": -147.6486,
+   "mix": {
+    "coal": 20.0
+   },
+   "year": 1955,
+   "sector": "Electric Utility",
+   "mw": 20.0,
+   "fuel": "coal"
+  },
+  {
+   "id": "6291",
+   "name": "Cooper Lake",
+   "owner": "Chugach Electric Assn Inc",
+   "lat": 60.3923,
+   "lon": -149.6656,
+   "mix": {
+    "hydro": 19.4
+   },
+   "year": 1961,
+   "sector": "Electric Utility",
+   "mw": 19.4,
+   "fuel": "hydro"
+  },
+  {
+   "id": "313",
+   "name": "Green Lake",
+   "owner": "City & Borough of Sitka - (AK)",
+   "lat": 56.9863,
+   "lon": -135.1227,
+   "mix": {
+    "hydro": 18.6
+   },
+   "year": 1982,
+   "sector": "Electric Utility",
+   "mw": 18.6,
+   "fuel": "hydro"
+  },
+  {
+   "id": "90",
+   "name": "Snake River",
+   "owner": "Nome Joint Utility Systems",
+   "lat": 64.5053,
+   "lon": -165.4298,
+   "mix": {
+    "oil": 16.6,
+    "wind": 1.8
+   },
+   "year": 1991,
+   "sector": "Electric Utility",
+   "mw": 18.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "6281",
+   "name": "Kodiak Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.79,
+   "lon": -152.397,
+   "mix": {
+    "oil": 18.3
+   },
+   "year": 1976,
+   "sector": "Electric Utility",
+   "mw": 18.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "58425",
+   "name": "Fire Island Wind",
+   "owner": "Fire Island Wind LLC",
+   "lat": 61.13,
+   "lon": -150.2436,
+   "mix": {
+    "wind": 18.0
+   },
+   "year": 2012,
+   "sector": "IPP Non-CHP",
+   "mw": 18.0,
+   "fuel": "wind"
+  },
+  {
+   "id": "54422",
+   "name": "Unisea G 2",
+   "owner": "Unisea Inc",
+   "lat": 53.8796,
+   "lon": -166.5532,
+   "mix": {
+    "oil": 17.5
+   },
+   "year": 1990,
+   "sector": "Industrial Non-CHP",
+   "mw": 17.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "7173",
+   "name": "Barrow",
+   "owner": "Barrow Utils & Elec Coop, Inc",
+   "lat": 71.292,
+   "lon": -156.7786,
+   "mix": {
+    "gas": 17.3
+   },
+   "year": 1977,
+   "sector": "Electric Utility",
+   "mw": 17.3,
+   "fuel": "gas"
+  },
+  {
+   "id": "6301",
+   "name": "Naknek",
+   "owner": "Naknek Electric Assn, Inc",
+   "lat": 58.7304,
+   "lon": -157.0072,
+   "mix": {
+    "oil": 16.5
+   },
+   "year": 1977,
+   "sector": "Electric Utility",
+   "mw": 16.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "6304",
+   "name": "Kotzebue Hybrid",
+   "owner": "Kotzebue Electric Assn Inc",
+   "lat": 66.8378,
+   "lon": -162.5569,
+   "mix": {
+    "oil": 11.8,
+    "wind": 1.8,
+    "storage": 1.2,
+    "solar": 1.7
+   },
+   "year": 1987,
+   "sector": "Electric Utility",
+   "mw": 16.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "93",
+   "name": "Blue Lake Hydro",
+   "owner": "City & Borough of Sitka - (AK)",
+   "lat": 57.0516,
+   "lon": -135.2297,
+   "mix": {
+    "hydro": 15.9
+   },
+   "year": 2014,
+   "sector": "Electric Utility",
+   "mw": 15.9,
+   "fuel": "hydro"
+  },
+  {
+   "id": "92",
+   "name": "Seward (AK)",
+   "owner": "City of Seward - (AK)",
+   "lat": 60.1309,
+   "lon": -149.435,
+   "mix": {
+    "oil": 15.6
+   },
+   "year": 1975,
+   "sector": "Electric Utility",
+   "mw": 15.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "91",
+   "name": "Petersburg",
+   "owner": "Petersburg Borough - (AK)",
+   "lat": 56.811,
+   "lon": -132.9571,
+   "mix": {
+    "hydro": 1.8,
+    "oil": 12.9
+   },
+   "year": 1965,
+   "sector": "Electric Utility",
+   "mw": 14.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "57085",
+   "name": "Lake Dorothy Hydroelectric Project",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.2325,
+   "lon": -134.0533,
+   "mix": {
+    "hydro": 14.3
+   },
+   "year": 2009,
+   "sector": "Electric Utility",
+   "mw": 14.3,
+   "fuel": "hydro"
+  },
+  {
+   "id": "6566",
+   "name": "Bethel",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 60.7897,
+   "lon": -161.7878,
+   "mix": {
+    "oil": 13.7
+   },
+   "year": 1976,
+   "sector": "Electric Utility",
+   "mw": 13.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "54452",
+   "name": "Nutrien Kenai Nitrogen Operations",
+   "owner": "Nutrien US LLC",
+   "lat": 60.6732,
+   "lon": -151.3784,
+   "mix": {
+    "gas": 12.5
+   },
+   "year": 1977,
+   "sector": "Industrial CHP",
+   "mw": 12.5,
+   "fuel": "gas"
+  },
+  {
+   "id": "95",
+   "name": "Wrangell",
+   "owner": "City of Wrangell - (AK)",
+   "lat": 56.461,
+   "lon": -132.3794,
+   "mix": {
+    "oil": 12.0
+   },
+   "year": 1987,
+   "sector": "Electric Utility",
+   "mw": 12.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "390",
+   "name": "Solomon Gulch",
+   "owner": "Copper Valley Elec Assn, Inc",
+   "lat": 61.0828,
+   "lon": -146.3033,
+   "mix": {
+    "hydro": 12.0
+   },
+   "year": 1982,
+   "sector": "Electric Utility",
+   "mw": 12.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "58380",
+   "name": "JBER Landfill Gas Power Plant",
+   "owner": "Doyon Utilities, LLC",
+   "lat": 61.286,
+   "lon": -149.61,
+   "mix": {
+    "other": 11.5
+   },
+   "year": 2012,
+   "sector": "Commercial Non-CHP",
+   "mw": 11.5,
+   "fuel": "other"
+  },
+  {
+   "id": "109",
+   "name": "Dillingham",
+   "owner": "Nushagak Electric Coop, Inc",
+   "lat": 59.0429,
+   "lon": -158.4686,
+   "mix": {
+    "oil": 10.5
+   },
+   "year": 1988,
+   "sector": "Electric Utility",
+   "mw": 10.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "7723",
+   "name": "Nymans Plant Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.7316,
+   "lon": -152.507,
+   "mix": {
+    "oil": 10.0
+   },
+   "year": 1994,
+   "sector": "Electric Utility",
+   "mw": 10.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "63",
+   "name": "Gold Creek",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.3107,
+   "lon": -134.4174,
+   "mix": {
+    "hydro": 1.6,
+    "oil": 8.1
+   },
+   "year": 1914,
+   "sector": "Electric Utility",
+   "mw": 9.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "6305",
+   "name": "Glennallen",
+   "owner": "Copper Valley Elec Assn, Inc",
+   "lat": 62.1104,
+   "lon": -145.5325,
+   "mix": {
+    "oil": 9.2
+   },
+   "year": 1976,
+   "sector": "Electric Utility",
+   "mw": 9.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "57187",
+   "name": "Pillar Mountain Wind Project Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.7869,
+   "lon": -152.4406,
+   "mix": {
+    "wind": 9.0
+   },
+   "year": 2009,
+   "sector": "Electric Utility",
+   "mw": 9.0,
+   "fuel": "wind"
+  },
+  {
+   "id": "789",
+   "name": "Orca",
+   "owner": "Cordova Electric Coop, Inc",
+   "lat": 60.5559,
+   "lon": -145.753,
+   "mix": {
+    "oil": 8.7
+   },
+   "year": 1984,
+   "sector": "Electric Utility",
+   "mw": 8.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "6306",
+   "name": "Valdez",
+   "owner": "Copper Valley Elec Assn, Inc",
+   "lat": 61.1303,
+   "lon": -146.3647,
+   "mix": {
+    "oil": 8.6
+   },
+   "year": 1972,
+   "sector": "Electric Utility",
+   "mw": 8.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "52184",
+   "name": "Tesoro Kenai Cogeneration Plant",
+   "owner": "Tesoro Alaska Company LLC",
+   "lat": 60.677,
+   "lon": -151.3815,
+   "mix": {
+    "gas": 8.6
+   },
+   "year": 1988,
+   "sector": "Industrial CHP",
+   "mw": 8.6,
+   "fuel": "gas"
+  },
+  {
+   "id": "65",
+   "name": "Salmon Creek 1",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.3269,
+   "lon": -134.4631,
+   "mix": {
+    "hydro": 8.5
+   },
+   "year": 1984,
+   "sector": "Electric Utility",
+   "mw": 8.5,
+   "fuel": "hydro"
+  },
+  {
+   "id": "60250",
+   "name": "Swampy Acres Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.7756,
+   "lon": -152.4803,
+   "mix": {
+    "oil": 8.4
+   },
+   "year": 2002,
+   "sector": "Electric Utility",
+   "mw": 8.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "69",
+   "name": "Haines",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 59.2359,
+   "lon": -135.4462,
+   "mix": {
+    "oil": 8.3
+   },
+   "year": 1968,
+   "sector": "Electric Utility",
+   "mw": 8.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "406",
+   "name": "Tok",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 63.3355,
+   "lon": -143.0,
+   "mix": {
+    "oil": 8.2
+   },
+   "year": 1989,
+   "sector": "Electric Utility",
+   "mw": 8.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "58117",
+   "name": "TNSG South Plant",
+   "owner": "TDX North Slope Generating Inc.",
+   "lat": 70.2,
+   "lon": -148.4667,
+   "mix": {
+    "gas": 7.8
+   },
+   "year": 1992,
+   "sector": "Electric Utility",
+   "mw": 7.8,
+   "fuel": "gas"
+  },
+  {
+   "id": "54834",
+   "name": "Fort Greely Power Plant",
+   "owner": "Doyon Utilities - Fort Greely",
+   "lat": 63.9736,
+   "lon": -145.7166,
+   "mix": {
+    "oil": 7.4
+   },
+   "year": 1959,
+   "sector": "Commercial Non-CHP",
+   "mw": 7.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "54305",
+   "name": "Westward Seafoods",
+   "owner": "Westward Seafoods Inc",
+   "lat": 53.8585,
+   "lon": -166.5529,
+   "mix": {
+    "oil": 6.6
+   },
+   "year": 1991,
+   "sector": "Industrial CHP",
+   "mw": 6.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "58982",
+   "name": "Allison Creek Hydro",
+   "owner": "Copper Valley Elec Assn, Inc",
+   "lat": 61.0844,
+   "lon": -146.3533,
+   "mix": {
+    "hydro": 6.5
+   },
+   "year": 2016,
+   "sector": "Electric Utility",
+   "mw": 6.5,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7862",
+   "name": "Power Creek",
+   "owner": "Cordova Electric Coop, Inc",
+   "lat": 60.5887,
+   "lon": -145.6045,
+   "mix": {
+    "hydro": 6.0
+   },
+   "year": 2001,
+   "sector": "Electric Utility",
+   "mw": 6.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "66887",
+   "name": "Houston Solar",
+   "owner": "Energy 49, LLC",
+   "lat": 61.59,
+   "lon": -149.79,
+   "mix": {
+    "solar": 6.0
+   },
+   "year": 2023,
+   "sector": "IPP Non-CHP",
+   "mw": 6.0,
+   "fuel": "solar"
+  },
+  {
+   "id": "6580",
+   "name": "Beaver Falls",
+   "owner": "Ketchikan Public Utilities",
+   "lat": 55.3798,
+   "lon": -131.4703,
+   "mix": {
+    "hydro": 5.4
+   },
+   "year": 1947,
+   "sector": "Electric Utility",
+   "mw": 5.4,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7841",
+   "name": "Valdez Cogen",
+   "owner": "Copper Valley Elec Assn, Inc",
+   "lat": 61.0839,
+   "lon": -146.2529,
+   "mix": {
+    "oil": 5.3
+   },
+   "year": 2000,
+   "sector": "Electric Utility",
+   "mw": 5.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "59037",
+   "name": "Hiilangaay Hydro",
+   "owner": "Haida Energy, Inc.",
+   "lat": 55.2173,
+   "lon": -132.61,
+   "mix": {
+    "hydro": 5.0
+   },
+   "year": 2021,
+   "sector": "Electric Utility",
+   "mw": 5.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "58977",
+   "name": "Whitman",
+   "owner": "Ketchikan Public Utilities",
+   "lat": 55.3281,
+   "lon": -131.5308,
+   "mix": {
+    "hydro": 4.8
+   },
+   "year": 2015,
+   "sector": "Electric Utility",
+   "mw": 4.8,
+   "fuel": "hydro"
+  },
+  {
+   "id": "66",
+   "name": "Skagway",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 59.4545,
+   "lon": -135.3131,
+   "mix": {
+    "hydro": 1.0,
+    "oil": 3.7
+   },
+   "year": 1909,
+   "sector": "Electric Utility",
+   "mw": 4.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "6338",
+   "name": "St Marys IC",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 62.0515,
+   "lon": -163.1726,
+   "mix": {
+    "oil": 4.6
+   },
+   "year": 2022,
+   "sector": "Electric Utility",
+   "mw": 4.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "7752",
+   "name": "Black Bear Lake",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 55.4765,
+   "lon": -133.1477,
+   "mix": {
+    "hydro": 4.5
+   },
+   "year": 1995,
+   "sector": "Electric Utility",
+   "mw": 4.5,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7484",
+   "name": "NSB Nuiqsut Utility",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 70.2206,
+   "lon": -150.9935,
+   "mix": {
+    "oil": 2.2,
+    "gas": 2.2
+   },
+   "year": 1999,
+   "sector": "Electric Utility",
+   "mw": 4.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "84",
+   "name": "Ketchikan",
+   "owner": "Ketchikan Public Utilities",
+   "lat": 55.3446,
+   "lon": -131.6334,
+   "mix": {
+    "hydro": 4.2
+   },
+   "year": 1938,
+   "sector": "Electric Utility",
+   "mw": 4.2,
+   "fuel": "hydro"
+  },
+  {
+   "id": "62",
+   "name": "Annex Creek",
+   "owner": "Alaska Electric Light & Power Co.",
+   "lat": 58.3176,
+   "lon": -134.101,
+   "mix": {
+    "hydro": 4.0
+   },
+   "year": 1915,
+   "sector": "Electric Utility",
+   "mw": 4.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7751",
+   "name": "Goat Lake Hydro",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 59.5357,
+   "lon": -135.2123,
+   "mix": {
+    "hydro": 4.0
+   },
+   "year": 1997,
+   "sector": "Electric Utility",
+   "mw": 4.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "6302",
+   "name": "Purple Lake",
+   "owner": "Metlakatla Power & Light",
+   "lat": 55.0913,
+   "lon": -131.545,
+   "mix": {
+    "hydro": 3.9
+   },
+   "year": 1956,
+   "sector": "Electric Utility",
+   "mw": 3.9,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7493",
+   "name": "King Cove",
+   "owner": "City of King Cove",
+   "lat": 55.0482,
+   "lon": -162.2932,
+   "mix": {
+    "oil": 2.7,
+    "hydro": 1.2
+   },
+   "year": 1986,
+   "sector": "Electric Utility",
+   "mw": 3.9,
+   "fuel": "oil"
+  },
+  {
+   "id": "6637",
+   "name": "Yakutat",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 59.5446,
+   "lon": -139.7243,
+   "mix": {
+    "oil": 3.8
+   },
+   "year": 1999,
+   "sector": "Electric Utility",
+   "mw": 3.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "56146",
+   "name": "False Island",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 55.4892,
+   "lon": -133.1345,
+   "mix": {
+    "oil": 3.8
+   },
+   "year": 2003,
+   "sector": "Electric Utility",
+   "mw": 3.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "1",
+   "name": "Sand Point",
+   "owner": "Sand Point Generating, LLC",
+   "lat": 55.3397,
+   "lon": -160.4972,
+   "mix": {
+    "oil": 2.7,
+    "wind": 1.0
+   },
+   "year": 2000,
+   "sector": "Electric Utility",
+   "mw": 3.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "7482",
+   "name": "NSB Atqasuk Utility",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 70.4826,
+   "lon": -157.4252,
+   "mix": {
+    "oil": 3.2
+   },
+   "year": 1986,
+   "sector": "Electric Utility",
+   "mw": 3.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "7464",
+   "name": "Kake",
+   "owner": "Inside Passage Elec Coop, Inc",
+   "lat": 56.963,
+   "lon": -133.9226,
+   "mix": {
+    "oil": 3.1
+   },
+   "year": 1993,
+   "sector": "Electric Utility",
+   "mw": 3.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "7485",
+   "name": "NSB Point Hope Utility",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 68.3484,
+   "lon": -166.7372,
+   "mix": {
+    "oil": 3.1
+   },
+   "year": 1995,
+   "sector": "Electric Utility",
+   "mw": 3.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "7488",
+   "name": "NSB Wainwright Utility",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 70.6429,
+   "lon": -160.0205,
+   "mix": {
+    "oil": 3.0
+   },
+   "year": 1988,
+   "sector": "Electric Utility",
+   "mw": 3.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "56542",
+   "name": "Kasidaya Creek Hydro",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 59.4072,
+   "lon": -135.3408,
+   "mix": {
+    "hydro": 3.0
+   },
+   "year": 2008,
+   "sector": "Electric Utility",
+   "mw": 3.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "58405",
+   "name": "ESS Battery Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.7992,
+   "lon": -152.4042,
+   "mix": {
+    "storage": 3.0
+   },
+   "year": 2012,
+   "sector": "Electric Utility",
+   "mw": 3.0,
+   "fuel": "storage"
+  },
+  {
+   "id": "421",
+   "name": "Craig (AK)",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 55.4769,
+   "lon": -133.1487,
+   "mix": {
+    "oil": 2.8
+   },
+   "year": 1983,
+   "sector": "Electric Utility",
+   "mw": 2.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "6348",
+   "name": "Togiak",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 59.0597,
+   "lon": -160.3803,
+   "mix": {
+    "oil": 2.8
+   },
+   "year": 2019,
+   "sector": "Electric Utility",
+   "mw": 2.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "7174",
+   "name": "Gwitchyaa Zhee",
+   "owner": "Gwitchyaa Zhee Utility Co",
+   "lat": 66.5663,
+   "lon": -145.2531,
+   "mix": {
+    "oil": 2.8
+   },
+   "year": 2015,
+   "sector": "Electric Utility",
+   "mw": 2.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "7487",
+   "name": "NSB Anaktuvuk Pass",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 68.138,
+   "lon": -151.741,
+   "mix": {
+    "oil": 2.7
+   },
+   "year": 1994,
+   "sector": "Electric Utility",
+   "mw": 2.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "7437",
+   "name": "Galena Electric Utility",
+   "owner": "Galena Electric Utility",
+   "lat": 64.7442,
+   "lon": -156.8736,
+   "mix": {
+    "oil": 2.6
+   },
+   "year": 2004,
+   "sector": "Electric Utility",
+   "mw": 2.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "7483",
+   "name": "NSB Kaktovik Utility",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 70.1256,
+   "lon": -143.619,
+   "mix": {
+    "oil": 2.6
+   },
+   "year": 2000,
+   "sector": "Electric Utility",
+   "mw": 2.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "61684",
+   "name": "Klawock Power Generation Station",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 55.5532,
+   "lon": -133.0854,
+   "mix": {
+    "oil": 2.5
+   },
+   "year": 2017,
+   "sector": "Electric Utility",
+   "mw": 2.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "6702",
+   "name": "Pelican",
+   "owner": "Pelican Utility",
+   "lat": 57.9572,
+   "lon": -136.2201,
+   "mix": {
+    "hydro": 1.4,
+    "oil": 1.0
+   },
+   "year": 1984,
+   "sector": "Electric Utility",
+   "mw": 2.4,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7486",
+   "name": "NSB Point Lay Utility",
+   "owner": "North Slope Borough Power & Light",
+   "lat": 69.7408,
+   "lon": -163.0058,
+   "mix": {
+    "oil": 2.4
+   },
+   "year": 2013,
+   "sector": "Electric Utility",
+   "mw": 2.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "6319",
+   "name": "Hooper Bay",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 61.5309,
+   "lon": -166.1019,
+   "mix": {
+    "oil": 2.2
+   },
+   "year": 1997,
+   "sector": "Electric Utility",
+   "mw": 2.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "6341",
+   "name": "Selawik",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 66.6068,
+   "lon": -160.0148,
+   "mix": {
+    "oil": 2.2
+   },
+   "year": 2013,
+   "sector": "Electric Utility",
+   "mw": 2.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "65767",
+   "name": "Gustavus",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 58.4195,
+   "lon": -135.7074,
+   "mix": {
+    "oil": 1.4,
+    "hydro": 0.8
+   },
+   "year": 2008,
+   "sector": "Electric Utility",
+   "mw": 2.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "6581",
+   "name": "Silvis",
+   "owner": "Ketchikan Public Utilities",
+   "lat": 55.3814,
+   "lon": -131.5178,
+   "mix": {
+    "hydro": 2.1
+   },
+   "year": 1968,
+   "sector": "Electric Utility",
+   "mw": 2.1,
+   "fuel": "hydro"
+  },
+  {
+   "id": "57067",
+   "name": "Toksook Bay",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 60.5301,
+   "lon": -165.1086,
+   "mix": {
+    "oil": 2.1
+   },
+   "year": 2005,
+   "sector": "Electric Utility",
+   "mw": 2.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "6283",
+   "name": "Seldovia",
+   "owner": "Homer Electric Assn Inc",
+   "lat": 59.4395,
+   "lon": -151.7134,
+   "mix": {
+    "oil": 2.0
+   },
+   "year": 2017,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "6299",
+   "name": "Unalakleet",
+   "owner": "Unalakleet Valley Elec Coop",
+   "lat": 63.8768,
+   "lon": -160.7904,
+   "mix": {
+    "oil": 2.0
+   },
+   "year": 2010,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "7463",
+   "name": "Hoonah",
+   "owner": "Inside Passage Elec Coop, Inc",
+   "lat": 58.1064,
+   "lon": -135.4307,
+   "mix": {
+    "oil": 2.0
+   },
+   "year": 1997,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "56265",
+   "name": "South Fork",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 55.5633,
+   "lon": -132.8911,
+   "mix": {
+    "hydro": 2.0
+   },
+   "year": 2005,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "hydro"
+  },
+  {
+   "id": "57055",
+   "name": "Stebbins",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 63.521,
+   "lon": -162.2863,
+   "mix": {
+    "oil": 2.0
+   },
+   "year": 2014,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "57066",
+   "name": "Kasigluk",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 60.8731,
+   "lon": -162.5197,
+   "mix": {
+    "oil": 2.0
+   },
+   "year": 2004,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "60563",
+   "name": "Flywheel Energy Storage System Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.7801,
+   "lon": -152.4438,
+   "mix": {
+    "storage": 2.0
+   },
+   "year": 2015,
+   "sector": "Electric Utility",
+   "mw": 2.0,
+   "fuel": "storage"
+  },
+  {
+   "id": "6330",
+   "name": "Noorvik",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 66.8345,
+   "lon": -161.0387,
+   "mix": {
+    "oil": 1.9
+   },
+   "year": 1997,
+   "sector": "Electric Utility",
+   "mw": 1.9,
+   "fuel": "oil"
+  },
+  {
+   "id": "58511",
+   "name": "Delta Wind Farm",
+   "owner": "Alaska Environmental Power",
+   "lat": 64.0139,
+   "lon": -145.5967,
+   "mix": {
+    "wind": 1.9
+   },
+   "year": 2008,
+   "sector": "IPP Non-CHP",
+   "mw": 1.9,
+   "fuel": "wind"
+  },
+  {
+   "id": "6311",
+   "name": "Chevak",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 61.5253,
+   "lon": -165.5902,
+   "mix": {
+    "oil": 1.8
+   },
+   "year": 2009,
+   "sector": "Electric Utility",
+   "mw": 1.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "7112",
+   "name": "Centennial",
+   "owner": "Metlakatla Power & Light",
+   "lat": 55.1214,
+   "lon": -131.5603,
+   "mix": {
+    "oil": 1.8
+   },
+   "year": 2017,
+   "sector": "Electric Utility",
+   "mw": 1.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "57062",
+   "name": "Gambell",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 63.7771,
+   "lon": -171.7124,
+   "mix": {
+    "oil": 1.8
+   },
+   "year": 2006,
+   "sector": "Electric Utility",
+   "mw": 1.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "7182",
+   "name": "Aniak",
+   "owner": "Aniak Light & Power Co Inc",
+   "lat": 61.5807,
+   "lon": -159.5356,
+   "mix": {
+    "oil": 1.7
+   },
+   "year": 1996,
+   "sector": "Electric Utility",
+   "mw": 1.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "7183",
+   "name": "Newhalen",
+   "owner": "I-N-N Electric Coop, Inc",
+   "lat": 59.8991,
+   "lon": -154.6987,
+   "mix": {
+    "oil": 0.9,
+    "hydro": 0.8
+   },
+   "year": 1998,
+   "sector": "Electric Utility",
+   "mw": 1.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "57052",
+   "name": "Savoonga",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 63.6953,
+   "lon": -170.4757,
+   "mix": {
+    "oil": 1.7
+   },
+   "year": 2008,
+   "sector": "Electric Utility",
+   "mw": 1.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "6555",
+   "name": "McGrath",
+   "owner": "McGrath Light & Power Co",
+   "lat": 62.957,
+   "lon": -155.595,
+   "mix": {
+    "oil": 1.6
+   },
+   "year": 2021,
+   "sector": "Electric Utility",
+   "mw": 1.6,
+   "fuel": "oil"
+  },
+  {
+   "id": "6345",
+   "name": "Shishmaref",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 66.2551,
+   "lon": -166.0736,
+   "mix": {
+    "oil": 1.5
+   },
+   "year": 1976,
+   "sector": "Electric Utility",
+   "mw": 1.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "7462",
+   "name": "Angoon",
+   "owner": "Inside Passage Elec Coop, Inc",
+   "lat": 57.4992,
+   "lon": -134.5861,
+   "mix": {
+    "oil": 1.5
+   },
+   "year": 1990,
+   "sector": "Electric Utility",
+   "mw": 1.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "6314",
+   "name": "Emmonak",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 62.7777,
+   "lon": -164.5315,
+   "mix": {
+    "oil": 1.4
+   },
+   "year": 1995,
+   "sector": "Electric Utility",
+   "mw": 1.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "57064",
+   "name": "Kotlik",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 63.0322,
+   "lon": -163.5531,
+   "mix": {
+    "oil": 1.4
+   },
+   "year": 2007,
+   "sector": "Electric Utility",
+   "mw": 1.4,
+   "fuel": "oil"
+  },
+  {
+   "id": "6323",
+   "name": "Kiana",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 66.9739,
+   "lon": -160.4286,
+   "mix": {
+    "oil": 1.3
+   },
+   "year": 1984,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "7168",
+   "name": "Chester Lake",
+   "owner": "Metlakatla Power & Light",
+   "lat": 55.1169,
+   "lon": -131.5459,
+   "mix": {
+    "hydro": 1.3
+   },
+   "year": 1988,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "hydro"
+  },
+  {
+   "id": "57051",
+   "name": "Noatak",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 67.5709,
+   "lon": -162.9657,
+   "mix": {
+    "oil": 1.3
+   },
+   "year": 2008,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "57056",
+   "name": "Scammon Bay",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 61.843,
+   "lon": -165.5815,
+   "mix": {
+    "oil": 1.3
+   },
+   "year": 2001,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "57057",
+   "name": "Quinhagak",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 59.7474,
+   "lon": -161.9106,
+   "mix": {
+    "oil": 1.3
+   },
+   "year": 2002,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "57058",
+   "name": "Pilot Station",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 61.9365,
+   "lon": -162.8807,
+   "mix": {
+    "oil": 1.3
+   },
+   "year": 2005,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "60245",
+   "name": "New Stuyahok",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 59.4484,
+   "lon": -157.3255,
+   "mix": {
+    "oil": 1.3
+   },
+   "year": 2010,
+   "sector": "Electric Utility",
+   "mw": 1.3,
+   "fuel": "oil"
+  },
+  {
+   "id": "7042",
+   "name": "Humpback Creek",
+   "owner": "Cordova Electric Coop, Inc",
+   "lat": 60.6128,
+   "lon": -145.6794,
+   "mix": {
+    "hydro": 1.2
+   },
+   "year": 1991,
+   "sector": "Electric Utility",
+   "mw": 1.2,
+   "fuel": "hydro"
+  },
+  {
+   "id": "7169",
+   "name": "Northway",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 62.9617,
+   "lon": -141.9372,
+   "mix": {
+    "oil": 1.2
+   },
+   "year": 1997,
+   "sector": "Electric Utility",
+   "mw": 1.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "57063",
+   "name": "Shungnak",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 66.8881,
+   "lon": -157.1402,
+   "mix": {
+    "oil": 1.2
+   },
+   "year": 1984,
+   "sector": "Electric Utility",
+   "mw": 1.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "61685",
+   "name": "Slana Generating Station\t",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 62.5928,
+   "lon": -143.5889,
+   "mix": {
+    "oil": 1.2
+   },
+   "year": 2016,
+   "sector": "Electric Utility",
+   "mw": 1.2,
+   "fuel": "oil"
+  },
+  {
+   "id": "7503",
+   "name": "Unalaska Power Module",
+   "owner": "City of Unalaska - (AK)",
+   "lat": 53.864,
+   "lon": -166.5126,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 1993,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "57054",
+   "name": "Upper Kalskag",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 61.5269,
+   "lon": -160.3481,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 2004,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "57059",
+   "name": "Koyuk",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 64.9321,
+   "lon": -161.1671,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 2005,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "57060",
+   "name": "Elim",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 64.6166,
+   "lon": -162.2637,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 2003,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "57065",
+   "name": "Kivalina",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 67.7266,
+   "lon": -164.5384,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 1977,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "60243",
+   "name": "Ambler",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 67.088,
+   "lon": -157.8567,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 1990,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "60244",
+   "name": "Marshall",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 61.8782,
+   "lon": -162.0851,
+   "mix": {
+    "oil": 1.1
+   },
+   "year": 1994,
+   "sector": "Electric Utility",
+   "mw": 1.1,
+   "fuel": "oil"
+  },
+  {
+   "id": "7414",
+   "name": "Thorne Bay Plant",
+   "owner": "Alaska Power and Telephone Co",
+   "lat": 55.6859,
+   "lon": -132.5289,
+   "mix": {
+    "oil": 1.0
+   },
+   "year": 1993,
+   "sector": "Electric Utility",
+   "mw": 1.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "60260",
+   "name": "Brevig Mission",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 65.3317,
+   "lon": -166.4795,
+   "mix": {
+    "oil": 1.0
+   },
+   "year": 2010,
+   "sector": "Electric Utility",
+   "mw": 1.0,
+   "fuel": "oil"
+  },
+  {
+   "id": "62714",
+   "name": "Eyak Service Center BESS",
+   "owner": "Cordova Electric Coop, Inc",
+   "lat": 60.5405,
+   "lon": -145.7408,
+   "mix": {
+    "storage": 1.0
+   },
+   "year": 2019,
+   "sector": "Electric Utility",
+   "mw": 1.0,
+   "fuel": "storage"
+  },
+  {
+   "id": "57053",
+   "name": "Alakanuk",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 62.6833,
+   "lon": -164.6544,
+   "mix": {
+    "oil": 0.8
+   },
+   "year": 2013,
+   "sector": "Electric Utility",
+   "mw": 0.8,
+   "fuel": "oil"
+  },
+  {
+   "id": "6329",
+   "name": "Mountain Village",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 62.0856,
+   "lon": -163.7291,
+   "mix": {
+    "oil": 0.7
+   },
+   "year": 2010,
+   "sector": "Electric Utility",
+   "mw": 0.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "57061",
+   "name": "St. Michael",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 63.4775,
+   "lon": -162.0383,
+   "mix": {
+    "oil": 0.7
+   },
+   "year": 2015,
+   "sector": "Electric Utility",
+   "mw": 0.7,
+   "fuel": "oil"
+  },
+  {
+   "id": "6282",
+   "name": "Port Lions Microgrid",
+   "owner": "Kodiak Electric Assn Inc",
+   "lat": 57.8648,
+   "lon": -152.8554,
+   "mix": {
+    "oil": 0.5
+   },
+   "year": 2017,
+   "sector": "Electric Utility",
+   "mw": 0.5,
+   "fuel": "oil"
+  },
+  {
+   "id": "6333",
+   "name": "Nunapitchuk",
+   "owner": "Alaska Village Elec Coop, Inc",
+   "lat": 60.8959,
+   "lon": -162.4598,
+   "mix": {
+    "oil": 0.5
+   },
+   "year": 2006,
+   "sector": "Electric Utility",
+   "mw": 0.5,
+   "fuel": "oil"
+  }
+ ],
+ "totals": {
+  "gas": 1391.4,
+  "oil": 833.5,
+  "hydro": 482.6,
+  "coal": 197.5,
+  "storage": 133.7,
+  "wind": 58.1,
+  "other": 11.5,
+  "solar": 7.7
+ },
+ "total_mw": 3116.0,
+ "fetched": "2026-11-15"
+}
