@@ -161,6 +161,46 @@ def summarize(rows, regions, exclude=()):
     return ak, {s: price(*v) for s, v in us.items()}
 
 
+US_OUT = ROOT / "electricity-us-utilities.json"
+
+
+def write_us_utilities(rows, year, exclude=()):
+    """Every U.S. utility's all-customer price and customer count, for the Electricity page scatter plots.
+
+    Keeps bundled service only (utilities that both supply and deliver power, plus short-form filers).
+    Energy-only and delivery-only rows in retail-choice states cover only part of a customer's bill,
+    so their price per kWh is not comparable. Drops utilities under 50 customers and prices outside
+    1-300 cents. One row per utility and state: [state, name, customers, cents per kWh].
+    """
+    acc = {}
+    for r in rows:
+        svc = (r.get("service") or "").lower()
+        if svc and not svc.startswith("bundle"):
+            continue
+        if r["state"] == "AK" and any(re.search(p, r["utility"], re.I) for p in exclude):
+            continue
+        k = (r["state"], str(r.get("id") or r["utility"]))
+        a = acc.setdefault(k, {"state": r["state"], "name": r["utility"], "rev": 0, "mwh": 0, "cust": 0})
+        a["rev"] += r.get("total_rev") or 0; a["mwh"] += r.get("total_mwh") or 0; a["cust"] += r.get("total_cust") or 0
+    out = []
+    for a in acc.values():
+        pr = price(a["rev"], a["mwh"])
+        if not pr or not (1 <= pr <= 300) or a["cust"] < 50 or not a["state"]:
+            continue
+        out.append([a["state"], a["name"], int(a["cust"]), pr])
+    out.sort(key=lambda x: (x[0], -x[2]))
+    data = {"source": "U.S. Energy Information Administration, Form EIA-861 (Sales to Ultimate Customers, long and short form)",
+            "url": "https://www.eia.gov/electricity/data/eia861/", "year": year,
+            "note": "Bundled service only; utilities with 50 or more customers; all-customer price = revenue / kWh sold.",
+            "fields": ["state", "utility", "customers", "cents_per_kwh"], "rows": out}
+    old = json.loads(US_OUT.read_text()) if US_OUT.exists() else {}
+    if {k: v for k, v in old.items() if k != "fetched"} == data:
+        print("us utilities: no change"); return
+    data["fetched"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    US_OUT.write_text(json.dumps(data, separators=(",", ":")) + "\n")
+    print(f"us utilities: {len(out)} rows written")
+
+
 def region_for(name, regions):
     for reg, pats in regions.items():
         if reg.startswith("_"): continue
@@ -232,6 +272,7 @@ def main():
         "utilities": utils,
         "rows_read": DIAG.get("ak_rows"),
     }
+    write_us_utilities(cur[1], y, exclude)
     old = json.loads(OUT.read_text()) if OUT.exists() else {}
     if {k: v for k, v in old.items() if k != "fetched"} == data:
         print("utilities: no change"); return
