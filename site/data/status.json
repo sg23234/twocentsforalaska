@@ -112,6 +112,19 @@
    "CES0500000003": "2026-10-01"
   }
  },
+ "natural-gas": {
+  "source": "eia_gas",
+  "latest": {
+   "AK-CITYGATE": "2026-08-01",
+   "US-CITYGATE": "2026-08-01",
+   "AK-RES": "2026-08-01",
+   "US-RES": "2026-08-01",
+   "AK-COM": "2026-08-01",
+   "US-COM": "2026-08-01",
+   "AK-ELEC": "2026-08-01",
+   "US-ELEC": "2026-08-01"
+  }
+ },
  "population": {
   "source": "fred",
   "latest": {
