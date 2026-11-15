@@ -154,7 +154,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   </div>
   <div class="regions" id="regions"></div>
   <div class="tbl"><table>
-    <thead><tr><th scope="col">#</th><th scope="col">Utility</th><th scope="col" class="r">¢/kWh</th><th scope="col" class="r">× U.S.</th><th scope="col" class="r" id="chgh">Change</th><th scope="col" class="r">Customers</th><th scope="col" class="r">Bill, 1,000 kWh</th></tr></thead>
+    <thead><tr><th scope="col">#</th><th scope="col">Utility</th><th scope="col" class="r">¢/kWh</th><th scope="col" class="r">× U.S.</th><th scope="col" class="r" id="chgh">Change</th><th scope="col" class="r">Customers</th><th scope="col" class="r">Bill, 750 kWh</th></tr></thead>
     <tbody id="rows"></tbody>
   </table></div>
   <p class="note" id="tblnote"></p>
@@ -203,7 +203,7 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
 
 <section class="sec" aria-labelledby="h-lad">
   <div class="sech"><span class="kick">Comparisons</span><h2 id="h-lad">What a household pays for power</h2>
-    <p>Monthly bill for a household using 1,000 kWh, at each place's average household price per kWh.</p></div>
+    <p>Monthly bill for a household using 750 kWh, at each place's average household price per kWh. A typical Alaska home uses about 600 to 750 kWh a month.</p></div>
   <div class="cmp">
     <div class="cmp-ctl">
       <div class="key"><span><i style="background:var(--ak)"></i>Alaska</span><span><i style="background:var(--us);outline:4px solid #FBEFE4"></i>Other U.S.</span><span><i style="background:#7A8499;outline:4px solid #ECEEF2"></i>Outside the U.S.</span></div>
@@ -270,7 +270,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     const SMALL = 1000, open_ = new Set();
     const row = (u, i, cls = '') => `<tr${cls}><td class="r" style="color:var(--muted);font-weight:600">${i}</td><td class="u">${esc(tidy(u.utility))}</td>
           <td class="r p">${fmt(u.total_price, 1)}</td><td class="r">${fmt(u.total_price / usT, 1)}×</td><td class="r">${sgn(u.change_pct)}</td>
-          <td class="r">${fmt(u.customers)}</td><td class="r bill">$${fmt(u.total_price * 10)}</td></tr>`;
+          <td class="r">${fmt(u.customers)}</td><td class="r bill">$${fmt(u.total_price * 7.5)}</td></tr>`;
     function table() {
       let i = 0, html = '';
       for (const [k, r] of regs) {
@@ -283,7 +283,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
           const mwh = sm.reduce((t, u) => t + u.sales_mwh, 0), p = sm.reduce((t, u) => t + u.total_price * u.sales_mwh, 0) / (mwh || 1);
           const cust = sm.reduce((t, u) => t + u.customers, 0), on = open_.has(k);
           html += `<tr class="sm"><td></td><td class="u"><button type="button" class="tog" data-r="${esc(k)}" aria-expanded="${on}">${on ? '▾' : '▸'} ${sm.length} small ${sm.length === 1 ? 'utility' : 'utilities'} <span>under ${fmt(SMALL)} customers each</span></button></td>
-            <td class="r p">${fmt(p, 1)}</td><td class="r">${fmt(p / usT, 1)}×</td><td class="r"></td><td class="r">${fmt(cust)}</td><td class="r bill">$${fmt(p * 10)}</td></tr>`;
+            <td class="r p">${fmt(p, 1)}</td><td class="r">${fmt(p / usT, 1)}×</td><td class="r"></td><td class="r">${fmt(cust)}</td><td class="r bill">$${fmt(p * 7.5)}</td></tr>`;
           if (on) for (const u of sm) html += row(u, '', ' class="sub"');
         }
       }
@@ -295,7 +295,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       const nb = $('rows').querySelector(`.tog[data-r="${CSS.escape(k)}"]`); if (nb) nb.focus();
     });
     table();
-    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y}, the same figure as in the chart at the top. The bill is 1,000 kWh at the utility's all-customer average price, so fixed monthly charges are spread over each kWh. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
+    $('tblnote').textContent = `${Y} annual figures: revenue ÷ kWh sold, all customer types. U.S. average ${cents(usT)} for ${Y}, the same figure as in the chart at the top. The bill is 750 kWh, about what a typical Alaska home uses in a month, at the utility's all-customer average price, so fixed monthly charges are spread over each kWh. Utilities with fewer than 1,000 customers are grouped into one row per region (select it to list them); the grouped price is weighted by kWh sold. Region averages are weighted by kWh sold. Changes compare ${Y} with ${PY}; at very small utilities a large swing can reflect a reporting change.` + (U.unassigned && U.unassigned.length ? ` Not yet placed in a region: ${U.unassigned.map(tidy).join(', ')}.` : '');
 
     // ----- Power Cost Equalization -----
     // Program rules (AEA / RCA): base rate = Anchorage-Fairbanks-Juneau residential average,
@@ -350,7 +350,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     const usRes = U.us.residential || usT;
     $('things').innerHTML = THINGS.map((x, i) => `<div class="thing"><span class="t">${esc(x.t)}</span><span class="a">${esc(x.a)}</span>
       <div class="c"><b data-i="${i}">—</b><span data-u="${i}"></span></div></div>`).join('') +
-      `<div class="thing own"><span class="t">A month of your own use</span><label class="a">kWh per month <input id="c-k" type="number" min="0" step="50" value="600" inputmode="numeric"></label>
+      `<div class="thing own"><span class="t">A month of your own use</span><label class="a">kWh per month <input id="c-k" type="number" min="0" step="50" value="750" inputmode="numeric"></label>
       <div class="c"><b data-i="own">—</b><span data-u="own"></span></div></div>`;
     const money = v => v < 1 ? fmt(v * 100) + '¢' : '$' + fmt(v, v < 10 ? 2 : 0);
     function calc() {
@@ -377,7 +377,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     const ABROAD = [
       {l: 'Iceland', d: 'Household average, 2025 (Eurostat)', v: 23.2},
       {l: 'Norway', d: 'Household average, 2025, before state support', v: 13.6},
-      {l: 'British Columbia', d: 'BC Hydro, 2025 rate', v: 9.9},
+      {l: 'British Columbia', d: 'BC Hydro, 2025 rate', v: 9.7},
     ];
     const PLACES = [  // one place for each part of Alaska
       [/^Alaska Village Elec/, 'Rural villages', 'AVEC, 58 communities'],
@@ -400,7 +400,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       <div class="ck">${fmt(r.v, 1)}¢/kWh</div></div>`).join('');
     const rowEls = [...$('cmp-rows').children];
     function cmp() {
-      const k = 1000;
+      const k = 750;
       crows.forEach((r, i) => {
         const pct = r.v / VMAX * 78, el = rowEls[i];
         el.querySelector('.bar').style.width = pct + '%';
@@ -408,7 +408,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
       });
     }
     cmp();
-    $('ladnote').textContent = `Bill = use × average household price per kWh, with fixed monthly charges spread over each kWh. Alaska, Hawaii, Washington and U.S. figures are ${Y} EIA-861 residential averages, before sales tax and before Power Cost Equalization credits, which lower the price of the first 750 kWh a month for village households. Iceland: Eurostat, 2025 average of both half-years, households using 2,500–5,000 kWh a year, all taxes included, converted at the Federal Reserve's 2025 average rate. Norway: Statistics Norway, including grid rent and taxes. British Columbia: BC Hydro's 2025 residential rate at 1,000 kWh a month, including the basic charge and 5% GST.`;
+    $('ladnote').textContent = `Bill = use × average household price per kWh, with fixed monthly charges spread over each kWh. Alaska, Hawaii, Washington and U.S. figures are ${Y} EIA-861 residential averages, before sales tax and before Power Cost Equalization credits, which lower the price of the first 750 kWh a month for village households. Iceland: Eurostat, 2025 average of both half-years, households using 2,500–5,000 kWh a year, all taxes included, converted at the Federal Reserve's 2025 average rate. Norway: Statistics Norway, including grid rent and taxes. British Columbia: BC Hydro's 2025 residential rate at 750 kWh a month, including the basic charge and 5% GST.`;
     $('src').innerHTML = `Sources: U.S. Energy Information Administration — Electric Power Monthly (state averages) and <a href="https://www.eia.gov/electricity/data/eia861/">Form EIA-861</a> (${Y} utility data, long and short form). Region grouping is Two Cents for Alaska's own. PCE: <a href="https://www.akenergyauthority.org/What-We-Do/Power-Cost-Equalization">Alaska Energy Authority</a> program rules and FY2025 totals; base rate from the Regulatory Commission of Alaska. Comparisons: <a href="https://www.ssb.no/en/energi-og-industri/energi/statistikk/elektrisitetspriser">Statistics Norway</a>, <a href="https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table">Eurostat</a> (Iceland), <a href="https://www.bcuc.com/WhatWeDo/ResidentialEnergyRates">BC Utilities Commission</a>; exchange rates from <a href="https://www.federalreserve.gov/releases/g5a/">Federal Reserve G.5A</a>.`;
   }
 
