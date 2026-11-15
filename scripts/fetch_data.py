@@ -56,6 +56,18 @@ def s(label, units, freq, kind, optional=False):
 # optional=True: try it, but a failure is only a warning (used for series whose
 # FRED ID we couldn't confirm ahead of time; the page copes without them).
 DASHBOARDS = {
+    "current-account": {"source": "fred", "series": {
+        "AKNGSP": s("GDP, current dollars, annual", "millions of dollars", "annual", "level"),
+        "AKPCE": s("Personal consumption expenditures by state of residence", "millions of dollars", "annual", "level"),
+        "AKODIV": s("Dividends, interest and rent received by Alaskans, SAAR", "millions of dollars, annual rate", "quarterly", "level"),
+        "AKGOVSLNGSP": s("GDP, state and local government", "millions of dollars", "annual", "level"),
+        "AKGOVFEDCIVNGSP": s("GDP, federal civilian", "millions of dollars", "annual", "level"),
+        "AKGOVFEDMILNGSP": s("GDP, military", "millions of dollars", "annual", "level", optional=True),
+        "AKOILGASNGSP": s("GDP, oil and gas extraction", "millions of dollars", "annual", "level"),
+        "AKMINNGSP": s("GDP, mining incl. oil and gas", "millions of dollars", "annual", "level"),
+        "AKPINGSP": s("GDP, private industries", "millions of dollars", "annual", "level"),
+        "AKEADJ": s("Residence adjustment, SAAR", "thousands of dollars, annual rate", "quarterly", "level", optional=True),
+    }},
     "gdp": {"source": "fred", "series": {
         "AKRGSP": s("Real GDP, annual, millions of chained 2017 dollars", "millions of 2017 dollars", "annual", "level"),
         "AKRQGSP": s("Real GDP, quarterly SAAR, millions of chained 2017 dollars", "millions of 2017 dollars, annual rate", "quarterly", "level"),
