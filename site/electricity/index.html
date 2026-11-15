@@ -124,17 +124,6 @@ tr.sub td.u{padding-left:30px;font-weight:500}
 .things-ctl .chk input{width:20px;height:20px;min-height:0;accent-color:var(--pce)}
 .things-ctl .chk small{font-weight:400;color:var(--muted);display:block}
 .things-ctl .chk[hidden]{display:none}
-.sc-fig{margin:0 0 28px;display:flex;flex-direction:column;gap:8px}
-.sc-fig figcaption{display:flex;flex-direction:column;gap:2px}
-.sc-fig figcaption b{font-family:var(--display);font-size:20px;color:var(--ink)}
-.sc-fig figcaption span{font-size:14px;color:var(--muted)}
-.sc-box{position:relative}
-.sc-box circle{cursor:pointer}
-.sc-box circle.ak{stroke:#fff;stroke-width:.8}
-.sc-box circle:hover{stroke:#14213D;stroke-width:1.5}
-#range{position:relative}
-.map-tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--rule);border-radius:4px;box-shadow:0 2px 8px rgba(20,33,61,.15);padding:8px 10px;font-size:13px;line-height:1.35;color:var(--body);max-width:260px;z-index:3}
-.map-tip b{color:var(--ink);font-size:14px;display:block}
 svg text{font-family:var(--sans)}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:760px){.top{grid-template-columns:1fr}}
@@ -175,24 +164,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <p class="note" id="tblnote"></p>
 </section>
 
-<section class="sec" id="range" aria-labelledby="h-range">
-  <div class="sech"><span class="kick">Compared with other states</span><h2 id="h-range">How wide Alaska's range is</h2>
-    <p>Each dot is one utility. Alaska's are blue; every other U.S. utility is gray.</p></div>
-  <figure class="sc-fig">
-    <figcaption><b>Size and price</b><span>Customers served (log scale) against average price per kWh. Small utilities elsewhere are not nearly as expensive as Alaska's.</span></figcaption>
-    <div class="sc-box" id="sc1"></div>
-  </figure>
-  <figure class="sc-fig">
-    <figcaption><b>Price range by state</b><span>Every utility's average price, one row per state, ordered by the state's typical price.</span></figcaption>
-    <div class="sc-box" id="sc2"></div>
-  </figure>
-  <figure class="sc-fig">
-    <figcaption><b>Average price and spread, by state</b><span>Typical price against the gap between a state's cheaper and costlier utilities (10th to 90th percentile). States with at least five utilities.</span></figcaption>
-    <div class="sc-box" id="sc3"></div>
-  </figure>
-  <div class="map-tip" id="sctip" hidden></div>
-  <p class="note" id="scnote"></p>
-</section>
 <section class="sec" aria-labelledby="h-calc">
   <div class="sech"><span class="kick">Your bill</span><h2 id="h-calc">What everyday things cost</h2>
     <p>The cost of common household uses at a utility's average household price per kWh, next to the same thing at the U.S. average.</p></div>
@@ -481,97 +452,6 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
 })();
 
 
-// ----- how wide Alaska's range is (EIA-861, every U.S. utility) -----
-(function () {
-  const $ = id => document.getElementById(id), NS = 'http://www.w3.org/2000/svg';
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const fmt = (v, d = 0) => v.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
-  const el = (t, a, p, txt) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; if (p) p.appendChild(e); return e; };
-  const AK = '#1F5FA8', GR = '#9AA3B2', INK = '#14213D', MUT = '#5A6580', RULE = '#E4E9F0';
-  const tidy = n => n.replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/\bUtils\b/, 'Utilities').replace(/ Coop\b/, ' Co-op');
-  const q = (a, p) => { const s = a.slice().sort((x, y) => x - y), i = (s.length - 1) * p, lo = Math.floor(i); return s[lo] + (s[Math.ceil(i)] - s[lo]) * (i - lo); };
-  const tip = $('sctip'), sec = $('range');
-  function showTip(evt, html) {
-    tip.innerHTML = html; tip.hidden = false;
-    const r = sec.getBoundingClientRect(), x = evt.clientX - r.left, y = evt.clientY - r.top;
-    tip.style.left = Math.min(r.width - 270, Math.max(0, x + 14)) + 'px'; tip.style.top = Math.max(0, y - 10) + 'px';
-  }
-  const hide = () => { tip.hidden = true; };
-  function dot(g, x, y, r, isAK, html) {
-    const c = el('circle', {cx: x.toFixed(1), cy: y.toFixed(1), r, fill: isAK ? AK : GR, 'fill-opacity': isAK ? .9 : .35, class: isAK ? 'ak' : ''}, g);
-    c.addEventListener('mouseenter', e => showTip(e, html)); c.addEventListener('mousemove', e => showTip(e, html)); c.addEventListener('mouseleave', hide);
-    c.addEventListener('click', e => { e.stopPropagation(); showTip(e, html); });
-    return c;
-  }
-  const label = u => `<b>${esc(tidy(u.n))}</b>${u.s} · ${fmt(u.p, 1)}¢ per kWh<br>${fmt(u.c)} customers`;
-  fetch('/data/electricity-us-utilities.json', {cache: 'no-cache'}).then(r => r.ok ? r.json() : Promise.reject()).then(D => {
-    const U = D.rows.map(r => ({s: r[0], n: r[1], c: r[2], p: r[3]}));
-    const others = U.filter(u => u.s !== 'AK'), ak = U.filter(u => u.s === 'AK');
-    const PMAX = Math.min(180, Math.ceil(Math.max(...U.map(u => u.p)) / 20) * 20);
-    document.addEventListener('click', hide);
-
-    // 1. size vs price
-    (function () {
-      const W = 760, H = 380, L = 46, R = 14, T = 12, B = 40, svg = el('svg', {viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': 'Customers against price for every U.S. utility'});
-      const cmin = 50, cmax = Math.max(...U.map(u => u.c));
-      const X = c => L + (Math.log10(c) - Math.log10(cmin)) / (Math.log10(cmax) - Math.log10(cmin)) * (W - L - R);
-      const Y = p => T + (1 - Math.min(p, PMAX) / PMAX) * (H - T - B);
-      for (let g = 0; g <= PMAX; g += 20) { el('line', {x1: L, x2: W - R, y1: Y(g), y2: Y(g), stroke: RULE}, svg); el('text', {x: L - 6, y: Y(g) + 4, 'text-anchor': 'end', 'font-size': 11, fill: MUT}, svg, g + '¢'); }
-      [100, 1000, 10000, 100000, 1000000].filter(c => c <= cmax).forEach(c => { el('line', {x1: X(c), x2: X(c), y1: T, y2: H - B, stroke: RULE}, svg);
-        el('text', {x: X(c), y: H - B + 16, 'text-anchor': 'middle', 'font-size': 11, fill: MUT}, svg, c >= 1e6 ? (c / 1e6) + 'M' : c >= 1000 ? (c / 1000) + 'k' : c); });
-      el('text', {x: (L + W - R) / 2, y: H - 6, 'text-anchor': 'middle', 'font-size': 12, fill: MUT}, svg, 'Customers served');
-      const g = el('g', {}, svg);
-      others.forEach(u => dot(g, X(u.c), Y(u.p), 2.4, false, label(u)));
-      ak.forEach(u => dot(g, X(u.c), Y(u.p), 4.2, true, label(u)));
-      // how small utilities compare
-      const smallO = others.filter(u => u.c < 1000).map(u => u.p), smallA = ak.filter(u => u.c < 1000).map(u => u.p);
-      $('sc1').appendChild(svg);
-      if (smallO.length && smallA.length) $('sc1').insertAdjacentHTML('afterend', `<p class="note" style="margin:6px 0 0">Utilities under 1,000 customers: typical price ${fmt(q(smallA, .5), 1)}¢ in Alaska (${smallA.length} utilities) and ${fmt(q(smallO, .5), 1)}¢ elsewhere (${smallO.length} utilities).</p>`);
-    })();
-
-    // 2. strip plot by state
-    (function () {
-      const by = {}; U.forEach(u => (by[u.s] = by[u.s] || []).push(u));
-      const states = Object.keys(by).map(s => ({s, med: q(by[s].map(u => u.p), .5)})).sort((a, b) => b.med - a.med);
-      const W = 760, RH = 15, L = 40, R = 14, T = 8, B = 30, H = T + states.length * RH + B;
-      const svg = el('svg', {viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': 'Utility prices by state'});
-      const X = p => L + Math.min(p, PMAX) / PMAX * (W - L - R);
-      for (let g = 0; g <= PMAX; g += 20) { el('line', {x1: X(g), x2: X(g), y1: T, y2: H - B, stroke: RULE}, svg); el('text', {x: X(g), y: H - B + 16, 'text-anchor': 'middle', 'font-size': 11, fill: MUT}, svg, g + '¢'); }
-      const g = el('g', {}, svg);
-      states.forEach((st, i) => {
-        const y = T + i * RH + RH / 2, isAK = st.s === 'AK';
-        if (isAK) el('rect', {x: 0, y: y - RH / 2, width: W, height: RH, fill: '#EAF1FA'}, g);
-        el('text', {x: L - 8, y: y + 4, 'text-anchor': 'end', 'font-size': 11, 'font-weight': isAK ? 700 : 400, fill: isAK ? AK : MUT}, g, st.s);
-        by[st.s].forEach((u, j) => dot(g, X(u.p), y + ((j * 7919) % 9 - 4) * .7, isAK ? 3.6 : 2.4, isAK, label(u)));
-      });
-      $('sc2').appendChild(svg);
-    })();
-
-    // 3. state average vs spread
-    (function () {
-      const by = {}; U.forEach(u => (by[u.s] = by[u.s] || []).push(u));
-      const pts = Object.entries(by).filter(([, l]) => l.length >= 5).map(([s, l]) => {
-        const c = l.reduce((t, u) => t + u.c, 0);
-        return {s, avg: l.reduce((t, u) => t + u.p * u.c, 0) / c, spread: q(l.map(u => u.p), .9) - q(l.map(u => u.p), .1), n: l.length};
-      });
-      const W = 760, H = 360, L = 46, R = 20, T = 12, B = 40;
-      const xm = Math.ceil(Math.max(...pts.map(p => p.avg)) / 5) * 5, ym = Math.ceil(Math.max(...pts.map(p => p.spread)) / 10) * 10;
-      const X = v => L + v / xm * (W - L - R), Y = v => T + (1 - v / ym) * (H - T - B);
-      const svg = el('svg', {viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': 'State average price against spread between utilities'});
-      for (let v = 0; v <= ym; v += 10) { el('line', {x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: RULE}, svg); el('text', {x: L - 6, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: MUT}, svg, fmt(v) + '¢'); }
-      for (let v = 0; v <= xm; v += 5) el('text', {x: X(v), y: H - B + 16, 'text-anchor': 'middle', 'font-size': 11, fill: MUT}, svg, v + '¢');
-      el('text', {x: (L + W - R) / 2, y: H - 6, 'text-anchor': 'middle', 'font-size': 12, fill: MUT}, svg, 'Typical price (customer-weighted average of utilities)');
-      el('text', {x: L + 4, y: T + 10, 'font-size': 12, fill: MUT}, svg, 'Spread between utilities');
-      const g = el('g', {}, svg);
-      pts.forEach(p => { const isAK = p.s === 'AK';
-        dot(g, X(p.avg), Y(p.spread), isAK ? 6 : 4, isAK, `<b>${p.s}</b>Typical ${fmt(p.avg, 1)}¢ · spread ${fmt(p.spread, 1)}¢<br>${p.n} utilities`);
-        if (isAK || p.avg > 15 || p.spread > 12) el('text', {x: X(p.avg) + (isAK ? 9 : 6), y: Y(p.spread) + 4, 'font-size': isAK ? 13 : 10, 'font-weight': isAK ? 700 : 400, fill: isAK ? AK : MUT, 'pointer-events': 'none'}, g, p.s); });
-      $('sc3').appendChild(svg);
-    })();
-
-    $('scnote').textContent = `${D.year} EIA-861. Each utility's average price for all customers (revenue ÷ kWh sold), before Power Cost Equalization. Includes utilities that both supply and deliver power and have at least 50 customers; in states with retail choice, many customers buy power from separate suppliers that are not shown. Prices above ${PMAX}¢ are drawn at the top edge.`;
-  }).catch(() => { $('scnote').textContent = 'Comparison data is not available yet.'; });
-})();
 </script>
 </body>
 </html>
