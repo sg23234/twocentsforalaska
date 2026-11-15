@@ -165,13 +165,13 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     <div><b>$46M</b><span>Paid to rural utilities, FY2025</span></div>
     <div><b>188</b><span>Communities</span></div>
     <div><b>81,000+</b><span>Alaskans who benefit</span></div>
-    <div><b>20.38¢</b><span>Base rate, FY2026 (per kWh)</span></div>
+    <div><b>22.11¢</b><span>Base rate per kWh, July 2026 to June 2027</span></div>
   </div>
   <div class="pce-grid">
     <div class="pce-how">
       <h3>How the credit is set</h3>
       <ol>
-        <li><b>The base rate.</b> Each year the Regulatory Commission of Alaska averages what households pay per kWh in Anchorage, Fairbanks and Juneau. For FY2026 that is 20.38¢. Proposed for FY2027: 22.11¢.</li>
+        <li><b>The base rate.</b> Each year the Regulatory Commission of Alaska averages what households pay per kWh in Anchorage, Fairbanks and Juneau. For the year from July 2026 it is 22.11¢, up from 20.38¢ the year before.</li>
         <li><b>The gap.</b> For each village utility, the gap is its cost per kWh minus the base rate. Costs above $1.00 a kWh don't count.</li>
         <li><b>The state pays 95% of the gap.</b> The credit comes off the bill for a home's first 750 kWh each month. Community buildings such as clinics and water plants get 70 kWh a month per resident. State and federal offices and businesses get nothing.</li>
         <li><b>Past 750 kWh, the household pays the full price.</b></li>
@@ -316,7 +316,7 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     // credit = 95% of (cost - base), cost capped at $1.00/kWh, first 750 kWh/month for homes.
     // Estimate uses each utility's average residential price as its cost; actual PCE levels
     // are set per community from utility costs and can be lower.
-    const PCE = {base: 20.38, cap: 100, share: 0.95, kwh: 750, fy: 'FY2026'};
+    const PCE = {base: 22.11, cap: 100, share: 0.95, kwh: 750, fy: 'FY2027'};  // updated each July; FY2026 was 20.38
     const credit = c => c > PCE.base ? PCE.share * (Math.min(c, PCE.cap) - PCE.base) : 0;
     const PCE_PLACES = [
       [/^Alaska Village Elec/, 'Rural villages (AVEC, 58 communities)'],
