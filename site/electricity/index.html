@@ -501,7 +501,20 @@ window.SNAPSHOT = {"energy":{"series":{"AK-ALL":{"dates":["2001-01-01","2001-02-
     const items = [...(D.additions || []).map(g => ({...g, kind: 'add'})), ...(D.retirements || []).map(g => ({...g, kind: 'ret'}))]
       .filter(g => g.month).sort((a, b) => b.month.localeCompare(a.month)).slice(0, 3);
     if (!items.length) return;
-    $('lat-plants').innerHTML = items.map(g => `<li><span class="d">${mlab(g.month + '-01')}</span><span>${g.kind === 'add' ? '<b>Added:</b>' : '<b>Retired:</b>'} ${esc(g.plant)}, ${g.mw ? fmt(g.mw, g.mw < 10 ? 1 : 0) + ' MW ' : ''}${esc((g.fuel || '').toLowerCase())}${g.owner ? ' (' + esc(g.owner.replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op').replace(/^U S /, 'U.S. ')) + ')' : ''}.</span></li>`).join('');
+    const inv = D.inventory || {}, byPlant = {};
+    Object.entries(inv).forEach(([id, g]) => { const pid = id.split(':')[0]; (byPlant[pid] = byPlant[pid] || []).push({id, ...g}); });
+    const addMonth = {}; (D.additions || []).forEach(g => { addMonth[g.id] = g.month; });
+    const own = o => o.replace(/,? Inc\.?$/, '').replace(/ Elec /, ' Electric ').replace(/ Assn\b/, ' Association').replace(/ Coop\b/, ' Co-op').replace(/^U S /, 'U.S. ');
+    const mwf = v => fmt(v, v < 10 ? 1 : 0);
+    $('lat-plants').innerHTML = items.map(g => {
+      const pid = String(g.id || '').split(':')[0], units = byPlant[pid] || [], tot = units.reduce((t, u) => t + (u.mw || 0), 0);
+      const isNew = units.length && units.every(u => addMonth[u.id] === g.month);
+      let what;
+      if (g.kind === 'ret') what = `<b>Retired:</b> a ${mwf(g.mw || 0)} MW ${esc((g.fuel || '').toLowerCase())} unit at ${esc(g.plant)}${g.owner ? ' (' + esc(own(g.owner)) + ')' : ''}.`;
+      else if (isNew) what = `<b>New plant:</b> ${esc(g.plant)}, ${mwf(tot || g.mw || 0)} MW ${esc((g.fuel || '').toLowerCase())}${g.owner ? ', run by ' + esc(own(g.owner)) : ''}.`;
+      else what = `<b>New unit:</b> a ${mwf(g.mw || 0)} MW ${esc((g.fuel || '').toLowerCase())} generator at the ${esc(g.plant)} power plant${g.owner ? ' (' + esc(own(g.owner)) + ')' : ''}. The plant now has ${units.length} ${units.length === 1 ? 'unit' : 'units'} totaling ${mwf(tot)} MW.`;
+      return `<li><span class="d">${mlab(g.month + '-01')}</span><span>${what}</span></li>`;
+    }).join('') + `<li class="na">How a change is listed: EIA keeps a monthly inventory of every generator at Alaska power plants of 1 MW or more. A generator appears here in the month it first produced power, or as retired when it drops out of the inventory. New units at village diesel plants often replace older engines, so an addition does not always mean more capacity.</li>`;
   }).catch(() => {});
 })();
 </script>
