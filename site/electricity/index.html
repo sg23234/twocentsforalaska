@@ -164,6 +164,18 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
   <p class="note" id="tblnote"></p>
 </section>
 
+<section class="sec" aria-labelledby="h-calc">
+  <div class="sech"><span class="kick">Your bill</span><h2 id="h-calc">What everyday things cost</h2>
+    <p>The cost of common household uses at a utility's average household price per kWh, next to the same thing at the U.S. average.</p></div>
+  <div class="calc things-ctl">
+    <div class="row">
+      <label>Utility<select id="c-u"></select></label>
+      <label class="chk" id="c-pce-l"><input type="checkbox" id="c-pce"> <span>Apply the PCE credit <small id="c-pce-s"></small></span></label>
+    </div>
+  </div>
+  <div class="things" id="things"></div>
+  <p class="note" id="thingsnote"></p>
+</section>
 <section class="sec" id="pce" aria-labelledby="h-pce">
   <div class="sech"><span class="kick">Power Cost Equalization</span><h2 id="h-pce">What village households actually pay</h2>
     <p>The prices above are what electricity costs to produce and deliver. In about 190 rural communities, the state pays most of a household's bill for its first 750 kWh a month through Power Cost Equalization (PCE). It is one of Alaska's largest rural programs.</p></div>
@@ -204,18 +216,6 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
     </div>
   </div>
   <p class="note" id="pcenote"></p>
-</section>
-<section class="sec" aria-labelledby="h-calc">
-  <div class="sech"><span class="kick">Your bill</span><h2 id="h-calc">What everyday things cost</h2>
-    <p>The cost of common household uses at a utility's average household price per kWh, next to the same thing at the U.S. average.</p></div>
-  <div class="calc things-ctl">
-    <div class="row">
-      <label>Utility<select id="c-u"></select></label>
-      <label class="chk" id="c-pce-l"><input type="checkbox" id="c-pce"> <span>Apply the PCE credit <small id="c-pce-s"></small></span></label>
-    </div>
-  </div>
-  <div class="things" id="things"></div>
-  <p class="note" id="thingsnote"></p>
 </section>
 
 <section class="sec" aria-labelledby="h-lad">
