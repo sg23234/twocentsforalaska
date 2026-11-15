@@ -98,6 +98,10 @@ The CPI detail comes from the BLS API, which works without a key but allows only
 
 Every box on the front page links to its own page. They are built from the `PAGES` list in `scripts/build_pages.py`: title, intro, headline numbers, charts, tables, notes and sources. To change a page, edit its entry there and run `python3 scripts/build_pages.py` (the refresh job also runs it). Numbers from live data files are filled in by `site/js/ind.js` in the browser; tables and bars from hand-kept files are written at build time. Each page shows a status badge: live, partly live, updated by hand, or in development.
 
+### Current account
+
+The Current account page is an estimate built line by line from `site/data/manual/current-account.json`: each line has a value, a low-high range, a confidence grade, how it was estimated and its source, all in billions of dollars. `build_pages.py` adds the lines up, works out the goods-and-services balance as GDP minus household consumption, private investment and state and local government spending, and combines the ranges. Change a number in the JSON and rebuild; the page and the front-page panel follow.
+
 ## Day-to-day
 
 - **Update a hand-kept number:** edit `site/data/manual/<topic>.json` on GitHub (the pencil icon works fine from an iPad), commit. The chart redraws and the summary is redrafted within a couple of minutes. Each file says where its numbers come from and when they next update.

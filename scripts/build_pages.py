@@ -87,13 +87,13 @@ def chart(title, kind, series, caption="", **opts):
             f'<figcaption data-t="{E(caption)}">{E(caption)}</figcaption></figure>')
 
 
-def hbar(title, rows, caption="", dec=0, prefix="", suffix="", highlight=None):
+def hbar(title, rows, caption="", dec=0, prefix="", suffix="", highlight=None, lw=210):
     """Static horizontal bars: rows = [(label, value)]."""
     rows = [r for r in rows if r[1] is not None]
     if not rows:
         return ""
     mx = max(abs(v) for _, v in rows) or 1
-    W, Lw, Rw, RH = 680, 210, 80, 30
+    W, Lw, Rw, RH = 680, lw, 80, 30
     H = 8 + RH * len(rows)
     s = f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="{E(title)}">'
     for i, (lab, v) in enumerate(rows):
@@ -724,23 +724,199 @@ def pages():
                  src("FRED, AKRQGSP (quarterly)", "https://fred.stlouisfed.org/series/AKRQGSP")],
         tile=tile({"file": "gdp", "series": "AKRQGSP", "calc": "qgrowth", "dec": 1, "suffix": "%", "sign": True}, None, unit="real GDP, annual rate")))
 
-    P.append(dict(slug="current-account", group=G, title="Current account", row="Macro", status="planned",
-        lead="Alaska is a small open economy: most of what it consumes is shipped in and most of what it produces is sold outside the state. A state current account adds up what Alaska earns from the rest of the world and what it pays out, borrowing the framework countries use for their balance of payments. No official statistic does this for a state.",
-        body=[text("How it works", ["Current account = goods balance + services balance + primary income balance + transfers balance.",
-                                    "A surplus means Alaska earns more from outside the state than it pays out; a deficit means spending is financed by inflows such as federal transfers, Permanent Fund returns or borrowing."]),
-              table("The four parts and where the data comes from", ["Part", "Money coming in", "Money going out", "Main sources"],
-                    [("Goods", "Oil, seafood, minerals sold outside Alaska", "Consumer goods, fuel, building materials shipped in", "Census state exports, DOR, ADF&G, DNR, port tonnage"),
-                     ("Services", "Visitor spending, air cargo services", "Freight, insurance, professional services, travel by Alaskans", "Visitor statistics, ANC cargo, BEA, Division of Insurance"),
-                     ("Primary income", "Permanent Fund and other investment earnings, pensions", "Earnings of nonresident workers, profits of out-of-state owners", "APFC, ARMB, DOLWD nonresident worker report, DOR"),
-                     ("Transfers", "Federal grants, payments to individuals, federal payroll", "Federal taxes paid by Alaskans", "BEA, USAspending, IRS Statistics of Income")],
-                    "Methodology draft. Figures will be published once each line is sourced and checked."),
-              plan(["Assemble each line for 2019 onward from the sources above.",
-                    "Settle three classification choices: whether federal payroll counts as a service export, which seafood value to use, and how to estimate profits paid to out-of-state owners.",
-                    "Publish the balance with and without federal flows, and a three-year average to smooth oil price swings."], "Next steps")],
-        notes=["No figures are shown yet. Early estimates were rough and will not be published until each line is verified against its source."],
-        tile=tile(unit="annual balance, estimate")))
+    P.append(current_account_page(tile))
 
     return P
+
+
+# ---------------------------------------------------------------- current account
+
+def ca_model():
+    """Add up site/data/manual/current-account.json. Billions of dollars."""
+    d = manual("current-account")
+    a, L = d["absorption"], d["lines"]
+    v = lambda k: a[k]["value"]
+    half = lambda x: (x["high"] - x["low"]) / 2
+    absorb = v("pce") + v("investment") + v("state_local")
+    tb = v("gdp") - absorb
+    tb_sd = (half(a["investment"]) ** 2 + half(a["state_local"]) ** 2) ** 0.5
+    tot = lambda acc, side, fed=None: sum(l["value"] for l in L if l["account"] == acc and l["side"] == side and (fed is None or l["federal"] == fed))
+    X = tot("trade", "credit")
+    pc, pd = tot("primary", "credit"), tot("primary", "debit")
+    sc, sd = tot("secondary", "credit"), tot("secondary", "debit")
+    ca = tb + (pc - pd) + (sc - sd)
+    sd_all = (tb_sd ** 2 + sum(half(l) ** 2 for l in L if l["account"] != "trade")) ** 0.5
+    fed_in = sum(l["value"] for l in L if l["federal"] and l["side"] == "credit")
+    fed_out = sum(l["value"] for l in L if l["federal"] and l["side"] == "debit")
+    return dict(d=d, a=a, L=L, absorb=absorb, tb=tb, tb_sd=tb_sd, X=X, M=X - tb, pc=pc, pd=pd, sc=sc, sd=sd,
+                primary=pc - pd, secondary=sc - sd, ca=ca, lo=ca - sd_all, hi=ca + sd_all, gdp=v("gdp"),
+                fed_in=fed_in, fed_out=fed_out, fed_net=fed_in - fed_out, ex_fed=ca - (fed_in - fed_out),
+                gains=d["memo"]["apf_realized_gains"]["value"])
+
+
+def bn(v, sign=False, dec=1):
+    return fnum(v, dec, "$", "B", sign=sign)
+
+
+def current_account_page(tile):
+    m = ca_model()
+    d, L, a, mm = m["d"], m["L"], m["a"], m["d"]["memo"]
+    yr = d["year"]
+    pct = lambda v: f"{v / m['gdp'] * 100:.0f}%"
+    line = {l["id"]: l for l in L}
+    val = lambda k: line[k]["value"]
+    rng = lambda l: f"{bn(l['low'])}–{bn(l['high'])}" if l["low"] != l["high"] else "—"
+    rows = lambda ls: [(l["label"], bn(l["value"]), rng(l), l["confidence"], l["basis"], l["source"]) for l in ls]
+    cols = ["Line", "$ billions", "Range", "Confidence", "How it is estimated", "Source"]
+    credits = sorted([l for l in L if l["side"] == "credit"], key=lambda l: -l["value"])
+    debits = sorted([l for l in L if l["side"] == "debit"], key=lambda l: -l["value"])
+    debits_rows = [("Imports (derived)", m["M"])] + [(l.get("short", l["label"]), l["value"]) for l in debits]
+    debits_rows.sort(key=lambda r: -r[1])
+    fed = [l for l in L if l["federal"]]
+    oil_per10 = mm["oil_barrels_m"] * 10 / 1000
+    oil_ca10 = oil_per10 * mm["marginal_state_take"]
+    big4 = val("oil") + val("metals") + val("seafood") + val("visitors")
+
+    stats = [
+        stat(f"Current account, {yr}", f"Estimate · {pct(m['ca'])} of GDP", value=bn(m["ca"], sign=True)),
+        stat("Likely range", "Combined uncertainty of every line", value=f"{bn(m['lo'], sign=True, dec=0)} to {bn(m['hi'], sign=True, dec=0)}"),
+        stat("Without federal flows", "Balance if federal money in and out is removed", value=bn(m["ex_fed"], sign=True)),
+        stat("Net federal flows", f"In {bn(m['fed_in'])}, out {bn(m['fed_out'])} · {pct(m['fed_net'])} of GDP", value=bn(m["fed_net"], sign=True)),
+        stat("Goods and services", "Exports less imports", value=bn(m["tb"], sign=True)),
+        stat("Primary income", "Wages, profits, interest, dividends", value=bn(m["primary"], sign=True)),
+        stat("Transfers", "Grants, benefits and taxes", value=bn(m["secondary"], sign=True)),
+    ]
+
+    glance = hbar("The four balances", [
+        ("Goods and services", m["tb"]), ("Primary income", m["primary"]), ("Transfers", m["secondary"]),
+        ("Current account", m["ca"]), ("Without federal flows", m["ex_fed"])],
+        f"Billions of dollars, {yr}. Blue is money coming in on balance, orange is money going out.", dec=1, prefix="$", suffix="B", highlight=r"^Current account$")
+
+    body = [
+        text("The short version", [
+            f"In {yr}, Alaskans earned more from the rest of the world than they paid out: a surplus of roughly {bn(m['ca'])}, about {pct(m['ca'])} of the state's GDP. The likely range runs from {bn(m['lo'], dec=0)} to {bn(m['hi'], dec=0)}, because several lines have to be estimated.",
+            f"The surplus does not come from trade. Alaska sells about {bn(m['X'], dec=0)} of goods and services to the outside each year and buys about {bn(m['M'], dec=0)}, so trade roughly balances ({bn(m['tb'], sign=True)}). Income going out to nonresident workers, out-of-state owners and lenders ({bn(m['pd'])}) also roughly cancels investment income coming in ({bn(m['pc'])}).",
+            f"What tips the balance is the federal government. Counting its payroll, purchases, grants and benefits against the federal taxes Alaskans pay, about {bn(m['fed_net'])} more arrives from Washington than leaves for it. Without that, Alaska would run a deficit of about {bn(abs(m['ex_fed']))}.",
+        ]),
+        section("The account at a glance", "A current account adds up every payment between a place and the rest of the world that is not a loan, an investment or a sale of assets. Countries publish one; states do not, so this is an estimate.",
+                glance,
+                table("Summary", ["", f"$ billions, {yr}", "Share of GDP"], [
+                    ("Exports of goods and services", bn(m["X"]), pct(m["X"])),
+                    ("Imports of goods and services (derived)", bn(-m["M"]), pct(m["M"])),
+                    ("Goods and services balance", bn(m["tb"], sign=True), pct(m["tb"])),
+                    ("Primary income received", bn(m["pc"]), pct(m["pc"])),
+                    ("Primary income paid", bn(-m["pd"]), pct(m["pd"])),
+                    ("Primary income balance", bn(m["primary"], sign=True), pct(m["primary"])),
+                    ("Transfers received", bn(m["sc"]), pct(m["sc"])),
+                    ("Transfers paid", bn(-m["sd"]), pct(m["sd"])),
+                    ("Transfers balance", bn(m["secondary"], sign=True), pct(m["secondary"])),
+                    ("Current account balance", bn(m["ca"], sign=True), pct(m["ca"])),
+                    ("Likely range", f"{bn(m['lo'], sign=True)} to {bn(m['hi'], sign=True)}", ""),
+                ], f"GDP {bn(m['gdp'])} (BEA). Shares are of GDP. Imports are worked out as exports minus the goods-and-services balance; see How the estimate is built.", right=(1, 2))),
+        section("Money coming in", f"Every payment from outside Alaska to Alaskans, largest first. Federal flows total {bn(m['fed_in'])}, more than crude oil ({bn(val('oil'))}).",
+                hbar("Money coming in", [(l.get("short", l["label"]), l["value"]) for l in credits], f"Billions of dollars, {yr}. Federal lines in red.", dec=1, prefix="$", suffix="B", highlight=r"^(Federal)", lw=290),
+                table("Each incoming line", cols, rows(credits), "Confidence: High means taken directly from an official figure; Medium means an official figure adjusted or combined with others; Low means an estimate built from partial information.", right=(1,))),
+        section("Money going out", f"Every payment from Alaskans to the outside. Imports are by far the largest, at about {bn(m['M'], dec=0)}.",
+                hbar("Money going out", debits_rows, f"Billions of dollars, {yr}. Imports are derived, not measured.", dec=1, prefix="$", suffix="B", highlight=r"^(Federal)", lw=290),
+                table("Each outgoing line", cols, [("Imports of goods and services (derived)", bn(m["M"]), f"{bn(m['M'] - m['tb_sd'])}–{bn(m['M'] + m['tb_sd'])}", "Low",
+                                                   "Exports minus the goods-and-services balance. The balance itself is GDP minus household consumption, private investment and state and local government spending. Includes freight, tanker shipping, fuel brought in for air cargo, and what Alaskans spend while traveling.", "Derived; BEA")] + rows(debits), "", right=(1,))),
+        section("The federal government's part", f"Federal money arrives four ways and leaves one way. On balance about {bn(m['fed_net'])} a year comes in, roughly {pct(m['fed_net'])} of GDP.",
+                table("Federal flows", ["Flow", "Direction", "$ billions", "Counted as"],
+                      [(l["label"], "In" if l["side"] == "credit" else "Out", bn(l["value"]),
+                        {"trade": "Export of goods and services", "secondary": "Transfer"}.get(l["account"], "Income")) for l in fed]
+                      + [("Net federal flows", "", bn(m["fed_net"], sign=True), "")], "", right=(2,)),
+                text("Why federal payroll and purchases count as exports", [
+                    "A national current account treats a foreign embassy's spending like any other export: the customer sits outside the country. The same logic applies here. When the Defense Department pays a soldier at JBER or a contractor building a hangar at Eielson, the customer is in Washington, so the payment is a sale of services to the outside.",
+                    "Grants and benefits are different. The federal government gets nothing in return, so they are counted as transfers, like foreign aid or remittances. Federal income and payroll taxes paid by Alaskans are the matching transfers going out.",
+                    f"For comparison, a 2026 ISER presentation put federal spending in Alaska at just under $20 billion in 2023, or about $18 billion without temporary pandemic money. This page's gross figure for {yr}, {bn(m['fed_in'])}, is in that range. An earlier ISER estimate of $13 billion to $14 billion a year counted fewer streams."])),
+        section("Oil's part", f"Crude oil is the largest single export, but much of its value leaves again as profit for out-of-state owners.",
+                table("Where a year of North Slope oil goes", ["Piece", "$ billions", "Stays in Alaska?"], [
+                    ("Crude oil sold outside Alaska", bn(val("oil")), "Comes in"),
+                    ("State petroleum revenue (FY2024)", bn(mm["state_petroleum_revenue_fy24"]), "Yes"),
+                    ("Local oil and gas property taxes (FY2024)", bn(mm["municipal_oil_property_tax_fy24"]), "Yes"),
+                    ("Producers' profit before federal income tax", bn(val("oil_profits")), "No"),
+                    ("Operating, drilling and transport costs, depreciation", "the rest", "Partly: Alaska wages and suppliers stay, imported equipment and nonresident workers do not"),
+                ], "State revenue includes royalties, production tax, property tax and corporate income tax, restricted and unrestricted. Sources: DOR, AOGA.", right=(1,)),
+                text("How oil prices move the balance", [
+                    f"North Slope fields produce about {mm['oil_barrels_m']:.0f} million barrels a year, so every $10 change in the price changes the value of oil exports by about {bn(oil_per10)}.",
+                    f"Most of that change ends up with the producers, whose owners are outside Alaska, so it leaves again as profit. What stays is mainly the state's share. At recent prices, royalties and production tax take roughly {mm['marginal_state_take'] * 100:.0f}% of an extra dollar, so a $10 rise in the price improves Alaska's current account by only about {bn(oil_ca10)}. That share is an approximation; the production tax's sliding scale makes it shift with price.",
+                    "This is why oil price swings shake the state budget more than they shake the current account."])),
+        section("Investment income: the Permanent Fund and household savings", "Alaskans own large savings invested outside the state, publicly through the Permanent Fund and privately through retirement accounts and pensions.",
+                table("Permanent Fund income", ["", "FY2024", "FY2025"], [
+                    ("Interest, dividends and real estate income", bn(mm["apf_cash_fy24"], dec=2), bn(mm["apf_cash_fy25"], dec=2)),
+                    ("Statutory net income (adds realized gains)", bn(mm["apf_sni_fy24"], dec=2), bn(mm["apf_sni_fy25"], dec=2)),
+                ], "State fiscal years ending June 30. Source: APFC 2025 Annual Report.", right=(1, 2)),
+                text("Which Permanent Fund number belongs in the account", [
+                    f"National accounts count interest, dividends and rent as income, and leave out capital gains, which are treated as a change in the value of assets. Following that rule, this page counts {bn(val('apf'), dec=2)} of Permanent Fund income for {yr}.",
+                    f"The Legislature budgets from a broader measure. Adding the Fund's realized gains, about {bn(m['gains'])} for {yr}, would raise the current account to about {bn(m['ca'] + m['gains'], sign=True)}.",
+                    f"The dividend is not in the account at all. The {yr} dividend and energy relief payment, about {bn(mm['pfd_2024'], dec=2)}, moved money from one Alaska account to Alaskans, so it is neither income from outside nor a payment to it.",
+                    f"Household investment income is the larger and less certain piece. BEA counts {bn(mm['bea_dir'])} of dividends, interest and rent received by Alaskans, including returns credited through pension funds such as the state retirement systems. This page assumes about 70% comes from outside Alaska. Each 10 percentage points on that assumption moves the balance by about {bn(mm['bea_dir'] * 0.1)}."])),
+        section("How the estimate is built", "",
+                text("The goods-and-services balance", [
+                    "No agency counts what Alaska buys from the Lower 48, because there are no customs records between states. Instead, the balance is worked out from the national accounts identity: what a place produces, minus what it spends, equals what it sells to the outside on balance.",
+                    f"Alaska's GDP in {yr} was {bn(m['gdp'])}. Alaskans spent {bn(a['pce']['value'])} on household consumption (BEA), about {bn(a['investment']['value'])} on private investment and about {bn(a['state_local']['value'])} through state and local government, for a total of {bn(m['absorb'])}. The difference, {bn(m['tb'], sign=True)}, is the goods-and-services balance. Federal spending in Alaska is left out of the spending total because it is counted as an export.",
+                    "The export lines are measured directly where possible. Imports are then whatever is needed to produce the balance. The split between goods and services is not reliable, so the page shows them together."]),
+                text("Three choices that had to be made", [
+                    "Federal payroll and purchases count as exports of services, for the reasons in the federal section.",
+                    "Seafood is valued at first wholesale, the price processors get when the fish leaves their hands. Ex-vessel value, what fishermen are paid, would understate what Alaska sells.",
+                    "Out-of-state owners' profits are counted after state taxes and royalties but before federal income tax. All of that profit leaves Alaska, whoever ends up with it."]),
+                text("What is not in the estimate", [
+                    "Capital gains and losses on investments, realized or not.",
+                    "Pension payments to retirees who have left Alaska, and to those who have moved in. BEA's investment income figure partly captures these.",
+                    "Loans, new investment and asset sales. Those belong to the financial account, which shows how a surplus or deficit is financed. Oil companies' spending on Willow and Pikka, for example, is an investment flowing in, not part of the current account; only its future profits will be."])),
+        section("Cross-checks", "Places where two independent sources can be compared.",
+                table("Cross-checks", ["Item", "This page", "Other source", "What it shows"], [
+                    ("Nonresident earnings", bn(val("nonres_wages")), f"{bn(mm['bea_residence_adjustment'], sign=True, dec=2)} (BEA residence adjustment)",
+                     "BEA's adjustment relies on commuting surveys that miss most seasonal workers, so it badly understates money leaving with nonresidents. The state labor department's payroll-based count is used here."),
+                    ("Oil producers' profits", bn(val("oil_profits")), "About $2.9B (DOR barrel economics, FY2024); about $3.5B (scaled from ConocoPhillips)", "Two methods within $0.6B of each other."),
+                    ("Federal benefits", bn(val("fed_payments")), "About $6.4B of federally funded transfers in BEA's personal income for 2024", "Close agreement."),
+                    ("Federal money coming in", bn(m["fed_in"]), "Just under $20B in 2023; about $18B without temporary pandemic money (ISER, 2026)", "Close agreement."),
+                    ("Imports", bn(m["M"]), "Roughly $32B by adding up likely imported shares of consumption, oil and mining inputs, construction and government purchases", "The derived figure is plausible."),
+                ], "")),
+        plan([f"Extend the estimate back to 2019 and forward to 2025, using the same lines, so the balance can be followed over time.",
+              "Show a three-year average alongside each year to smooth swings in oil prices.",
+              "Replace estimated lines with measured ones where data allow: BEA's split of dividends, interest and rent, mortgage servicing data for interest paid out, and at-sea versus shore-based seafood value.",
+              "Update once a year, after BEA's September release of state GDP, personal income and consumption."], "What comes next"),
+    ]
+    notes = [
+        f"All figures are for calendar {yr} unless marked. Where a source uses the state fiscal year (July to June) or the federal fiscal year (October to September), the closest year or an average of two years is used, as described in each line.",
+        "The likely range combines each line's low-to-high range as if the errors were independent, which is a standard way to add up uncertain pieces. It is a guide, not a statistical confidence interval.",
+        "Seafood value includes fish processed at sea by Seattle-based catcher-processors, which BEA does not count in Alaska's GDP. Because imports are derived, this raises both exports and imports by the same amount and does not change the balance.",
+        "Crude oil exports count all North Slope production, including oil refined in Alaska. Refined products used in Alaska therefore show up in derived imports, and the balance is unaffected.",
+        "Spending in Alaska by nonresident workers is an export, like visitor spending, but is not measured separately. It is captured in the goods-and-services balance through the GDP identity.",
+        "No official statistic measures a state's current account. These are this site's estimates and will be revised as better data are found.",
+    ]
+    sources = [
+        src("BEA via FRED, Alaska GDP (AKNGSP)", "https://fred.stlouisfed.org/series/AKNGSP"),
+        src("BEA via FRED, Alaska personal consumption expenditures (AKPCE)", "https://fred.stlouisfed.org/data/AKPCE"),
+        src("BEA via FRED, Alaska dividends, interest and rent (AKODIV)", "https://fred.stlouisfed.org/series/AKODIV"),
+        src("BEA via FRED, Alaska residence adjustment (AKEADJ)", "https://fred.stlouisfed.org/series/AKEADJ"),
+        src("BEA SAINC35, personal current transfer receipts, via ArcticStat", "https://www.arcticstat.org/doc/document/2023-06-07-07.pdf"),
+        src("Alaska DOR, Revenue Sources Book, Fall 2024", "https://tax.alaska.gov/programs/programs/reports/RSB.aspx?Type=Fall&Year=2024"),
+        src("Alaska DOR, Spring 2025 Revenue Forecast", "https://dor.alaska.gov/docs/default-source/homepage-documents/revenue-spring-2025-forecast.pdf?sfvrsn=c1a81c75_1"),
+        src("ConocoPhillips, 2024 Form 10-K", "https://www.sec.gov/Archives/edgar/data/1163165/000116316525000012/cop-20241231.htm"),
+        src("ConocoPhillips Alaska, 2024 earnings review", "https://alaska.conocophillips.com/newsroom/story/2024-conocophillips-alaska-earnings-review/"),
+        src("AOGA, Economic Impacts of the Oil and Gas Industry in Alaska (2025)", "https://www.aoga.org/wp-content/uploads/2026/02/AOGA-Economic-Impact-Report-2025-Final-Report.pdf"),
+        src("ASMI, Economic Value of Alaska's Seafood Industry (2026)", "https://www.alaskaseafood.org/wp-content/uploads/2026-Economic-Value-of-AK-Seafood-Industry-2023-2024-data-final.pdf"),
+        src("DGGS, Alaska's Mineral Industry", "https://dggs.alaska.gov/pubs/minerals"),
+        src("ATIA, FY2024-25 Marketing Plan (visitor spending)", "https://www.alaskatia.org/sites/default/files/2024-09/AKFY24-25_Marketing%20Plan%20Final%20Optimized.pdf"),
+        src("AIAS 2024 Annual Report", "https://dot.alaska.gov/aias/assets/2024-AIAS-Annual-Report.pdf"),
+        src("Alaska Beacon via Alaska's News Source, nonresident workers in 2024", "https://www.alaskasnewssource.com/2026/02/06/almost-one-four-alaska-workers-doesnt-live-state-new-report-concludes/"),
+        src("Wrangell Sentinel, nonresident fishermen's share of earnings", "https://www.wrangellsentinel.com/stories/nonresidents-held-almost-23-of-alaska-jobs-in-2024-second-highest-since-1992,50172"),
+        src("APFC, 2025 Annual Report", "https://fliphtml5.com/weyac/yojf/APFC_2025_Annual_Report_(old)/"),
+        src("Alaska DOR, 2024 Permanent Fund Dividend Annual Report", "https://dor.alaska.gov/docs/permanentfunddividendlibraries/annual-reports/2024-pfd-annual-report.pdf?sfvrsn=214f2751_1"),
+        src("Commonwealth North, Half of Alaska's Recent Growth Came From Washington (ISER)", "https://www.commonwealthnorth.org/half-of-alaskas-recent-growth-came-from-washington/"),
+        src("Commonwealth North, Federal Spending Shifts Reshape Alaska's Economic Outlook", "https://www.commonwealthnorth.org/federal-spending-shifts-reshape-alaskas-economic-outlook/"),
+        src("DOLWD, Alaska Economic Trends, May 2025 (federal employment)", "https://live.laborstats.alaska.gov/sites/default/files/trends/may25art1_0.pdf"),
+        src("IRS Data Book 2025, Table 5", "https://www.irs.gov/pub/irs-pdf/p55b.pdf"),
+        src("IRS Data Book 2023, Table 5", "https://www.irs.gov/pub/irs-prior/p55b--2024.pdf"),
+        src("AGC of Alaska, 2024 Construction Spending Forecast", "https://rdc.memberclicks.net/assets/Breakfasts/2024/Info%20Sheet%20%202024%20Construction%20Spending%20Forecast.pdf"),
+        src("Alaska Business, 2025 Top 49ers", "https://digital.akbizmag.com/issue/october-2025/2025-top-49ers/"),
+    ]
+    return dict(slug="current-account", group="Macro", title="Current account", row="Macro", status="static",
+        lead=f"Alaska is a small open economy: most of what it consumes is shipped in and most of what it produces is sold outside the state. A current account adds up what Alaskans earn from the rest of the world and what they pay out, using the framework countries use for their balance of payments. No official statistic does this for a state, so the balance here is an estimate for {yr}, built line by line, with a range and a confidence grade for each line.",
+        stats=stats, body=body, notes=notes, sources=sources,
+        tile=tile(value=bn(m["ca"], sign=True), unit=f"annual balance, {yr} estimate"))
 
 
 # ---------------------------------------------------------------- front page
@@ -778,6 +954,9 @@ def micro_html(P):
 def macro_html():
     gdp_main = {"file": "gdp", "series": "AKRQGSP", "calc": "qgrowth", "dec": 1, "suffix": "%", "sign": True}
     gdp_chart = chart("Real GDP, Alaska", "line", [{"file": "gdp", "id": "AKRGSP", "label": "Alaska", "scale": 0.001}], "Billions of chained 2017 dollars. Source: BEA.", dec=0, prefix="$", suffix="B", zero=False, height=200)
+    ca = ca_model()
+    ca_chart = hbar("Current account", [("Goods and services", ca["tb"]), ("Primary income", ca["primary"]), ("Transfers", ca["secondary"]), ("Current account", ca["ca"]), ("Without federal flows", ca["ex_fed"])],
+                    f"Billions of dollars, {ca['d']['year']}. Estimate.", dec=1, prefix="$", suffix="B", highlight=r"^Current account$")
     sub = lambda label, spec: f'<div class="stat" data-spec="{spec_attr(spec)}"><b>—</b><span data-t="{E(label)}">{E(label)}</span></div>'
     return f"""<section id="macro" aria-labelledby="h-macro">
   <div class="sec-head"><h2 id="h-macro">Macro</h2><p>The state as a whole: what it produces, and what it earns from and pays to the outside world.</p></div>
@@ -798,15 +977,15 @@ def macro_html():
     <article class="panel">
       <span class="kick">External balance</span>
       <h3><a href="/current-account/">Current account</a></h3>
-      <div class="headline"><b class="na">—</b><span>Annual balance, estimate · in development</span></div>
-      <div class="chartph">Credits vs. debits, with and without federal flows</div>
+      <div class="headline"><b>{bn(ca["ca"], sign=True)}</b><span>Annual balance, {ca["d"]["year"]} estimate · likely range {bn(ca["lo"], sign=True, dec=0)} to {bn(ca["hi"], sign=True, dec=0)}</span></div>
+      {ca_chart}
       <div class="sub">
-        <div><b class="na">—</b><span>Goods</span></div>
-        <div><b class="na">—</b><span>Services</span></div>
-        <div><b class="na">—</b><span>Primary income</span></div>
-        <div><b class="na">—</b><span>Transfers</span></div>
+        <div class="stat"><b>{bn(ca["tb"], sign=True)}</b><span>Goods &amp; services</span></div>
+        <div class="stat"><b>{bn(ca["primary"], sign=True)}</b><span>Primary income</span></div>
+        <div class="stat"><b>{bn(ca["secondary"], sign=True)}</b><span>Transfers</span></div>
+        <div class="stat"><b>{bn(ca["ex_fed"], sign=True)}</b><span>Without federal flows</span></div>
       </div>
-      <a class="more" href="/current-account/">How it will be built →</a>
+      <a class="more" href="/current-account/">Current account page →</a>
     </article>
   </div>
 </section>"""
