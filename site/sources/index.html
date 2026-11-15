@@ -77,6 +77,16 @@ footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:va
       <dt>Notes</dt><dd>Covers utilities that report to EIA. Some of the smallest village utilities report only to the state's Power Cost Equalization program and are not included. Prices are before Power Cost Equalization credits.</dd>
     </dl>
   </div>
+  <div class="src" id="electricity-plants">
+    <h3>Electricity page: power plant map</h3>
+    <dl>
+      <dt>Shows</dt><dd>Every Alaska power plant of 1 MW or more in operation or on standby, placed by its coordinates, sized by nameplate capacity and colored by the fuel that makes up most of its capacity.</dd>
+      <dt>Source</dt><dd>U.S. Energy Information Administration, <a href="https://www.eia.gov/electricity/data/eia860m/" target="_blank" rel="noopener">Form EIA-860M</a> (Monthly Update to the Annual Electric Generator Report), through the EIA API (electricity/operating-generator-capacity). Alaska outline from the U.S. Census Bureau cartographic boundary files (us-atlas).</dd>
+      <dt>Method</dt><dd>Generators are summed to plants. "Since" is the year the plant's first generator came online. Batteries are shown by their power rating in MW.</dd>
+      <dt>Updates</dt><dd>Monthly, with the site's data refresh.</dd>
+      <dt>Notes</dt><dd>Plants under 1 MW, including most village diesel plants, are not in EIA's survey. The <a href="https://akenergygateway.alaska.edu/" target="_blank" rel="noopener">Alaska Energy Data Gateway</a> covers them.</dd>
+    </dl>
+  </div>
   <div class="src" id="electricity-pce">
     <h3>Electricity page: Power Cost Equalization</h3>
     <dl>
