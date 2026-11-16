@@ -1,4 +1,4 @@
-name: Refresh Cook Inlet gas and Anchorage weather (weekly)
+name: Refresh Cook Inlet gas, Anchorage weather and freight rates (weekly)
 
 # The main refresh runs twice a month. Degree days change daily in winter and AOGCC
 # posts production as operators report, so this lighter job runs every Monday.
@@ -23,12 +23,20 @@ jobs:
         run: |
           pip install --quiet openpyxl
           python3 scripts/fetch_cook_inlet.py
+      - name: Fetch freight rates and rebuild the freight index
+        if: always()
+        run: |
+          pip install --quiet pypdf
+          python3 scripts/fetch_freight.py
+      - name: Rebuild pages
+        if: always()
+        run: python3 scripts/build_pages.py
       - name: Commit any new data
         if: always()
         run: |
           git config user.name "data-bot"
           git config user.email "data-bot@users.noreply.github.com"
-          git add site/data/cook-inlet.json site/data/anchorage-hdd.json
+          git add site/data/cook-inlet.json site/data/anchorage-hdd.json site/data/freight.json site/data/freight-observations.json site/data/status.json site/index.html site/*/index.html
           if git diff --cached --quiet; then
             echo "No changes."
           else

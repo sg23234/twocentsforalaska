@@ -1,0 +1,87 @@
+{
+ "about": "Hand-kept inputs for the freight rate index (scripts/fetch_freight.py). Edit these when a carrier announces a rate increase or the Port of Alaska changes its surcharge. Everything else on the Freight page is collected automatically.",
+ "base_month": "2025-01",
+ "start_month": "2024-01",
+ "weights": {
+  "about": "Shares of each part in the index. Gateway parts are weighted roughly by how freight reaches Southcentral and the Interior; they are judgment calls, not measured tonnage. Change them here and the index is recomputed on the next run.",
+  "gateway": {
+   "ocean": 0.6,
+   "rail": 0.2,
+   "truck": 0.2
+  },
+  "total": {
+   "gateway": 0.75,
+   "lastmile": 0.25
+  }
+ },
+ "tote_gri": {
+  "about": "TOTE Maritime Alaska general rate increases (GRI). Used to carry the current tariff rate back in time, since only recent tariffs are posted. Source: TOTE notifications.",
+  "rows": [
+   {
+    "effective": "2024-11-10",
+    "pct": 7.5,
+    "source": "https://www.adn.com/business-economy/2024/11/24/shipping-fees-for-alaska-bound-products-are-increasing-store-prices-will-barely-rise-but-could-add-up/",
+    "note": "Exact effective date not confirmed; TOTE's GRIs take effect on an early-November Sunday."
+   },
+   {
+    "effective": "2025-11-09",
+    "pct": 5.75,
+    "source": "https://www.totemaritime.com/notification/tote-maritime-alaska-2026-gri-notification/"
+   },
+   {
+    "effective": "2026-11-08",
+    "pct": 6.25,
+    "source": "https://www.totemaritime.com/notification/5047/"
+   }
+  ]
+ },
+ "tote_fsc_since": {
+  "date": "2022-05-22",
+  "about": "TOTE's ocean fuel surcharge did not change between its May 22, 2022 revision and its March 29, 2026 revision (no ocean surcharge notices in between). The oldest posted tariff's surcharge is carried back to this date.",
+  "source": "https://www.totemaritime.com/notification/trade-notification-ocean-fuel-surcharge-revision-effective-may-22-2022/"
+ },
+ "pamp_per_container": {
+  "about": "Port of Alaska Modernization Program surcharge, northbound, per trailer or container (TOTE tariff 101-A, Item 695). Set each January by the Anchorage Assembly.",
+  "rows": [
+   {
+    "effective": "2024-01-01",
+    "value": 9.0,
+    "note": "Estimate: $0.59 per ton at about 15.7 tons per container."
+   },
+   {
+    "effective": "2025-01-01",
+    "value": 79.0,
+    "source": "https://www.totemaritime.com/es/notification/tote-maritime-alaska-2025-port-of-alaska-modernization-surcharge-notification/"
+   },
+   {
+    "effective": "2026-01-01",
+    "value": 126.5,
+    "note": "$8.05 per ton."
+   },
+   {
+    "effective": "2027-01-01",
+    "value": 357.5,
+    "note": "$22.76 per ton.",
+    "source": "https://www.totemaritime.com/notification/2027-pamp-surcharge-notification/"
+   }
+  ]
+ },
+ "hubs": {
+  "BET": "Bethel",
+  "OME": "Nome",
+  "OTZ": "Kotzebue"
+ },
+ "extra_observations": {
+  "about": "Rates read by hand from documents the collector can't find on its own. They are added to the observation log on each run.",
+  "rows": [
+   {
+    "source": "tote",
+    "key": "fsc",
+    "value": 29.5,
+    "effective": "2026-04-26",
+    "url": "https://www.totemaritime.com/wp-content/uploads/STB-TOTE-501-A-Rev-26-Item-295-Filed-04.16.2026-Effective-04.26.2026-Full-Tariff.pdf",
+    "note": "TOTE tariff 501-A Rev 26 (not returned by the site search)."
+   }
+  ]
+ }
+}

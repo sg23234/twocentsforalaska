@@ -1,0 +1,22 @@
+name: Freight backfill (past rates from the Wayback Machine)
+# Run by hand from the Actions tab. Reads archived copies of the Northern Air Cargo and Everts
+# rate pages, adds any rates not yet in site/data/freight-observations.json, and rebuilds the index.
+on:
+  workflow_dispatch: {}
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install --quiet pypdf
+      - run: python3 scripts/fetch_freight.py --backfill || true
+      - run: python3 scripts/build_pages.py
+      - run: |
+          git config user.name "data-bot"; git config user.email "data-bot@users.noreply.github.com"
+          git add site/data site/index.html site/*/index.html
+          git diff --cached --quiet || (git commit -m "Freight backfill $(date -u +%Y-%m-%d)" && git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push)

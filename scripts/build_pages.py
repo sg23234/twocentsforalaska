@@ -299,15 +299,68 @@ def pages():
                   change=f"{(g_now['value'] / g_prev['value'] - 1) * 100:+.1f}% from {g_prev['period']}" if g_now else "",
                   unit="Enstar cost of gas, per Mcf")))
 
-    P.append(dict(slug="freight", group=G, title="Freight rate index", row="Input costs", status="planned",
-        lead="Almost everything sold in Alaska arrives by ship, barge, truck or plane, so shipping costs are built into the price of nearly every good. No public index tracks what it costs to move freight to and within Alaska. This page will build one.",
-        body=[plan(["Container rates from Tacoma to Anchorage from the carriers' published tariffs.",
-                    "Barge rates from Anchorage or Seattle to regional hubs such as Bethel, Nome and Kotzebue.",
-                    "Air freight and bypass mail rates to rural communities.",
-                    "National freight price indexes from the Bureau of Labor Statistics for context.",
-                    "An index (base year = 100) combining these, updated as tariffs change."], "How the index will be built")],
-        notes=["This page is a placeholder. No figures are shown until the index is built."],
-        tile=tile(unit="Seattle–Anchorage")))
+    # Freight rate index: series from data/freight.json (scripts/fetch_freight.py); inputs in data/manual/freight.json.
+    fr = load("freight")
+    fr_status = load("status").get("freight", {})
+    base_lbl = month(fr.get("base_month", "2025-01") + "-01")
+
+    def fr_val(r):
+        v, u = r["value"], r["unit"]
+        return f"{v:g}%" if u == "%" else f"${v:,.0f}" if v >= 100 else f"${v:,.2f}"
+
+    def fr_date(d):
+        y, m, dd = map(int, d.split("-"))
+        return f"{MON[m - 1]} {dd}, {y}"
+
+    fr_rows = [(r["mode"], r["label"], fr_val(r) + ("/lb" if r["unit"] == "$/lb" else ""), fr_date(r["effective"])) for r in fr.get("current", [])]
+    FS = {"file": "freight"}
+    P.append(dict(slug="freight", group=G, title="Freight rate index", row="Input costs", status="live",
+        lead="Almost everything sold in Alaska arrives by ship, barge, truck or plane, so shipping costs are built into the price of nearly every good. No public index tracked what it costs to move freight to and within Alaska, so this page builds one from the carriers' own published rates and fuel surcharges.",
+        stats=[stat("Freight rate index, {date}", f"{base_lbl} = 100", {**FS, "series": "idx:total", "dec": 1}),
+               stat("Change from a year earlier", "Alaska freight rate index", {**FS, "series": "idx:total", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}),
+               stat("Gateway, {date}", f"Lower 48 to Southcentral and Interior · {base_lbl} = 100", {**FS, "series": "idx:gateway", "dec": 1}),
+               stat("Last mile, {date}", f"Air freight to Bethel, Nome, Kotzebue · {base_lbl} = 100", {**FS, "series": "idx:lastmile", "dec": 1}),
+               stat("Lower 48 benchmark, {date}", f"BLS producer prices, same weights · {base_lbl} = 100", {**FS, "series": "bench:total", "dec": 1})],
+        body=[section("The index", f"Monthly, {base_lbl} = 100. The Lower 48 benchmark weights national producer price indexes for ocean, rail, truck and air freight the same way.",
+                      chart("Alaska freight rates vs. the Lower 48", "line", [{**FS, "id": "idx:total", "label": "Alaska"}, {**FS, "id": "bench:total", "label": "Lower 48"}],
+                            "Latest: {date}. Sources: carrier tariffs and surcharge pages; BLS producer price indexes via FRED.", zero=False, dec=0),
+                      chart("Gateway and last mile", "line", [{**FS, "id": "idx:gateway", "label": "Gateway"}, {**FS, "id": "idx:lastmile", "label": "Last mile"}],
+                            "Gateway: ocean (60%), rail (20%), truck (20%). Last mile: Northern Air Cargo and Everts hub rates with the air fuel surcharge.", zero=False, dec=0)),
+              section("What a shipment costs now", "The latest published rate for each route the index tracks, with the date it took effect. Fuel surcharges are added on top of the base rates.",
+                      table("Current published rates", ["Mode", "Rate", "Value", "Effective"], fr_rows,
+                            f"Collected {fr.get('fetched', '')}. Air rates before fuel surcharge and the 6.25% federal air cargo tax. Bypass mail is a postal rate set by law and is shown, not counted in the index.", right=(2,)),
+                      chart("Groceries in one 40-ft trailer, Tacoma to Anchorage", "line", [{**FS, "id": "ocean:container", "label": "Rate + surcharges"}],
+                            "TOTE tariff rate (Item 2300) plus TOTE's ocean fuel surcharge and the Port of Alaska modernization surcharge. Before TOTE's tariffs posted online, the rate is carried back using its announced rate increases.", prefix="$", zero=False)),
+              section("Fuel surcharges", "Carriers adjust these weekly or monthly as fuel prices move. They explain most of the month-to-month change in freight costs.",
+                      chart("Fuel surcharges by mode", "line", [{**FS, "id": "fsc:rail", "label": "Rail"}, {**FS, "id": "fsc:tote", "label": "Ocean"}, {**FS, "id": "fsc:road", "label": "Truck"}, {**FS, "id": "fsc:air", "label": "Air"}],
+                            "Percent added to the base rate. Rail: Alaska Railroad. Ocean: TOTE, Tacoma to Anchorage. Truck (Lower 48 to the Alaska road system) and air (within Alaska): Carlile Transportation's posted surcharges. Latest: {date}.", suffix="%", **{"from": "2018-01-01"}),
+                      chart("Diesel price, West Coast", "line", [{**FS, "id": "diesel:wc", "label": "Diesel"}],
+                            "Monthly average of EIA's weekly retail price, dollars per gallon. Truck and rail surcharges are set from this price or one like it.", prefix="$", dec=2, **{"from": "2018-01-01"})),
+              section("Air freight to rural hubs", "Northern Air Cargo's general rate per pound from Anchorage, 1,000 lb shipments, before fuel surcharge. Earlier years come from archived copies of its rates page.",
+                      chart("Northern Air Cargo hub rates", "line", [{**FS, "id": "rate:nac:BET", "label": "Bethel"}, {**FS, "id": "rate:nac:OME", "label": "Nome"}],
+                            "Dollars per pound. Kotzebue's rate matches Nome's. Latest: {date}.", prefix="$", dec=2)),
+              text("How the index is built", [
+                  "Each part is a delivered price: base rate times one plus the fuel surcharge, plus fixed charges. Ocean is TOTE's Tacoma–Anchorage truckload rate for groceries with TOTE's ocean fuel surcharge and the Port of Alaska modernization surcharge. Rail and truck move with their fuel surcharges. Last mile is the average of Northern Air Cargo's and Everts' 1,000 lb rates to Bethel, Nome and Kotzebue with the in-state air fuel surcharge.",
+                  "Every rate and surcharge the collector sees is saved with the date it took effect, so the index can be rebuilt and checked. Weights and the base month are set in data/manual/freight.json.",
+                  "These are published list prices. Large shippers negotiate contract rates, which move with the same surcharges but start from different base rates."])],
+        notes=["Rail and truck base rates are held constant; only their fuel surcharges move. The Alaska Railroad and Carlile do not post their base-rate history.",
+               "The in-state air surcharge comes from Carlile Transportation's posted history, used as a stand-in because Northern Air Cargo and Everts post only their current surcharge. Their own current surcharges appear in the table above.",
+               "TOTE's ocean surcharge did not change between May 2022 and March 2026, so the level in its oldest posted tariff is used for that whole stretch.",
+               "TOTE posts only recent tariffs. Before November 2026 its rate is carried back using its general rate increases: 6.25% (Nov 2026), 5.75% (Nov 2025) and 7.5% (Nov 2024)."]
+              + fr_status.get("notes", []),
+        sources=[src("TOTE Maritime Alaska, tariffs and notifications", "https://www.totemaritime.com/alaska/tote-alaska-notifications/"),
+                 src("Alaska Railroad, fuel surcharge (customer tools)", "https://www.alaskarailroad.com/freight/customer-tools"),
+                 src("Carlile Transportation, fuel surcharge history", "https://www.carlile.biz/fuel-surcharge-history/"),
+                 src("Northern Air Cargo, rates", "https://www.nac.aero/rates/"),
+                 src("Northern Air Cargo, fuel surcharge", "https://www.nac.aero/fuel-surcharge/"),
+                 src("Everts Air Cargo, rates", "https://evertsair.com/cargo/rates"),
+                 src("Alaska Air Cargo, rates", "https://public.alaskacargo.com/services/rates"),
+                 src("USPS Notice 123 (Alaska Bypass Service)", "https://pe.usps.com/text/dmm300/Notice123.pdf"),
+                 src("Port of Alaska, modernization program surcharge", "https://www.portofalaska.com/port-of-alaska-modernization-program/"),
+                 src("BLS producer price indexes via FRED (deep sea, rail, truck, air freight)", "https://fred.stlouisfed.org/series/PCU483111483111"),
+                 src("EIA West Coast diesel price via FRED", "https://fred.stlouisfed.org/series/GASDESWCW"),
+                 src("Internet Archive Wayback Machine (past rate pages)", "https://web.archive.org/")],
+        tile=tile({**FS, "series": "idx:total", "dec": 1}, {**FS, "series": "idx:total", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True, "after": " y/y"}, unit=f"index, {base_lbl} = 100")))
 
     P.append(dict(slug="health-premium", group=G, title="Employer health premium", row="Input costs", status="static", front=False,
         lead="For employers, health insurance is part of the cost of every job. Alaska's premiums are among the highest in the country, which makes hiring here more expensive than the wage alone suggests.",

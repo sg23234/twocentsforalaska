@@ -19,6 +19,7 @@ site/                        ← everything the public sees (Cloudflare Pages se
 scripts/
   fetch_data.py              ← pulls live series (FRED, BLS, Alaska DOLWD, EIA) into site/data/
   write_summaries.py         ← drafts each page's summary with Claude and checks its numbers
+  fetch_freight.py           ← collects carrier tariffs and fuel surcharges, logs every change, builds the freight index
   build_pages.py             ← writes every box's page, the front-page matrix and /sources/ from the PAGES list
 .github/workflows/
   refresh-data.yml           ← runs both scripts on the 2nd and 16th, and whenever scripts,
@@ -44,6 +45,7 @@ The loop: **GitHub Action runs the scripts → new JSON committed → Cloudflare
 | Energy | Average electricity price, all sectors plus commercial and residential (EIA API; front-page tile) | All charts |
 | Connectivity | — | All charts |
 | Education | — (no charts) | — |
+| Freight rate index | Carrier tariffs and fuel surcharges (TOTE, Alaska Railroad, Carlile, Northern Air Cargo, Everts, Alaska Air Cargo), USPS bypass price, BLS freight PPIs and West Coast diesel (FRED) | TOTE rate increases, Port of Alaska surcharge, index weights and base month (`manual/freight.json`) |
 
 Payroll jobs come from DOLWD's own CSV, not FRED: for recent months the federal (BLS) numbers on FRED differ from DOLWD's monthly estimates, and DOLWD's are the ones Alaska news reports.
 
@@ -102,6 +104,15 @@ Every box on the front page links to its own page. They are built from the `PAGE
 ### Current account
 
 The Current account page is an estimate built line by line from `site/data/manual/current-account.json`: each line has a value, a low-high range, a confidence grade, how it was estimated and its source, all in billions of dollars. `build_pages.py` adds the lines up, works out the goods-and-services balance as GDP minus household consumption, private investment and state and local government spending, and combines the ranges. Change a number in the JSON and rebuild; the page and the front-page panel follow.
+
+### Freight rate index
+
+`scripts/fetch_freight.py` reads each carrier's published rates and fuel surcharges and saves every value it sees, with the date it took effect, to `site/data/freight-observations.json`. That log is never overwritten, so the index can always be rebuilt and checked. From the log it builds `site/data/freight.json`: the monthly index (base month = 100), its gateway and last-mile parts, a Lower 48 benchmark from BLS producer price indexes, fuel-surcharge history and hub air rates.
+
+- Runs weekly (Mondays, with the gas and weather job) and in the twice-monthly refresh. Needs `pypdf`, which the workflows install.
+- **When TOTE announces a rate increase** (usually October, effective early November) or the Port of Alaska sets next year's surcharge, add a row to `site/data/manual/freight.json`. The collector picks up TOTE's new tariff on its own; the manual rows carry rates back in time.
+- **Past rates:** Actions → *Freight backfill* → Run workflow reads archived copies of the Northern Air Cargo and Everts rate pages from the Wayback Machine. It's slow (20–40 minutes) and only adds what's missing, so run it rarely.
+- To rebuild the index from the log without fetching (after changing weights, say): `python3 scripts/fetch_freight.py --rebuild`.
 
 ## Day-to-day
 
