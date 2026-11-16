@@ -417,7 +417,7 @@ def pages():
                             [[r[0], fnum(r[1]), r[2] or "—"] for r in rm.get("rows", [])]
                             + ([[f"12 months to {rm['ltm']['through']}", fnum(rm["ltm"]["landings"]), rm["ltm"]["change"]]] if rm.get("ltm") else []),
                             f"International freighters only; the trade press hasn't reported every month. Source: {rm.get('source', '')}.", right=(1, 2))),
-              section("Jet fuel", "Refueling is the main reason freighters stop in Anchorage, so jet fuel sold is the most direct gauge of that business. Statewide sales are dominated by ANC; the state now reports ANC's own figure for recent fiscal years.",
+              section("Jet fuel", "Most cargo planes crossing the Pacific stop in Anchorage for one reason: to refuel. A full 747 freighter can't fly from Asia to the eastern U.S. with a full load of cargo, so it lands at ANC halfway, fills up, and keeps going. That makes jet fuel the clearest measure of ANC's cargo business. More fuel pumped means more planes choosing to stop here.",
                       vbars(jf.get("label", "Jet fuel"), jf_a.get("years", []) + jf_n.get("years", []), jf_a.get("values", []) + jf_n.get("values", []),
                             f"Blue: {jf_a.get('source', '')} Orange: {jf_n.get('source', '')}. The two series measure different things (all of Alaska by calendar year, ANC alone by fiscal year), so the step from 2020 to fiscal 2023 isn't a like-for-like change.",
                             dec=0, show_values=True, bar_colors=[BLUE] * len(jf_a.get("values", [])) + [ORANGE] * len(jf_n.get("values", [])),
