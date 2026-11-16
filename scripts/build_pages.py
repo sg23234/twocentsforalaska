@@ -107,8 +107,9 @@ def hbar(title, rows, caption="", dec=0, prefix="", suffix="", highlight=None, l
     return f'<figure class="chart"><h3>{E(title)}</h3><div class="plot">{s}</div><figcaption>{E(caption)}</figcaption></figure>'
 
 
-def vbars(title, labels, values, caption="", dec=0, prefix="", suffix="", partial_last=False, colors=None, show_values=None):
-    """Static vertical bars (one or two series). values: list or list of (name, list)."""
+def vbars(title, labels, values, caption="", dec=0, prefix="", suffix="", partial_last=False, colors=None, show_values=None, bar_colors=None, legend_items=None):
+    """Static vertical bars (one or two series). values: list or list of (name, list).
+    bar_colors: optional per-bar fill (single series); legend_items: [(name, color)] for a custom legend."""
     multi = isinstance(values[0], tuple)
     sers = values if multi else [("", values)]
     allv = [v for _, vs in sers for v in vs if v is not None]
@@ -132,13 +133,17 @@ def vbars(title, labels, values, caption="", dec=0, prefix="", suffix="", partia
             x = cx - bw * k / 2 + j * bw
             top = Y(max(v, 0))
             op = "0.5" if partial_last and i == n - 1 else "1"
-            s += f'<rect x="{x:.1f}" y="{top:.1f}" width="{bw - 2:.1f}" height="{max(abs(Y(v) - Y(0)), .5):.1f}" fill="{cols[j % len(cols)]}" opacity="{op}"></rect>'
+            s += f'<rect x="{x:.1f}" y="{top:.1f}" width="{bw - 2:.1f}" height="{max(abs(Y(v) - Y(0)), .5):.1f}" fill="{bar_colors[i] if bar_colors else cols[j % len(cols)]}" opacity="{op}"></rect>'
             if (n * k <= 16) if show_values is None else show_values:
                 s += f'<text x="{x + bw / 2 - 1:.1f}" y="{(Y(v) + 13) if v < 0 else top - 5:.1f}" text-anchor="middle" font-size="{11 if n * k <= 16 else 10}" font-weight="600" fill="{INK}">{E(fnum(v, dec, prefix, suffix))}</text>'
-        s += f'<text x="{cx:.1f}" y="{H - 9}" text-anchor="middle" font-size="11" fill="{MUTED}">{E(lab)}{"*" if partial_last and i == n - 1 else ""}</text>'
+        if n > 22:  # crowded: shorten 2005 and FY2005 to '05
+            lab = ("’" + lab[-2:]) if (lab.isdigit() and len(lab) == 4) else (("\u2019" + lab[-2:]) if lab.startswith("FY") and lab[2:].isdigit() else lab)
+        s += f'<text x="{cx:.1f}" y="{H - 9}" text-anchor="middle" font-size="{10 if n > 22 else 11}" fill="{MUTED}">{E(lab)}{"*" if partial_last and i == n - 1 else ""}</text>'
     s += "</svg>"
     legend = ""
-    if multi:
+    if legend_items:
+        legend = '<div class="legend">' + "".join(f'<span><i style="background:{c}"></i>{E(nm)}</span>' for nm, c in legend_items) + "</div>"
+    elif multi:
         legend = '<div class="legend">' + "".join(f'<span><i style="background:{cols[j % len(cols)]}"></i>{E(nm)}</span>' for j, (nm, _) in enumerate(sers)) + "</div>"
     return f'<figure class="chart"><h3>{E(title)}</h3><div class="plot">{s}{legend}</div><figcaption>{E(caption)}</figcaption></figure>'
 
@@ -371,6 +376,8 @@ def pages():
     h_p, h_a, h_f = hy.get("periods", []), hy.get("anc", []), hy.get("fai", [])
     h2 = hy.get("second_half", {})
     l_y, l_v = lw.get("years", []), lw.get("values", [])
+    jf = ac.get("jet_fuel", {})
+    jf_a, jf_n = jf.get("alaska", {}), jf.get("anc", {})
     pct = lambda a, b: (a / b - 1) * 100 if a and b else None
     h_chg = pct(h_a[-1], h_a[0]) if len(h_a) == 2 else None
     jobs_spec = {"file": "air-cargo", "series": "SMU02000004348100001", "scale": 1000, "dec": 0}
@@ -386,14 +393,14 @@ def pages():
         body=[section("Cargo handled each year", "Freight and mail loaded, unloaded or passing through ANC, in millions of metric tons. Anchorage counts transit freight that never leaves the plane during a refueling stop, which most airports don't.",
                       vbars(ton.get("label", "Cargo handled at ANC"), t_y, t_v,
                             f"{ton.get('as_of', '')}. Source: {ton.get('source', '')}. World rank in {t_y[-1] if t_y else ''}: #{t_r[-1] if t_r else ''}. Next: {ton.get('next_update', '')}.", dec=2, show_values=True),
-                      two(vbars(lw.get("label", "All-cargo landed weight"), l_y, l_v,
-                                f"Source: {lw.get('source', '')}. ANC ranked #2 behind Memphis through 2020 and #1 since 2021.", dec=1),
-                          table("This year and last: cargo tonnage by half-year", ["Period", "ANC, metric tons", "Change"],
+                      vbars(lw.get("label", "All-cargo landed weight"), l_y, l_v,
+                            f"Source: {lw.get('source', '')}. ANC ranked #1 in the U.S. through 2007, #2 behind Memphis from 2008 to 2020, and #1 again since 2021.", dec=1, show_values=True),
+                      table("This year and last: cargo tonnage by half-year", ["Period", "ANC, metric tons", "Change"],
                                 [[h2.get("periods", ["", ""])[0], fnum(h2.get("anc", [None])[0]), ""],
                                  [h2.get("periods", ["", ""])[-1], fnum(h2.get("anc", [None])[-1]), fnum(pct(h2.get("anc", [0, 0])[-1], h2.get("anc", [0, 0])[0]), 1, suffix="%", sign=True)],
                                  [h_p[0] if h_p else "", fnum(h_a[0] if h_a else None), ""],
                                  [h_p[-1] if h_p else "", fnum(h_a[-1] if h_a else None), fnum(h_chg, 1, suffix="%", sign=True)]] if h_a and h2 else [],
-                                f"Source: {hy.get('source', '')}; {h2.get('source', '')}. Fairbanks, ANC's backup airport, handled {fnum(h_f[-1] if h_f else None)} metric tons in {h_p[-1] if h_p else ''}, up from {fnum(h_f[0] if h_f else None)}.", right=(1, 2)))),
+                                f"Source: {hy.get('source', '')}; {h2.get('source', '')}. Fairbanks, ANC's backup airport, handled {fnum(h_f[-1] if h_f else None)} metric tons in {h_p[-1] if h_p else ''}, up from {fnum(h_f[0] if h_f else None)}.", right=(1, 2))),
               section("How ANC compares", "Two ways to rank cargo airports: tons of freight and mail handled (ACI, worldwide) and the landed weight of cargo planes (FAA, U.S. only).",
                       two(hbar(wt.get("label", "World's busiest cargo airports"), [tuple(r) for r in wt.get("rows", [])],
                                f"Source: {wt.get('source', '')}.", dec=2, highlight="Anchorage", lw=150),
@@ -410,6 +417,11 @@ def pages():
                             [[r[0], fnum(r[1]), r[2] or "—"] for r in rm.get("rows", [])]
                             + ([[f"12 months to {rm['ltm']['through']}", fnum(rm["ltm"]["landings"]), rm["ltm"]["change"]]] if rm.get("ltm") else []),
                             f"International freighters only; the trade press hasn't reported every month. Source: {rm.get('source', '')}.", right=(1, 2))),
+              section("Jet fuel", "Refueling is the main reason freighters stop in Anchorage, so jet fuel sold is the most direct gauge of that business. Statewide sales are dominated by ANC; the state now reports ANC's own figure for recent fiscal years.",
+                      vbars(jf.get("label", "Jet fuel"), jf_a.get("years", []) + jf_n.get("years", []), jf_a.get("values", []) + jf_n.get("values", []),
+                            f"Blue: {jf_a.get('source', '')} Orange: {jf_n.get('source', '')}. The two series measure different things (all of Alaska by calendar year, ANC alone by fiscal year), so the step from 2020 to fiscal 2023 isn't a like-for-like change.",
+                            dec=0, show_values=True, bar_colors=[BLUE] * len(jf_a.get("values", [])) + [ORANGE] * len(jf_n.get("values", [])),
+                            legend_items=[("Sold in Alaska, calendar year (EIA)", BLUE), ("Pumped at ANC, fiscal year (state)", ORANGE)]) if jf else ""),
               section("What passes through", f"In 2021, the latest year studied in detail, {fl.get('transit_mt', '')} million metric tons stayed aboard during refueling stops and {fl.get('onoff_mt', '')} million were loaded or unloaded. About {fl.get('asia_to_us_share', '')}% of Asia-to-U.S. air cargo went through Anchorage, and {fl.get('us_to_asia_share', '')}% of U.S.-to-Asia.",
                       two(table("Where freighters to ANC came from, 2021", ["City", "Metric tons", "Flights"],
                                 [[r[0], fnum(r[1]), fnum(r[2])] for r in fl.get("origins", [])], f"Top Asian origins. Source: {fl.get('source', '')}.", right=(1, 2)),
@@ -432,9 +444,8 @@ def pages():
                       text("Jet fuel", ["Freighters stop in Anchorage mainly to refuel, and more than 70% of the airport's jet fuel arrives by tanker from Asian refineries. In March 2026, with the Strait of Hormuz disrupted and China limiting refined fuel exports, international cargo landings fell 8% from a year earlier, the first real monthly decline in over a year. By August they were 5% above a year earlier."]),
                       text("Room to park", ["Heavy snowstorms have shown how tight wide-body parking is at ANC: carriers with reserved spots keep landing, others divert. Private projects on airport land aim to add capacity: NorthLink Aviation's 120-acre South Airpark campus (a 55-year lease, with up to 11 drive-through hardstands planned), a cold-storage warehouse and hardstands by Alaska Cold Cargo Storage on the North Airpark, and six hardstands proposed by Alaska Airport Partners on the West Airpark. The state also lists $126 million for nine more airport-run hardstands."]),
                       text("Fairbanks as the backup", [f"Fairbanks International, about 260 miles north, is ANC's main diversion airport. Its cargo tonnage nearly tripled in the first half of 2026, from {fnum(h_f[0] if h_f else None)} to {fnum(h_f[-1] if h_f else None)} metric tons, as carriers used it during storms and summer construction at ANC."])),
-              plan(["Monthly cargo tonnage and landings from the state airport system's monthly reports, once a regularly published table is found.",
-                    "Jet fuel sold at ANC (fuel flowage), the clearest measure of the refueling business.",
-                    "FAA landed weight back to 2000, and a comparison with trans-Pacific air freight rates."])],
+              plan(["ANC jet fuel by year before fiscal 2023, if the state publishes it, to join the two fuel series.",
+                    "A comparison with trans-Pacific air freight rates."])],
         notes=["Tonnage counts freight and mail loaded, unloaded or in transit. Anchorage is the only top-10 airport whose count includes transit freight that stays aboard; in 2021 that was about 46% of its total, so ANC's world rank overstates how much freight is handled on the ground.",
                "Landed weight is the certificated maximum landing weight of the all-cargo aircraft that land, summed over the year. It measures flights, not freight, and is what the FAA uses to share out cargo grants to airports.",
                "ACI revises earlier years; the series here uses each year's figure as published with that year's ranking. The 2014 figure is from Air Cargo World. 2025 is preliminary.",
@@ -448,6 +459,10 @@ def pages():
                  src("Alaska International Airport System, Overview of ANC Air Cargo Activity 2016–2024", "https://dot.alaska.gov/aias/assets/Overview-of-ANC-Air-Cargo-Activity-2016-2024.pdf"),
                  src("McKinley Research Group for AEDC, ANC Economic Impact Study (2023)", "https://dot.alaska.gov/aias/assets/AEDC-ANC-Economic-Impact-Report.pdf"),
                  src("Ted Stevens Anchorage International Airport, facts", "https://dot.alaska.gov/anc/passengers-facts.shtml"),
+                 src("EIA, Alaska kerosene-type jet fuel prime supplier sales (C500050021)", "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=C500050021&f=A"),
+                 src("Alaska DOT&PF, Sustainable Aviation Fuel (ANC jet fuel uplift)", "https://dot.alaska.gov/comm/saf/"),
+                 src("FHWA, Freight Facts and Figures 2010, Table 3-10 (landed weight 2000–2008)", "https://ops.fhwa.dot.gov/freight/freight_analysis/nat_freight_stats/docs/10factsfigures/table3_10hist.htm"),
+                 src("FHWA, Freight Facts and Figures 2013, Table 3-7 (landed weight 2009–2012)", "https://ops.fhwa.dot.gov/freight/freight_analysis/nat_freight_stats/docs/13factsfigures/table3_07.htm"),
                  src("FRED, Air transportation jobs in Alaska (SMU02000004348100001)", "https://fred.stlouisfed.org/series/SMU02000004348100001"),
                  src("STAT Times, Freighter landings rise 5% at ANC in August (Sep 2026)", "https://www.stattimes.com/aviation/freighter-landings-rise-5-at-anc-in-august-1360616"),
                  src("The Loadstar, Atlas Air trims Anchorage operations as Fairbanks emerges as fallback", "https://theloadstar.com/atlas-air-trims-anchorage-operations-as-fairbanks-emerges-as-fallback/"),
