@@ -304,7 +304,7 @@ def pages():
         notes=["This page is a placeholder. No figures are shown until the index is built."],
         tile=tile(unit="Seattle–Anchorage")))
 
-    P.append(dict(slug="health-premium", group=G, title="Employer health premium", row="Input costs", status="static",
+    P.append(dict(slug="health-premium", group=G, title="Employer health premium", row="Input costs", status="static", front=False,
         lead="For employers, health insurance is part of the cost of every job. Alaska's premiums are among the highest in the country, which makes hiring here more expensive than the wage alone suggests.",
         stats=[stat("Average single-coverage premium, Alaska", "Employer and employee share · 2025", value="$10,630"),
                stat("United States", "Same measure · 2025", value="$9,025"),
@@ -322,7 +322,7 @@ def pages():
                  src("AHRQ, Medical Expenditure Panel Survey, Insurance Component", "https://meps.ahrq.gov/mepsweb/data_stats/quick_tables_search.jsp?component=2&subcomponent=2")],
         tile=tile(value="$10,630", change="U.S. $9,025", unit="single coverage, 2025")))
 
-    P.append(dict(slug="commercial-lease", group=G, title="Commercial lease rate", row="Input costs", status="planned",
+    P.append(dict(slug="commercial-lease", group=G, title="Commercial lease rate", row="Input costs", status="planned", front=False,
         lead="Rent for offices, shops and warehouses is a fixed cost for most businesses. This page will track asking rents and vacancy for commercial space in Anchorage and the Mat-Su.",
         body=[plan(["Asking rent per square foot and vacancy for office, retail and industrial space, from commercial real estate market reports.",
                     "Anchorage and Mat-Su separately, with Fairbanks and Juneau where reports exist.",
@@ -922,7 +922,7 @@ def tile_html(p):
 def micro_html(P):
     rows = []
     for row, intro in ROW_INTRO.items():
-        tiles = "".join(tile_html(p) for p in P if p.get("row") == row)
+        tiles = "".join(tile_html(p) for p in P if p.get("row") == row and p.get("front", True))
         rows.append(f'<div class="row"><div class="row-head"><h3>{E(row)}</h3><span>{E(intro)}</span></div><div class="tiles">{tiles}</div></div>')
     return ('<section id="micro" aria-labelledby="h-micro">\n  <div class="sec-head"><h2 id="h-micro">Micro</h2>'
             '<p>The prices, volumes and decisions that sit underneath the headline numbers.</p></div>\n'
