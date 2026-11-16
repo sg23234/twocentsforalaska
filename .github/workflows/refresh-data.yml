@@ -57,6 +57,13 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: python3 scripts/fetch_plant_changes.py
 
+      - name: Fetch freight rates and rebuild the freight index
+        id: freight
+        continue-on-error: true
+        run: |
+          pip install --quiet pypdf
+          python3 scripts/fetch_freight.py
+
       - name: Refresh the Electricity page's backup data
         continue-on-error: true
         run: python3 scripts/electricity_snapshot.py
@@ -86,7 +93,7 @@ jobs:
           fi
 
       - name: Report failures
-        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.cookinlet.outcome == 'failure' || steps.summaries.outcome == 'failure'
+        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.cookinlet.outcome == 'failure' || steps.freight.outcome == 'failure' || steps.summaries.outcome == 'failure'
         run: |
-          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Cook Inlet: ${{ steps.cookinlet.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
+          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Cook Inlet: ${{ steps.cookinlet.outcome }}. Freight: ${{ steps.freight.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
           exit 1
