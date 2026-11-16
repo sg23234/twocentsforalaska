@@ -18,6 +18,10 @@ Sources
           (County Business Patterns for employers, Nonemployer Statistics for
           owner-operators). Used for food trucks (NAICS 722330). No key needed;
           add one as the CENSUS_API_KEY secret if requests are ever refused.
+  BDS   - the Census Bureau's Business Dynamics Statistics, read from its
+          published CSV tables (no key). Annual firm startups, deaths and
+          establishment entry for Alaska and the U.S. since 1978, plus entry
+          by industry. Firm entry rate = age-0 firms / all firms.
 
 Standard library only, so GitHub Actions can run it without installing anything.
 
@@ -179,6 +183,79 @@ DASHBOARDS = {
         "cbp-US:ESTAB": s("Mobile food services establishments with employees, United States", "establishments", "annual", "level", optional=True),
         "nonemp-US:NESTAB": s("Mobile food services businesses without employees, United States", "businesses", "annual", "level", optional=True),
     }},
+    # Business Dynamics Statistics (Census), annual, keyed "<measure>-<AK|US>".
+    # Sector rows ("SEC<code>:<measure>-<geo>") feed the industry table on /firm-entry/.
+    "firm-dynamics": {"source": "bds", "soft": True, "series": {
+        "FIRM_ENTRY_RATE-AK": s("Firm entry rate (new employer firms as a share of all firms), Alaska", "percent", "annual", "rate"),
+        "FIRM_ENTRY_RATE-US": s("Firm entry rate (new employer firms as a share of all firms), United States", "percent", "annual", "rate"),
+        "STARTUPS-AK": s("New employer firms (age 0), Alaska", "firms", "annual", "flow"),
+        "STARTUPS-US": s("New employer firms (age 0), United States", "firms", "annual", "flow"),
+        "FIRMS-AK": s("Employer firms, Alaska", "firms", "annual", "level"),
+        "FIRMS-US": s("Employer firms, United States", "firms", "annual", "level"),
+        "STARTUP_EMP-AK": s("Employment at new (age 0) firms, Alaska, March", "jobs", "annual", "level", optional=True),
+        "STARTUP_EMP_SHARE-AK": s("Employment at new (age 0) firms as a share of all employment, Alaska", "percent", "annual", "pct", optional=True),
+        "STARTUP_EMP_SHARE-US": s("Employment at new (age 0) firms as a share of all employment, United States", "percent", "annual", "pct"),
+        "ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Alaska", "percent", "annual", "rate"),
+        "ESTAB_ENTRY_RATE-US": s("Establishment entry rate, United States", "percent", "annual", "rate"),
+        "FIRM_EXIT_RATE-AK": s("Firm exit rate (firm deaths as a share of all firms), Alaska", "percent", "annual", "rate", optional=True),
+        "FIRM_EXIT_RATE-US": s("Firm exit rate (firm deaths as a share of all firms), United States", "percent", "annual", "rate", optional=True),
+        "YOUNG_EMP_SHARE-AK": s("Employment at firms aged 0-5 as a share of all employment, Alaska", "percent", "annual", "pct", optional=True),
+        "YOUNG_EMP_SHARE-US": s("Employment at firms aged 0-5 as a share of all employment, United States", "percent", "annual", "pct", optional=True),
+        "SEC11:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Agriculture, forestry, fishing, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC11:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Agriculture, forestry, fishing, United States", "percent", "annual", "rate", optional=True),
+        "SEC11:ESTABS-AK": s("Establishments, Agriculture, forestry, fishing, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC21:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Mining, oil and gas, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC21:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Mining, oil and gas, United States", "percent", "annual", "rate", optional=True),
+        "SEC21:ESTABS-AK": s("Establishments, Mining, oil and gas, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC22:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Utilities, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC22:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Utilities, United States", "percent", "annual", "rate", optional=True),
+        "SEC22:ESTABS-AK": s("Establishments, Utilities, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC23:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Construction, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC23:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Construction, United States", "percent", "annual", "rate", optional=True),
+        "SEC23:ESTABS-AK": s("Establishments, Construction, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC31-33:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Manufacturing, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC31-33:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Manufacturing, United States", "percent", "annual", "rate", optional=True),
+        "SEC31-33:ESTABS-AK": s("Establishments, Manufacturing, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC42:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Wholesale trade, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC42:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Wholesale trade, United States", "percent", "annual", "rate", optional=True),
+        "SEC42:ESTABS-AK": s("Establishments, Wholesale trade, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC44-45:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Retail trade, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC44-45:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Retail trade, United States", "percent", "annual", "rate", optional=True),
+        "SEC44-45:ESTABS-AK": s("Establishments, Retail trade, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC48-49:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Transportation and warehousing, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC48-49:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Transportation and warehousing, United States", "percent", "annual", "rate", optional=True),
+        "SEC48-49:ESTABS-AK": s("Establishments, Transportation and warehousing, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC51:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Information, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC51:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Information, United States", "percent", "annual", "rate", optional=True),
+        "SEC51:ESTABS-AK": s("Establishments, Information, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC52:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Finance and insurance, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC52:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Finance and insurance, United States", "percent", "annual", "rate", optional=True),
+        "SEC52:ESTABS-AK": s("Establishments, Finance and insurance, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC53:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Real estate, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC53:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Real estate, United States", "percent", "annual", "rate", optional=True),
+        "SEC53:ESTABS-AK": s("Establishments, Real estate, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC54:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Professional services, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC54:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Professional services, United States", "percent", "annual", "rate", optional=True),
+        "SEC54:ESTABS-AK": s("Establishments, Professional services, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC56:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Administrative and support, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC56:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Administrative and support, United States", "percent", "annual", "rate", optional=True),
+        "SEC56:ESTABS-AK": s("Establishments, Administrative and support, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC61:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Education, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC61:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Education, United States", "percent", "annual", "rate", optional=True),
+        "SEC61:ESTABS-AK": s("Establishments, Education, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC62:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Health care and social assistance, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC62:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Health care and social assistance, United States", "percent", "annual", "rate", optional=True),
+        "SEC62:ESTABS-AK": s("Establishments, Health care and social assistance, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC71:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Arts and recreation, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC71:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Arts and recreation, United States", "percent", "annual", "rate", optional=True),
+        "SEC71:ESTABS-AK": s("Establishments, Arts and recreation, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC72:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Accommodation and food, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC72:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Accommodation and food, United States", "percent", "annual", "rate", optional=True),
+        "SEC72:ESTABS-AK": s("Establishments, Accommodation and food, Alaska", "establishments", "annual", "level", optional=True),
+        "SEC81:ESTAB_ENTRY_RATE-AK": s("Establishment entry rate, Other services, Alaska", "percent", "annual", "rate", optional=True),
+        "SEC81:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Other services, United States", "percent", "annual", "rate", optional=True),
+        "SEC81:ESTABS-AK": s("Establishments, Other services, Alaska", "establishments", "annual", "level", optional=True),
+    }},
     "spending": {"source": "dolwd", "soft": True, "series": {
         "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
         "Government": s("Payroll jobs, government", "jobs", "monthly", "level"),
@@ -194,6 +271,7 @@ SOURCE_NAMES = {
     "eia": "U.S. Energy Information Administration, Electric Power Monthly (retail sales)",
     "eia_gas": "U.S. Energy Information Administration, Natural Gas Monthly (prices by state)",
     "census": "U.S. Census Bureau, County Business Patterns and Nonemployer Statistics (data API)",
+    "bds": "U.S. Census Bureau, Business Dynamics Statistics (published CSV tables)",
     "dolwd": "Alaska Department of Labor and Workforce Development, Current Employment Statistics",
 }
 
@@ -438,6 +516,110 @@ def fetch_census(series_ids, naics):
     return out
 
 
+# ---------- Census Business Dynamics Statistics ----------
+
+BDS_URL = "https://www2.census.gov/programs-surveys/bds/tables/time-series/{v}/bds{v}{tab}.csv"
+
+
+def bds_table(tab, tries=2):
+    """Rows of one BDS table (tab: '' economy-wide, '_st' by state, '_fa' by firm age, ...),
+    from the newest vintage published. Returns (vintage, rows)."""
+    for v in range(date.today().year - 1, 2021, -1):
+        url = BDS_URL.format(v=v, tab=tab)
+        for attempt in range(tries):
+            try:
+                with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
+                    text = r.read().decode("utf-8-sig", errors="replace")
+                rows = [{k.strip().lower(): (x or "").strip() for k, x in row.items() if k} for row in csv.DictReader(io.StringIO(text))]
+                if rows:
+                    need = {"year", "firms", "emp"} | ({"st"} if "_st" in tab else set()) | ({"fage"} if "fa" in tab else set()) | ({"sector"} if "sec" in tab else set())
+                    if not need <= set(rows[0]):
+                        raise ValueError(f"BDS bds{v}{tab}.csv columns changed; has {sorted(rows[0])[:25]}")
+                    return v, rows
+                break
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    break               # this vintage isn't out yet; try the one before
+                if attempt == tries - 1:
+                    raise RuntimeError(f"BDS {url}: HTTP {e.code}") from e
+            except Exception as e:
+                if attempt == tries - 1:
+                    raise RuntimeError(f"BDS {url}: {type(e).__name__}: {e}") from e
+            time.sleep(5)
+    raise RuntimeError(f"BDS table bds<vintage>{tab}.csv not found for any vintage")
+
+
+def num(x):
+    """BDS marks withheld cells with letters (D, S, X, N); those come back None."""
+    try:
+        return float(x.replace(",", ""))
+    except (AttributeError, ValueError):
+        return None
+
+
+def is_ak(row):
+    return row.get("st", "").lstrip("0") == "2"
+
+
+def fetch_bds(series_ids):
+    """Firm entry, exit and establishment entry for Alaska and the U.S.
+    Entry rate = age-0 firms / all firms (the BDS 'startup rate'); exit rate =
+    firm deaths / all firms; establishment entry rate as published."""
+    acc = {}                                # sid -> {year: value}
+
+    def put(sid, year, v):
+        if v is not None and sid in series_ids:
+            acc.setdefault(sid, {})[f"{int(year)}-01-01"] = v
+
+    totals = {}                             # (geo, year) -> row
+    vint, us = bds_table("")
+    _, st = bds_table("_st")
+    for geo, rows in (("US", us), ("AK", [r for r in st if is_ak(r)])):
+        for r in rows:
+            totals[(geo, r["year"])] = r
+            put(f"FIRMS-{geo}", r["year"], num(r.get("firms")))
+            put(f"ESTAB_ENTRY_RATE-{geo}", r["year"], num(r.get("estabs_entry_rate")))
+            f, d = num(r.get("firms")), num(r.get("firmdeath_firms"))
+            if f and d is not None:
+                put(f"FIRM_EXIT_RATE-{geo}", r["year"], 100 * d / f)
+
+    _, us_fa = bds_table("_fa")
+    _, st_fa = bds_table("_st_fa")
+    for geo, rows in (("US", us_fa), ("AK", [r for r in st_fa if is_ak(r)])):
+        young = {}
+        for r in rows:
+            age = r.get("fage", "").lower()
+            y = r["year"]
+            emp = num(r.get("emp"))
+            if age[:2] in ("a)", "b)", "c)", "d)", "e)", "f)"):   # ages 0 through 5
+                young.setdefault(y, []).append(emp)
+            if not age.startswith("a)"):
+                continue
+            tot = totals.get((geo, y), {})
+            firms, all_firms, all_emp = num(r.get("firms")), num(tot.get("firms")), num(tot.get("emp"))
+            put(f"STARTUPS-{geo}", y, firms)
+            put(f"STARTUP_EMP-{geo}", y, emp)
+            if firms is not None and all_firms:
+                put(f"FIRM_ENTRY_RATE-{geo}", y, 100 * firms / all_firms)
+            if emp is not None and all_emp:
+                put(f"STARTUP_EMP_SHARE-{geo}", y, 100 * emp / all_emp)
+        for y, vals in young.items():
+            all_emp = num(totals.get((geo, y), {}).get("emp"))
+            if len(vals) == 6 and None not in vals and all_emp:
+                put(f"YOUNG_EMP_SHARE-{geo}", y, 100 * sum(vals) / all_emp)
+
+    _, us_sec = bds_table("_sec")
+    _, st_sec = bds_table("_st_sec")
+    for geo, rows in (("US", us_sec), ("AK", [r for r in st_sec if is_ak(r)])):
+        for r in rows:
+            code = r.get("sector", "")
+            put(f"SEC{code}:ESTAB_ENTRY_RATE-{geo}", r["year"], num(r.get("estabs_entry_rate")))
+            put(f"SEC{code}:ESTABS-{geo}", r["year"], num(r.get("estabs")))
+
+    print(f"  BDS vintage {vint}")
+    return {sid: {"dates": sorted(o), "values": [o[d] for d in sorted(o)], "vintage": vint} for sid, o in acc.items()}
+
+
 # ---------- Alaska DOLWD ----------
 
 MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august",
@@ -504,6 +686,8 @@ def build(slug, cfg):
         got = fetch_eia_gas(set(meta))
     elif cfg["source"] == "census":
         got = fetch_census(set(meta), cfg["naics"])
+    elif cfg["source"] == "bds":
+        got = fetch_bds(set(meta))
     else:
         got = {}
         for sid, m in meta.items():
