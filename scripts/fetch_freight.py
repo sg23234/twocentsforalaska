@@ -570,6 +570,17 @@ def build(log, fred, manual, status):
                 S[f"rate:{src}:{code}"] = ser(f"{nm}, Anchorage to {city}, 1,000 lb", "dollars per pound", "monthly", "rate",
                                               [(m + "-01", step_at(h, mid(m))) for m in months(h[0][0][:7], last_m)], nm)
 
+    # One 1,000 lb pallet, Anchorage to Bethel, Northern Air Cargo: base rate x (1 + fuel surcharge) x federal tax.
+    # NAC posts only its current surcharge; earlier months use Carlile's in-state air surcharge.
+    bet, nfsc = history(log, "nac", "BET:1000"), history(log, "nac", "fsc")
+    pal = []
+    for m in months("2020-01", last_m):
+        r = step_at(bet, mid(m))
+        f = step_at(nfsc, mid(m)) if nfsc and mid(m) >= nfsc[0][0] else fsc["air"].get(m)
+        if r is not None and f is not None:
+            pal.append((m + "-01", 1000 * r * (1 + f / 100) * 1.0625))
+    S["pallet:nac:BET"] = ser("1,000 lb pallet, Anchorage to Bethel, Northern Air Cargo, delivered", "dollars", "monthly", "level", pal, "Northern Air Cargo; Carlile")
+
     # Diesel and producer price indexes
     if fred.get("GASDESWCW"):
         by = {}
@@ -657,6 +668,34 @@ def build(log, fred, manual, status):
     return S, notes
 
 
+def receipts(log, manual, series):
+    """Itemized cost of two typical shipments today, for the page's receipts."""
+    def latest(src, key):
+        h = history(log, src, key)
+        return h[-1] if h else (None, None)
+    today = TODAY.isoformat()
+    pamp = step_at(sorted((r["effective"], r["value"]) for r in manual["pamp_per_container"]["rows"]), today)
+    pamp_next = next((r for r in sorted(manual["pamp_per_container"]["rows"], key=lambda r: r["effective"]) if r["effective"] > today), None)
+    (te, base), (fe, fsc) = latest("tote", "2300"), latest("tote", "fsc")
+    (ne, nr), (nfe, nf) = latest("nac", "BET:1000"), latest("nac", "fsc")
+    (ee, er), (efe, ef) = latest("everts", "BET:1000"), latest("everts", "fsc")
+    (be, bp) = latest("usps", "bypass70")
+    out = {}
+    if base and fsc is not None:
+        tc = dict(zip(series.get("ocean:container", {}).get("dates", []), series.get("ocean:container", {}).get("values", [])))
+        out["trailer"] = {"base": base, "base_eff": te, "fsc": fsc, "fsc_eff": fe, "fuel": base * fsc / 100, "pamp": pamp,
+                          "total": base * (1 + fsc / 100) + (pamp or 0), "jan2025": tc.get("2025-01-01"),
+                          "pamp_next": pamp_next and {"value": pamp_next["value"], "effective": pamp_next["effective"]}}
+    if nr and nf is not None:
+        pc = dict(zip(series.get("pallet:nac:BET", {}).get("dates", []), series.get("pallet:nac:BET", {}).get("values", [])))
+        out["pallet"] = {"rate": nr, "rate_eff": ne, "fsc": nf, "fsc_eff": nfe, "base": 1000 * nr, "fuel": 1000 * nr * nf / 100,
+                         "tax": 1000 * nr * (1 + nf / 100) * 0.0625, "total": 1000 * nr * (1 + nf / 100) * 1.0625,
+                         "jan2025": pc.get("2025-01-01"),
+                         "everts": er and ef is not None and 1000 * er * (1 + ef / 100) * 1.0625,
+                         "bypass": bp and 1000 / 70 * bp}
+    return out
+
+
 def current_table(log):
     """Latest value of each tracked rate, for the page's table."""
     def latest(src, key):
@@ -716,7 +755,7 @@ def main():
     status["problems"] += [n for n in notes if not n.startswith("Carlile's")]
     out = {"dashboard": "freight", "source": status["source"], "fetched": TODAY.isoformat(),
            "base_month": manual["base_month"], "weights": manual["weights"],
-           "current": current_table(log), "series": series,
+           "current": current_table(log), "receipts": receipts(log, manual, series), "series": series,
            "fred": {k: [r for r in v if r[0] >= "2015"] for k, v in fred.items()}}
     OUT.write_text(json.dumps(out, indent=1) + "\n")
 

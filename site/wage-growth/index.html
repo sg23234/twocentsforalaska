@@ -49,6 +49,12 @@ table{border-collapse:collapse;width:100%;font-size:15px}
 th{text-align:left;padding:9px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);white-space:nowrap}
 td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--body)}
 th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+.receipts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
+.receipt{background:var(--tile);border:1px solid var(--rule);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px}
+.receipt .rl{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px dashed var(--rule);font-size:15px;color:var(--body)}
+.receipt .rl span:last-child,.receipt .rt span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+.receipt .rt{display:flex;justify-content:space-between;padding-top:12px;font-family:var(--display);font-size:28px;font-weight:700}
+.receipt p{margin:4px 0 0;font-size:13px;color:var(--muted)}
 .plan,.textblock{border:1px dashed var(--muted);border-radius:4px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
 .textblock{border-style:solid;border-color:var(--rule)}
 .plan h3,.textblock h3{font-size:18px} .plan ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;color:var(--body)}

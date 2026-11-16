@@ -147,16 +147,7 @@
  },
  "freight": {
   "source": "carrier tariffs, fuel-surcharge pages, USPS, FRED",
-  "latest": {
-   "tote": "2026-11-08",
-   "arrc": "2026-12",
-   "carlile": "2026-11-04",
-   "nac": "2026-09-16",
-   "everts": "2026-11-11",
-   "aac": "2026-10-01",
-   "usps": "2026-10-04",
-   "fred": "2026-11-09"
-  },
+  "latest": {},
   "problems": [],
   "notes": [
    "Carlile's in-state air surcharge was last posted for Sep 15, 2026; its last rate (58%) is carried forward.",
