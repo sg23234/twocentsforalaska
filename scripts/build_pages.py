@@ -426,15 +426,118 @@ def pages():
     q, op_, cl_ = oc.get("quarters", []), oc.get("jobs_gained_openings", []), oc.get("jobs_lost_closings", [])
     bed_chart = vbars("Jobs at opening and closing establishments", q, [("Gained at openings", op_), ("Lost at closings", cl_)],
                       f"Seasonally adjusted. Latest: {oc.get('as_of', '')}. Source: {oc.get('source', '')}.") if q else ""
+    # ---- Firm entry rate: Census Business Dynamics Statistics (data/firm-dynamics.json)
+    fd = load("firm-dynamics")
+    fds = fd.get("series") or {}
+    FD = "firm-dynamics"
+
+    def fser(sid):
+        s = fds.get(sid) or {}
+        return dict(zip((d[:4] for d in s.get("dates", [])), s.get("values", [])))
+
+    ak_e, us_e = fser("FIRM_ENTRY_RATE-AK"), fser("FIRM_ENTRY_RATE-US")
+    yrs = sorted(set(ak_e) & set(us_e))
+    ly = yrs[-1] if yrs else None
+    vint = (fds.get("FIRM_ENTRY_RATE-AK") or {}).get("vintage")
+
+    # Decade averages, Alaska vs U.S. (the current decade is labeled with the years it covers so far)
+    dec_rows = []
+    for d0 in range(1980, 2030, 10):
+        ys = [y for y in yrs if d0 <= int(y) < d0 + 10]
+        if not ys:
+            continue
+        a, u = sum(ak_e[y] for y in ys) / len(ys), sum(us_e[y] for y in ys) / len(ys)
+        lab = f"{d0}s" if len(ys) == 10 else f"{ys[0]}–{ys[-1]}"
+        dec_rows.append((lab, f"{a:.1f}%", f"{u:.1f}%", fnum(a - u, 1, sign=True) + " pts"))
+
+    # Years Alaska ran above the U.S.
+    above = [y for y in yrs if ak_e[y] > us_e[y]]
+
+    # Establishment entry by industry, latest year
+    SECTORS = [("11", "Agriculture, forestry, fishing"), ("21", "Mining, oil and gas"), ("22", "Utilities"), ("23", "Construction"),
+               ("31-33", "Manufacturing"), ("42", "Wholesale trade"), ("44-45", "Retail trade"), ("48-49", "Transportation and warehousing"),
+               ("51", "Information"), ("52", "Finance and insurance"), ("53", "Real estate"), ("54", "Professional services"),
+               ("56", "Administrative and support"), ("61", "Education"), ("62", "Health care and social assistance"),
+               ("71", "Arts and recreation"), ("72", "Accommodation and food"), ("81", "Other services")]
+    sec_rows, sec_bars = [], []
+    sec_year = None
+    for code, name in SECTORS:
+        a, u, n = fser(f"SEC{code}:ESTAB_ENTRY_RATE-AK"), fser(f"SEC{code}:ESTAB_ENTRY_RATE-US"), fser(f"SEC{code}:ESTABS-AK")
+        if not a:
+            continue
+        y = max(a)
+        sec_year = max(sec_year or y, y)
+    for code, name in SECTORS:
+        a, u, n = fser(f"SEC{code}:ESTAB_ENTRY_RATE-AK"), fser(f"SEC{code}:ESTAB_ENTRY_RATE-US"), fser(f"SEC{code}:ESTABS-AK")
+        if sec_year not in a:
+            continue
+        # five-year average smooths the year-to-year noise in small Alaska industries
+        last5 = [str(int(sec_year) - k) for k in range(5)]
+        a5 = [a[y] for y in last5 if y in a]
+        u5 = [u[y] for y in last5 if y in u]
+        avg_a = sum(a5) / len(a5) if len(a5) == 5 else None
+        avg_u = sum(u5) / len(u5) if len(u5) == 5 else None
+        sec_rows.append((name, fnum(n.get(sec_year)), f"{a[sec_year]:.1f}%", f"{u[sec_year]:.1f}%" if sec_year in u else "—",
+                         f"{avg_a:.1f}%" if avg_a is not None else "—", f"{avg_u:.1f}%" if avg_u is not None else "—",
+                         fnum(avg_a - avg_u, 1, sign=True) if avg_a is not None and avg_u is not None else "—", avg_a or 0))
+        if avg_a is not None and avg_u is not None:
+            sec_bars.append((name, avg_a - avg_u))
+    sec_rows.sort(key=lambda r: -r[-1])
+    sec_rows = [r[:-1] for r in sec_rows]
+    sec_bars.sort(key=lambda r: -r[1])
+    s5 = f"{int(sec_year) - 4}–{sec_year}" if sec_year else ""
+
+    E_AK = {"file": FD, "series": "FIRM_ENTRY_RATE-AK", "dec": 1, "suffix": "%"}
+    P.append(dict(slug="firm-entry", group=G, title="Firm entry rate", row="Business dynamism", status="live" if ly else "partial",
+        lead="The share of Alaska's employer businesses that are brand new: firms in their first year with paid employees, as a percentage of all employer firms. A steady flow of new firms is one of the main ways an economy finds new products, raises productivity and creates jobs. The measure comes from the Census Bureau's Business Dynamics Statistics, which covers every employer in the country back to 1978 but is published with a lag of about two years.",
+        stats=[stat("Firm entry rate, {year}", "Alaska, share of employer firms that are new", E_AK),
+               stat("U.S., {year}", "Same measure, nationwide", {"file": FD, "series": "FIRM_ENTRY_RATE-US", "dec": 1, "suffix": "%"}),
+               stat("Alaska vs. U.S.", "Percentage points, {year}", {"file": FD, "series": "FIRM_ENTRY_RATE-AK", "calc": "diff_vs", "over": {"file": FD, "series": "FIRM_ENTRY_RATE-US"}, "dec": 1, "sign": True, "suffix": " pts"}),
+               stat("Change from a year earlier", "Alaska, percentage points", {"file": FD, "series": "FIRM_ENTRY_RATE-AK", "calc": "yoy_diff", "dec": 1, "sign": True, "suffix": " pts"}),
+               stat("New employer firms, {year}", "Alaska, in their first year", {"file": FD, "series": "STARTUPS-AK"}),
+               stat("Employer firms, {year}", "Alaska, all ages", {"file": FD, "series": "FIRMS-AK"})],
+        body=[section("The long view", "In 1978 about one U.S. employer firm in seven was new. In Alaska, in the pipeline and early oil-revenue years, it was one in five. Alaska's rate fell to about the national rate after the 1986 oil-price crash, slipped below it around 2000, and has been roughly a point below since. Both have drifted down over the whole period.",
+                      chart("Firm entry rate, Alaska and U.S.", "line", [{"file": FD, "id": "FIRM_ENTRY_RATE-AK", "label": "Alaska"}, {"file": FD, "id": "FIRM_ENTRY_RATE-US", "label": "U.S."}],
+                            "New employer firms (age 0) as a share of all employer firms, percent. Each year is measured in March. Latest: {date}.", suffix="%", dec=0),
+                      table("Average firm entry rate by decade", ["Period", "Alaska", "U.S.", "Alaska vs. U.S."], dec_rows,
+                            f"Simple averages of annual rates. Alaska's rate was above the U.S. rate in {len(above)} of {len(yrs)} years from {yrs[0]} to {ly}." if yrs else "", right=(1, 2, 3)) if dec_rows else ""),
+              section("New firms and the jobs they bring", "The count of new firms moves with the size of the economy; the share of jobs at those firms shows how much hiring they account for in their first year.",
+                      '<div class="two">' +
+                      chart("New employer firms, Alaska", "bars", [{"file": FD, "id": "STARTUPS-AK", "label": "Alaska"}], "Firms in their first year with paid employees. Latest: {date}.", **{"from": "2000-01-01"}) +
+                      chart("Jobs at new firms, share of all jobs", "line", [{"file": FD, "id": "STARTUP_EMP_SHARE-AK", "label": "Alaska"}, {"file": FD, "id": "STARTUP_EMP_SHARE-US", "label": "U.S."}],
+                            "Employment at age-0 firms as a percentage of total employment, March. Gaps are years the Census Bureau withheld Alaska's figure. Latest: {date}.", suffix="%", dec=1) +
+                      "</div>"),
+              section("By industry", f"Firm age isn't published by industry for individual states, so this compares the establishment entry rate: new business locations as a share of all locations. Small Alaska industries bounce around from year to year, so the comparison uses the {s5} average." if sec_year else "",
+                      hbar(f"Alaska's establishment entry rate minus the U.S. rate, {s5} average", sec_bars, "Percentage points. Positive bars are industries where new locations open more often in Alaska than nationally.", dec=1, suffix=" pts", lw=250) if sec_bars else "",
+                      table(f"Establishment entry rate by industry, {sec_year}", ["Industry", "Alaska locations", f"Alaska {sec_year}", f"U.S. {sec_year}", f"Alaska {s5} avg", f"U.S. {s5} avg", "Gap (pts)"], sec_rows,
+                            "Sorted by Alaska's five-year average. Establishments are individual business locations; a new store opened by an existing chain counts as a new establishment but not as a new firm.", right=(1, 2, 3, 4, 5, 6)) if sec_rows else ""),
+              section("A quicker read: openings and closings", f"Business Dynamics Statistics run about two years behind. The BLS Business Employment Dynamics series counts jobs at establishments that opened or closed each quarter, through {q[-1] if q else 'recent quarters'}.", bed_chart),
+              section("Related measures", "",
+                      chart("Establishment entry rate, Alaska and U.S.", "line", [{"file": FD, "id": "ESTAB_ENTRY_RATE-AK", "label": "Alaska"}, {"file": FD, "id": "ESTAB_ENTRY_RATE-US", "label": "U.S."}],
+                            "New establishments as a share of the average number of establishments in the current and prior year, percent. Includes new locations of existing firms. Latest: {date}.", suffix="%", dec=0),
+                      text("Three ways to count new businesses", [
+                          "Business applications (Census Business Formation Statistics) count filings for an employer ID number. They are monthly and current, but many applications never become businesses with employees.",
+                          "The firm entry rate on this page counts businesses that actually started paying employees. It is the most complete measure, covering every employer, but it is annual and about two years old.",
+                          "Business Employment Dynamics (BLS) counts jobs at establishments that opened or closed, quarterly, with a lag of about seven months. It counts locations, not firms."]))],
+        notes=["A firm is a business and all the locations it owns. A firm is age 0 in the year it first reports paid employees, measured in March. Firms with no employees (sole proprietors, most gig work) are not counted.",
+               "Entry rate = age-0 firms ÷ all employer firms in the same year, the standard Census startup-rate definition. The U.S. figures use the national table; Census notes that firm counts summed across states can run slightly higher than the national total, because a firm operating in several states is counted once in each.",
+               f"Figures are from the {vint} vintage of the Business Dynamics Statistics. Each new vintage can revise earlier years." if vint else "Each new vintage of the Business Dynamics Statistics can revise earlier years.",
+               "The data refresh reads the Census Bureau's published CSV tables, checks for a new vintage on every run, and needs no API key.",
+               "Alaska has about 15,000 employer firms, so 150 more or fewer new firms moves the rate by a full percentage point. Read single-year changes with care."],
+        sources=[src("Census Bureau, Business Dynamics Statistics", "https://www.census.gov/programs-surveys/bds.html"),
+                 src("Census Bureau, BDS data tables (CSV)", "https://www.census.gov/data/datasets/time-series/econ/bds/bds-datasets.html"),
+                 src("BLS, Business Employment Dynamics", "https://www.bls.gov/bdm/")],
+        tile=tile(E_AK, {"file": FD, "series": "FIRM_ENTRY_RATE-AK", "calc": "diff_vs", "over": {"file": FD, "series": "FIRM_ENTRY_RATE-US"}, "dec": 1, "sign": True, "after": " pts vs. U.S."}, unit="% of employer firms") if ly else
+             tile(value=fnum(op_[-1]) if op_ else None, change=f"jobs, {q[-1]}" if q else "", unit="jobs gained at openings")))
+
     for slug, title, lead, i_val, lbl in [
-        ("firm-entry", "Firm entry rate", "How often new businesses open. A steady flow of new firms is one of the main ways an economy finds new products, raises productivity and creates jobs; young firms account for a large share of new hiring.", op_, "Jobs gained at openings"),
         ("firm-exit", "Firm exit rate", "How often businesses close. Some turnover is healthy, as resources move from struggling firms to growing ones; a rising exit rate with few entrants signals a shrinking business base.", cl_, "Jobs lost at closings")]:
         P.append(dict(slug=slug, group=G, title=title, row="Business dynamism", status="partial",
             lead=lead,
             stats=[stat(f"{lbl}, {q[-1] if q else ''}", "Establishments, seasonally adjusted", value=fnum(i_val[-1]) if i_val else "—"),
                    stat("Same quarter a year earlier", q[0] if q else "", value=fnum(i_val[0]) if i_val else "—")],
             body=[section("Openings and closings", "A quarterly BLS series counts jobs at establishments that opened or closed.", bed_chart),
-                  plan([f"The {'entry' if slug == 'firm-entry' else 'exit'} rate itself: new {'firms' if slug == 'firm-entry' else 'firm closures'} as a share of all firms, from the Census Bureau's Business Dynamics Statistics (annual), compared with the U.S.",
+                  plan(["The exit rate itself: firm closures as a share of all firms, from the Census Bureau's Business Dynamics Statistics (annual), compared with the U.S.",
                         "Establishment births and deaths by industry from BLS Business Employment Dynamics.",
                         "Alaska business license counts from the state."])],
             notes=["Business Employment Dynamics data are published about seven months after each quarter. Figures are kept in data/manual/business-formation.json."],

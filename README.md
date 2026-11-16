@@ -35,6 +35,7 @@ The loop: **GitHub Action runs the scripts → new JSON committed → Cloudflare
 | Cost of living | Urban Alaska CPI by category (BLS API) | Annual inflation (official annual averages) |
 | Housing | Building permits, mortgage rate (FRED) | Anchorage prices and vacancy, rents by area |
 | Business formation | Business applications (Census via FRED) | Jobs at openings and closings (BLS BED) |
+| Firm entry rate | Census Business Dynamics Statistics CSV tables, 1978 on, Alaska vs. U.S. and by industry (`data/firm-dynamics.json`) | — |
 | Population | Census population since 1970 (FRED) | Components of change, boroughs |
 | Productivity | BLS state productivity, output, hours (FRED) | — (comparison tables are in the page) |
 | Key sectors | Payroll jobs by industry (Alaska DOLWD) | Visitors, air cargo |
