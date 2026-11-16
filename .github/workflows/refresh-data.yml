@@ -34,6 +34,7 @@ jobs:
         env:
           BLS_API_KEY: ${{ secrets.BLS_API_KEY }}   # optional
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}   # needed for the electricity price
+          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}   # needed for food trucks (Census data API)
         run: python3 scripts/fetch_data.py
 
       - name: Fetch electricity prices by utility (EIA-861)
