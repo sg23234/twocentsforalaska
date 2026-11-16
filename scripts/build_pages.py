@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DATA = SITE / "data"
 
-INK, BODY, MUTED, RULE, TILE, ACC, BLUE, ORANGE = "#14213D", "#33405C", "#5A6580", "#C9D2DE", "#F6F8FB", "#B42318", "#1F5FA8", "#C2610C"
+INK, BODY, MUTED, RULE, TILE, ACC, BLUE, ORANGE = "#14213D", "#33405C", "#5A6580", "#C9D2DE", "#FFFFFF", "#B42318", "#1F5FA8", "#C2610C"
 E = html.escape
 
 
@@ -179,7 +179,7 @@ def src(name, url):
 # ---------------------------------------------------------------- page shell
 
 CSS = """
-:root{--bg:#FFFFFF;--ink:#14213D;--body:#33405C;--muted:#5A6580;--rule:#C9D2DE;--tile:#F6F8FB;--accent:#B42318;
+:root{--bg:#EEF2F5;--ink:#14213D;--body:#33405C;--muted:#5A6580;--rule:#C9D2DE;--tile:#FFFFFF;--accent:#B42318;
 --display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
