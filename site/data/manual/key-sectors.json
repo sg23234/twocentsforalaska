@@ -25,33 +25,5 @@
    0.0783,
    0.084
   ]
- },
- "air_cargo": {
-  "label": "Top U.S. all-cargo airports by landed weight, billions of pounds, preliminary",
-  "source": "FAA CY2025 all-cargo airports",
-  "as_of": "2025",
-  "next_update": "FAA CY2026 preliminary, about Sep 2027",
-  "rows": [
-   [
-    "Anchorage",
-    26.28
-   ],
-   [
-    "Louisville",
-    19.67
-   ],
-   [
-    "Memphis",
-    16.27
-   ],
-   [
-    "Miami",
-    10.38
-   ],
-   [
-    "Cincinnati",
-    8.55
-   ]
-  ]
  }
 }

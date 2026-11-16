@@ -139,6 +139,12 @@ DASHBOARDS = {
         "State Government": s("Payroll jobs, state government", "jobs", "monthly", "level"),
         "Federal Government": s("Payroll jobs, federal government (civilian)", "jobs", "monthly", "level"),
     }},
+    # ANC air cargo page: BLS state payroll detail via FRED, thousands of jobs,
+    # not seasonally adjusted. Optional so a FRED hiccup only warns.
+    "air-cargo": {"source": "fred", "series": {
+        "SMU02000004348100001": s("Payroll jobs, air transportation, Alaska", "thousands of jobs", "monthly", "level", optional=True),
+        "SMU02000004340008901": s("Payroll jobs, transportation and warehousing, Alaska", "thousands of jobs", "monthly", "level", optional=True),
+    }},
     "labor": {"source": "fred", "series": {
         "LBSSA02": s("Labor force participation rate, Alaska", "percent", "monthly", "rate"),
         "CIVPART": s("Labor force participation rate, United States", "percent", "monthly", "rate"),

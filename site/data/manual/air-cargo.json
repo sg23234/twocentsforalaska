@@ -1,0 +1,78 @@
+{
+ "_about": "Hand-maintained numbers for the ANC air cargo page (site/air-cargo/). Edit and commit; build_pages.py redraws the page on the next refresh run. Alaska air transportation jobs are live from FRED (site/data/air-cargo.json) and are not kept here.",
+ "tonnage": {
+  "label": "Cargo handled at ANC, millions of metric tons (freight and mail, including transit)",
+  "source": "Airports Council International (ACI World) annual rankings, as compiled on Wikipedia's list of busiest cargo airports",
+  "as_of": "2025, preliminary",
+  "next_update": "ACI 2026 rankings, about April 2027",
+  "years": ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  "values": [2.553937, 2.691395, 2.825511, 2.339831, 1.994629, 2.578396, 2.625201, 2.449551, 2.421145, 2.482153, 2.630701, 2.542526, 2.713230, 2.806743, 2.745348, 3.157682, 3.555160, 3.461603, 3.380374, 3.699284, 3.854614],
+  "world_rank": [3, 3, 3, 5, 6, 5, 4, 5, 6, 5, 4, 6, 5, 5, 6, 4, 4, 3, 4, 4, 3]
+ },
+ "half_year": {
+  "label": "Cargo handled at ANC, January to June, metric tons",
+  "source": "Alaska International Airport System, 2026 Development Report, Q1 and Q2",
+  "periods": ["Jan–Jun 2025", "Jan–Jun 2026"],
+  "anc": [1766194, 1944990],
+  "fai": [12161, 35399],
+  "second_half": {"periods": ["Jul–Dec 2024", "Jul–Dec 2025"], "anc": [1984856, 2088421], "source": "AIAS Biannual Report, Q3 and Q4 2025"}
+ },
+ "landed_weight": {
+  "label": "All-cargo landed weight at ANC, billions of pounds",
+  "source": "FAA, CY all-cargo airports by landed weight (final releases)",
+  "years": ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  "values": [18.414, 18.307, 22.883, 25.219, 24.265, 25.635, 25.468, 26.280],
+  "us_rank": [2, 2, 2, 1, 1, 1, 1, 1]
+ },
+ "us_top": {
+  "label": "Top U.S. all-cargo airports by landed weight, 2025, billions of pounds",
+  "source": "FAA CY2025 all-cargo airports, final (Sep 22, 2026)",
+  "as_of": "2025",
+  "next_update": "FAA CY2026 preliminary, about June 2027",
+  "rows": [["Anchorage", 26.28], ["Louisville", 19.67], ["Memphis", 16.27], ["Miami", 10.38], ["Cincinnati", 8.55]]
+ },
+ "world_top": {
+  "label": "World's busiest cargo airports, 2025, millions of metric tons",
+  "source": "ACI World 2025 preliminary rankings (April 2026)",
+  "rows": [["Hong Kong", 5.070], ["Shanghai Pudong", 4.096], ["Anchorage", 3.855], ["Louisville", 3.396], ["Miami", 3.128], ["Memphis", 2.970], ["Seoul Incheon", 2.955], ["Doha", 2.614], ["Taipei Taoyuan", 2.500], ["Guangzhou", 2.439]]
+ },
+ "landings": {
+  "label": "Aircraft landings at ANC by type, calendar years",
+  "source": "McKinley Research Group for the Anchorage Economic Development Corporation, Ted Stevens Anchorage International Airport Economic Impact Study (Feb 2023), Figure 1",
+  "years": ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"],
+  "cargo": [40133, 36769, 35589, 35473, 38004, 38174, 39928, 41972, 41511, 50803, 54864],
+  "passenger": [50606, 50114, 53987, 52585, 51344, 50700, 47737, 46256, 44785, 27628, 38405]
+ },
+ "recent_months": {
+  "label": "International cargo landings at ANC, recent months",
+  "source": "NorthLink Aviation monthly cargo updates, as reported by STAT Times and The Loadstar",
+  "rows": [["Nov 2025", 2949, "+14%"], ["Mar 2026", 2518, "−8%"], ["Jul 2026", 2627, ""], ["Aug 2026", 2756, "+5%"]],
+  "ltm": {"through": "Aug 2026", "landings": 30809, "change": "+2%"}
+ },
+ "carriers_widebody_2024": {
+  "label": "Share of wide-body freighter landings at ANC by carrier, 2024",
+  "source": "Alaska International Airport System, Overview of ANC Air Cargo Activity 2016–2024",
+  "rows": [["Atlas Air", 18], ["FedEx", 16], ["UPS", 13], ["Kalitta Air", 10], ["Cathay Pacific", 8], ["Korean Air", 5], ["China Airlines", 5], ["EVA Air", 4], ["Cargolux", 3], ["China Southern", 3], ["Air China Cargo", 3], ["Nippon Cargo", 3]]
+ },
+ "carriers_narrowbody_2024": {
+  "label": "Share of narrow-body (mostly in-state) freighter landings at ANC by carrier, 2024",
+  "source": "Alaska International Airport System, Overview of ANC Air Cargo Activity 2016–2024",
+  "rows": [["Alaska Central Express", 38], ["Northern Air Cargo", 13], ["Alaska Airlines", 11], ["Tatonduk (Everts)", 8], ["Lynden Air Cargo", 7], ["Empire Airlines", 6], ["TransNorthern", 6]]
+ },
+ "flows_2021": {
+  "source": "McKinley Research Group for AEDC (Feb 2023), Tables 1, 8, 9 and 11",
+  "transit_mt": 1.7, "onoff_mt": 2.0,
+  "asia_to_us_share": 63, "us_to_asia_share": 47,
+  "origins": [["Hong Kong", 511002, 4844], ["Seoul", 431441, 5440], ["Shanghai", 245928, 2555], ["Taipei", 237669, 2525]],
+  "destinations": [["Chicago", 557365, 5768], ["Los Angeles", 315039, 3174], ["Louisville", 275355, 2978], ["New York", 207495, 2114]]
+ },
+ "jobs_2021": {
+  "source": "McKinley Research Group for AEDC (Feb 2023), Tables 14, 18 and 19",
+  "total": 19070, "direct": 10820, "indirect_induced": 8250, "labor_income_m": 1249.3,
+  "cargo_jobs": 5210, "cargo_labor_income_m": 378.9
+ },
+ "air_trade_2023": {
+  "source": "AIAS, Overview of ANC Air Cargo Activity 2016–2024, from Census USA Trade Online",
+  "imports_bn": 34.67, "exports_bn": 18.46, "imports_kt": 189.5, "exports_kt": 100.7
+ }
+}

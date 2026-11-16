@@ -107,7 +107,7 @@ def hbar(title, rows, caption="", dec=0, prefix="", suffix="", highlight=None, l
     return f'<figure class="chart"><h3>{E(title)}</h3><div class="plot">{s}</div><figcaption>{E(caption)}</figcaption></figure>'
 
 
-def vbars(title, labels, values, caption="", dec=0, prefix="", suffix="", partial_last=False, colors=None):
+def vbars(title, labels, values, caption="", dec=0, prefix="", suffix="", partial_last=False, colors=None, show_values=None):
     """Static vertical bars (one or two series). values: list or list of (name, list)."""
     multi = isinstance(values[0], tuple)
     sers = values if multi else [("", values)]
@@ -133,8 +133,8 @@ def vbars(title, labels, values, caption="", dec=0, prefix="", suffix="", partia
             top = Y(max(v, 0))
             op = "0.5" if partial_last and i == n - 1 else "1"
             s += f'<rect x="{x:.1f}" y="{top:.1f}" width="{bw - 2:.1f}" height="{max(abs(Y(v) - Y(0)), .5):.1f}" fill="{cols[j % len(cols)]}" opacity="{op}"></rect>'
-            if n * k <= 16:
-                s += f'<text x="{x + bw / 2 - 1:.1f}" y="{(Y(v) + 13) if v < 0 else top - 5:.1f}" text-anchor="middle" font-size="11" font-weight="600" fill="{INK}">{E(fnum(v, dec, prefix, suffix))}</text>'
+            if (n * k <= 16) if show_values is None else show_values:
+                s += f'<text x="{x + bw / 2 - 1:.1f}" y="{(Y(v) + 13) if v < 0 else top - 5:.1f}" text-anchor="middle" font-size="{11 if n * k <= 16 else 10}" font-weight="600" fill="{INK}">{E(fnum(v, dec, prefix, suffix))}</text>'
         s += f'<text x="{cx:.1f}" y="{H - 9}" text-anchor="middle" font-size="11" fill="{MUTED}">{E(lab)}{"*" if partial_last and i == n - 1 else ""}</text>'
     s += "</svg>"
     legend = ""
@@ -361,21 +361,99 @@ def pages():
         notes=["This page is a placeholder until tonnage figures are assembled."],
         tile=tile(unit="tons")))
 
-    cargo = m_ks.get("air_cargo", {})
-    P.append(dict(slug="air-cargo", group=G, title="ANC air cargo", row="Physical volumes", status="static",
-        lead="Anchorage sits on the great-circle route between Asia and North America, and most trans-Pacific freighters stop there to refuel. Ted Stevens Anchorage International Airport handles more all-cargo landed weight than any other airport in the country.",
-        stats=[stat("Rank among U.S. airports", "All-cargo landed weight · 2025", value="#1"),
-               stat("All-cargo landed weight", "Billions of pounds · 2025, preliminary", value=fnum((cargo.get("rows") or [[None, None]])[0][1], 1)),
-               stat("Change from 2024", "Landed weight · FAA preliminary", value="+3.2%")],
-        body=[section("Busiest U.S. cargo airports", "All-cargo landed weight, billions of pounds.",
-                      hbar(cargo.get("label", "All-cargo landed weight"), [tuple(r) for r in cargo.get("rows", [])],
-                           f"{cargo.get('as_of', '')}. Source: {cargo.get('source', '')}. Next: {cargo.get('next_update', '')}.", dec=2, highlight="Anchorage")),
-              plan(["Monthly cargo tonnage and freighter landings from the Alaska International Airport System reports.",
-                    "Cargo-related jobs and fuel sales at the airport."])],
-        notes=["Landed weight is the maximum weight of the aircraft that land, the FAA's standard measure. Anchorage's count includes freight that only stops to refuel."],
-        sources=[src("FAA, CY2025 all-cargo airports, preliminary", "https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/arp-CY2025-all-cargo-airports-preliminary.pdf"),
-                 src("Alaska International Airport System, reports", "https://dot.alaska.gov/aias/")],
-        tile=tile(value="#1", change="+3.2% landed wt.", unit="U.S. cargo airport, 2025")))
+    # ANC air cargo: hand-kept figures in data/manual/air-cargo.json; Alaska air
+    # transportation jobs live from FRED (data/air-cargo.json).
+    ac = manual("air-cargo")
+    ton, hy, lw = ac.get("tonnage", {}), ac.get("half_year", {}), ac.get("landed_weight", {})
+    ust, wt, ld, rm = ac.get("us_top", {}), ac.get("world_top", {}), ac.get("landings", {}), ac.get("recent_months", {})
+    wb, nb, fl, jb, tr = (ac.get(k, {}) for k in ["carriers_widebody_2024", "carriers_narrowbody_2024", "flows_2021", "jobs_2021", "air_trade_2023"])
+    t_y, t_v, t_r = ton.get("years", []), ton.get("values", []), ton.get("world_rank", [])
+    h_p, h_a, h_f = hy.get("periods", []), hy.get("anc", []), hy.get("fai", [])
+    h2 = hy.get("second_half", {})
+    l_y, l_v = lw.get("years", []), lw.get("values", [])
+    pct = lambda a, b: (a / b - 1) * 100 if a and b else None
+    h_chg = pct(h_a[-1], h_a[0]) if len(h_a) == 2 else None
+    jobs_spec = {"file": "air-cargo", "series": "SMU02000004348100001", "scale": 1000, "dec": 0}
+    two = lambda *b: '<div class="two">' + "".join(x for x in b if x) + "</div>"
+    P.append(dict(slug="air-cargo", group=G, title="ANC air cargo", row="Physical volumes", status="partial",
+        lead="Anchorage sits on the great-circle route between Asia and North America, within about nine and a half hours' flying of 90% of the industrialized world, and most trans-Pacific freighters stop there to refuel. That makes Ted Stevens Anchorage International the busiest cargo airport in the United States and the third busiest in the world, though most of the freight is only passing through.",
+        stats=[stat("Cargo handled, " + (t_y[-1] if t_y else ""), f"Million metric tons · #{t_r[-1] if t_r else '—'} in the world (ACI, preliminary)", value=fnum(t_v[-1] if t_v else None, 2)),
+               stat("First half of " + (h_p[-1][-4:] if h_p else ""), f"Million metric tons · {fnum(h_chg, 1, suffix='%', sign=True)} from a year earlier", value=fnum(h_a[-1] / 1e6 if h_a else None, 2)),
+               stat("All-cargo landed weight, " + (l_y[-1] if l_y else ""), f"Billion pounds · #1 in the U.S. (FAA) · {fnum(pct(l_v[-1], l_v[-2]) if len(l_v) > 1 else None, 1, suffix='%', sign=True)}", value=fnum(l_v[-1] if l_v else None, 1)),
+               stat("Air transportation jobs, {date}", "Alaska, all airlines, passenger and cargo", jobs_spec),
+               stat("vs. a year earlier", "Air transportation jobs, same month", {"file": "air-cargo", "series": "SMU02000004348100001", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}),
+               stat("Jobs tied to cargo airlines", "Incl. FedEx and UPS, with spinoff jobs · 2021", value=fnum(jb.get("cargo_jobs")))],
+        body=[section("Cargo handled each year", "Freight and mail loaded, unloaded or passing through ANC, in millions of metric tons. Anchorage counts transit freight that never leaves the plane during a refueling stop, which most airports don't.",
+                      vbars(ton.get("label", "Cargo handled at ANC"), t_y, t_v,
+                            f"{ton.get('as_of', '')}. Source: {ton.get('source', '')}. World rank in {t_y[-1] if t_y else ''}: #{t_r[-1] if t_r else ''}. Next: {ton.get('next_update', '')}.", dec=2, show_values=True),
+                      two(vbars(lw.get("label", "All-cargo landed weight"), l_y, l_v,
+                                f"Source: {lw.get('source', '')}. ANC ranked #2 behind Memphis through 2020 and #1 since 2021.", dec=1),
+                          table("This year and last: cargo tonnage by half-year", ["Period", "ANC, metric tons", "Change"],
+                                [[h2.get("periods", ["", ""])[0], fnum(h2.get("anc", [None])[0]), ""],
+                                 [h2.get("periods", ["", ""])[-1], fnum(h2.get("anc", [None])[-1]), fnum(pct(h2.get("anc", [0, 0])[-1], h2.get("anc", [0, 0])[0]), 1, suffix="%", sign=True)],
+                                 [h_p[0] if h_p else "", fnum(h_a[0] if h_a else None), ""],
+                                 [h_p[-1] if h_p else "", fnum(h_a[-1] if h_a else None), fnum(h_chg, 1, suffix="%", sign=True)]] if h_a and h2 else [],
+                                f"Source: {hy.get('source', '')}; {h2.get('source', '')}. Fairbanks, ANC's backup airport, handled {fnum(h_f[-1] if h_f else None)} metric tons in {h_p[-1] if h_p else ''}, up from {fnum(h_f[0] if h_f else None)}.", right=(1, 2)))),
+              section("How ANC compares", "Two ways to rank cargo airports: tons of freight and mail handled (ACI, worldwide) and the landed weight of cargo planes (FAA, U.S. only).",
+                      two(hbar(wt.get("label", "World's busiest cargo airports"), [tuple(r) for r in wt.get("rows", [])],
+                               f"Source: {wt.get('source', '')}.", dec=2, highlight="Anchorage", lw=150),
+                          hbar(ust.get("label", "Top U.S. all-cargo airports"), [tuple(r) for r in ust.get("rows", [])],
+                               f"Source: {ust.get('source', '')}. Next: {ust.get('next_update', '')}.", dec=2, highlight="Anchorage", lw=150))),
+              section("The flights", "Cargo planes now make up most landings at ANC. The big international freighters are mostly Boeing 747s and 777s; a fleet of smaller planes carries freight on to the rest of Alaska.",
+                      vbars("Aircraft landings at ANC, cargo and passenger", ld.get("years", []), [("Cargo", ld.get("cargo", [])), ("Passenger", ld.get("passenger", []))],
+                            f"In 2021: {fnum((ld.get('cargo') or [None])[-1])} cargo and {fnum((ld.get('passenger') or [None])[-1])} passenger landings. Source: {ld.get('source', '')}. In fiscal 2026 the airport reported more than 55,000 cargo landings, about 138 wide-body cargo landings a day."),
+                      two(hbar(wb.get("label", "Wide-body freighter landings by carrier"), [tuple(r) for r in wb.get("rows", [])],
+                               f"Source: {wb.get('source', '')}.", suffix="%", lw=150),
+                          hbar(nb.get("label", "Narrow-body freighter landings by carrier"), [tuple(r) for r in nb.get("rows", [])],
+                               f"Source: {nb.get('source', '')}. These planes carry freight between Anchorage, Seattle and rural Alaska.", suffix="%", lw=190)),
+                      table(rm.get("label", "Recent months"), ["Month", "Landings", "vs. a year earlier"],
+                            [[r[0], fnum(r[1]), r[2] or "—"] for r in rm.get("rows", [])]
+                            + ([[f"12 months to {rm['ltm']['through']}", fnum(rm["ltm"]["landings"]), rm["ltm"]["change"]]] if rm.get("ltm") else []),
+                            f"International freighters only; the trade press hasn't reported every month. Source: {rm.get('source', '')}.", right=(1, 2))),
+              section("What passes through", f"In 2021, the latest year studied in detail, {fl.get('transit_mt', '')} million metric tons stayed aboard during refueling stops and {fl.get('onoff_mt', '')} million were loaded or unloaded. About {fl.get('asia_to_us_share', '')}% of Asia-to-U.S. air cargo went through Anchorage, and {fl.get('us_to_asia_share', '')}% of U.S.-to-Asia.",
+                      two(table("Where freighters to ANC came from, 2021", ["City", "Metric tons", "Flights"],
+                                [[r[0], fnum(r[1]), fnum(r[2])] for r in fl.get("origins", [])], f"Top Asian origins. Source: {fl.get('source', '')}.", right=(1, 2)),
+                          table("Where freighters from ANC went, 2021", ["City", "Metric tons", "Flights"],
+                                [[r[0], fnum(r[1]), fnum(r[2])] for r in fl.get("destinations", [])], f"Top Lower 48 destinations. Source: {fl.get('source', '')}.", right=(1, 2))),
+                      text("Trade that clears customs in Anchorage", [
+                          f"Goods that clear customs at the Anchorage port of entry are a slice of what flies through. In 2023 air imports recorded there were worth ${tr.get('imports_bn', 0):.1f} billion and air exports ${tr.get('exports_bn', 0):.1f} billion. By weight the leading goods were electrical equipment and machinery, then instruments, plastics and toys; fish and seafood ranked eighth.",
+                      ]) if tr else ""),
+              section("Jobs", "Payroll jobs at airlines in Alaska, live from the Bureau of Labor Statistics. This counts passenger and cargo airlines alike; ground handling, fueling and freight forwarding are counted in other industries.",
+                      chart("Air transportation jobs, Alaska", "line", [{"file": "air-cargo", "id": "SMU02000004348100001", "label": "Air transportation", "scale": 1000}],
+                            "Monthly, not seasonally adjusted. Latest: {date}. Source: BLS via FRED, SMU02000004348100001.", **{"from": "2005-01-01"}),
+                      table("Jobs and earnings that depend on ANC, 2021", ["Measure", "Jobs", "Labor income"],
+                            [["Direct, at the airport", fnum(jb.get("direct")), ""],
+                             ["Spinoff, in the wider economy", fnum(jb.get("indirect_induced")), ""],
+                             ["Total", fnum(jb.get("total")), fnum(jb.get("labor_income_m"), 0, "$", "M")],
+                             ["Of which: cargo airlines and express carriers", fnum(jb.get("cargo_jobs")), fnum(jb.get("cargo_labor_income_m"), 0, "$", "M")]] if jb else [],
+                            f"Source: {jb.get('source', '')}. The state airport system credits ANC with about 1 in 7 jobs in the Anchorage region.", right=(1, 2))),
+              section("What's changing", "",
+                      text("Trade rules", ["The U.S. ended duty-free entry for low-value parcels (the $800 de minimis exemption) on goods from China in May 2025 and on goods from everywhere that August. Cross-border e-commerce by air fell sharply, and NorthLink Aviation's planned e-commerce hub at ANC stalled. Anchorage's tonnage kept growing anyway as general freight and electronics filled the space. FedEx cut its Anchorage landings by about 12% in the first nine months of 2025, while Kalitta Air, China Airlines and EVA Air added flights."]),
+                      text("Jet fuel", ["Freighters stop in Anchorage mainly to refuel, and more than 70% of the airport's jet fuel arrives by tanker from Asian refineries. In March 2026, with the Strait of Hormuz disrupted and China limiting refined fuel exports, international cargo landings fell 8% from a year earlier, the first real monthly decline in over a year. By August they were 5% above a year earlier."]),
+                      text("Room to park", ["Heavy snowstorms have shown how tight wide-body parking is at ANC: carriers with reserved spots keep landing, others divert. Private projects on airport land aim to add capacity: NorthLink Aviation's 120-acre South Airpark campus (a 55-year lease, with up to 11 drive-through hardstands planned), a cold-storage warehouse and hardstands by Alaska Cold Cargo Storage on the North Airpark, and six hardstands proposed by Alaska Airport Partners on the West Airpark. The state also lists $126 million for nine more airport-run hardstands."]),
+                      text("Fairbanks as the backup", [f"Fairbanks International, about 260 miles north, is ANC's main diversion airport. Its cargo tonnage nearly tripled in the first half of 2026, from {fnum(h_f[0] if h_f else None)} to {fnum(h_f[-1] if h_f else None)} metric tons, as carriers used it during storms and summer construction at ANC."])),
+              plan(["Monthly cargo tonnage and landings from the state airport system's monthly reports, once a regularly published table is found.",
+                    "Jet fuel sold at ANC (fuel flowage), the clearest measure of the refueling business.",
+                    "FAA landed weight back to 2000, and a comparison with trans-Pacific air freight rates."])],
+        notes=["Tonnage counts freight and mail loaded, unloaded or in transit. Anchorage is the only top-10 airport whose count includes transit freight that stays aboard; in 2021 that was about 46% of its total, so ANC's world rank overstates how much freight is handled on the ground.",
+               "Landed weight is the certificated maximum landing weight of the all-cargo aircraft that land, summed over the year. It measures flights, not freight, and is what the FAA uses to share out cargo grants to airports.",
+               "ACI revises earlier years; the series here uses each year's figure as published with that year's ranking. The 2014 figure is from Air Cargo World. 2025 is preliminary.",
+               "The 2021 economic impact study gives two figures for Anchorage's share of Asia-to-U.S. air cargo: 51% in its summary and 63% in its tables. The page uses the table figure.",
+               "Recent-month landings are NorthLink Aviation's counts of international cargo landings, compiled from airport data and reported in the trade press. NorthLink is developing cargo facilities at ANC."],
+        sources=[src("ACI World, 2025 airport rankings (via Wikipedia's list of busiest cargo airports)", "https://en.wikipedia.org/wiki/List_of_busiest_airports_by_cargo_traffic"),
+                 src("FAA, CY2025 all-cargo airports by landed weight, final", "https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/ARP-CY2025-all-cargo-airports.pdf"),
+                 src("FAA, all-cargo data, previous years", "https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/previous_years"),
+                 src("Alaska International Airport System, 2026 Development Report, Q1–Q2", "https://dot.alaska.gov/aias/assets/2026-AIAS-Development-Report-Q1Q2.pdf"),
+                 src("Alaska International Airport System, Biannual Report, Q3–Q4 2025", "https://dot.alaska.gov/aias/assets/AIAS-Biannual-Report-Q3-Q4-2025.pdf"),
+                 src("Alaska International Airport System, Overview of ANC Air Cargo Activity 2016–2024", "https://dot.alaska.gov/aias/assets/Overview-of-ANC-Air-Cargo-Activity-2016-2024.pdf"),
+                 src("McKinley Research Group for AEDC, ANC Economic Impact Study (2023)", "https://dot.alaska.gov/aias/assets/AEDC-ANC-Economic-Impact-Report.pdf"),
+                 src("Ted Stevens Anchorage International Airport, facts", "https://dot.alaska.gov/anc/passengers-facts.shtml"),
+                 src("FRED, Air transportation jobs in Alaska (SMU02000004348100001)", "https://fred.stlouisfed.org/series/SMU02000004348100001"),
+                 src("STAT Times, Freighter landings rise 5% at ANC in August (Sep 2026)", "https://www.stattimes.com/aviation/freighter-landings-rise-5-at-anc-in-august-1360616"),
+                 src("The Loadstar, Atlas Air trims Anchorage operations as Fairbanks emerges as fallback", "https://theloadstar.com/atlas-air-trims-anchorage-operations-as-fairbanks-emerges-as-fallback/"),
+                 src("The Loadstar, Ecommerce hopes for Anchorage tied in red tape, but airport traffic grows", "https://theloadstar.com/ecommerce-hopes-for-anchorage-tied-in-red-tape-but-airport-traffic-grows/")],
+        tile=tile(value=fnum(h_a[-1] / 1e6, 2, suffix="M") if h_a else "—", change=f"{fnum(h_chg, 1, suffix='%', sign=True)} y/y" if h_chg is not None else "",
+                  unit=f"metric tons, {h_p[-1] if h_p else ''}")))
 
     P.append(dict(slug="railroad-freight", group=G, title="Alaska Railroad freight", row="Physical volumes", status="static",
         lead="The state-owned Alaska Railroad runs from Seward and Whittier to Fairbanks. Its freight volume reflects construction (gravel), power generation (coal), fuel distribution and goods arriving from the Lower 48 by rail barge.",
