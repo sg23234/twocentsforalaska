@@ -403,13 +403,60 @@ def pages():
 
     # ======================= PHYSICAL VOLUMES =======================
     G = "Micro · Physical volumes"
-    P.append(dict(slug="port-tonnage", group=G, title="Port of Alaska tonnage", row="Physical volumes", status="planned",
-        lead="Most goods that reach Southcentral and Interior Alaska come through the Port of Alaska in Anchorage. Tonnage crossing its docks is a direct measure of how much the state is consuming and building.",
-        body=[plan(["Annual tonnage by type: containers and trailers, petroleum, cement and bulk.",
-                    "Long history from the U.S. Army Corps of Engineers Waterborne Commerce statistics.",
-                    "Port of Alaska modernization project milestones and costs."])],
-        notes=["This page is a placeholder until tonnage figures are assembled."],
-        tile=tile(unit="tons")))
+    pt = manual("port-tonnage")
+    dk, phy, us = pt.get("dock", {}), pt.get("half_year", {}), pt.get("usace", {})
+    d_y, d_t, d_f, d_c, d_b = (dk.get(k, []) for k in ["years", "total", "fuel", "containers", "bulk"])
+    M = lambda xs: [round(x / 1e6, 2) for x in xs]
+    pchg = lambda xs: (xs[-1] / xs[-2] - 1) * 100 if len(xs) > 1 else None
+    hy_rows = phy.get("rows", [])
+    hy_tot = [sum(r[1][j] for r in hy_rows) for j in range(len(phy.get("years", [])))] if hy_rows else []
+    hy_fmt = lambda v: [fnum(x) for x in v]
+    sc = pt.get("surcharge_per_ton", {})
+    P.append(dict(slug="port-tonnage", group=G, title="Port of Alaska tonnage", row="Physical volumes", status="static",
+        lead="Most goods that reach Southcentral and Interior Alaska come through the Don Young Port of Alaska in Anchorage. Tonnage crossing its docks is a direct measure of how much the state is consuming and building.",
+        stats=[stat("Total, " + (d_y[-1] if d_y else ""), f"Million short tons · {fnum(pchg(d_t), 1, suffix='%', sign=True)} from a year earlier", value=fnum(d_t[-1] / 1e6 if d_t else None, 2)),
+               stat("Fuel, " + (d_y[-1] if d_y else ""), f"Million tons · {fnum(d_f[-1] / d_t[-1] * 100 if d_t else None, 0)}% of the total", value=fnum(d_f[-1] / 1e6 if d_f else None, 2)),
+               stat("Containers and trailers, " + (d_y[-1] if d_y else ""), f"Million tons · {fnum(pchg(d_c), 1, suffix='%', sign=True)} from a year earlier", value=fnum(d_c[-1] / 1e6 if d_c else None, 2)),
+               stat("January–June 2026", f"Million tons · {fnum((hy_tot[-1] / hy_tot[-2] - 1) * 100 if len(hy_tot) > 1 else None, 1, suffix='%', sign=True)} from a year earlier", value=fnum(hy_tot[-1] / 1e6 if hy_tot else None, 2))],
+        body=[section("Tonnage by year", "Short tons crossing the port's docks. Total tonnage fell from 4.4 million in 2008 to 3.4 million in 2013, then climbed to records in 2024 and 2025.",
+                      vbars("Total tonnage, million short tons", d_y, M(d_t), f"Source: {dk.get('source', '')}. Latest revision used for each year.", dec=2, show_values=True),
+                      vbars("Fuel and containers, million short tons", d_y, [("Fuel", M(d_f)), ("Containers and trailers", M(d_c))],
+                            "Fuel counts tanker and barge deliveries over the dock, pipeline transfers through the port's valve yard, and vessel fueling. Containers and trailers carry most groceries and consumer goods.", dec=2),
+                      vbars("Cement and dry bulk, thousand short tons", d_y, [round(x / 1000) for x in d_b],
+                            "Nearly all dry bulk here is cement, and most cement used in Alaska arrives through this port, so the series is a rough read on construction.", dec=0, show_values=True)),
+              section("2026 so far", "January through June, compared with the same months of earlier years.",
+                      table("Tonnage by type, January–June", ["Commodity"] + phy.get("years", []) + ["vs. a year earlier"],
+                            [[r[0]] + hy_fmt(r[1]) + [fnum((r[1][-1] / r[1][-2] - 1) * 100, 1, suffix="%", sign=True)] for r in hy_rows]
+                            + ([["Total"] + hy_fmt(hy_tot) + [fnum((hy_tot[-1] / hy_tot[-2] - 1) * 100, 1, suffix="%", sign=True)]] if hy_tot else []),
+                            f"Short tons. Source: {phy.get('source', '')}.", right=tuple(range(1, len(phy.get('years', [])) + 2)))),
+              section("The longer view", "The Army Corps of Engineers has counted waterborne freight at Anchorage for decades. Its count covers cargo moved by vessel in the harbor; the port's own dock count also includes fuel piped through its valve yard, so the two series aren't directly comparable.",
+                      vbars("Waterborne freight at Anchorage (Army Corps), million short tons", us.get("years", []), [round(x / 1000, 2) for x in us.get("thousand_tons", [])],
+                            f"Source: {us.get('source', '')}. Petroleum products were {fnum(us.get('petroleum_2001'))} thousand tons of the 2001 total.", dec=2)),
+              section("Rebuilding the port", f"The Port of Alaska Modernization Program is a ${pt.get('program_cost_bn', '')} billion plan to replace the aging docks, paid for largely by a per-ton surcharge on cargo.",
+                      bullets("Milestones", [
+                          "2003–2013: a federally managed expansion raises about $439 million, then is abandoned when its dock design proves unsuitable.",
+                          "2014: the city starts the current, scaled-back modernization program.",
+                          "2022: the new petroleum and cement terminal opens.",
+                          "March 2026: work starts on Cargo Terminal 1 ($977 million, due 2029).",
+                          "July 2026: the federal government settles the expansion lawsuit for $191.3 million, which goes to construction."]),
+                      bullets("What shippers pay", [
+                          f"The modernization surcharge is ${sc.get('current', 0):.2f} per ton of cargo in 2026.",
+                          f"It rises to ${sc.get('next', 0):.2f} per ton in January 2027."]))],
+        notes=["Dock tonnage is in short tons (2,000 lb) as the port reports it. It counts weight, not value or container counts.",
+               "\"Dockside\" fuel arrives by tanker or barge; \"shoreside\" fuel moves through the port's valve yard by pipeline. The split shifts sharply around 2015 after the North Pole refinery closed, so compare total fuel over long periods.",
+               "The port revises recent years between reports; this page uses the latest figure for each year.",
+               "Army Corps figures for 2002 onward are published in an online database that isn't yet loaded here."],
+        sources=[src("Port of Alaska, ten-year tonnage reports", "https://www.portofalaska.com/business/ten-year-tonnage-summary/"),
+                 src("Municipality of Anchorage, Port performance report Q2 2026", "https://www.muni.org/Departments/Mayor/Documents/PVRs/2026%20PVRs/2026%20Q2%20PVRs/2026%202Q%20PVR%20Port%20for%20Web.pdf"),
+                 src("USACE, Waterborne Commerce of the United States 1995, Part 4", "https://rosap.ntl.bts.gov/view/dot/4655"),
+                 src("USACE, Waterborne Commerce of the United States 1998, Part 4", "https://rosap.ntl.bts.gov/view/dot/42429/dot_42429_DS1.pdf"),
+                 src("USACE, Waterborne Commerce of the United States 2001, Part 4", "https://rosap.ntl.bts.gov/view/dot/5467"),
+                 src("PAMP Comprehensive Plan of Finance, Nov 2025", "https://modernization.portofalaska.com/wp-content/uploads/2026/02/PAMP_Comprehensive_Plan_of_Finance-First_Revision_Nov.2025.pdf"),
+                 src("Port of Alaska, Modernization Program", "https://www.portofalaska.com/port-of-alaska-modernization-program/"),
+                 src("Alaska Business, Feds settle Port of Alaska lawsuit for $191.3M", "https://www.akbizmag.com/industry/government/feds-settle-port-of-alaska-lawsuit-for-191-3m/"),
+                 src("Alaska's News Source, Cargo Terminal 1 construction begins", "https://www.alaskasnewssource.com/2026/06/30/construction-begins-new-cargo-terminal-don-young-port-alaska/")],
+        tile=tile(value=fnum(d_t[-1] / 1e6, 2, suffix="M") if d_t else "—", change=f"{fnum(pchg(d_t), 1, suffix='%', sign=True)} y/y" if d_t else "",
+                  unit=f"short tons, {d_y[-1] if d_y else ''}")))
 
     # ANC air cargo: hand-kept figures in data/manual/air-cargo.json; Alaska air
     # transportation jobs live from FRED (data/air-cargo.json).
@@ -552,13 +599,34 @@ def pages():
                  src("Alaska Business, Tracking Progress", "https://digital.akbizmag.com/?p=76233")],
         tile=tile(value="3.9M", change="+8% vs 2024", unit="tons, 2025")))
 
-    P.append(dict(slug="barge-amhs", group=G, title="Barge & AMHS volumes", row="Physical volumes", status="planned",
+    am = manual("amhs")
+    a_y, a_p, a_v = am.get("years", []), am.get("passengers", []), am.get("vehicles", [])
+    ar = am.get("regions", {})
+    se, sw = ar.get("southeast", {}), ar.get("southwest", {})
+    P.append(dict(slug="barge-amhs", group=G, title="Barge & AMHS volumes", row="Physical volumes", status="static",
         lead="Barges supply most coastal and river communities, and the Alaska Marine Highway System carries people and vehicles between Southeast, Southcentral and Southwest Alaska. Together they are the freight and transit backbone for places off the road system.",
-        body=[plan(["Alaska Marine Highway traffic by year: passengers and vehicles, and sailings by route, from the state's annual traffic volume reports.",
-                    "Waterborne freight to Alaska ports from the U.S. Army Corps of Engineers.",
-                    "The number of communities served and sailings cancelled."])],
-        notes=["This page is a placeholder until volumes are assembled."],
-        tile=tile(unit="loads")))
+        stats=[stat("Ferry passengers, " + (a_y[-1] if a_y else ""), f"{fnum(pct(a_p[-1], a_p[-2]) if len(a_p) > 1 else None, 1, suffix='%', sign=True)} from a year earlier", value=fnum(a_p[-1] if a_p else None)),
+               stat("Vehicles carried, " + (a_y[-1] if a_y else ""), f"{fnum(pct(a_v[-1], a_v[-2]) if len(a_v) > 1 else None, 1, suffix='%', sign=True)} from a year earlier", value=fnum(a_v[-1] if a_v else None)),
+               stat("Passengers vs. 2019", "Last year before the pandemic", value=fnum(pct(a_p[-1], a_p[a_y.index("2019")]) if "2019" in a_y else None, 0, suffix="%", sign=True)),
+               stat("Ports served", f"{am.get('ports_with_traffic_2025', '')} had traffic in 2025", value=str(am.get("ports_served", "—")))],
+        body=[section("Ferry traffic", "Passengers and vehicles carried by the Alaska Marine Highway System each calendar year. Ridership was above 300,000 a year through 2014, fell steadily as the fleet aged and sailings were cut, collapsed in 2020, and has recovered to a little over half its 2000s level.",
+                      vbars("Passengers, thousands", a_y, [round(x / 1000) for x in a_p], f"Source: {am.get('source', '')}.", dec=0, show_values=True),
+                      vbars("Vehicles, thousands", a_y, [round(x / 1000) for x in a_v], "Includes cars, trucks, RVs and freight vans carried aboard.", dec=0, show_values=True)),
+              section("Where the ferries run", "Southeast routes carry about three-quarters of passengers; Southwest covers Kodiak, the Kenai Peninsula, Prince William Sound and the Aleutian chain.",
+                      table("Traffic by region", ["Region", "Passengers " + ar.get("years", ["", ""])[0], "Passengers " + ar.get("years", ["", ""])[-1], "Vehicles " + ar.get("years", ["", ""])[0], "Vehicles " + ar.get("years", ["", ""])[-1]],
+                            [["Southeast"] + [fnum(x) for x in se.get("passengers", [])] + [fnum(x) for x in se.get("vehicles", [])],
+                             ["Southwest"] + [fnum(x) for x in sw.get("passengers", [])] + [fnum(x) for x in sw.get("vehicles", [])]] if se else [],
+                            f"Source: {am.get('source', '')}.", right=(1, 2, 3, 4)),
+                      bullets("Service gaps", [
+                          "No cross-Gulf trips ran in 2024 or 2025 because of crew shortages and vessel availability.",
+                          "The Matanuska had no sailings in 2023 and 2024.",
+                          "The Kennicott was out of service for 10 months in 2025 for new generators."])),
+              plan(["Barge freight to coastal and river communities. Carriers don't publish volumes, and Army Corps harbor counts for recent years aren't loaded yet."], title="Still to add")],
+        notes=["Traffic counts are calendar-year totals of passengers and vehicles boarding AMHS vessels, including contract vessels."],
+        sources=[src("Alaska Marine Highway System, Annual Traffic Volume Report 2025", "https://dot.alaska.gov/amhs/doc/ATVR/atvr_2025.pdf"),
+                 src("Alaska Marine Highway System, reports", "https://dot.alaska.gov/amhs/reports.shtml")],
+        tile=tile(value=fnum(a_p[-1] / 1000, 0, suffix="K") if a_p else "—", change=f"{fnum(pct(a_p[-1], a_p[-2]), 1, suffix='%', sign=True)} y/y" if len(a_p) > 1 else "",
+                  unit=f"ferry passengers, {a_y[-1] if a_y else ''}")))
 
     # ======================= BUSINESS DYNAMISM =======================
     G = "Micro · Business dynamism"

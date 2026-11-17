@@ -1,0 +1,205 @@
+{
+ "_about": "Port of Alaska (Anchorage) tonnage. Dock tonnage by type from the port's ten-year tonnage reports (latest revision for each year); Jan-Jun from the Municipality's Q2 2026 port performance report; long history from USACE Waterborne Commerce of the United States, Part 4 (Anchorage harbor, comparative statement of traffic). Short tons.",
+ "dock": {
+  "source": "Port of Alaska, ten-year tonnage reports (2017 and 2025 editions)",
+  "years": [
+   "2007",
+   "2008",
+   "2009",
+   "2010",
+   "2011",
+   "2012",
+   "2013",
+   "2014",
+   "2015",
+   "2016",
+   "2017",
+   "2018",
+   "2019",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ],
+  "total": [
+   4316392,
+   4370277,
+   3798272,
+   3962962,
+   4135214,
+   3754231,
+   3408158,
+   3455707,
+   3773584,
+   3498171,
+   3497845,
+   3948665,
+   4265763,
+   4704101,
+   4987806,
+   5189935,
+   5165464,
+   5483779,
+   5476366
+  ],
+  "fuel": [
+   2400926,
+   2410732,
+   2002095,
+   2116791,
+   2310892,
+   1877990,
+   1541287,
+   1498424,
+   1965624,
+   1788763,
+   1802273,
+   2209837,
+   2499028,
+   2959012,
+   3261592,
+   3429817,
+   3351216,
+   3683439,
+   3729012
+  ],
+  "containers": [
+   1785518,
+   1831816,
+   1713086,
+   1736943,
+   1705176,
+   1740969,
+   1738601,
+   1811136,
+   1681223,
+   1582951,
+   1592473,
+   1631303,
+   1655612,
+   1642547,
+   1638486,
+   1642100,
+   1659727,
+   1683498,
+   1645106
+  ],
+  "bulk": [
+   124089,
+   116789,
+   81494,
+   109228,
+   118280,
+   119939,
+   119271,
+   140684,
+   126737,
+   122006,
+   97223,
+   105326,
+   109956,
+   101853,
+   87692,
+   117837,
+   154516,
+   116841,
+   102241
+  ]
+ },
+ "half_year": {
+  "source": "Municipality of Anchorage, Port performance report, Q2 2026",
+  "label": "January-June",
+  "years": [
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "rows": [
+   [
+    "Fuel, dockside",
+    [
+     1079515,
+     1125140,
+     1211371,
+     1153551
+    ]
+   ],
+   [
+    "Fuel, shoreside",
+    [
+     514681,
+     489556,
+     656697,
+     586483
+    ]
+   ],
+   [
+    "Containers & trailers",
+    [
+     804605,
+     854171,
+     836718,
+     843288
+    ]
+   ],
+   [
+    "Cement / dry bulk",
+    [
+     64237,
+     57871,
+     63661,
+     60186
+    ]
+   ]
+  ]
+ },
+ "usace": {
+  "source": "U.S. Army Corps of Engineers, Waterborne Commerce of the United States, Part 4 (calendar years 1995, 1998 and 2001 editions), Anchorage harbor",
+  "years": [
+   "1986",
+   "1987",
+   "1988",
+   "1989",
+   "1990",
+   "1991",
+   "1992",
+   "1993",
+   "1994",
+   "1995",
+   "1996",
+   "1997",
+   "1998",
+   "1999",
+   "2000",
+   "2001"
+  ],
+  "thousand_tons": [
+   1332,
+   2105,
+   2294,
+   2253,
+   1706,
+   2309,
+   2540,
+   2470,
+   2559,
+   3222,
+   3401,
+   3424,
+   3589,
+   3701,
+   3157,
+   2861
+  ],
+  "petroleum_2001": 946
+ },
+ "surcharge_per_ton": {
+  "current": 8.05,
+  "next": 22.76,
+  "next_effective": "2027-01-01"
+ },
+ "program_cost_bn": 2.76
+}
