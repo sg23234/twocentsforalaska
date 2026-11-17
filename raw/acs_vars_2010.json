@@ -1,0 +1,3377 @@
+{
+  "variables": {
+    "S2301_C01_021MA": {
+      "label": "Annotation of Total!!Margin of Error!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020EA": {
+      "label": "Annotation of In labor force!!Estimate!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022EA": {
+      "label": "Annotation of Total!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022MA": {
+      "label": "Annotation of Total!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023EA": {
+      "label": "Annotation of Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020EA": {
+      "label": "Annotation of Employed!!Estimate!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020MA": {
+      "label": "Annotation of Employed!!Margin of Error!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021EA": {
+      "label": "Annotation of Employed!!Estimate!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020EA": {
+      "label": "Annotation of Total!!Estimate!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021MA": {
+      "label": "Annotation of Employed!!Margin of Error!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020MA": {
+      "label": "Annotation of Total!!Margin of Error!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_021EA": {
+      "label": "Annotation of Total!!Estimate!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023MA": {
+      "label": "Annotation of Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024EA": {
+      "label": "Annotation of Total!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024MA": {
+      "label": "Annotation of Total!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026MA": {
+      "label": "Annotation of Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028EA": {
+      "label": "Annotation of In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026EA": {
+      "label": "Annotation of Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027EA": {
+      "label": "Annotation of In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027EA": {
+      "label": "Annotation of Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027MA": {
+      "label": "Annotation of Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026EA": {
+      "label": "Annotation of In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028EA": {
+      "label": "Annotation of Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028MA": {
+      "label": "Annotation of Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029EA": {
+      "label": "Annotation of Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029MA": {
+      "label": "Annotation of Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025EA": {
+      "label": "Annotation of In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022EA": {
+      "label": "Annotation of Employed!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022MA": {
+      "label": "Annotation of Employed!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024EA": {
+      "label": "Annotation of In labor force!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023MA": {
+      "label": "Annotation of Employed!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023EA": {
+      "label": "Annotation of Employed!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023EA": {
+      "label": "Annotation of In labor force!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024MA": {
+      "label": "Annotation of Employed!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024EA": {
+      "label": "Annotation of Employed!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022EA": {
+      "label": "Annotation of In labor force!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025MA": {
+      "label": "Annotation of Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021EA": {
+      "label": "Annotation of In labor force!!Estimate!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025EA": {
+      "label": "Annotation of Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017EA": {
+      "label": "Annotation of Employed!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017MA": {
+      "label": "Annotation of Employed!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018EA": {
+      "label": "Annotation of Employed!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018MA": {
+      "label": "Annotation of Employed!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019EA": {
+      "label": "Annotation of Employed!!Estimate!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019MA": {
+      "label": "Annotation of Employed!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029EA": {
+      "label": "Annotation of In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017EA": {
+      "label": "Annotation of Total!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017MA": {
+      "label": "Annotation of Total!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018EA": {
+      "label": "Annotation of Total!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018MA": {
+      "label": "Annotation of Total!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "NAME": {
+      "label": "Geographic Area Name",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018E": {
+      "label": "Unemployment rate!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018M": {
+      "label": "Unemployment rate!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017E": {
+      "label": "Unemployment rate!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017M": {
+      "label": "Unemployment rate!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001E": {
+      "label": "Unemployment rate!!Estimate!!Population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!75 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030M": {
+      "label": "Unemployment rate!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030E": {
+      "label": "Unemployment rate!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020E": {
+      "label": "Unemployment rate!!Estimate!!SEX!!Male",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024E": {
+      "label": "Unemployment rate!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024M": {
+      "label": "Unemployment rate!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023E": {
+      "label": "Unemployment rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023M": {
+      "label": "Unemployment rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021M": {
+      "label": "Unemployment rate!!Margin of Error!!SEX!!Female",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022E": {
+      "label": "Unemployment rate!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022M": {
+      "label": "Unemployment rate!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020M": {
+      "label": "Unemployment rate!!Margin of Error!!SEX!!Male",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021E": {
+      "label": "Unemployment rate!!Estimate!!SEX!!Female",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030EA": {
+      "label": "Annotation of Total!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030MA": {
+      "label": "Annotation of Total!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009EA": {
+      "label": "Annotation of Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009MA": {
+      "label": "Annotation of Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019EA": {
+      "label": "Annotation of In labor force!!Estimate!!Population 20 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018EA": {
+      "label": "Annotation of In labor force!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017EA": {
+      "label": "Annotation of In labor force!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002E": {
+      "label": "In labor force!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002M": {
+      "label": "In labor force!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001M": {
+      "label": "In labor force!!Margin of Error!!Population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001E": {
+      "label": "In labor force!!Estimate!!Population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008E": {
+      "label": "In labor force!!Estimate!!AGE!!75 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008M": {
+      "label": "In labor force!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007E": {
+      "label": "In labor force!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007M": {
+      "label": "In labor force!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006E": {
+      "label": "In labor force!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006M": {
+      "label": "In labor force!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005E": {
+      "label": "In labor force!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005M": {
+      "label": "In labor force!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004E": {
+      "label": "In labor force!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004M": {
+      "label": "In labor force!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003E": {
+      "label": "In labor force!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003M": {
+      "label": "In labor force!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019E": {
+      "label": "In labor force!!Estimate!!Population 20 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019M": {
+      "label": "In labor force!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018E": {
+      "label": "In labor force!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018M": {
+      "label": "In labor force!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017E": {
+      "label": "In labor force!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017M": {
+      "label": "In labor force!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015E": {
+      "label": "In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015M": {
+      "label": "In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026E": {
+      "label": "In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026M": {
+      "label": "In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025E": {
+      "label": "In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025M": {
+      "label": "In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024E": {
+      "label": "In labor force!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024M": {
+      "label": "In labor force!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023M": {
+      "label": "In labor force!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023E": {
+      "label": "In labor force!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022M": {
+      "label": "In labor force!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022E": {
+      "label": "In labor force!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021M": {
+      "label": "In labor force!!Margin of Error!!SEX!!Female",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021E": {
+      "label": "In labor force!!Estimate!!SEX!!Female",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020M": {
+      "label": "In labor force!!Margin of Error!!SEX!!Male",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020E": {
+      "label": "In labor force!!Estimate!!SEX!!Male",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029E": {
+      "label": "In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029M": {
+      "label": "In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028E": {
+      "label": "In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028M": {
+      "label": "In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027E": {
+      "label": "In labor force!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027M": {
+      "label": "In labor force!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030E": {
+      "label": "In labor force!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030M": {
+      "label": "In labor force!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!SEX!!Male",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001EA": {
+      "label": "Annotation of Total!!Estimate!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!SEX!!Female",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001MA": {
+      "label": "Annotation of Employed!!Margin of Error!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001EA": {
+      "label": "Annotation of Employed!!Estimate!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001EA": {
+      "label": "Annotation of In labor force!!Estimate!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003MA": {
+      "label": "Annotation of Employed!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003EA": {
+      "label": "Annotation of Employed!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009EA": {
+      "label": "Annotation of In labor force!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003EA": {
+      "label": "Annotation of In labor force!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030MA": {
+      "label": "Annotation of In labor force!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030EA": {
+      "label": "Annotation of In labor force!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030MA": {
+      "label": "Annotation of Employed!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030EA": {
+      "label": "Annotation of Employed!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007M": {
+      "label": "Employed!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007E": {
+      "label": "Employed!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006M": {
+      "label": "Employed!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006E": {
+      "label": "Employed!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008M": {
+      "label": "Employed!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008E": {
+      "label": "Employed!!Estimate!!AGE!!75 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003M": {
+      "label": "Employed!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003E": {
+      "label": "Employed!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002M": {
+      "label": "Employed!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002E": {
+      "label": "Employed!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005M": {
+      "label": "Employed!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005E": {
+      "label": "Employed!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004M": {
+      "label": "Employed!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004E": {
+      "label": "Employed!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001M": {
+      "label": "Employed!!Margin of Error!!Population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001E": {
+      "label": "Employed!!Estimate!!Population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019M": {
+      "label": "Employed!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019E": {
+      "label": "Employed!!Estimate!!Population 20 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018M": {
+      "label": "Employed!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018E": {
+      "label": "Employed!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "GEO_ID": {
+      "label": "Geography",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017M": {
+      "label": "Employed!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017E": {
+      "label": "Employed!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012M": {
+      "label": "Employed!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012E": {
+      "label": "Employed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020M": {
+      "label": "Employed!!Margin of Error!!SEX!!Male",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021E": {
+      "label": "Employed!!Estimate!!SEX!!Female",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020E": {
+      "label": "Employed!!Estimate!!SEX!!Male",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027M": {
+      "label": "Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027E": {
+      "label": "Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026M": {
+      "label": "Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026E": {
+      "label": "Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029M": {
+      "label": "Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029E": {
+      "label": "Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028M": {
+      "label": "Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028E": {
+      "label": "Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022M": {
+      "label": "Employed!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023M": {
+      "label": "Employed!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023E": {
+      "label": "Employed!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021M": {
+      "label": "Employed!!Margin of Error!!SEX!!Female",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022E": {
+      "label": "Employed!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025M": {
+      "label": "Employed!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025E": {
+      "label": "Employed!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024M": {
+      "label": "Employed!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024E": {
+      "label": "Employed!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030M": {
+      "label": "Employed!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030E": {
+      "label": "Employed!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 16 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030E": {
+      "label": "Total!!Estimate!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030M": {
+      "label": "Total!!Margin of Error!!PERCENT IMPUTED!!Employment status for population 16 years and over",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023M": {
+      "label": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024E": {
+      "label": "Total!!Estimate!!DISABILITY STATUS!!With any disability",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024M": {
+      "label": "Total!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_021M": {
+      "label": "Total!!Margin of Error!!SEX!!Female",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022E": {
+      "label": "Total!!Estimate!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022M": {
+      "label": "Total!!Margin of Error!!SEX!!Female!!With own children under 6 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023E": {
+      "label": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020E": {
+      "label": "Total!!Estimate!!SEX!!Male",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020M": {
+      "label": "Total!!Margin of Error!!SEX!!Male",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_021E": {
+      "label": "Total!!Estimate!!SEX!!Female",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018E": {
+      "label": "Total!!Estimate!!White alone, not Hispanic or Latino",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018M": {
+      "label": "Total!!Margin of Error!!White alone, not Hispanic or Latino",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017E": {
+      "label": "Total!!Estimate!!Hispanic or Latino origin (of any race)",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017M": {
+      "label": "Total!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008E": {
+      "label": "Total!!Estimate!!AGE!!75 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008M": {
+      "label": "Total!!Margin of Error!!AGE!!75 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001M": {
+      "label": "Total!!Margin of Error!!Population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002E": {
+      "label": "Total!!Estimate!!AGE!!16 to 19 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002M": {
+      "label": "Total!!Margin of Error!!AGE!!16 to 19 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003E": {
+      "label": "Total!!Estimate!!AGE!!20 to 24 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003M": {
+      "label": "Total!!Margin of Error!!AGE!!20 to 24 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001E": {
+      "label": "Total!!Estimate!!Population 16 years and over",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006E": {
+      "label": "Total!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006M": {
+      "label": "Total!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007E": {
+      "label": "Total!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007M": {
+      "label": "Total!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004E": {
+      "label": "Total!!Estimate!!AGE!!25 to 44 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004M": {
+      "label": "Total!!Margin of Error!!AGE!!25 to 44 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005E": {
+      "label": "Total!!Estimate!!AGE!!45 to 54 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005M": {
+      "label": "Total!!Margin of Error!!AGE!!45 to 54 years",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!55 to 64 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!65 to 74 years",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    }
+  }
+}
