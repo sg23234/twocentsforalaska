@@ -1,0 +1,4500 @@
+{
+  "variables": {
+    "S2301_C01_021MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020EA": {
+      "label": "Annotation of Total!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020MA": {
+      "label": "Annotation of Total!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_021EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025EA": {
+      "label": "Annotation of Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "NAME": {
+      "label": "Geographic Area Name",
+      "concept": "AGE AND SEX ;POPULATION 60 YEARS AND OVER IN THE UNITED STATES ;POPULATION 60 YEARS AND OVER IN PUERTO RICO ;POPULATION 65 YEARS AND OVER IN THE UNITED STATES ;POPULATION 65 YEARS AND OVER IN PUERTO RICO ;SELECTED CHARACTERISTICS OF THE NATIVE AND FOREIGN-BORN POPULATIONS ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY PERIOD OF ENTRY INTO THE UNITED STATES ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY PERIOD OF ENTRY INTO PUERTO RICO ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: EUROPE ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: AFRICA, NORTHERN AMERICA, AND OCEANIA ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: ASIA ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: LATIN AMERICA ;SELECTED CHARACTERISTICS OF THE TOTAL AND NATIVE POPULATIONS IN THE UNITED STATES ;LANGUAGE SPOKEN AT HOME ;LIMITED ENGLISH SPEAKING HOUSEHOLDS ;CHARACTERISTICS OF PEOPLE BY LANGUAGE SPOKEN AT HOME ;POVERTY STATUS IN THE PAST 12 MONTHS ;POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILIES ;SELECTED CHARACTERISTICS OF PEOPLE AT SPECIFIED LEVELS OF POVERTY IN THE PAST 12 MONTHS ;DISABILITY CHARACTERISTICS ;SELECTED ECONOMIC CHARACTERISTICS FOR THE CIVILIAN NONINSTITUTIONALIZED POPULATION BY DISABILITY STATUS ;INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;MEAN INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;MEDIAN INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) OF WORKERS BY SEX AND WOMEN'S EARNINGS AS A PERCENTAGE OF MEN'S EARNINGS BY SELECTED CHARACTERISTICS ;VETERAN STATUS ;FOOD STAMPS/Supplemental Nutrition Assistance Program (SNAP) ;EMPLOYMENT STATUS ;EMPLOYMENT CHARACTERISTICS OF FAMILIES ;WORK STATUS IN THE PAST 12 MONTHS ;OCCUPATION BY SEX FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY SEX FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY OCCUPATION FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY CLASS OF WORKER FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY CLASS OF WORKER FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPANCY CHARACTERISTICS ;DEMOGRAPHIC CHARACTERISTICS FOR OCCUPIED HOUSING UNITS ;FINANCIAL CHARACTERISTICS ;PHYSICAL HOUSING CHARACTERISTICS FOR OCCUPIED HOUSING UNITS ;FINANCIAL CHARACTERISTICS FOR HOUSING UNITS WITH A MORTGAGE ;FINANCIAL CHARACTERISTICS FOR HOUSING UNITS WITHOUT A MORTGAGE ;CHARACTERISTICS OF THE GROUP QUARTERS POPULATION IN THE UNITED STATES ;CHARACTERISTICS OF THE GROUP QUARTERS POPULATION BY GROUP QUARTERS TYPE ;CHARACTERISTICS OF THE GROUP QUARTERS POPULATION IN THE UNITED STATES ;SELECTED CHARACTERISTICS OF HEALTH INSURANCE COVERAGE IN THE UNITED STATES ;FIELD OF BACHELOR'S DEGREE FOR FIRST MAJOR ;SELECTED CHARACTERISTICS OF THE UNINSURED IN THE UNITED STATES ;SELECTED CHARACTERISTICS OF THE UNINSURED IN PUERTO RICO ;PRIVATE HEALTH INSURANCE COVERAGE BY TYPE ;PUBLIC HEALTH INSURANCE COVERAGE BY TYPE ;TYPES OF COMPUTERS AND INTERNET SUBSCRIPTIONS ;TYPES OF INTERNET SUBSCRIPTIONS BY SELECTED CHARACTERISTICS ;SELECTED CHARACTERISTICS OF THE TOTAL AND NATIVE POPULATIONS IN PUERTO RICO ;GEOGRAPHIC MOBILITY BY SELECTED CHARACTERISTICS IN THE UNITED STATES ;GEOGRAPHIC MOBILITY BY SELECTED CHARACTERISTICS IN PUERTO RICO ;MOVERS BETWEEN REGIONS ;COMMUTING CHARACTERISTICS BY SEX ;MEANS OF TRANSPORTATION TO WORK BY SELECTED CHARACTERISTICS ;MEANS OF TRANSPORTATION TO WORK BY SELECTED CHARACTERISTICS FOR WORKPLACE GEOGRAPHY ;CHILDREN CHARACTERISTICS ;CHARACTERISTICS OF TEENAGERS 15 TO 19 YEARS OLD ;GRANDCHILDREN CHARACTERISTICS ;GRANDPARENTS ;HOUSEHOLDS AND FAMILIES ;MARITAL STATUS ;CHARACTERISTICS OF PEOPLE WITH A MARITAL EVENT IN THE LAST 12 MONTHS ;FERTILITY ;SCHOOL ENROLLMENT ;EDUCATIONAL ATTAINMENT",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019EA": {
+      "label": "Annotation of Total!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019MA": {
+      "label": "Annotation of Total!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_034MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_035EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_035MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_032MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_032EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_033EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_033MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_034EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019E": {
+      "label": "Unemployment rate!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019M": {
+      "label": "Unemployment rate!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017E": {
+      "label": "Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017M": {
+      "label": "Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_004M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_003M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_002M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001E": {
+      "label": "Unemployment rate!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_001M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_008M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_007M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_006M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_005M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009E": {
+      "label": "Unemployment rate!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_009M": {
+      "label": "Unemployment rate!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_031M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_032E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030M": {
+      "label": "Unemployment rate!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_031E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030E": {
+      "label": "Unemployment rate!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_035E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_035M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_034E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_034M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_032M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_033E": {
+      "label": "Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_033M": {
+      "label": "Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020E": {
+      "label": "Unemployment rate!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020M": {
+      "label": "Unemployment rate!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028E": {
+      "label": "Unemployment rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028M": {
+      "label": "Unemployment rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025E": {
+      "label": "Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025M": {
+      "label": "Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029E": {
+      "label": "Unemployment rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029M": {
+      "label": "Unemployment rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_011EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_010EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_013EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_012EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030EA": {
+      "label": "Annotation of Total!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030MA": {
+      "label": "Annotation of Total!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_015EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_031EA": {
+      "label": "Annotation of Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_031MA": {
+      "label": "Annotation of Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_014EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_017EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_016EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_019EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_018MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_014M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_013M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_012E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_011E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_010E": {
+      "label": "Labor Force Participation Rate!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_019M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_018M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_017M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_016M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015E": {
+      "label": "Labor Force Participation Rate!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_015M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_026M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_025M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_024M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_023E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_022E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_021E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_020E": {
+      "label": "Labor Force Participation Rate!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029E": {
+      "label": "Labor Force Participation Rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_029M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028E": {
+      "label": "Labor Force Participation Rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_028M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027E": {
+      "label": "Labor Force Participation Rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_027M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028EA": {
+      "label": "Annotation of Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030E": {
+      "label": "Labor Force Participation Rate!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028MA": {
+      "label": "Annotation of Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_035E": {
+      "label": "Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_035M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_034M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_034E": {
+      "label": "Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_033M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_033E": {
+      "label": "Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_032M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_032E": {
+      "label": "Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_031M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_031E": {
+      "label": "Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030M": {
+      "label": "Labor Force Participation Rate!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029EA": {
+      "label": "Annotation of Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029MA": {
+      "label": "Annotation of Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_020EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001EA": {
+      "label": "Annotation of Total!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_022EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_021EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_024EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_002EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_023EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_001EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_026EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_025EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_028EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_027EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_029MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_009EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_008EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_007EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_006MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_005MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_004MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_003MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_031EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_031MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_032MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_033EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_032EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_032MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_031MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_032EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_031MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_033EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_031EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_033MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_031EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_034EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_034MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_030EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_030EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_033MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_033EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_032MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_032EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014MA": {
+      "label": "Annotation of Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_035MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_035EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_034MA": {
+      "label": "Annotation of Unemployment rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C04_034EA": {
+      "label": "Annotation of Unemployment rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012EA": {
+      "label": "Annotation of Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_035MA": {
+      "label": "Annotation of Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_035EA": {
+      "label": "Annotation of Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_007E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_006E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_009M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_008E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_035MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_003E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_002E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_005E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_035EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_004E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_001E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_019E": {
+      "label": "Employment/Population Ratio!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_018E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_033MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "GEO_ID": {
+      "label": "Geography",
+      "concept": "AGE AND SEX ;POPULATION 60 YEARS AND OVER IN THE UNITED STATES ;POPULATION 60 YEARS AND OVER IN PUERTO RICO ;POPULATION 65 YEARS AND OVER IN THE UNITED STATES ;POPULATION 65 YEARS AND OVER IN PUERTO RICO ;SELECTED CHARACTERISTICS OF THE NATIVE AND FOREIGN-BORN POPULATIONS ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY PERIOD OF ENTRY INTO THE UNITED STATES ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY PERIOD OF ENTRY INTO PUERTO RICO ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: EUROPE ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: AFRICA, NORTHERN AMERICA, AND OCEANIA ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: ASIA ;SELECTED CHARACTERISTICS OF THE FOREIGN-BORN POPULATION BY REGION OF BIRTH: LATIN AMERICA ;SELECTED CHARACTERISTICS OF THE TOTAL AND NATIVE POPULATIONS IN THE UNITED STATES ;LANGUAGE SPOKEN AT HOME ;LIMITED ENGLISH SPEAKING HOUSEHOLDS ;CHARACTERISTICS OF PEOPLE BY LANGUAGE SPOKEN AT HOME ;POVERTY STATUS IN THE PAST 12 MONTHS ;POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILIES ;SELECTED CHARACTERISTICS OF PEOPLE AT SPECIFIED LEVELS OF POVERTY IN THE PAST 12 MONTHS ;DISABILITY CHARACTERISTICS ;SELECTED ECONOMIC CHARACTERISTICS FOR THE CIVILIAN NONINSTITUTIONALIZED POPULATION BY DISABILITY STATUS ;INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;MEAN INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;MEDIAN INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) ;MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) OF WORKERS BY SEX AND WOMEN'S EARNINGS AS A PERCENTAGE OF MEN'S EARNINGS BY SELECTED CHARACTERISTICS ;VETERAN STATUS ;FOOD STAMPS/Supplemental Nutrition Assistance Program (SNAP) ;EMPLOYMENT STATUS ;EMPLOYMENT CHARACTERISTICS OF FAMILIES ;WORK STATUS IN THE PAST 12 MONTHS ;OCCUPATION BY SEX FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY SEX FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY OCCUPATION FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY CLASS OF WORKER FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY CLASS OF WORKER FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPATION BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;INDUSTRY BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;CLASS OF WORKER BY SEX AND MEDIAN EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS) FOR THE FULL-TIME, YEAR-ROUND CIVILIAN EMPLOYED POPULATION 16 YEARS AND OVER ;OCCUPANCY CHARACTERISTICS ;DEMOGRAPHIC CHARACTERISTICS FOR OCCUPIED HOUSING UNITS ;FINANCIAL CHARACTERISTICS ;PHYSICAL HOUSING CHARACTERISTICS FOR OCCUPIED HOUSING UNITS ;FINANCIAL CHARACTERISTICS FOR HOUSING UNITS WITH A MORTGAGE ;FINANCIAL CHARACTERISTICS FOR HOUSING UNITS WITHOUT A MORTGAGE ;CHARACTERISTICS OF THE GROUP QUARTERS POPULATION IN THE UNITED STATES ;CHARACTERISTICS OF THE GROUP QUARTERS POPULATION BY GROUP QUARTERS TYPE ;CHARACTERISTICS OF THE GROUP QUARTERS POPULATION IN THE UNITED STATES ;SELECTED CHARACTERISTICS OF HEALTH INSURANCE COVERAGE IN THE UNITED STATES ;FIELD OF BACHELOR'S DEGREE FOR FIRST MAJOR ;SELECTED CHARACTERISTICS OF THE UNINSURED IN THE UNITED STATES ;SELECTED CHARACTERISTICS OF THE UNINSURED IN PUERTO RICO ;PRIVATE HEALTH INSURANCE COVERAGE BY TYPE ;PUBLIC HEALTH INSURANCE COVERAGE BY TYPE ;TYPES OF COMPUTERS AND INTERNET SUBSCRIPTIONS ;TYPES OF INTERNET SUBSCRIPTIONS BY SELECTED CHARACTERISTICS ;SELECTED CHARACTERISTICS OF THE TOTAL AND NATIVE POPULATIONS IN PUERTO RICO ;GEOGRAPHIC MOBILITY BY SELECTED CHARACTERISTICS IN THE UNITED STATES ;GEOGRAPHIC MOBILITY BY SELECTED CHARACTERISTICS IN PUERTO RICO ;MOVERS BETWEEN REGIONS ;COMMUTING CHARACTERISTICS BY SEX ;MEANS OF TRANSPORTATION TO WORK BY SELECTED CHARACTERISTICS ;MEANS OF TRANSPORTATION TO WORK BY SELECTED CHARACTERISTICS FOR WORKPLACE GEOGRAPHY ;CHILDREN CHARACTERISTICS ;CHARACTERISTICS OF TEENAGERS 15 TO 19 YEARS OLD ;GRANDCHILDREN CHARACTERISTICS ;GRANDPARENTS ;HOUSEHOLDS AND FAMILIES ;MARITAL STATUS ;CHARACTERISTICS OF PEOPLE WITH A MARITAL EVENT IN THE LAST 12 MONTHS ;FERTILITY ;SCHOOL ENROLLMENT ;EDUCATIONAL ATTAINMENT",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_034MA": {
+      "label": "Annotation of Labor Force Participation Rate!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C02_034EA": {
+      "label": "Annotation of Labor Force Participation Rate!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_015E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_014E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_017E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_016E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_010E": {
+      "label": "Employment/Population Ratio!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_013E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_011M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_012E": {
+      "label": "Employment/Population Ratio!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_020E": {
+      "label": "Employment/Population Ratio!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_027E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_026E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_029E": {
+      "label": "Employment/Population Ratio!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_028E": {
+      "label": "Employment/Population Ratio!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_023E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_021M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_022E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_025E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_024E": {
+      "label": "Employment/Population Ratio!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_031E": {
+      "label": "Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_030E": {
+      "label": "Employment/Population Ratio!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_032M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_033E": {
+      "label": "Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_031M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_032E": {
+      "label": "Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_035M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_035E": {
+      "label": "Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_033M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_034M": {
+      "label": "Employment/Population Ratio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C03_034E": {
+      "label": "Employment/Population Ratio!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "float",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001MA": {
+      "label": "Annotation of Total!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_035M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030E": {
+      "label": "Total!!Estimate!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_030M": {
+      "label": "Total!!Margin of Error!!DISABILITY STATUS!!With any disability",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_031E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_033M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_034E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_034M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Some college or associate's degree",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_035E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Bachelor's degree or higher",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_031M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_032E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_032M": {
+      "label": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!Less than high school graduate",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_033E": {
+      "label": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 to 64 years!!High school graduate (includes equivalency)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_026M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years and 6 to 17 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_027M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 to 17 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_024M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_025M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Female!!With own children under 18 years!!With own children under 6 years only",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028E": {
+      "label": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_028M": {
+      "label": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029E": {
+      "label": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_029M": {
+      "label": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above the poverty level",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_021M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_022M": {
+      "label": "Total!!Margin of Error!!Population 20 to 64 years!!SEX!!Male",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_023E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years!!SEX!!Female",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020E": {
+      "label": "Total!!Estimate!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_020M": {
+      "label": "Total!!Margin of Error!!White alone, not Hispanic or Latino",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_021E": {
+      "label": "Total!!Estimate!!Population 20 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_014M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!American Indian and Alaska Native alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_015M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Asian alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011M": {
+      "label": "Total!!Margin of Error!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_012M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_013E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Black or African American alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_018M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019E": {
+      "label": "Total!!Estimate!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_019M": {
+      "label": "Total!!Margin of Error!!Hispanic or Latino origin (of any race)",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_016M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Native Hawaiian and Other Pacific Islander alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017E": {
+      "label": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_017M": {
+      "label": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Some other race alone",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010E": {
+      "label": "Total!!Estimate!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_010M": {
+      "label": "Total!!Margin of Error!!AGE!!65 to 74 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_011E": {
+      "label": "Total!!Estimate!!AGE!!75 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008E": {
+      "label": "Total!!Estimate!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_008M": {
+      "label": "Total!!Margin of Error!!AGE!!55 to 59 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009E": {
+      "label": "Total!!Estimate!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009M": {
+      "label": "Total!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_009MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!60 to 64 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001M": {
+      "label": "Total!!Margin of Error!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002E": {
+      "label": "Total!!Estimate!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_002M": {
+      "label": "Total!!Margin of Error!!AGE!!16 to 19 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003E": {
+      "label": "Total!!Estimate!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_003M": {
+      "label": "Total!!Margin of Error!!AGE!!20 to 24 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_001E": {
+      "label": "Total!!Estimate!!Population 16 years and over",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006E": {
+      "label": "Total!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006M": {
+      "label": "Total!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007E": {
+      "label": "Total!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007M": {
+      "label": "Total!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004E": {
+      "label": "Total!!Estimate!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_004M": {
+      "label": "Total!!Margin of Error!!AGE!!25 to 29 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005E": {
+      "label": "Total!!Estimate!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_005M": {
+      "label": "Total!!Margin of Error!!AGE!!30 to 34 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "int",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_006MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!35 to 44 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007EA": {
+      "label": "Annotation of Total!!Estimate!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    },
+    "S2301_C01_007MA": {
+      "label": "Annotation of Total!!Margin of Error!!AGE!!45 to 54 years",
+      "concept": "EMPLOYMENT STATUS",
+      "predicateType": "string",
+      "group": "S2301",
+      "limit": 0,
+      "predicateOnly": true
+    }
+  }
+}
