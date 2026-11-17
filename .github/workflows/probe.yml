@@ -1,0 +1,37 @@
+name: Probe raw files (temporary)
+on:
+  push:
+    branches: [probe-raw]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download
+        run: |
+          mkdir -p raw && cd raw
+          UA="twocentsforalaska.org data refresh (github.com/sg23234/twocentsforalaska)"
+          g(){ curl -sSL -A "$UA" -m 120 -o "$1" "$2" || echo "FAIL $1"; ls -la "$1" 2>/dev/null; }
+          g pfd_age_2020_2025.xlsx "https://live.laborstats.alaska.gov/sites/default/files/2026-02/PFD-Based%20Migration%20by%20Age%20and%20Sex%2C%202020-2025.xlsx"
+          g pfd_age_hist.xlsx "https://live.laborstats.alaska.gov/sites/default/files/2026-02/Historical%20PFD-Based%20Migration%20by%20Age%20and%20Sex%20for%20Alaska%20%281985-2020%29%20and%20Boroughs%20and%20Census%20Areas%20%281990-2020%29_0.xlsx"
+          g pop_index.html "https://live.laborstats.alaska.gov/pop/index.html"
+          g pop_estimates.html "https://live.laborstats.alaska.gov/data-pages/alaska-population-estimates"
+          g qcew_2026_1_area.csv "https://data.bls.gov/cew/data/api/2026/1/area/02000.csv"
+          g qcew_2025_4_area.csv "https://data.bls.gov/cew/data/api/2025/4/area/02000.csv"
+          g qcew_2025_a_area.csv "https://data.bls.gov/cew/data/api/2025/a/area/02000.csv"
+          curl -sSL -A "$UA" -m 120 "https://data.bls.gov/cew/data/api/2025/4/industry/10.csv" | awk -F, 'NR==1 || $1 ~ /^"02/' > qcew_2025_4_ind10_ak.csv; ls -la qcew_2025_4_ind10_ak.csv
+          g acs_vars_2023.json "https://api.census.gov/data/2023/acs/acs1/subject/groups/S2301.json"
+          g acs_s2301_2023.json "https://api.census.gov/data/2023/acs/acs1/subject?get=NAME,group(S2301)&for=state:02,11"
+          g acs_vars_2015.json "https://api.census.gov/data/2015/acs/acs1/subject/groups/S2301.json"
+          g fred_ak_jol.csv "https://fred.stlouisfed.org/graph/fredgraph.csv?id=JTS000000020000000JOL"
+          g fred_ak_jol2.csv "https://fred.stlouisfed.org/graph/fredgraph.csv?id=AKJTSJOL"
+          g fred_ak_unemp.csv "https://fred.stlouisfed.org/graph/fredgraph.csv?id=LASST020000000000004"
+          g fred_ak_unemp2.csv "https://fred.stlouisfed.org/graph/fredgraph.csv?id=LAUST020000000000004"
+          g bls_jolts_ak.json "https://api.bls.gov/publicAPI/v1/timeseries/data/JTS000000020000000JOL"
+          ls -la
+      - name: Commit
+        run: |
+          git config user.name "data-bot"; git config user.email "data-bot@users.noreply.github.com"
+          git add raw; git commit -m "probe raw files" -q; git push
