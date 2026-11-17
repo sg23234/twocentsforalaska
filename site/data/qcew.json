@@ -1,0 +1,479 @@
+{
+ "source": "U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (open data CSV)",
+ "url": "https://www.bls.gov/cew/",
+ "fetched": "2026-11-17",
+ "annual": {
+  "year": 2025,
+  "total": {
+   "wage": 1450.0,
+   "jobs": 332544.0,
+   "chg_pct": 4.9
+  },
+  "private": {
+   "wage": 1446.0,
+   "jobs": 257911.0,
+   "chg_pct": 5.2
+  },
+  "sectors": [
+   {
+    "name": "Mining, oil and gas",
+    "naics": "21",
+    "wage": 3269.0,
+    "jobs": 13099.0,
+    "chg_pct": 4.0
+   },
+   {
+    "name": "Management of companies",
+    "naics": "55",
+    "wage": 2443.0,
+    "jobs": 3261.0,
+    "chg_pct": 9.8
+   },
+   {
+    "name": "Utilities",
+    "naics": "22",
+    "wage": 2277.0,
+    "jobs": 2592.0,
+    "chg_pct": 5.8
+   },
+   {
+    "name": "Professional and technical services",
+    "naics": "54",
+    "wage": 1884.0,
+    "jobs": 13642.0,
+    "chg_pct": 4.4
+   },
+   {
+    "name": "Transportation and warehousing",
+    "naics": "48-49",
+    "wage": 1747.0,
+    "jobs": 23139.0,
+    "chg_pct": 2.2
+   },
+   {
+    "name": "Wholesale trade",
+    "naics": "42",
+    "wage": 1500.0,
+    "jobs": 6459.0,
+    "chg_pct": 3.9
+   },
+   {
+    "name": "Health care and social assistance",
+    "naics": "62",
+    "wage": 1475.0,
+    "jobs": 51043.0,
+    "chg_pct": 4.6
+   },
+   {
+    "name": "Administrative and support",
+    "naics": "56",
+    "wage": 1244.0,
+    "jobs": 12026.0,
+    "chg_pct": 6.1
+   },
+   {
+    "name": "Private education",
+    "naics": "61",
+    "wage": 894.0,
+    "jobs": 2653.0,
+    "chg_pct": 3.1
+   },
+   {
+    "name": "Retail trade",
+    "naics": "44-45",
+    "wage": 831.0,
+    "jobs": 34850.0,
+    "chg_pct": 3.7
+   }
+  ],
+  "government": [
+   {
+    "name": "Federal government",
+    "wage": 1951.0,
+    "jobs": 14839.0,
+    "chg_pct": 2.2
+   },
+   {
+    "name": "State government",
+    "wage": 1511.0,
+    "jobs": 22460.0,
+    "chg_pct": 6.8
+   },
+   {
+    "name": "Local government",
+    "wage": 1241.0,
+    "jobs": 37333.0,
+    "chg_pct": 3.9
+   }
+  ],
+  "boroughs": [
+   {
+    "name": "North Slope",
+    "fips": "02185",
+    "wage": 2639.0,
+    "jobs": 12694.0,
+    "chg_pct": 6.8
+   },
+   {
+    "name": "Northwest Arctic",
+    "fips": "02188",
+    "wage": 1833.0,
+    "jobs": 3010.0,
+    "chg_pct": 6.3
+   },
+   {
+    "name": "Southeast Fairbanks",
+    "fips": "02240",
+    "wage": 1762.0,
+    "jobs": 3093.0,
+    "chg_pct": 1.7
+   },
+   {
+    "name": "Aleutians West",
+    "fips": "02016",
+    "wage": 1567.0,
+    "jobs": 3462.0,
+    "chg_pct": -2.1
+   },
+   {
+    "name": "Nome",
+    "fips": "02180",
+    "wage": 1542.0,
+    "jobs": 3874.0,
+    "chg_pct": 6.6
+   },
+   {
+    "name": "Chugach",
+    "fips": "02063",
+    "wage": 1509.0,
+    "jobs": 3615.0,
+    "chg_pct": 4.6
+   },
+   {
+    "name": "Anchorage",
+    "fips": "02020",
+    "wage": 1500.0,
+    "jobs": 148620.0,
+    "chg_pct": 4.5
+   },
+   {
+    "name": "Bristol Bay",
+    "fips": "02060",
+    "wage": 1458.0,
+    "jobs": 1196.0,
+    "chg_pct": 7.1
+   },
+   {
+    "name": "Fairbanks North Star",
+    "fips": "02090",
+    "wage": 1390.0,
+    "jobs": 37074.0,
+    "chg_pct": 3.7
+   },
+   {
+    "name": "Juneau",
+    "fips": "02110",
+    "wage": 1386.0,
+    "jobs": 17756.0,
+    "chg_pct": 5.2
+   },
+   {
+    "name": "Aleutians East",
+    "fips": "02013",
+    "wage": 1385.0,
+    "jobs": 1835.0,
+    "chg_pct": 0.9
+   },
+   {
+    "name": "Dillingham",
+    "fips": "02070",
+    "wage": 1365.0,
+    "jobs": 2027.0,
+    "chg_pct": 5.1
+   },
+   {
+    "name": "Denali",
+    "fips": "02068",
+    "wage": 1325.0,
+    "jobs": 2058.0,
+    "chg_pct": 2.8
+   },
+   {
+    "name": "Yakutat",
+    "fips": "02282",
+    "wage": 1277.0,
+    "jobs": 313.0,
+    "chg_pct": 6.4
+   },
+   {
+    "name": "Kenai Peninsula",
+    "fips": "02122",
+    "wage": 1272.0,
+    "jobs": 21722.0,
+    "chg_pct": 6.0
+   },
+   {
+    "name": "Ketchikan Gateway",
+    "fips": "02130",
+    "wage": 1270.0,
+    "jobs": 7211.0,
+    "chg_pct": 5.5
+   },
+   {
+    "name": "Sitka",
+    "fips": "02220",
+    "wage": 1270.0,
+    "jobs": 4464.0,
+    "chg_pct": 7.3
+   },
+   {
+    "name": "Kodiak Island",
+    "fips": "02150",
+    "wage": 1203.0,
+    "jobs": 5713.0,
+    "chg_pct": 2.8
+   },
+   {
+    "name": "Matanuska-Susitna",
+    "fips": "02170",
+    "wage": 1177.0,
+    "jobs": 29978.0,
+    "chg_pct": 4.9
+   },
+   {
+    "name": "Wrangell",
+    "fips": "02275",
+    "wage": 1160.0,
+    "jobs": 796.0,
+    "chg_pct": 5.9
+   },
+   {
+    "name": "Copper River",
+    "fips": "02066",
+    "wage": 1126.0,
+    "jobs": 1091.0,
+    "chg_pct": 3.0
+   },
+   {
+    "name": "Haines",
+    "fips": "02100",
+    "wage": 1126.0,
+    "jobs": 1055.0,
+    "chg_pct": 13.2
+   },
+   {
+    "name": "Petersburg",
+    "fips": "02195",
+    "wage": 1124.0,
+    "jobs": 1300.0,
+    "chg_pct": 5.1
+   },
+   {
+    "name": "Skagway",
+    "fips": "02230",
+    "wage": 1124.0,
+    "jobs": 949.0,
+    "chg_pct": 0.7
+   },
+   {
+    "name": "Prince of Wales-Hyder",
+    "fips": "02198",
+    "wage": 1103.0,
+    "jobs": 2131.0,
+    "chg_pct": 4.8
+   },
+   {
+    "name": "Bethel",
+    "fips": "02050",
+    "wage": 1088.0,
+    "jobs": 6225.0,
+    "chg_pct": 3.2
+   },
+   {
+    "name": "Yukon-Koyukuk",
+    "fips": "02290",
+    "wage": 1077.0,
+    "jobs": 2306.0,
+    "chg_pct": 7.5
+   },
+   {
+    "name": "Lake and Peninsula",
+    "fips": "02164",
+    "wage": 999.0,
+    "jobs": 817.0,
+    "chg_pct": 1.4
+   },
+   {
+    "name": "Hoonah-Angoon",
+    "fips": "02105",
+    "wage": 996.0,
+    "jobs": 1030.0,
+    "chg_pct": 1.2
+   },
+   {
+    "name": "Kusilvak",
+    "fips": "02158",
+    "wage": 863.0,
+    "jobs": 2032.0,
+    "chg_pct": 15.4
+   }
+  ]
+ },
+ "quarter": {
+  "year": 2026,
+  "qtr": 1,
+  "total": {
+   "wage": 1519.0,
+   "jobs": 320096.0,
+   "chg_pct": 4.8
+  },
+  "private": {
+   "wage": 1529.0,
+   "jobs": 245192.0,
+   "chg_pct": 4.6
+  },
+  "sectors": [
+   {
+    "name": "Mining, oil and gas",
+    "naics": "21",
+    "wage": 4418.0,
+    "jobs": 13090.0,
+    "chg_pct": 17.2
+   },
+   {
+    "name": "Management of companies",
+    "naics": "55",
+    "wage": 2713.0,
+    "jobs": 3130.0,
+    "chg_pct": 11.7
+   },
+   {
+    "name": "Utilities",
+    "naics": "22",
+    "wage": 2395.0,
+    "jobs": 2535.0,
+    "chg_pct": 8.1
+   },
+   {
+    "name": "Transportation and warehousing",
+    "naics": "48-49",
+    "wage": 1859.0,
+    "jobs": 21273.0,
+    "chg_pct": 0.3
+   },
+   {
+    "name": "Professional and technical services",
+    "naics": "54",
+    "wage": 1847.0,
+    "jobs": 13253.0,
+    "chg_pct": 1.9
+   },
+   {
+    "name": "Wholesale trade",
+    "naics": "42",
+    "wage": 1553.0,
+    "jobs": 6348.0,
+    "chg_pct": 2.4
+   },
+   {
+    "name": "Health care and social assistance",
+    "naics": "62",
+    "wage": 1498.0,
+    "jobs": 50979.0,
+    "chg_pct": 3.8
+   },
+   {
+    "name": "Administrative and support",
+    "naics": "56",
+    "wage": 1265.0,
+    "jobs": 11232.0,
+    "chg_pct": 1.1
+   },
+   {
+    "name": "Other services",
+    "naics": "81",
+    "wage": 1101.0,
+    "jobs": 10212.0,
+    "chg_pct": 0.0
+   },
+   {
+    "name": "Private education",
+    "naics": "61",
+    "wage": 871.0,
+    "jobs": 2647.0,
+    "chg_pct": 0.9
+   },
+   {
+    "name": "Retail trade",
+    "naics": "44-45",
+    "wage": 816.0,
+    "jobs": 33264.0,
+    "chg_pct": -0.1
+   },
+   {
+    "name": "Accommodation and food",
+    "naics": "72",
+    "wage": 637.0,
+    "jobs": 26720.0,
+    "chg_pct": 0.0
+   },
+   {
+    "name": "Arts and recreation",
+    "naics": "71",
+    "wage": 568.0,
+    "jobs": 4637.0,
+    "chg_pct": 0.0
+   }
+  ],
+  "government": [
+   {
+    "name": "Federal government",
+    "wage": 2182.0,
+    "jobs": 13170.0,
+    "chg_pct": 12.6
+   },
+   {
+    "name": "State government",
+    "wage": 1569.0,
+    "jobs": 22330.0,
+    "chg_pct": 5.0
+   },
+   {
+    "name": "Local government",
+    "wage": 1206.0,
+    "jobs": 39404.0,
+    "chg_pct": 3.6
+   }
+  ]
+ },
+ "history": {
+  "years": [
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "wages": [
+   1027.0,
+   1053.0,
+   1031.0,
+   1033.0,
+   1071.0,
+   1106.0,
+   1187.0,
+   1205.0,
+   1256.0,
+   1323.0,
+   1382.0,
+   1450.0
+  ]
+ }
+}
