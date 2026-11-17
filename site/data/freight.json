@@ -1,7 +1,7 @@
 {
  "dashboard": "freight",
  "source": "carrier tariffs, fuel-surcharge pages, USPS, FRED",
- "fetched": "2026-11-16",
+ "fetched": "2026-11-17",
  "base_month": "2025-01",
  "weights": {
   "about": "Shares of each part in the index. Gateway parts are weighted roughly by how freight reaches Southcentral and the Interior; they are judgment calls, not measured tonnage. Change them here and the index is recomputed on the next run.",
@@ -832,7 +832,7 @@
     52.4,
     58.8133,
     61.5097,
-    61.2938
+    61.2882
    ]
   },
   "fsc:ocean": {
@@ -5818,7 +5818,7 @@
     117.4036,
     120.2857,
     121.8059,
-    124.8482
+    124.8476
    ]
   },
   "idx:gateway": {
@@ -5897,7 +5897,7 @@
     108.9288,
     110.9866,
     113.0135,
-    117.0699
+    117.0691
    ]
   },
   "idx:lastmile": {
@@ -6219,7 +6219,7 @@
     111.9128,
     116.6224,
     118.6024,
-    118.4438
+    118.4398
    ]
   },
   "bench:total": {
