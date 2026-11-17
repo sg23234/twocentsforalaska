@@ -15,7 +15,11 @@ Usage:  python3 scripts/build_pages.py
 import html
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import whats_new  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
@@ -282,6 +286,57 @@ def page_html(p):
 </body>
 </html>
 """
+
+
+# ---------------------------------------------------------------- page helpers that read data files
+
+def lfp_age_table():
+    d = load("lfp-age")
+    ser = d.get("series") or {}
+    ages = ["16-19", "20-24", "25-29", "30-34", "35-44", "45-54", "55-59", "60-64", "65-74", "75+"]
+    if not ser.get("AK:25-29"):
+        return '<p class="note">Participation by age loads with the next data refresh after the Census Bureau API key is set.</p>'
+    yr = ser["AK:25-29"]["dates"][-1]
+    rows = []
+    for a in ages:
+        ak, us = at(d, f"AK:{a}", yr), at(d, f"US:{a}", yr)
+        rows.append([a.replace("-", "–"), fnum(ak, 1, suffix="%"), fnum(us, 1, suffix="%"), fnum(ak - us, 1, sign=True) if ak is not None and us is not None else "—"])
+    return table(f"Participation by age, {yr[:4]}", ["Age", "Alaska", "U.S.", "Difference (pts)"], rows,
+                 "Percent in the labor force. Source: Census Bureau, ACS 1-year, table S2301.", right=(1, 2, 3))
+
+
+def qcew_blocks():
+    q = load("qcew")
+    out = []
+    a = q.get("annual")
+    if a:
+        rows = [(x["name"], x["wage"]) for x in a.get("sectors", [])] + [(x["name"], x["wage"]) for x in a.get("government", [])]
+        rows.sort(key=lambda r: -r[1])
+        out.append(hbar(f"Average weekly wage by industry, {a['year']}", rows,
+                        f"All jobs covered by unemployment insurance, annual average. Statewide: ${a['total']['wage']:,.0f}. Industries BLS withholds to protect employer confidentiality are left out. Source: BLS QCEW.",
+                        prefix="$", highlight=r"government$", lw=250))
+        if a.get("boroughs"):
+            out.append(hbar(f"Average weekly wage by borough or census area, {a['year']}", [(x["name"], x["wage"]) for x in a["boroughs"]],
+                            "All covered jobs located in each area (by where people work, not where they live). Source: BLS QCEW.", prefix="$", highlight=r"^(Anchorage|Matanuska-Susitna|Fairbanks North Star|Juneau)$", lw=190))
+    h = q.get("history")
+    if h and len(h.get("years", [])) > 3:
+        out.append(vbars("Average weekly wage, all covered jobs, Alaska", [str(y) for y in h["years"]], h["wages"],
+                         "Annual average, current dollars. Source: BLS QCEW.", prefix="$", show_values=False))
+    if not out:
+        out.append('<p class="note">QCEW wages load with the next data refresh.</p>')
+    return out
+
+
+def qcew_stats():
+    q = load("qcew")
+    out = []
+    qq = q.get("quarter")
+    if qq and qq.get("total"):
+        t = qq["total"]
+        out.append(stat("Average weekly wage, all jobs", f"Q{qq['qtr']} {qq['year']} · QCEW", value=fnum(t["wage"], prefix="$")))
+        if t.get("chg_pct") is not None:
+            out.append(stat("Weekly wage vs. a year earlier", f"Q{qq['qtr']} {qq['year']}", value=fnum(t["chg_pct"], 1, suffix="%", sign=True)))
+    return out
 
 
 # ---------------------------------------------------------------- pages
@@ -844,22 +899,40 @@ def pages():
         sources=[src("Alaska DOLWD, monthly employment by industry", "https://live.laborstats.alaska.gov/labforce/000000/01/ces.html")],
         tile=tile({"file": "key-sectors", "series": "Total Nonfarm", "scale": 0.001, "dec": 1, "suffix": "k"}, {"file": "key-sectors", "series": "Total Nonfarm", "calc": "yoy_diff", "sign": True, "after": " y/y"}, unit="nonfarm")))
 
-    P.append(dict(slug="job-postings", group=G, title="Job postings", row="Labor market", status="planned",
-        lead="Online job postings show employers' demand for workers in close to real time, by occupation and region. They lead official hiring data by weeks.",
-        body=[plan(["Job postings index for Alaska vs. the U.S. from Indeed Hiring Lab's public data.",
-                    "Active job orders by occupation and region from AlaskaJobs (Alaska DOLWD).",
-                    "Openings per unemployed worker, from the federal JOLTS state estimates."])],
-        notes=["This page is a placeholder until a postings series is wired in."],
-        sources=[src("Indeed Hiring Lab, job postings data", "https://data.indeed.com/"),
-                 src("BLS, JOLTS state estimates", "https://www.bls.gov/jlt/jlt_statedata.htm")],
-        tile=tile(unit="active")))
+    P.append(dict(slug="job-postings", group=G, title="Job postings", row="Labor market", status="live",
+        lead="Online job postings show employers' demand for workers in close to real time. They lead official hiring data by weeks. Two measures here: Indeed's daily postings index, and the federal survey count of open jobs set against the number of people looking for work.",
+        stats=[stat("Indeed postings index, {date}", "Alaska · Feb 1, 2020 = 100", {"file": "job-postings", "series": "AK", "dec": 0}),
+               stat("vs. a year earlier", "Alaska", {"file": "job-postings", "series": "AK", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}),
+               stat("U.S. postings index", "{date}", {"file": "job-postings", "series": "US", "dec": 0}),
+               stat("Job openings, {date}", "Alaska · JOLTS", {"file": "job-openings", "series": "JTS000000020000000JOL", "scale": 1000}),
+               stat("Openings per unemployed person", "Alaska · {date}", {"file": "job-openings", "series": "JTS000000020000000JOL", "div": {"file": "job-openings", "series": "LASST020000000000004", "scale": 1000}, "dec": 2})],
+        body=[section("Postings since 2020", "Indeed's index of job postings on its site, seasonally adjusted, with February 1, 2020 set to 100. Monthly averages of the daily index; the latest month is month to date.",
+                      chart("Indeed job postings index", "line", [{"file": "job-postings", "id": "AK", "label": "Alaska"}, {"file": "job-postings", "id": "US", "label": "U.S."}],
+                            "Feb 1, 2020 = 100. Latest: {date}. Source: Indeed Hiring Lab (CC BY 4.0).", dec=0, zero=False),
+                      chart("Postings, change from a year earlier", "line", [{"file": "job-postings", "id": "AK", "label": "Alaska", "transform": "yoy_pct"}, {"file": "job-postings", "id": "US", "label": "U.S.", "transform": "yoy_pct"}],
+                            "Percent change in the monthly average. Source: Indeed Hiring Lab.", dec=0, suffix="%", zero=False, **{"from": "2022-01-01"})),
+              section("Openings per unemployed person", "Job openings from the federal Job Openings and Labor Turnover Survey divided by the number of unemployed people. Above 1 means more open jobs than job seekers.",
+                      chart("Job openings per unemployed person", "line",
+                            [{"file": "job-openings", "id": "JTS000000020000000JOL", "label": "Alaska", "div": {"file": "job-openings", "id": "LASST020000000000004", "scale": 1000}},
+                             {"file": "job-openings", "id": "JTS000000000000000JOL", "label": "U.S.", "div": {"file": "job-openings", "id": "LNS13000000"}}],
+                            "Monthly, seasonally adjusted. Latest: {date}. Sources: BLS JOLTS state estimates and Local Area Unemployment Statistics.", dec=1, zero=True),
+                      chart("Job openings, Alaska", "line", [{"file": "job-openings", "id": "JTS000000020000000JOL", "label": "Alaska", "scale": 1000}],
+                            "Open jobs on the last business day of the month, seasonally adjusted. Latest: {date}.", zero=False)),
+              plan(["Active job orders by occupation and region from AlaskaJobs (Alaska DOLWD)."])],
+        notes=["Indeed's index counts postings on Indeed only, and one job can be posted more than once; it is best read as a trend, not a count of jobs.",
+               "JOLTS state estimates are modeled from a small sample and are revised; month-to-month moves in a state as small as Alaska are noisy."],
+        sources=[src("Indeed Hiring Lab, job postings tracker (GitHub)", "https://github.com/hiring-lab/job_postings_tracker"),
+                 src("BLS, JOLTS state estimates", "https://www.bls.gov/jlt/jlt_statedata.htm"),
+                 src("BLS, Local Area Unemployment Statistics", "https://www.bls.gov/lau/")],
+        tile=tile({"file": "job-postings", "series": "AK", "dec": 0}, {"file": "job-postings", "series": "AK", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True, "after": " y/y"}, unit="Indeed index, Feb 2020 = 100")))
 
     P.append(dict(slug="wage-growth", group=G, title="Wage growth", row="Labor market", status="live",
         lead="How fast pay is rising for Alaska's private-sector workers, measured by average hourly earnings from the monthly employer survey. Wage growth above inflation means rising real pay.",
         stats=[stat("Average hourly earnings, {date}", "All private employees, Alaska", {"file": "labor", "series": "SMU02000000500000003", "dec": 2, "prefix": "$"}),
                stat("vs. a year earlier", "Alaska", {"file": "labor", "series": "SMU02000000500000003", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}),
                stat("U.S. average hourly earnings", "{date}", {"file": "labor", "series": "CES0500000003", "dec": 2, "prefix": "$"}),
-               stat("U.S., vs. a year earlier", "{date}", {"file": "labor", "series": "CES0500000003", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True})],
+               stat("U.S., vs. a year earlier", "{date}", {"file": "labor", "series": "CES0500000003", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}),
+               stat("Real wage growth, {date}", "After Urban Alaska inflation", {"file": "labor", "series": "SMU02000000500000003", "div": {"file": "cost-of-living", "series": "CUURS49GSA0", "scale": 100}, "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True})] + qcew_stats(),
         body=[section("Pay growth", "Percent change in average hourly earnings from a year earlier.",
                       chart("Average hourly earnings, change from a year earlier", "line",
                             [{"file": "labor", "id": "SMU02000000500000003", "label": "Alaska", "transform": "yoy_pct"}, {"file": "labor", "id": "CES0500000003", "label": "U.S.", "transform": "yoy_pct"}],
@@ -867,10 +940,19 @@ def pages():
                       chart("Average hourly earnings", "line",
                             [{"file": "labor", "id": "SMU02000000500000003", "label": "Alaska"}, {"file": "labor", "id": "CES0500000003", "label": "U.S."}],
                             "Dollars per hour, all private employees.", dec=2, prefix="$", zero=False, **{"from": "2010-01-01"})),
-              plan(["Average weekly wages by industry and borough from the Quarterly Census of Employment and Wages.",
-                    "Real (inflation-adjusted) wage growth using Urban Alaska CPI."])],
-        notes=["State earnings estimates come from a sample and move around from month to month; the year-over-year change is more reliable than any single month."],
+              section("Real wage growth", "Pay growth after inflation: the change in average hourly earnings divided by the change in Urban Alaska consumer prices. Above zero means paychecks buy more than a year earlier.",
+                      chart("Real average hourly earnings, change from a year earlier", "line",
+                            [{"file": "labor", "id": "SMU02000000500000003", "label": "Real", "div": {"file": "cost-of-living", "id": "CUURS49GSA0", "scale": 100}, "transform": "yoy_pct"},
+                             {"file": "labor", "id": "SMU02000000500000003", "label": "Nominal", "transform": "yoy_pct"}],
+                            "Alaska, all private employees. Urban Alaska CPI is published every other month, so the real line has a point every two months. Latest: {date}.", dec=1, suffix="%", zero=False, **{"from": "2018-01-01"})),
+              section("Weekly wages by industry and place", "From the Quarterly Census of Employment and Wages, a count of nearly every job covered by unemployment insurance. Weekly wages mix pay rates with hours, so seasonal and part-time work pulls an industry's average down.",
+                      *qcew_blocks())],
+        notes=["State earnings estimates come from a sample and move around from month to month; the year-over-year change is more reliable than any single month.",
+               "Real wage growth uses the Urban Alaska CPI (Anchorage and the Mat-Su), which is the only Alaska price index.",
+               "QCEW counts jobs by where they are, so North Slope oil field wages show up in the North Slope Borough even though most of those workers live elsewhere."],
         sources=[src("FRED, SMU02000000500000003 (Alaska)", "https://fred.stlouisfed.org/series/SMU02000000500000003"),
+                 src("BLS, Urban Alaska CPI", "https://www.bls.gov/regions/west/cpi-summary/"),
+                 src("BLS, Quarterly Census of Employment and Wages", "https://www.bls.gov/cew/"),
                  src("FRED, CES0500000003 (U.S.)", "https://fred.stlouisfed.org/series/CES0500000003")],
         tile=tile({"file": "labor", "series": "SMU02000000500000003", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}, {"file": "labor", "series": "SMU02000000500000003", "dec": 2, "prefix": "$", "after": "/hr"}, unit="hourly earnings, y/y")))
 
@@ -887,32 +969,98 @@ def pages():
               section("Unemployment", "",
                       chart("Unemployment rate", "line", [{"file": "labor", "id": "AKUR", "label": "Alaska"}, {"file": "labor", "id": "UNRATE", "label": "U.S."}],
                             "Monthly, seasonally adjusted. Latest: {date}.", dec=0, suffix="%", **{"from": "2000-01-01"})),
-              plan(["Participation by age group, to separate aging from people leaving work.",
-                    "Childcare cost and availability as a factor in participation."])],
-        notes=["State participation and unemployment rates are modeled estimates from BLS and are revised each spring."],
+              section("Participation by age", "Share of each age group working or looking for work. Alaska's overall rate has drifted down partly because more of its adults are past typical working ages; comparing age groups separates that aging effect from people within an age group leaving work.",
+                      chart("Participation by age group, Alaska", "line",
+                            [{"file": "lfp-age", "id": "AK:25-54", "label": "25–54"}, {"file": "lfp-age", "id": "AK:16-24", "label": "16–24"},
+                             {"file": "lfp-age", "id": "AK:55-64", "label": "55–64"}, {"file": "lfp-age", "id": "AK:65+", "label": "65+"}],
+                            "Percent of each age group in the labor force. Annual, American Community Survey 1-year estimates (no 2020 release). Latest: {date}.", dec=0, suffix="%", zero=True),
+                      chart("Prime-age (25–54) participation", "line",
+                            [{"file": "lfp-age", "id": "AK:25-54", "label": "Alaska"}, {"file": "lfp-age", "id": "US:25-54", "label": "U.S."}],
+                            "Percent of people 25 to 54 in the labor force. ACS 1-year. Latest: {date}.", dec=0, suffix="%", zero=False),
+                      chart("Share of adults 55 and older", "line",
+                            [{"file": "lfp-age", "id": "AK:pop55+", "label": "Alaska"}, {"file": "lfp-age", "id": "US:pop55+", "label": "U.S."}],
+                            "People 55 and older as a percent of everyone 16 and older. A rising share pulls the overall participation rate down even if no age group changes. ACS 1-year. Latest: {date}.", dec=0, suffix="%", zero=False),
+                      lfp_age_table()),
+              plan(["Childcare cost and availability as a factor in participation."])],
+        notes=["State participation and unemployment rates are modeled estimates from BLS and are revised each spring.",
+               "Participation by age comes from the Census Bureau's American Community Survey, a different survey from the monthly BLS rate above, so its overall rate won't match exactly."],
         sources=[src("FRED, LBSSA02 (Alaska participation)", "https://fred.stlouisfed.org/series/LBSSA02"),
+                 src("Census Bureau, ACS table S2301 (employment status by age)", "https://data.census.gov/table/ACSST1Y2024.S2301?g=040XX00US02"),
                  src("FRED, AKUR (Alaska unemployment)", "https://fred.stlouisfed.org/series/AKUR"),
                  src("BLS, Local Area Unemployment Statistics", "https://www.bls.gov/lau/")],
         tile=tile({"file": "labor", "series": "LBSSA02", "dec": 1, "suffix": "%"}, {"file": "labor", "series": "CIVPART", "dec": 1, "suffix": "%", "after": " U.S."}, unit="of 16+, seas. adj.")))
 
     comp, boro = m_pop.get("components", {}), m_pop.get("boroughs", {})
-    P.append(dict(slug="net-migration", group=G, title="Net migration", row="Labor market", status="partial",
+    mig = load("migration")
+    crow = (mig.get("components") or {}).get("rows") or []
+    last_c = crow[-1] if crow else None
+    if last_c:
+        net_v, nat_v, in_v, out_v, yr_lab = last_c[7], last_c[4], last_c[5], last_c[6], f"Jul {last_c[0][:4]} to Jul {int(last_c[0][:4]) + 1}"
+    else:
+        net_v, nat_v, in_v, out_v, yr_lab = comp.get("net_migration"), comp.get("natural_increase"), None, None, "Jul 2024 to Jul 2025"
+    streak = 0
+    for r in reversed(crow):
+        if r[7] is not None and r[7] < 0:
+            streak += 1
+        else:
+            break
+    streak = streak or 13
+    # migration by age (PFD), statewide
+    ba = mig.get("by_age") or {}
+    pers = sorted(ba)
+    age_body = []
+    if pers:
+        cur = ba[pers[-1]]
+        nets = [(a, i - o) for a, i, o in zip(cur["ages"], cur["in"], cur["out"]) if i is not None and o is not None]
+        age_body.append(hbar(f"Average yearly net migration by age, {pers[-1].replace('-', '–')}",
+                             [(a, v) for a, v in nets], "In-migrants minus out-migrants per year, by age at the time of the move. Source: AK DOLWD, from Permanent Fund Dividend applications.", lw=90))
+        BROAD = [("Under 20", ("0-4", "5-9", "10-14", "15-19")), ("20–29", ("20-24", "25-29")), ("30–39", ("30-34", "35-39")),
+                 ("40–54", ("40-44", "45-49", "50-54")), ("55–64", ("55-59", "60-64")), ("65+", ("65-69", "70-74", "75-79", "80-84", "85-89", "90+"))]
+
+        def broad(per, grp):
+            d = ba[per]
+            m = dict(zip(d["ages"], zip(d["in"], d["out"])))
+            if not all(g in m for g in grp):
+                return None
+            return sum(m[g][0] - m[g][1] for g in grp)
+        rows = []
+        for per in pers:
+            vals = [broad(per, g) for _, g in BROAD]
+            tot = (ba[per].get("total_in") or 0) - (ba[per].get("total_out") or 0)
+            rows.append([per.replace("-", "–")] + [fnum(v, sign=True) if v is not None else "—" for v in vals] + [fnum(tot, sign=True)])
+        age_body.append(table("Average yearly net migration by age group, each five-year period", ["Period"] + [b[0] for b in BROAD] + ["All ages"], rows,
+                              "In-migrants minus out-migrants per year. PFD-based counts run below the official estimates because people who arrive and leave within a year never apply for a dividend.",
+                              right=tuple(range(1, len(BROAD) + 2))))
+        inout = [(a, i, o) for a, i, o in zip(cur["ages"], cur["in"], cur["out"])]
+        age_body.append(vbars(f"Moving in and moving out by age, {pers[-1].replace('-', '–')}", [a.split("-")[0] for a, _, _ in inout],
+                              [("In-migrants", [i for _, i, _ in inout]), ("Out-migrants", [o for _, _, o in inout])],
+                              "Average per year, by five-year age group (labeled by the youngest age in each group). Source: AK DOLWD, PFD-based migration by age and sex.", show_values=False))
+    P.append(dict(slug="net-migration", group=G, title="Net migration", row="Labor market", status="live" if crow else "partial",
         lead="People moving to Alaska minus people leaving. Migration is the main way a small state's workforce grows or shrinks quickly, and Alaska has lost more people than it gained for more than a decade.",
-        stats=[stat("Net migration", comp.get("label", "").replace("Components of population change, ", "") or "Jul 2024–Jul 2025", value=fnum(comp.get("net_migration"), sign=True)),
-               stat("Natural increase", "Births minus deaths, same year", value=fnum(comp.get("natural_increase"), sign=True)),
-               stat("Population, {year}", "Census Bureau estimate, July 1", {"file": "population", "series": "AKPOP", "scale": 1000}),
-               stat("Years in a row of net out-migration", "Through 2025 · AK DOLWD", value="13")],
-        body=[section("Population since 1970", "Resident population, Census Bureau estimates.",
+        stats=[stat("Net migration", yr_lab, value=fnum(net_v, sign=True)),
+               stat("Natural increase", "Births minus deaths, same year", value=fnum(nat_v, sign=True)),
+               stat("Moved in", yr_lab, value=fnum(in_v)) if in_v else stat("Population, {year}", "Census Bureau estimate, July 1", {"file": "population", "series": "AKPOP", "scale": 1000}),
+               stat("Moved out", yr_lab, value=fnum(out_v)) if out_v else "",
+               stat("Years in a row of net out-migration", f"Through {int(last_c[0][:4]) + 1 if last_c else 2025} · AK DOLWD", value=str(streak))],
+        body=[section("Net migration since 1945", "People who moved to Alaska minus people who left, each year from July 1 to June 30. Bars are dated by the year that ends on June 30.",
+                      chart("Net migration", "bars", [{"file": "migration", "id": "net", "label": "Net migration"}], "Source: AK DOLWD, annual components of population change. Latest: {date}.")),
+              section("Moving in and moving out", "Gross flows since 1981. Tens of thousands of people move each way every year; net migration is the small difference between two big numbers.",
+                      chart("In-migrants and out-migrants", "line", [{"file": "migration", "id": "in", "label": "In"}, {"file": "migration", "id": "out", "label": "Out"}],
+                            "People per year, July to June. Source: AK DOLWD.", zero=False),
+                      chart("Births minus deaths", "bars", [{"file": "migration", "id": "natural", "label": "Natural increase"}], "Natural increase per year. Source: AK DOLWD.")),
+              section("Who moves: migration by age", "From Permanent Fund Dividend applications, which record when residents arrive and stop applying. Alaska is one of the few states that can track migrants by age this way.", *age_body) if age_body else "",
+              section("Population since 1970", "Resident population, Census Bureau estimates.",
                       chart("Alaska population", "line", [{"file": "population", "id": "AKPOP", "label": "Alaska", "scale": 1000}], "July 1 estimates. Latest: {date}.", zero=False)),
               section("Change by borough, 2020–2025", "Percent change in population, with 2025 population.",
-                      hbar("Population change, 2020–2025", [(r[0], r[1]) for r in boro.get("rows", [])], f"Source: {boro.get('source', '')}. {boro.get('note', '')}", dec=1, suffix="%")),
-              plan(["Net migration each year back to 1945 from the state's components-of-change table.",
-                    "Migration by age, from Permanent Fund Dividend applications, which show who moves in and out each year."])],
-        notes=["Alaska's migration estimates come from Permanent Fund Dividend applications, an unusually good source that most states lack."],
-        sources=[src("Alaska DOLWD, population estimates", "https://live.laborstats.alaska.gov/data-pages/alaska-population-estimates"),
+                      hbar("Population change, 2020–2025", [(r[0], r[1]) for r in boro.get("rows", [])], f"Source: {boro.get('source', '')}. {boro.get('note', '')}", dec=1, suffix="%"))],
+        notes=["Alaska's migration estimates come from Permanent Fund Dividend applications, an unusually good source that most states lack.",
+               "The yearly table is the state's official series (vintage " + str((mig.get("components") or {}).get("vintage", "")) + "); each new vintage can revise earlier years.",
+               "Migration by age is published as yearly averages over five-year periods, and it counts only people who applied for a dividend, so it runs below the official totals."],
+        sources=[src("Alaska DOLWD, annual components of population change, 1945 on", "https://live.laborstats.alaska.gov/pop/estimates/data/ComponentsOfChangeAK.xlsx"),
+                 src("Alaska DOLWD, PFD-based migration by age and sex", "https://live.laborstats.alaska.gov/node/83"),
                  src("Alaska Economic Trends, Apr 2026: population change in the 2020s", "https://live.laborstats.alaska.gov/sites/default/files/trends/apr26art2.pdf"),
                  src("FRED, AKPOP", "https://fred.stlouisfed.org/series/AKPOP")],
-        tile=tile(value=fnum(comp.get("net_migration"), sign=True), change="13th year negative", unit="people, to Jul 2025")))
+        tile=tile(value=fnum(net_v, sign=True), change=f"{streak}th year negative", unit=f"people, to Jul {int(last_c[0][:4]) + 1 if last_c else 2025}")))
 
     # ======================= COST OF LIVING =======================
     G = "Micro · Local cost of living"
@@ -1317,12 +1465,18 @@ figure.chart figcaption{font-size:12px;color:var(--muted)}
 def build_front(P):
     p = SITE / "index.html"
     s = p.read_text()
+    wn = whats_new.html_block(whats_new.build())
+    if '<section id="new"' in s:
+        s = re.sub(r'<section id="new".*?</section>', lambda m: wn, s, count=1, flags=re.S)
+    else:
+        s = s.replace('<!-- MICRO -->', '<!-- WHATS NEW (built by scripts/whats_new.py) -->\n' + wn + '\n\n<!-- MICRO -->', 1)
+    s = s.replace('<nav aria-label="Sections"><a href="#micro">', '<nav aria-label="Sections"><a href="#new">What\'s new</a><a href="#micro">', 1)
     s = re.sub(r'<section id="micro".*?</section>', lambda m: micro_html(P), s, count=1, flags=re.S)
     s = re.sub(r'<section id="macro".*?</section>', lambda m: macro_html(), s, count=1, flags=re.S)
     s = re.sub(r"<script>\s*/\* Electricity tile.*?</script>\s*", "", s, flags=re.S)
     if "/js/ind.js" not in s:
         s = s.replace("</body>", '<script src="/js/ind.js"></script>\n</body>')
-    block = "/* front-page tiles (build_pages) */" + FRONT_CSS + "/* end build_pages */"
+    block = "/* front-page tiles (build_pages) */" + FRONT_CSS + whats_new.CSS + "/* end build_pages */"
     if "/* front-page tiles (build_pages) */" in s:
         s = re.sub(r"/\* front-page tiles \(build_pages\) \*/.*?(/\* end build_pages \*/|(?=</style>))", lambda m: block, s, count=1, flags=re.S)
     else:

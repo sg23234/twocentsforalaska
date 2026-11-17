@@ -64,6 +64,25 @@ jobs:
           pip install --quiet pypdf
           python3 scripts/fetch_freight.py
 
+      - name: Fetch QCEW weekly wages by industry and borough (BLS)
+        id: qcew
+        continue-on-error: true
+        run: python3 scripts/fetch_qcew.py
+
+      - name: Fetch migration (AK DOLWD components of change and PFD migration by age)
+        id: migration
+        continue-on-error: true
+        run: |
+          pip install --quiet openpyxl
+          python3 scripts/fetch_migration.py
+
+      - name: Fetch labor force participation by age (Census ACS)
+        id: lfpage
+        continue-on-error: true
+        env:
+          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}   # the Census data API requires a free key
+        run: python3 scripts/fetch_lfp_age.py
+
       - name: Refresh the Electricity page's backup data
         continue-on-error: true
         run: python3 scripts/electricity_snapshot.py
@@ -93,7 +112,7 @@ jobs:
           fi
 
       - name: Report failures
-        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.cookinlet.outcome == 'failure' || steps.freight.outcome == 'failure' || steps.summaries.outcome == 'failure'
+        if: steps.fetch.outcome == 'failure' || steps.utilities.outcome == 'failure' || steps.cookinlet.outcome == 'failure' || steps.freight.outcome == 'failure' || steps.qcew.outcome == 'failure' || steps.migration.outcome == 'failure' || steps.lfpage.outcome == 'failure' || steps.summaries.outcome == 'failure'
         run: |
-          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Cook Inlet: ${{ steps.cookinlet.outcome }}. Freight: ${{ steps.freight.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
+          echo "::error::Fetch: ${{ steps.fetch.outcome }}. Utilities: ${{ steps.utilities.outcome }}. Cook Inlet: ${{ steps.cookinlet.outcome }}. Freight: ${{ steps.freight.outcome }}. QCEW: ${{ steps.qcew.outcome }}. Migration: ${{ steps.migration.outcome }}. LFP by age: ${{ steps.lfpage.outcome }}. Summaries: ${{ steps.summaries.outcome }}. See those steps and site/data/status.json."
           exit 1

@@ -183,6 +183,13 @@
    "USSTHPI": "2026-04-01"
   }
  },
+ "job-postings": {
+  "source": "indeed",
+  "latest": {
+   "AK": "2026-11-01",
+   "US": "2026-11-01"
+  }
+ },
  "key-sectors": {
   "source": "dolwd",
   "latest": {

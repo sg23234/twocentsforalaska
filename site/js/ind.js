@@ -8,6 +8,9 @@
  *   <figure class="chart" data-chart='{"kind":"line","series":[...]}'>
  *   <a class="tile" data-tile='{"main":{...},"chg":{...}}'>   (front page)
  *
+ * Any stat spec or chart series can carry "div": {"file","series"|"id","scale"} to divide
+ * it by another series at matching dates first (e.g. wages / CPI x 100 = real wages).
+ *
  * Text in labels can use {date} (latest period of that series) and {year}.
  */
 (function () {
@@ -98,8 +101,23 @@
     }
   }
 
+  /* divide one series by another at matching dates: real wages (div by CPI, scale 100),
+     openings per unemployed person, and similar ratios */
+  function divide(s, o, scale) {
+    const by = new Map(o.dates.map((d, i) => [d, o.values[i]])), d = [], v = [];
+    s.dates.forEach((x, i) => { const q = by.get(x); if (q) { d.push(x); v.push(s.values[i] / q * (scale || 1)); } });
+    return { ...s, dates: d, values: v };
+  }
+  async function withDiv(s, div) {
+    if (!s || !div) return s;
+    const od = await IND.get(div.file), o = series(od, div.series || div.id);
+    if (!o) return null;
+    const r = divide(s, o, div.scale);
+    return r.dates.length ? r : null;
+  }
+
   async function evaluate(spec) {
-    const d = await IND.get(spec.file), s = series(d, spec.series);
+    const d = await IND.get(spec.file), s = await withDiv(series(d, spec.series), spec.div);
     if (!s) return null;
     let other = null;
     if (spec.over) { const od = await IND.get(spec.over.file); other = series(od, spec.over.series); }
@@ -148,7 +166,7 @@
     const plot = fig.querySelector('.plot');
     const got = [];
     for (const [k, sp] of c.series.entries()) {
-      const d = await IND.get(sp.file), s0 = series(d, sp.id);
+      const d = await IND.get(sp.file), s0 = await withDiv(series(d, sp.id), sp.div);
       if (!s0) continue;
       let s = transform(s0, sp.transform);
       if (c.agg) { const a = annual(s, c.agg); s = { ...s, dates: a.map(r => r.year + '-01-01'), values: a.map(r => r.value), partial: a.map(r => !r.full), freq: 'annual' }; }
@@ -198,7 +216,7 @@
       const cx = L + slot * i + slot / 2, top = Y(Math.max(v, 0)), h = Math.abs(Y(v) - Y(0)), part = g.partial && g.partial[i];
       s += `<rect x="${(cx - bw / 2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(h, 0.5).toFixed(1)}" fill="${v < 0 ? '#C2610C' : g.color}" opacity="${part ? 0.5 : 1}"/>`;
       if (n <= 14) s += `<text x="${cx.toFixed(1)}" y="${(v < 0 ? Y(v) + 13 : top - 5).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="600" fill="#14213D">${esc(fmt(v, o))}</text>`;
-      if (i % every === 0 || i === n - 1) s += `<text x="${cx.toFixed(1)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#5A6580">${esc((g.freq === 'quarterly' ? fdate(g.dates[i], 'quarterly').replace(' 20', " '") : g.dates[i].slice(0, 4)) + (part ? '*' : ''))}</text>`;
+      if ((i % every === 0 && n - 1 - i >= every * 0.6) || i === n - 1) s += `<text x="${cx.toFixed(1)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#5A6580">${esc((g.freq === 'quarterly' ? fdate(g.dates[i], 'quarterly').replace(' 20', " '") : g.dates[i].slice(0, 4)) + (part ? '*' : ''))}</text>`;
     });
     return s + '</svg>';
   }

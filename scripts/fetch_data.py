@@ -264,6 +264,20 @@ DASHBOARDS = {
         "SEC81:ESTAB_ENTRY_RATE-US": s("Establishment entry rate, Other services, United States", "percent", "annual", "rate", optional=True),
         "SEC81:ESTABS-AK": s("Establishments, Other services, Alaska", "establishments", "annual", "level", optional=True),
     }},
+    # Indeed Hiring Lab job postings index (Feb 1, 2020 = 100, seasonally adjusted),
+    # published daily on GitHub; kept here as monthly averages (the latest month is month to date).
+    "job-postings": {"source": "indeed", "soft": True, "series": {
+        "AK": s("Indeed job postings index, Alaska (Feb 1, 2020 = 100, seasonally adjusted)", "index", "monthly", "index"),
+        "US": s("Indeed job postings index, United States (Feb 1, 2020 = 100, seasonally adjusted)", "index", "monthly", "index"),
+    }},
+    # JOLTS state job openings and LAUS unemployed persons, from the BLS API.
+    # Openings per unemployed person = openings / unemployed.
+    "job-openings": {"source": "bls", "soft": True, "series": {
+        "JTS000000020000000JOL": s("Job openings, total nonfarm, Alaska (JOLTS, seasonally adjusted)", "thousands", "monthly", "level"),
+        "JTS000000000000000JOL": s("Job openings, total nonfarm, United States (JOLTS, seasonally adjusted)", "thousands", "monthly", "level"),
+        "LASST020000000000004": s("Unemployed persons, Alaska (seasonally adjusted)", "persons", "monthly", "level"),
+        "LNS13000000": s("Unemployed persons, United States (seasonally adjusted)", "thousands", "monthly", "level"),
+    }},
     "spending": {"source": "dolwd", "soft": True, "series": {
         "Total Nonfarm": s("Payroll jobs, total nonfarm", "jobs", "monthly", "level"),
         "Government": s("Payroll jobs, government", "jobs", "monthly", "level"),
@@ -281,6 +295,7 @@ SOURCE_NAMES = {
     "census": "U.S. Census Bureau, County Business Patterns and Nonemployer Statistics (data API)",
     "bds": "U.S. Census Bureau, Business Dynamics Statistics (published CSV tables)",
     "dolwd": "Alaska Department of Labor and Workforce Development, Current Employment Statistics",
+    "indeed": "Indeed Hiring Lab, job postings tracker (github.com/hiring-lab/job_postings_tracker, CC BY 4.0)",
 }
 
 # A soft dashboard (BLS without a key can be rate-limited) only fails the job
@@ -671,6 +686,48 @@ def fetch_dolwd(names, tries=3):
     return out
 
 
+# ---------- Indeed Hiring Lab ----------
+
+INDEED_STATE = "https://raw.githubusercontent.com/hiring-lab/job_postings_tracker/master/US/state_job_postings_us.csv"
+INDEED_US = "https://raw.githubusercontent.com/hiring-lab/job_postings_tracker/master/US/aggregate_job_postings_US.csv"
+
+
+def fetch_indeed(wanted, tries=3):
+    """Monthly averages of Indeed's daily postings index for Alaska and the U.S."""
+    def grab(url):
+        for attempt in range(tries):
+            try:
+                with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=90) as r:
+                    return list(csv.DictReader(io.StringIO(r.read().decode("utf-8"))))
+            except Exception as e:
+                if attempt == tries - 1:
+                    raise RuntimeError(f"Indeed CSV: {e}") from e
+                time.sleep(5 * (attempt + 1))
+
+    def monthly(pairs):
+        by = {}
+        for d, v in pairs:
+            by.setdefault(d[:7] + "-01", []).append(v)
+        ds = sorted(by)
+        return {"dates": ds, "values": [round(sum(by[x]) / len(by[x]), 2) for x in ds],
+                "last_day": max(d for d, _ in pairs)}
+
+    out = {}
+    if "AK" in wanted:
+        rows = grab(INDEED_STATE)
+        pairs = [(r["date"], float(r["indeed_job_postings_index"])) for r in rows
+                 if r.get("state", "").lower() == "ak" and r.get("indeed_job_postings_index")]
+        if pairs:
+            out["AK"] = monthly(pairs)
+    if "US" in wanted:
+        rows = grab(INDEED_US)
+        pairs = [(r["date"], float(r["indeed_job_postings_index_SA"])) for r in rows
+                 if r.get("variable") == "total postings" and r.get("indeed_job_postings_index_SA")]
+        if pairs:
+            out["US"] = monthly(pairs)
+    return out
+
+
 # ---------- build / write ----------
 
 def build(slug, cfg):
@@ -696,6 +753,8 @@ def build(slug, cfg):
         got = fetch_census(set(meta), cfg["naics"])
     elif cfg["source"] == "bds":
         got = fetch_bds(set(meta))
+    elif cfg["source"] == "indeed":
+        got = fetch_indeed(set(meta))
     else:
         got = {}
         for sid, m in meta.items():
