@@ -321,7 +321,7 @@ def qcew_blocks():
     h = q.get("history")
     if h and len(h.get("years", [])) > 3:
         out.append(vbars("Average weekly wage, all covered jobs, Alaska", [str(y) for y in h["years"]], h["wages"],
-                         "Annual average, current dollars. Source: BLS QCEW.", prefix="$", show_values=False))
+                         "Annual average, current dollars. Source: BLS QCEW.", prefix="$"))
     if not out:
         out.append('<p class="note">QCEW wages load with the next data refresh.</p>')
     return out
