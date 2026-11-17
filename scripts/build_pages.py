@@ -15,7 +15,11 @@ Usage:  python3 scripts/build_pages.py
 import html
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import whats_new  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
@@ -1317,12 +1321,18 @@ figure.chart figcaption{font-size:12px;color:var(--muted)}
 def build_front(P):
     p = SITE / "index.html"
     s = p.read_text()
+    wn = whats_new.html_block(whats_new.build())
+    if '<section id="new"' in s:
+        s = re.sub(r'<section id="new".*?</section>', lambda m: wn, s, count=1, flags=re.S)
+    else:
+        s = s.replace('<!-- MICRO -->', '<!-- WHATS NEW (built by scripts/whats_new.py) -->\n' + wn + '\n\n<!-- MICRO -->', 1)
+    s = s.replace('<nav aria-label="Sections"><a href="#micro">', '<nav aria-label="Sections"><a href="#new">What\'s new</a><a href="#micro">', 1)
     s = re.sub(r'<section id="micro".*?</section>', lambda m: micro_html(P), s, count=1, flags=re.S)
     s = re.sub(r'<section id="macro".*?</section>', lambda m: macro_html(), s, count=1, flags=re.S)
     s = re.sub(r"<script>\s*/\* Electricity tile.*?</script>\s*", "", s, flags=re.S)
     if "/js/ind.js" not in s:
         s = s.replace("</body>", '<script src="/js/ind.js"></script>\n</body>')
-    block = "/* front-page tiles (build_pages) */" + FRONT_CSS + "/* end build_pages */"
+    block = "/* front-page tiles (build_pages) */" + FRONT_CSS + whats_new.CSS + "/* end build_pages */"
     if "/* front-page tiles (build_pages) */" in s:
         s = re.sub(r"/\* front-page tiles \(build_pages\) \*/.*?(/\* end build_pages \*/|(?=</style>))", lambda m: block, s, count=1, flags=re.S)
     else:
