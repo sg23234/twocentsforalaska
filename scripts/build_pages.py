@@ -341,7 +341,6 @@ def pages():
             [(f"Base rate, ${pl['rate']:.2f}/lb", f"${pl['base']:,.0f}"), (f"Fuel surcharge, {pl['fsc']:g}%", f"${pl['fuel']:,.0f}"),
              ("Federal air cargo tax, 6.25%", f"${pl['tax']:,.0f}")], f"${pl['total']:,.0f}", pn) + "</div>"
 
-    pamp_rows = sorted(fr_man.get("pamp_per_container", {}).get("rows", []), key=lambda r: r["effective"])
     fr_rows = [(r["mode"], r["label"], fr_val(r) + ("/lb" if r["unit"] == "$/lb" else ""), fr_date(r["effective"])) for r in fr.get("current", [])]
     FS = {"file": "freight"}
     P.append(dict(slug="freight", group=G, title="Freight costs", row="Input costs", status="live",
@@ -351,13 +350,7 @@ def pages():
                       chart("Groceries in one 40-ft trailer, Tacoma to Anchorage", "line", [{**FS, "id": "ocean:container", "label": "Rate + surcharges"}],
                             "TOTE tariff rate (Item 2300) plus TOTE's ocean fuel surcharge and the Port of Alaska modernization surcharge. Before TOTE's tariffs posted online, the rate is carried back using its announced rate increases.", prefix="$", zero=False),
                       chart("A 1,000 lb pallet flown from Anchorage to Bethel", "line", [{**FS, "id": "pallet:nac:BET", "label": "Delivered"}],
-                            "Northern Air Cargo base rate plus fuel surcharge and the 6.25% federal air cargo tax. Northern Air Cargo posts only its current surcharge, so earlier months use Carlile Transportation's in-state air surcharge. Latest: {date}.", prefix="$", zero=False),
-                      vbars("Port of Alaska modernization surcharge, per container", [r["effective"][:4] for r in pamp_rows], [r["value"] for r in pamp_rows],
-                            "Northbound, per trailer or container (TOTE tariff 101-A, Item 695). Set each January by the Anchorage Assembly. 2024 is estimated from the per-ton rate.", dec=2, prefix="$"),
-                      chart("Air freight base rate per pound, Anchorage to Bethel and Nome", "line", [{**FS, "id": "rate:nac:BET", "label": "Bethel"}, {**FS, "id": "rate:nac:OME", "label": "Nome"}],
-                            "Northern Air Cargo, 1,000 lb shipments, before fuel surcharge. Earlier years from archived copies of its rates page. Kotzebue's rate matches Nome's.", prefix="$", dec=2),
-                      chart("Fuel surcharges by mode", "line", [{**FS, "id": "fsc:rail", "label": "Rail"}, {**FS, "id": "fsc:tote", "label": "Ocean"}, {**FS, "id": "fsc:road", "label": "Truck"}, {**FS, "id": "fsc:air", "label": "Air"}],
-                            "Percent added to the base rate. Rail: Alaska Railroad. Ocean: TOTE, Tacoma to Anchorage. Truck (Lower 48 to the Alaska road system) and air (within Alaska): Carlile Transportation's posted surcharges. Latest: {date}.", suffix="%", **{"from": "2018-01-01"})),
+                            "Northern Air Cargo base rate plus fuel surcharge and the 6.25% federal air cargo tax. Northern Air Cargo posts only its current surcharge, so earlier months use Carlile Transportation's in-state air surcharge. Latest: {date}.", prefix="$", zero=False)),
               section("What a shipment costs now", "The latest published rate for each route tracked here, with the date it took effect. Fuel surcharges are added on top of the base rates.",
                       table("Current published rates", ["Mode", "Rate", "Value", "Effective"], fr_rows,
                             f"Collected {fr_date(fr['fetched']) if fr.get('fetched') else ''}. Air rates before fuel surcharge and the 6.25% federal air cargo tax. Bypass mail is a postal rate set by law.", right=(2,)))],
@@ -406,27 +399,6 @@ def pages():
 
     # ======================= PHYSICAL VOLUMES =======================
     G = "Micro · Physical volumes"
-    regs = sorted((util.get("regions") or {}).items(), key=lambda x: -x[1].get("sales_mwh", 0))
-    P.append(dict(slug="electricity-load", group=G, title="Electricity load", row="Physical volumes", status="live",
-        lead="How much electricity Alaskans buy each month. Power use follows activity in homes, stores, mines and offices, and it is reported quickly, so it can show changes in the economy before official statistics do.",
-        stats=[stat("Electricity sold, {date}", "Million kWh (GWh)", {"file": "energy", "series": "AK-ALL:sales", "dec": 0}),
-               stat("vs. a year earlier", "Same month", {"file": "energy", "series": "AK-ALL:sales", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True}),
-               stat("Electricity sold, {year}", "Last full year, GWh", {"file": "energy", "series": "AK-ALL:sales", "calc": "annual_last", "agg": "sum", "dec": 0}),
-               stat("vs. the year before", "Full year", {"file": "energy", "series": "AK-ALL:sales", "calc": "annual_yoy_pct", "agg": "sum", "dec": 1, "suffix": "%", "sign": True})],
-        body=[section("Electricity sold each year", "Retail sales to all customers, in gigawatt-hours.",
-                      chart("Electricity sold, Alaska", "bars", [{"file": "energy", "id": "AK-ALL:sales", "label": "Alaska"}],
-                            "Annual totals of monthly EIA retail sales. Faded bar: year to date.", agg="sum", dec=0, **{"from": "2001-01-01"}),
-                      chart("Change from the same month a year earlier", "line", [{"file": "energy", "id": "AK-ALL:sales", "label": "Alaska", "transform": "yoy_pct"}],
-                            "Percent change from a year earlier, monthly. Latest: {date}.", dec=1, suffix="%", zero=False, **{"from": "2018-01-01"})),
-              section("Where the power goes", f"Electricity sold by region, {util.get('year', '')}.",
-                      hbar("Electricity sold by region, GWh", [(k, round(v["sales_mwh"] / 1000)) for k, v in regs if v.get("sales_mwh")],
-                           f"Source: EIA-861, {util.get('year', '')}. Regions as on the Electricity page.") if regs else "")],
-        notes=["Retail sales measure electricity sold by utilities. They leave out power that oil fields, mines and military bases generate for their own use.",
-               "Monthly figures come from EIA's sample survey and are revised when the annual survey is final."],
-        sources=[src("EIA, Electric Power Monthly, retail sales by state", "https://www.eia.gov/electricity/monthly/"),
-                 src("EIA, Form EIA-861", "https://www.eia.gov/electricity/data/eia861/")],
-        tile=tile({"file": "energy", "series": "AK-ALL:sales", "dec": 0, "suffix": " GWh"}, {"file": "energy", "series": "AK-ALL:sales", "calc": "yoy_pct", "dec": 1, "suffix": "%", "sign": True, "after": " y/y"}, unit="electricity sold")))
-
     P.append(dict(slug="port-tonnage", group=G, title="Port of Alaska tonnage", row="Physical volumes", status="planned",
         lead="Most goods that reach Southcentral and Interior Alaska come through the Port of Alaska in Anchorage. Tonnage crossing its docks is a direct measure of how much the state is consuming and building.",
         body=[plan(["Annual tonnage by type: containers and trailers, petroleum, cement and bulk.",
