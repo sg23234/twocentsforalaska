@@ -164,6 +164,10 @@ def text(title, paras):
     return f'<div class="textblock"><h3>{E(title)}</h3>' + "".join(f"<p>{E(p)}</p>" for p in paras) + "</div>"
 
 
+def bullets(title, items):
+    return f'<div class="textblock"><h3>{E(title)}</h3><ul>' + "".join(f"<li>{E(i)}</li>" for i in items) + "</ul></div>"
+
+
 def section(title, intro, *blocks):
     blocks = [b for b in blocks if b]
     if not blocks:
@@ -228,7 +232,7 @@ th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
 .plan,.textblock{border:1px dashed var(--muted);border-radius:4px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
 .textblock{border-style:solid;border-color:var(--rule)}
 .plan h3,.textblock h3{font-size:18px} .plan ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;color:var(--body)}
-.textblock p{margin:0;color:var(--body)}
+.textblock p{margin:0;color:var(--body)} .textblock ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--body)}
 .notes ul,.sources ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;color:var(--body);font-size:14.5px}
 .note{margin:0;font-size:13px;color:var(--muted)}
 footer{border-top:4px double var(--ink);padding-top:14px;font-size:13px;color:var(--muted);text-align:center}
@@ -421,6 +425,16 @@ def pages():
     jf_a, jf_n = jf.get("alaska", {}), jf.get("anc", {})
     pct = lambda a, b: (a / b - 1) * 100 if a and b else None
     h_chg = pct(h_a[-1], h_a[0]) if len(h_a) == 2 else None
+    # Asia-to-U.S. air freight prices (BLS via FRED) against ANC tonnage, by calendar year
+    acl = load("air-cargo").get("series", {}).get("IC1312", {})
+    px = {}
+    for d_, v_ in zip(acl.get("dates", []), acl.get("values", [])):
+        if v_ is not None:
+            px.setdefault(d_[:4], []).append(v_)
+    px = {y: sum(v) / len(v) for y, v in px.items() if len(v) == 12}
+    tn = dict(zip(t_y, t_v))
+    cmp_rows = [[y, fnum(pct(tn[y], tn[str(int(y) - 1)]), 1, suffix="%", sign=True), fnum(pct(px[y], px[str(int(y) - 1)]), 1, suffix="%", sign=True)]
+                for y in t_y if y in px and str(int(y) - 1) in px and str(int(y) - 1) in tn]
     jobs_spec = {"file": "air-cargo", "series": "SMU02000004348100001", "scale": 1000, "dec": 0}
     two = lambda *b: '<div class="two">' + "".join(x for x in b if x) + "</div>"
     P.append(dict(slug="air-cargo", group=G, title="ANC air cargo", row="Physical volumes", status="partial",
@@ -460,7 +474,7 @@ def pages():
                             f"International freighters only; the trade press hasn't reported every month. Source: {rm.get('source', '')}.", right=(1, 2))),
               section("Jet fuel", "Most cargo planes crossing the Pacific stop in Anchorage for one reason: to refuel. A full 747 freighter can't fly from Asia to the eastern U.S. with a full load of cargo, so it lands at ANC halfway, fills up, and keeps going. That makes jet fuel the clearest measure of ANC's cargo business. More fuel pumped means more planes choosing to stop here.",
                       vbars(jf.get("label", "Jet fuel"), jf_a.get("years", []) + jf_n.get("years", []), jf_a.get("values", []) + jf_n.get("values", []),
-                            f"Blue: {jf_a.get('source', '')} Orange: {jf_n.get('source', '')}. The two series measure different things (all of Alaska by calendar year, ANC alone by fiscal year), so the step from 2020 to fiscal 2023 isn't a like-for-like change.",
+                            f"Blue: {jf_a.get('source', '')} Orange: {jf_n.get('source', '')}. The two series measure different things (all of Alaska by calendar year, ANC alone by fiscal year), so the step from 2020 to fiscal 2023 isn't a like-for-like change. The state hasn't published ANC's own totals for earlier years; a 2020 fuel study for the Port of Alaska put ANC at a little over 15 million barrels (about 630 million gallons) in 2019.",
                             dec=0, show_values=True, bar_colors=[BLUE] * len(jf_a.get("values", [])) + [ORANGE] * len(jf_n.get("values", [])),
                             legend_items=[("Sold in Alaska, calendar year (EIA)", BLUE), ("Pumped at ANC, fiscal year (state)", ORANGE)]) if jf else ""),
               section("What passes through", f"In 2021, the latest year studied in detail, {fl.get('transit_mt', '')} million metric tons stayed aboard during refueling stops and {fl.get('onoff_mt', '')} million were loaded or unloaded. About {fl.get('asia_to_us_share', '')}% of Asia-to-U.S. air cargo went through Anchorage, and {fl.get('us_to_asia_share', '')}% of U.S.-to-Asia.",
@@ -471,16 +485,31 @@ def pages():
                       text("Trade that clears customs in Anchorage", [
                           f"Goods that clear customs at the Anchorage port of entry are a slice of what flies through. In 2023 air imports recorded there were worth ${tr.get('imports_bn', 0):.1f} billion and air exports ${tr.get('exports_bn', 0):.1f} billion. By weight the leading goods were electrical equipment and machinery, then instruments, plastics and toys; fish and seafood ranked eighth.",
                       ]) if tr else ""),
+              section("Freight prices across the Pacific", "What shippers pay to fly goods from Asia to the U.S. ANC's business depends on that trade, though tonnage and prices don't always move together: in 2020 and 2021 rates soared as passenger planes stopped flying and freighters picked up the slack, many of them through Anchorage.",
+                      chart("Air freight prices, Asia to the U.S., change from a year earlier", "line", [{"file": "air-cargo", "id": "IC1312", "label": "Asia to U.S.", "transform": "yoy_pct"}],
+                            "BLS inbound air freight price index for Asia, U.S. and foreign carriers. Monthly. Latest: {date}. Source: BLS via FRED, IC1312.", dec=1, suffix="%", zero=False, **{"from": "2016-01-01"}),
+                      table("ANC cargo and Asia-to-U.S. air freight prices, change from the year before", ["Year", "ANC cargo tonnage", "Air freight prices (annual average)"],
+                            cmp_rows, "Tonnage: ACI via the airport. Prices: BLS inbound air freight price index for Asia.", right=(1, 2)) if cmp_rows else ""),
               section("Jobs", "Payroll jobs at airlines in Alaska, live from the Bureau of Labor Statistics. This counts passenger and cargo airlines alike; ground handling, fueling and freight forwarding are counted in other industries.",
                       chart("Air transportation jobs, Alaska", "line", [{"file": "air-cargo", "id": "SMU02000004348100001", "label": "Air transportation", "scale": 1000}],
                             "Monthly, not seasonally adjusted. Latest: {date}. Source: BLS via FRED, SMU02000004348100001.", **{"from": "2005-01-01"})),
               section("What's changing", "",
-                      text("Trade rules", ["The U.S. ended duty-free entry for low-value parcels (the $800 de minimis exemption) on goods from China in May 2025 and on goods from everywhere that August. Cross-border e-commerce by air fell sharply, and NorthLink Aviation's planned e-commerce hub at ANC stalled. Anchorage's tonnage kept growing anyway as general freight and electronics filled the space. FedEx cut its Anchorage landings by about 12% in the first nine months of 2025, while Kalitta Air, China Airlines and EVA Air added flights."]),
-                      text("Jet fuel", ["Freighters stop in Anchorage mainly to refuel, and more than 70% of the airport's jet fuel arrives by tanker from Asian refineries. In March 2026, with the Strait of Hormuz disrupted and China limiting refined fuel exports, international cargo landings fell 8% from a year earlier, the first real monthly decline in over a year. By August they were 5% above a year earlier."]),
-                      text("Room to park", ["Heavy snowstorms have shown how tight wide-body parking is at ANC: carriers with reserved spots keep landing, others divert. Private projects on airport land aim to add capacity: NorthLink Aviation's 120-acre South Airpark campus (a 55-year lease, with up to 11 drive-through hardstands planned), a cold-storage warehouse and hardstands by Alaska Cold Cargo Storage on the North Airpark, and six hardstands proposed by Alaska Airport Partners on the West Airpark. The state also lists $126 million for nine more airport-run hardstands."]),
-                      text("Fairbanks as the backup", [f"Fairbanks International, about 260 miles north, is ANC's main diversion airport. Its cargo tonnage nearly tripled in the first half of 2026, from {fnum(h_f[0] if h_f else None)} to {fnum(h_f[-1] if h_f else None)} metric tons, as carriers used it during storms and summer construction at ANC."])),
-              plan(["ANC jet fuel by year before fiscal 2023, if the state publishes it, to join the two fuel series.",
-                    "A comparison with trans-Pacific air freight rates."])],
+                      bullets("Trade rules", [
+                          "The U.S. ended the $800 duty-free allowance for small parcels: for China in May 2025, for everyone that August.",
+                          "Cross-border e-commerce by air dropped, and NorthLink Aviation's planned e-commerce hub at ANC stalled.",
+                          "ANC's tonnage kept growing as general freight and electronics filled the gap.",
+                          "FedEx cut Anchorage landings about 12% in early 2025; Kalitta, China Airlines and EVA Air added flights."]),
+                      bullets("Jet fuel", [
+                          "More than 70% of ANC's jet fuel arrives by tanker from Asian refineries.",
+                          "March 2026: with the Strait of Hormuz disrupted and China limiting fuel exports, international cargo landings fell 8%, the first real drop in over a year.",
+                          "By August, landings were back 5% above a year earlier."]),
+                      bullets("Room to park", [
+                          "Wide-body parking is tight: in heavy snow, carriers without reserved spots divert.",
+                          "Private projects planned: NorthLink's 120-acre South Airpark campus (up to 11 hardstands), Alaska Cold Cargo Storage on the North Airpark, and six hardstands from Alaska Airport Partners on the West Airpark.",
+                          "The state lists $126 million for nine more airport-run hardstands."]),
+                      bullets("Fairbanks as the backup", [
+                          "Fairbanks, about 260 miles north, is ANC's main diversion airport.",
+                          f"Its cargo nearly tripled in the first half of 2026, from {fnum(h_f[0] if h_f else None)} to {fnum(h_f[-1] if h_f else None)} metric tons, during storms and summer construction at ANC."]))],
         notes=["Tonnage counts freight and mail loaded, unloaded or in transit. Anchorage is the only top-10 airport whose count includes transit freight that stays aboard; in 2021 that was about 46% of its total, so ANC's world rank overstates how much freight is handled on the ground.",
                "Landed weight is the certificated maximum landing weight of the all-cargo aircraft that land, summed over the year. It measures flights, not freight, and is what the FAA uses to share out cargo grants to airports.",
                "ACI revises earlier years; the series here uses each year's figure as published with that year's ranking. The 2014 figure is from Air Cargo World. 2025 is preliminary.",
@@ -499,6 +528,8 @@ def pages():
                  src("FHWA, Freight Facts and Figures 2010, Table 3-10 (landed weight 2000–2008)", "https://ops.fhwa.dot.gov/freight/freight_analysis/nat_freight_stats/docs/10factsfigures/table3_10hist.htm"),
                  src("FHWA, Freight Facts and Figures 2013, Table 3-7 (landed weight 2009–2012)", "https://ops.fhwa.dot.gov/freight/freight_analysis/nat_freight_stats/docs/13factsfigures/table3_07.htm"),
                  src("FRED, Air transportation jobs in Alaska (SMU02000004348100001)", "https://fred.stlouisfed.org/series/SMU02000004348100001"),
+                 src("BLS via FRED, Inbound air freight price index, Asia (IC1312)", "https://fred.stlouisfed.org/series/IC1312"),
+                 src("McDowell Group for the Port of Alaska, Fuel Forecast (Nov 2020)", "https://www.portofalaska.com/wp-content/uploads/Alaska-PoA_Fuel_Forecast_Nov2020.pdf"),
                  src("STAT Times, Freighter landings rise 5% at ANC in August (Sep 2026)", "https://www.stattimes.com/aviation/freighter-landings-rise-5-at-anc-in-august-1360616"),
                  src("The Loadstar, Atlas Air trims Anchorage operations as Fairbanks emerges as fallback", "https://theloadstar.com/atlas-air-trims-anchorage-operations-as-fairbanks-emerges-as-fallback/"),
                  src("The Loadstar, Ecommerce hopes for Anchorage tied in red tape, but airport traffic grows", "https://theloadstar.com/ecommerce-hopes-for-anchorage-tied-in-red-tape-but-airport-traffic-grows/")],

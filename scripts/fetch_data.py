@@ -144,6 +144,8 @@ DASHBOARDS = {
     "air-cargo": {"source": "fred", "series": {
         "SMU02000004348100001": s("Payroll jobs, air transportation, Alaska", "thousands of jobs", "monthly", "level", optional=True),
         "SMU02000004340008901": s("Payroll jobs, transportation and warehousing, Alaska", "thousands of jobs", "monthly", "level", optional=True),
+        # BLS inbound air freight price index, Asia to the U.S. (U.S. and foreign carriers)
+        "IC1312": s("Inbound air freight price index, Asia", "index", "monthly", "index", optional=True),
     }},
     "labor": {"source": "fred", "series": {
         "LBSSA02": s("Labor force participation rate, Alaska", "percent", "monthly", "rate"),
